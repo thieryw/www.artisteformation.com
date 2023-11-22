@@ -6,12 +6,12 @@ const opts: RouterOpts = {
 	"scrollToTop": false
 }
 
-const publicUrl = __BASE_URL__;
+const publicUrl = import.meta.env.BASE_URL;
 
 
 export const routeDefs = {
-	"home": defineRoute(publicUrl || "/"),
-	"page1": defineRoute(publicUrl + "/page1")
+	"home": defineRoute(publicUrl.slice(0, -1)),
+	"page1": defineRoute(publicUrl + "page1")
 };
 
 

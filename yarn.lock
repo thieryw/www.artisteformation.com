@@ -1279,10 +1279,10 @@ gensync@^1.0.0-beta.2:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
   integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
 
-github-pages-plugin-for-type-route@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/github-pages-plugin-for-type-route/-/github-pages-plugin-for-type-route-1.0.1.tgz#df1972d3f7c0bbb204a8da496a618cf1980a2fa5"
-  integrity sha512-z0SQa+9auyxj3hiryBeiitmNnWgwgoRsrR3oFfr0nwstKGrzfHLylOX7EsjJ9N0/3wKiRLo0M0TGOYJuyi3RKg==
+github-pages-plugin-for-type-route@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/github-pages-plugin-for-type-route/-/github-pages-plugin-for-type-route-2.0.4.tgz#131a792be7eec7ef1e32fa065b7e83cd9974b070"
+  integrity sha512-veNam8HFgeLjT4Q4XJ+Sqqcq7aSawtw8swhGepfcYoei0FL/2bfrx1YPqJ0GTJQxhH65hLFFsBMQQ/zFO5Lf+g==
 
 glob-parent@^5.1.2:
   version "5.1.2"
