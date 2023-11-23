@@ -32,7 +32,7 @@ export const typography: Record<Typography, CSSObject> = {
         "fontFamily": "Zodiak-Regular"
     },
     "carousel": {
-        "color": "7D7D7D",
+        "color": "rgba(125, 125, 125, 0.09)",
         "fontFamily": "Satoshi-Bold",
         "fontSize": `${130 / baseFontSizePx}em`,
     },
@@ -100,12 +100,12 @@ export const typography: Record<Typography, CSSObject> = {
     },
     "additionalTitle": {
         "fontFamily": "Satoshi-Bold",
-        "color": "7D7D7D",
+        "color": "rgba(125, 125, 125, 0.6",
         "fontSize": `${14 / baseFontSizePx}em`
     },
     "carouselItem": {
         "fontFamily": "Satoshi-Bold",
-        "color": "7D7D7D",
+        "color": "rgba(125, 125, 125, 0.6",
         "fontSize": `${20 / baseFontSizePx}em`
     },
     "paragraph": {
@@ -124,7 +124,28 @@ export const typography: Record<Typography, CSSObject> = {
 
 function useContext() {
     const theme = {
-        "primaryColor": "#32CD32", // This is LimeGreen in hex
+        "spacing": {
+            "sectionTopBottomPadding": 220,
+            "textGap": 50,
+            "sectionTitleGap": 70,
+            "buttonGap": 75,
+            "pageTitleGap": 110,
+            "nonCenteredHeroSide": 430,
+            "nonCenteredSectionSide": 190
+        },
+        "colors": {
+            "lightGray": "F2F2F2",
+            "darkGray": "7D7D7D",
+            "bloodOrange": "F14C2C",
+            "linden": "72B0A8",
+            "darkYellow": "FAA219",
+            "indigo": "3B3051",
+            "lighterGray": "FAFAFA",
+            "darkGray2": "rgba(125, 125, 125, 0.8)",
+            "darkGray3": "rgba(125, 125, 125, 0.6)",
+            "bloodOrangeVariant": "E45437",
+            "white": "FFFFFF"
+        },
         typography
     };
 
