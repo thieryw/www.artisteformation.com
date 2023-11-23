@@ -1,5 +1,6 @@
 import { Home } from "./pages/Home";
 import { useRoute } from "./router";
+import { Text } from "./theme/Text";
 
 
 export function App() {
@@ -8,7 +9,7 @@ export function App() {
   return (
     <>
       {route.name === "home" && <Home />}
-      {route.name === "page1" && <h1>Page 1</h1>}
+      {route.name === "page1" && <Text typo="transition">Transitions</Text>}
     </>
   )
 }
