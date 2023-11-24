@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build && hack-gh-pages src/router.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "format-images -a src/assets/jpg -o src/assets/webp -f webp --ov true"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -21,6 +22,7 @@
     "i18n": "^0.15.1"
   },
   "devDependencies": {
+    "dir-image-converter": "^0.0.17",
     "github-pages-plugin-for-type-route": "^2.0.4",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
