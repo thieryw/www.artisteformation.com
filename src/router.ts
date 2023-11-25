@@ -11,7 +11,10 @@ const publicUrl = import.meta.env.BASE_URL;
 
 export const routeDefs = {
 	"home": defineRoute(publicUrl.slice(0, -1)),
-	"page1": defineRoute(publicUrl + "page1")
+	"how": defineRoute(publicUrl + "comment"),
+	"teachers": defineRoute(publicUrl + "formateurs"),
+	"about": defineRoute(publicUrl + "a-propos"),
+	"contact": defineRoute(publicUrl + "contact")
 };
 
 

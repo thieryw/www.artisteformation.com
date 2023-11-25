@@ -19,7 +19,8 @@
     "@emotion/react": "^11.11.1",
     "tsafe": "^1.6.5",
     "type-route": "^1.0.1",
-    "i18n": "^0.15.1"
+    "i18n": "^0.15.1",
+    "react-svg": "^16.1.31"
   },
   "devDependencies": {
     "dir-image-converter": "^0.0.17",

@@ -1,5 +1,6 @@
 import { CSSObject } from "@emotion/react";
 import { createTss } from "tss-react";
+import { useWindowInnerSize } from "powerhooks/useWindowInnerSize";
 
 export type Typography =
     "transition" |
@@ -27,7 +28,7 @@ const baseFontSizePx = parseInt(window.
 
 export const typography: Record<Typography, CSSObject> = {
     "transition": {
-        "color": "FFFFFF",
+        "color": "#FFFFFF",
         "fontSize": `${196 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular"
     },
@@ -37,14 +38,14 @@ export const typography: Record<Typography, CSSObject> = {
         "fontSize": `${130 / baseFontSizePx}em`,
     },
     "splashScreen": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${128 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
         "lineHeight": "1em"
     },
     "siteTitle": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${110 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
@@ -52,41 +53,43 @@ export const typography: Record<Typography, CSSObject> = {
 
     },
     "heading1": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${96 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
         "lineHeight": "1.1em"
     },
     "menuItem": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${75 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
+        "listStyleType": "none",
+        "lineHeight": "1em"
     },
     "heading2": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${64 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
         "lineHeight": "1.15em"
     },
     "heading3": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${48 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
         "lineHeight": "1.20em"
     },
     "heading4": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${40 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
         "lineHeight": "1.2em"
     },
     "heading5": {
-        "color": "3B3051",
+        "color": "#3B3051",
         "fontSize": `${36 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
@@ -95,7 +98,7 @@ export const typography: Record<Typography, CSSObject> = {
     "sectionPageOrButton": {
         "fontFamily": "Satoshi-Bold",
         "letterSpacing": "0.12em",
-        "color": "F14C2C",
+        "color": "#F14C2C",
         "fontSize": `${14 / baseFontSizePx}em`
     },
     "additionalTitle": {
@@ -112,17 +115,19 @@ export const typography: Record<Typography, CSSObject> = {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${18 / baseFontSizePx}em`,
         "lineHeight": "1.95em",
-        "color": "3B3051"
+        "color": "#3B3051"
     },
     "quote": {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${13 / baseFontSizePx}em`,
         "lineHeight": "1.95em",
-        "color": "7D7D7D"
+        "color": "#7D7D7D"
     }
 }
 
 function useContext() {
+    const windowInnerWidth = useWindowInnerSize().windowInnerWidth;
+    const windowInnerHeight = useWindowInnerSize().windowInnerHeight;
     const theme = {
         "spacing": {
             "sectionTopBottomPadding": 220,
@@ -131,21 +136,24 @@ function useContext() {
             "buttonGap": 75,
             "pageTitleGap": 110,
             "nonCenteredHeroSide": 430,
-            "nonCenteredSectionSide": 190
+            "nonCenteredSectionSide": 190,
+            "listElementGap": 40
         },
         "colors": {
-            "lightGray": "F2F2F2",
-            "darkGray": "7D7D7D",
-            "bloodOrange": "F14C2C",
-            "linden": "72B0A8",
-            "darkYellow": "FAA219",
-            "indigo": "3B3051",
-            "lighterGray": "FAFAFA",
+            "backgroundMain": "#F5F5F5",
+            "darkGray": "#7D7D7D",
+            "bloodOrange": "#F14C2C",
+            "linden": "#72B0A8",
+            "darkYellow": "#FAA219",
+            "indigo": "#3B3051",
+            "lighterGray": "#FAFAFA",
             "darkGray2": "rgba(125, 125, 125, 0.8)",
             "darkGray3": "rgba(125, 125, 125, 0.6)",
-            "bloodOrangeVariant": "E45437",
-            "white": "FFFFFF"
+            "bloodOrangeVariant": "#E45437",
+            "white": "#FFFFFF"
         },
+        windowInnerWidth,
+        windowInnerHeight,
         typography
     };
 
@@ -153,6 +161,14 @@ function useContext() {
     // You can return anything here, you decide what's the context.
     return { theme };
 }
+
+export const breakpointValues = {
+    "xl": 1920,
+    "lg+": 1440,
+    "lg": 1280,
+    "md": 960,
+    "sm": 600
+} as const;
 
 export const { tss } = createTss({ useContext });
 

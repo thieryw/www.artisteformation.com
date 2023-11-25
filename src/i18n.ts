@@ -17,11 +17,19 @@ export const {
 	useResolveLocalizedString,
 	getTranslation 
 } = createI18nApi<
-	typeof import ("pages/Home").i18n 
+	typeof import ("pages/Home").i18n |
+	typeof import ("App").i18n
 >()(
 	{ languages, fallbackLanguage },
 	{
 		"fr": {
+			"App": {
+				"homeLink": "Acceuil",
+				"howLink": "Comment ?",
+				"teachersLink": "Formateurs",
+				"aboutLink": "À propos",
+				"contactLink": "Contact"
+			},
 			"Home": {
 				"title": "Vite + React",
 				"count": "count is",
