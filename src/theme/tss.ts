@@ -86,7 +86,7 @@ export const typography: Record<Typography, CSSObject> = {
         "fontSize": `${40 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
-        "lineHeight": "1.2em"
+        "lineHeight": "1.2em",
     },
     "heading5": {
         "color": "#3B3051",
@@ -114,13 +114,11 @@ export const typography: Record<Typography, CSSObject> = {
     "paragraph": {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${18 / baseFontSizePx}em`,
-        "lineHeight": "1.95em",
         "color": "#3B3051"
     },
     "quote": {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${13 / baseFontSizePx}em`,
-        "lineHeight": "1.95em",
         "color": "#7D7D7D"
     }
 }
@@ -137,7 +135,8 @@ function useContext() {
             "pageTitleGap": 110,
             "nonCenteredHeroSide": 430,
             "nonCenteredSectionSide": 190,
-            "listElementGap": 40
+            "listElementGap": 40,
+            "iconSpacing": 18
         },
         "colors": {
             "backgroundMain": "#F5F5F5",
