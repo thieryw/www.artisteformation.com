@@ -31,14 +31,14 @@ const useStyles = tss.withParams<{
     fill: string | undefined;
     width: number | undefined;
     height: number | undefined;
-}>().withName("Logo").create(({ fill, height, theme, width }) => ({
+}>().withName("Logo").create(({ fill, height, width }) => ({
     "root": {
         width,
         height,
     },
     "svg": {
         "& svg": {
-            "fill": fill ?? theme.colors.lighterGray,
+            "fill": fill ?? undefined,
             "width": "100%",
             "height": "100%",
         },
