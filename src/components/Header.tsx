@@ -4,27 +4,25 @@ import { tss } from "../theme";
 import { Text } from "../theme/Text";
 import { useConstCallback } from "powerhooks/useConstCallback";
 import { Logo } from "./Logo";
+import type { Link } from "../tools/link";
+
 
 export type HeaderProps = {
-    links: {
-        label: string;
-        href: string;
-        onClick?: () => void;
-    }[];
+    links: Link[];
     currentLinkLabel?: string;
-    title?: ReactNode;
-    logoLinks?: {
+    logo?: ReactNode;
+    contact?: ReactNode;
+    smallPrint?: ReactNode;
+    appointmentsLink?: Link;
+    logoLinks?: ({
         logo: ReactNode;
-        href: string;
-        onClick?: () => void;
-        linkText?: string;
-    }[],
+    } & Link)[],
     className?: string;
     classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
 }
 
 export function Header(props: HeaderProps) {
-    const { links, className, logoLinks, title, currentLinkLabel } = props;
+    const { links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint } = props;
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -55,13 +53,59 @@ export function Header(props: HeaderProps) {
 
             </div>
             <div className={classes.menu} role="menu">
-                {
-                    title !== undefined &&
-                    <div>
-                        {title}
-                    </div>
-                }
-                <div>
+                <div className={classes.contactWrapper}>
+
+                    {
+                        logo !== undefined &&
+                        <div>
+                            {
+                                typeof logo === "string" ?
+                                    <Logo width={119} logoUrl={logo} /> :
+                                    logo
+                            }
+                        </div>
+                    }
+                    {
+
+                        contact !== undefined &&
+                        <div className={classes.contact}>
+                            {
+                                contact
+                            }
+                        </div>
+                    }
+
+                    {
+                        logoLinks !== undefined &&
+                        <div className={classes.logoLinks}>
+                            {
+                                logoLinks.map(({ logo, label, ...rest }, index) => <a
+                                    key={label}
+                                    {...rest}
+                                    aria-label={label}
+                                    style={{
+                                        "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
+
+                                    }}
+                                >{typeof logo === "string" ?
+                                    <Logo width={62} logoUrl={logo} /> :
+                                    logo
+                                    }
+                                </a>)
+                            }
+                        </div>
+                    }
+                    {
+                        smallPrint !== undefined &&
+                        <div>
+                            {smallPrint}
+                        </div>
+
+                    }
+
+
+                </div>
+                <div className={classes.linksWrapper}>
                     {
                         links.map(({ href, label, onClick }, index) => <div
                             onClick={handleMenuItemClick}
@@ -71,6 +115,7 @@ export function Header(props: HeaderProps) {
                             }}
                         >
                             <Link
+                                key={label}
                                 href={href}
                                 onClick={onClick}
                                 label={label}
@@ -78,33 +123,6 @@ export function Header(props: HeaderProps) {
                             />
                         </div>)
                     }
-
-                </div>
-                <div>
-                    {
-                        title !== undefined &&
-                        <div>
-                            {title}
-                        </div>
-                    }
-
-                    {
-                        logoLinks !== undefined &&
-                        <div>
-                            {
-                                logoLinks.map(({ logo, linkText, ...rest }) => <a
-                                    key={rest.href}
-                                    {...rest}
-                                    aria-label={linkText}
-                                >{typeof logo === "string" ?
-                                    <Logo width={30} logoUrl={logo} /> :
-                                    logo
-                                    }
-                                </a>)
-                            }
-                        </div>
-                    }
-
 
                 </div>
 
@@ -125,6 +143,11 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "left": 0
 
         },
+        "logoLinks": {
+            "display": "flex",
+            "marginTop": theme.spacing.textGap,
+            "marginBottom": theme.spacing.textGap
+        },
         "menu": {
             "position": "absolute",
             "display": "flex",
@@ -140,6 +163,18 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
         "button": {
             "position": "relative",
             "zIndex": 4001
+        },
+        "contactWrapper": {
+            "marginRight": 392,
+            "marginLeft": 243
+
+        },
+        "contact": {
+            "marginTop": theme.spacing.textGap,
+
+        },
+        "linksWrapper": {
+
         }
 
     })
