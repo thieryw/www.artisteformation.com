@@ -14,7 +14,8 @@ export const routeDefs = {
 	"how": defineRoute(publicUrl + "comment"),
 	"teachers": defineRoute(publicUrl + "formateurs"),
 	"about": defineRoute(publicUrl + "a-propos"),
-	"contact": defineRoute(publicUrl + "contact")
+	"contact": defineRoute(publicUrl + "contact"),
+	"legal": defineRoute(publicUrl + "legal")
 };
 
 
