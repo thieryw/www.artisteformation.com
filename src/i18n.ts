@@ -28,7 +28,13 @@ export const {
 				"howLink": "Comment ?",
 				"teachersLink": "Formateurs",
 				"aboutLink": "À propos",
-				"contactLink": "Contact"
+				"contactLink": "Contact",
+				"contactTitle": "Nous joindre",
+				"email": "contact@artisteformation.com",
+				"number": "(+33) 199 999 990",
+				"legalLink": "Mentions légales",
+				"copyRight": "Copiright © 2023 Artiste Formation",
+				"designerCredits": "Designé par IdeaArt"
 			},
 			"Home": {
 				"title": "Vite + React",

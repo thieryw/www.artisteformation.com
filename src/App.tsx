@@ -1,11 +1,16 @@
 import { useMemo } from "react";
 import { Home } from "./pages/Home";
 import { useRoute, routes, routeDefs } from "./router";
-//import { Text } from "./theme/Text";
+import { Text } from "./theme/Text";
 import { tss } from "./theme/tss";
 import { Header } from "./components/Header";
 import type { HeaderProps } from "./components/Header";
 import {declareComponentKeys, useTranslation} from "./i18n";
+import fbIcon from "./assets/svg/fb-icon.svg"
+import instaIcon from "./assets/svg/insta-icon.svg";
+import youtubeIcon from "./assets/svg/youtube-icon.svg";
+import siteLogo from "./assets/svg/logo.svg";
+import ReactMarkdown from "react-markdown";
 
 
 export function App() {
@@ -46,11 +51,41 @@ export function App() {
     <div className={classes.root}>
       <Header
         links={links}
-        currentLinkLabel={links.find(({routeName}) => routeName === route.name)?.label}
+        currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
+        logo={siteLogo}
+        contact={<div>
+          <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
+          <a className={classes.email} href={`mailto:${t("email")}`}><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
+          <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
+        </div>}
+        smallPrint={
+          <div>
+            <a className={classes.legalLink} {...routes.legal().link}><Text typo="quote">{t("legalLink")}</Text></a>
+            <Text typo="quote">{t("copyRight")}</Text>
+            <Text typo="quote">{<ReactMarkdown>{t("designerCredits")}</ReactMarkdown>}</Text>
+          </div>
+        }
+        logoLinks={[
+          {
+            "href": "",
+            "logo": fbIcon,
+            "label": "Facebook link"
+          },
+          {
+            "href": "",
+            "logo": instaIcon,
+            "label": "Instagram link",
+          },
+          {
+            "href": "",
+            "logo": youtubeIcon,
+            "label": "Youtube link"
+          }
+        ]}
+
       />
       <div>
         {route.name === "home" && <Home />}
-
       </div>
     </div>
   )
@@ -65,6 +100,18 @@ const useStyles = tss.create(({ theme }) => ({
     "left": -8,
     "overflow": "hidden"
 
+  },
+  "contactText": {
+    "color": theme.colors.darkGray
+  },
+  "contactTitle": {
+    "marginBlock": 0
+  },
+  "email": {
+    "textDecoration": "none"
+  },
+  "legalLink": {
+    "color": theme.colors.darkGray
   }
 }))
 
@@ -73,6 +120,12 @@ export const { i18n } = declareComponentKeys<
   "howLink" |
   "teachersLink" |
   "aboutLink" |
-  "contactLink"
+  "contactLink" |
+  "contactTitle" |
+  "email" |
+  "number" |
+  "legalLink" |
+  "copyRight" |
+  "designerCredits"
 >()({ App });
 
