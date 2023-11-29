@@ -34,7 +34,7 @@ export const {
 				"number": "(+33) 199 999 990",
 				"legalLink": "Mentions légales",
 				"copyRight": "Copiright © 2023 Artiste Formation",
-				"designerCredits": "Designé par IdeaArt",
+				"designerCredits": "Designé par [IdeaArt](https://github.com/thieryw/)",
 				"appointmentLink": "Fixer un rdv"
 			},
 			"Home": {
