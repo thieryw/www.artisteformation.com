@@ -15,6 +15,11 @@ export type HeaderProps = {
     contact?: ReactNode;
     smallPrint?: ReactNode;
     buttonLink?: Link;
+    zoomProviderInterval?: {
+        min: number;
+        max: number;
+
+    },
     logoLinks?: ({
         logo: ReactNode;
     } & Link)[],
@@ -23,12 +28,12 @@ export type HeaderProps = {
 }
 
 export function Header(props: HeaderProps) {
-    const { links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
+    const { zoomProviderInterval, links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
 
-    const { classes, cx, theme } = useStyles({ isOpen, "classesOverrides": props.classes });
+    const { classes, cx, theme } = useStyles({ isOpen, zoomProviderInterval, "classesOverrides": props.classes });
 
     const toggleMenu = useConstCallback(() => {
         setIsOpen(!isOpen);
@@ -42,17 +47,11 @@ export function Header(props: HeaderProps) {
 
     return (
         <div ref={ref} className={cx(classes.root, className)}>
-            <div>
-                <button
-                    aria-haspopup="true"
-                    aria-expanded={isOpen}
-                    aria-label="drop down menu button"
-                    onClick={toggleMenu}
-                    className={classes.button}
-                >
-                </button>
-
-            </div>
+            <ToggleMenuButton 
+                isActive={isOpen}
+                onClick={toggleMenu}
+                className={classes.toggleMenuButton}
+            />
             <div className={classes.menu} role="menu">
                 {
                     buttonLink !== undefined &&
@@ -145,19 +144,49 @@ export function Header(props: HeaderProps) {
 
 
 
-const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme }) => {
+const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomProviderInterval">>().create(({ isOpen, zoomProviderInterval, theme }) => {
+    const openHeaderHeight = (() => {
+        function getHeight(referenceHeight: number){
+            if (zoomProviderInterval === undefined) {
+                return referenceHeight
+            }
+            if (theme.windowInnerWidth >= zoomProviderInterval.min && theme.windowInnerWidth <= zoomProviderInterval.max) {
+                return referenceHeight / (theme.windowInnerWidth / zoomProviderInterval.max);
+            }
+
+            return referenceHeight;
+
+        }
+        if (theme.windowInnerHeight < 800) {
+            getHeight(800);
+        }
+
+        return getHeight(theme.windowInnerHeight);
+
+    })();
+    const transitionTime = 600;
     return ({
         "root": {
             "zIndex": 4000,
             "position": "fixed",
             "top": 0,
-            "left": 0
+            "left": 0,
+            "width": "100%",
+            "height": theme.spacing.nonCenteredHeroSide
+
+        },
+        "toggleMenuButton": {
+            "position": "absolute",
+            "top": 125,
+            "right": 186
 
         },
         "linkButton": {
             "position": "absolute",
             "top": 100,
-            "right": 290
+            "right": 290,
+            "transition": `opacity ${transitionTime}ms, background-color 300ms`,
+            "opacity": isOpen ? 1 : 0,
 
 
         },
@@ -170,21 +199,20 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "position": "absolute",
             "display": "flex",
             "alignItems": "center",
-            "top": 0,
-            "transition": "height 600ms",
-            "height": isOpen ? theme.windowInnerHeight : 0,
-            "width": theme.windowInnerWidth,
+            "top": isOpen ? 0 : -openHeaderHeight,
+            "transition": `top ${transitionTime}ms`,
+            "height": openHeaderHeight,
+            "width": "100%",
             "backgroundColor": theme.colors.lighterGray,
             "overflow": "hidden",
             "pointerEvents": !isOpen ? "none" : undefined
         },
-        "button": {
-            "position": "relative",
-            "zIndex": 4001
-        },
         "contactWrapper": {
             "marginRight": 392,
-            "marginLeft": 243
+            "marginLeft": 243,
+            "transition": `opacity ${transitionTime}ms`,
+            "opacity": isOpen ? 1 : 0,
+            "transitionDelay": !isOpen ? undefined : `${transitionTime / 2}ms`
 
         },
         "contact": {
@@ -192,12 +220,81 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
 
         },
         "linksWrapper": {
+            "transition": `opacity ${transitionTime}ms`,
+            "opacity": isOpen ? 1 : 0,
+            "transitionDelay": !isOpen ? undefined : `${transitionTime / 2}ms`
 
         }
 
     })
 })
 
+const { ToggleMenuButton } = (() => {
+
+    type ToggleMenuButtonProps = {
+        onClick: () => void;
+        isActive: boolean;
+        className?: string;
+    };
+
+    const ToggleMenuButton = memo((props: ToggleMenuButtonProps) => {
+
+        const { onClick, className, isActive } = props;
+        const handleClick = useConstCallback(() => {
+            onClick();
+        })
+        const { classes, cx } = useStyles({ isActive })
+
+        return <button
+            aria-haspopup="true"
+            aria-expanded={isActive}
+            aria-label="drop down menu button"
+            onClick={handleClick}
+            className={cx(classes.root, className)}
+        >
+            <div className={cx(classes.line, classes.line1)}></div>
+            <div className={cx(classes.line, classes.line2)}></div>
+            <div className={cx(classes.line, classes.line3)}></div>
+        </button>
+
+    });
+
+    const useStyles = tss.withParams<{ isActive: boolean }>().create(({ isActive, theme }) => ({
+        "root": {
+            "width": 40,
+            "height": 30,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "space-around",
+            "cursor": "pointer",
+            "position": "relative",
+            "zIndex": 4001,
+            "border": "none",
+            "backgroundColor": "transparent",
+            "outline": "none"
+        },
+        "line": {
+            "display": "block",
+            "height": 2,
+            "width": "100%",
+            "background": theme.colors.bloodOrange,
+            "transition": "all 0.3s ease"
+        },
+        "line1": {
+            "transform": isActive ? "translateY(9px) rotate(45deg)" : undefined,
+        },
+        "line2": {
+            "opacity": isActive ? 0 : undefined
+        },
+        "line3": {
+            "transform": isActive ? "translateY(-9px) rotate(-45deg)" : undefined
+
+        },
+
+    }))
+
+    return { ToggleMenuButton }
+})();
 
 const { Link } = (() => {
 
