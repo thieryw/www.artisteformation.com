@@ -34,7 +34,8 @@ export const {
 				"number": "(+33) 199 999 990",
 				"legalLink": "Mentions légales",
 				"copyRight": "Copiright © 2023 Artiste Formation",
-				"designerCredits": "Designé par IdeaArt"
+				"designerCredits": "Designé par IdeaArt",
+				"appointmentLink": "Fixer un rdv"
 			},
 			"Home": {
 				"title": "Vite + React",

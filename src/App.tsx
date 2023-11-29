@@ -82,6 +82,10 @@ export function App() {
             "label": "Youtube link"
           }
         ]}
+        buttonLink={{
+          "label": t("appointmentLink"),
+          ...routes.contact().link
+        }}
 
       />
       <div>
@@ -126,6 +130,7 @@ export const { i18n } = declareComponentKeys<
   "number" |
   "legalLink" |
   "copyRight" |
-  "designerCredits"
+  "designerCredits" |
+  "appointmentLink"
 >()({ App });
 

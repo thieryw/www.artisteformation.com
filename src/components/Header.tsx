@@ -5,6 +5,7 @@ import { Text } from "../theme/Text";
 import { useConstCallback } from "powerhooks/useConstCallback";
 import { Logo } from "./Logo";
 import type { Link } from "../tools/link";
+import { LinkButton } from "./LinkButton";
 
 
 export type HeaderProps = {
@@ -13,7 +14,7 @@ export type HeaderProps = {
     logo?: ReactNode;
     contact?: ReactNode;
     smallPrint?: ReactNode;
-    appointmentsLink?: Link;
+    buttonLink?: Link;
     logoLinks?: ({
         logo: ReactNode;
     } & Link)[],
@@ -22,7 +23,7 @@ export type HeaderProps = {
 }
 
 export function Header(props: HeaderProps) {
-    const { links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint } = props;
+    const { links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -53,6 +54,16 @@ export function Header(props: HeaderProps) {
 
             </div>
             <div className={classes.menu} role="menu">
+                {
+                    buttonLink !== undefined &&
+                    <LinkButton
+                        {
+                        ...buttonLink
+                        }
+                        className={classes.linkButton}
+                    />
+
+                }
                 <div className={classes.contactWrapper}>
 
                     {
@@ -141,6 +152,13 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "position": "fixed",
             "top": 0,
             "left": 0
+
+        },
+        "linkButton": {
+            "position": "absolute",
+            "top": 100,
+            "right": 290
+
 
         },
         "logoLinks": {
