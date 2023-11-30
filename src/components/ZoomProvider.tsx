@@ -1,5 +1,5 @@
 import { tss } from "../theme";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import type { ReactNode } from "react";
 
 
@@ -11,7 +11,20 @@ export type ZoomProviderProps = {
 
 export const ZoomProvider = memo((props: ZoomProviderProps) => {
     const {children, ...rest} = props;
-    const { classes } = useStyles({ ...rest })
+    const { classes, theme } = useStyles({ ...rest })
+
+    const isWithinInterval = theme.windowInnerWidth <= props.referenceWidth && theme.windowInnerWidth >= props.minEffectivenessWidth;
+
+    useEffect(() => {
+        const body = document.body;
+
+        body.style.height = isWithinInterval ? "0px": "";
+
+        return () => {
+            body.style.height = "";
+        };
+    }, [isWithinInterval]);
+
 
     return <div className={classes.root}>
         <div className={classes.inner}>
@@ -25,22 +38,27 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
 const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create(({
     minEffectivenessWidth,
     referenceWidth,
-    theme }) => ({
-        "root": {
+    theme }) => {
+        const isWithinInterval = theme.windowInnerWidth <= referenceWidth && theme.windowInnerWidth >= minEffectivenessWidth;
+        return ({"root": {
             "position": "relative",
-            "width": "100%"
+            "width": "100%",
+            "height": isWithinInterval ? 0 : undefined
+
 
         },
         "inner": {
-            ...(theme.windowInnerWidth <= referenceWidth && theme.windowInnerWidth >= minEffectivenessWidth ? {
+            ...(isWithinInterval ? {
+                "position": "relative",
                 "transform": `scale(${theme.windowInnerWidth / referenceWidth})`,
                 "transformOrigin": "top left",
-                "width": referenceWidth
+                "width": referenceWidth,
+                "height": theme.windowInnerHeight / (theme.windowInnerWidth / referenceWidth),
             } : {
                 "width": "100%"
             }),
-            "margin": "auto"
+            "margin": "auto",
 
         }
     }
-))
+)})
