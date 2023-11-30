@@ -46,7 +46,7 @@ export function Header(props: HeaderProps) {
 
 
     return (
-        <div ref={ref} className={cx(classes.root, className)}>
+        <header ref={ref} className={cx(classes.root, className)}>
             <ToggleMenuButton 
                 isActive={isOpen}
                 onClick={toggleMenu}
@@ -138,7 +138,7 @@ export function Header(props: HeaderProps) {
 
             </div>
 
-        </div>
+        </header>
     );
 };
 
@@ -167,19 +167,18 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
     const transitionTime = 600;
     return ({
         "root": {
-            "zIndex": 4000,
             "position": "fixed",
             "top": 0,
             "left": 0,
             "width": "100%",
-            "height": theme.spacing.nonCenteredHeroSide
+            "height": 150,
+            "zIndex": 4000,
 
         },
         "toggleMenuButton": {
             "position": "absolute",
             "top": 125,
-            "right": 186
-
+            "right": 186,
         },
         "linkButton": {
             "position": "absolute",
