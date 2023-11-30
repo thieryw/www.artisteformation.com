@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Link } from "../tools/link";
+import type { Link } from "../tools/link";
 import { tss, Text } from "../theme";
 
 
