@@ -101,14 +101,19 @@ export function App() {
           }}
 
         />
-        <div>
+        <div className={classes.body}>
           {route.name === "home" && <Home />}
         </div>
         <Footer
+          className={classes.footer}
           links={links}
           currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
           siteLogo={siteLogo}
           contactTitle={t("footerContactTitle")}
+          smallPrint={<div>
+            <Text typo="quote">{t("copyRight")}</Text>
+            <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
+          </div>}
           socialLinks={[
             {
               "href": "",
@@ -148,11 +153,23 @@ const useStyles = tss.create(({ theme }) => ({
     "backgroundColor": theme.colors.backgroundMain,
     "width": "100%",
     "position": "relative",
-    "overflow": "hidden"
+    "overflow": "hidden",
+    "display": "flex",
+    "flexDirection": "column",
+    "minHeight": "100%"
 
   },
+  "body": {
+    "flex": "1 0 auto"
+
+  },
+  "footer": {
+    "flexShrink": 0
+  },
   "contactText": {
-    "color": theme.colors.darkGray
+    "color": theme.colors.darkGray,
+    "marginTop": "1em",
+    "marginBottom": "1em"
   },
   "contactTitle": {
     "marginBlock": 0
