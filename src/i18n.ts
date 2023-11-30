@@ -35,7 +35,13 @@ export const {
 				"legalLink": "Mentions légales",
 				"copyRight": "Copiright © 2023 Artiste Formation",
 				"designerCredits": "Designé par [IdeaArt](https://github.com/thieryw/)",
-				"appointmentLink": "Fixer un rdv"
+				"appointmentLink": "Fixer un rdv",
+				"siteTitle": "Artiste Formation",
+				"footerContactTitle": "Suivez-nous !",
+				"footerParagraphTitle": "Prêt(e) à lancer votre carrière ?",
+				"footerParagraph": "Bookez un entretien gratuit et voyons ce qu'on peut bâtir ensemble.",
+				"footerCallToActionTitle": "C'est parti !",
+				"footerLinkButtonLabel": "DÎTES-NOUS TOUT !"
 			},
 			"Home": {
 				"title": "Vite + React",

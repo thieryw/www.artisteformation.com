@@ -12,6 +12,7 @@ import youtubeIcon from "./assets/svg/youtube-icon.svg";
 import siteLogo from "./assets/svg/logo.svg";
 import ReactMarkdown from "react-markdown";
 import { ZoomProvider } from "./components/ZoomProvider";
+import { Footer } from "./components/Footer";
 
 const referenceWidth = 1920;
 const minEffectivenessWidth = 0;
@@ -103,6 +104,38 @@ export function App() {
         <div>
           {route.name === "home" && <Home />}
         </div>
+        <Footer
+          links={links}
+          currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
+          siteLogo={siteLogo}
+          contactTitle={t("footerContactTitle")}
+          socialLinks={[
+            {
+              "href": "",
+              "icon": fbIcon,
+              "label": "facebook link"
+            },
+            {
+              "href": "",
+              "icon": instaIcon,
+              "label": "instagram link"
+            },
+            {
+              "href": "",
+              "icon": youtubeIcon,
+              "label": "youtube link"
+            },
+          ]}
+          siteTitle={t("siteTitle")}
+          paragraphTitle={t("footerParagraphTitle")}
+          paragraph={t("footerParagraph")}
+          callToActionTitle={t("footerCallToActionTitle")}
+          buttonLink={{
+            "label": t("footerLinkButtonLabel"),
+            ...routes.contact().link
+          }}
+
+        />
       </div>
 
     </ZoomProvider>
@@ -152,6 +185,12 @@ export const { i18n } = declareComponentKeys<
   "legalLink" |
   "copyRight" |
   "designerCredits" |
-  "appointmentLink"
+  "appointmentLink" |
+  "siteTitle" |
+  "footerContactTitle" |
+  "footerParagraphTitle" |
+  "footerParagraph" |
+  "footerCallToActionTitle" |
+  "footerLinkButtonLabel"
 >()({ App });
 
