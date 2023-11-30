@@ -86,7 +86,7 @@ export const typography: Record<Typography, CSSObject> = {
         "fontSize": `${40 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
-        "lineHeight": "1.2em",
+        "marginBlock": 0
     },
     "heading5": {
         "color": "#3B3051",
@@ -103,18 +103,20 @@ export const typography: Record<Typography, CSSObject> = {
     },
     "additionalTitle": {
         "fontFamily": "Satoshi-Bold",
-        "color": "rgba(125, 125, 125, 0.6",
-        "fontSize": `${14 / baseFontSizePx}em`
+        "color": "rgba(125, 125, 125, 0.6)",
+        "fontSize": `${14 / baseFontSizePx}em`,
+        "marginBlock": 0
     },
     "carouselItem": {
         "fontFamily": "Satoshi-Bold",
-        "color": "rgba(125, 125, 125, 0.6",
+        "color": "rgba(125, 125, 125, 0.6)",
         "fontSize": `${20 / baseFontSizePx}em`
     },
     "paragraph": {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${18 / baseFontSizePx}em`,
-        "color": "#3B3051"
+        "color": "#3B3051",
+        "marginBlock": 0
     },
     "quote": {
         "fontFamily": "Satoshi-Medium",
@@ -136,10 +138,14 @@ function useContext() {
             "nonCenteredHeroSide": 430,
             "nonCenteredSectionSide": 190,
             "listElementGap": 40,
-            "iconSpacing": 18
+            "iconSpacing": 18,
+            "footerPaddingRightLeft": 210,
+            "titleWidth": 300
+        
         },
         "colors": {
             "backgroundMain": "#F5F5F5",
+            "backgroundSecondary": "#F6F6F6",
             "darkGray": "#7D7D7D",
             "bloodOrange": "#F14C2C",
             "linden": "#72B0A8",
