@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "ES2015",
     "useDefineForClassFields": true,
-    "lib": ["ES2016", "DOM", "DOM.Iterable"],
-    "module": "CommonJS",
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    "module": "ES2015",
     "skipLibCheck": true,
     "baseUrl": "src",
 
