@@ -14,6 +14,15 @@ export function Home() {
     return (
         <div className={classes.root}>
             <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
         </div>
     )
 }

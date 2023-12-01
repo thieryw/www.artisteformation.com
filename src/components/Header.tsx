@@ -195,7 +195,7 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
             "marginBottom": theme.spacing.textGap
         },
         "menu": {
-            "position": "absolute",
+            "position": "fixed",
             "display": "flex",
             "alignItems": "center",
             "top": isOpen ? 0 : -openHeaderHeight,

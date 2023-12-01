@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 
 export type ZoomProviderProps = {
+
     referenceWidth: number;
     minEffectivenessWidth: number;
     children: ReactNode;
@@ -43,13 +44,11 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create((
         return ({"root": {
             "position": "relative",
             "width": "100%",
-            "height": isWithinInterval ? 0 : undefined
-
 
         },
         "inner": {
             ...(isWithinInterval ? {
-                "position": "relative",
+                "position": isWithinInterval ? "absolute" : "relative",
                 "transform": `scale(${theme.windowInnerWidth / referenceWidth})`,
                 "transformOrigin": "top left",
                 "width": referenceWidth,

@@ -5,7 +5,7 @@ import { Text } from "./theme/Text";
 import { tss } from "./theme/tss";
 import { Header } from "./components/Header";
 import type { HeaderProps } from "./components/Header";
-import {declareComponentKeys, useTranslation} from "./i18n";
+import { declareComponentKeys, useTranslation } from "./i18n";
 import fbIcon from "./assets/svg/fb-icon.svg"
 import instaIcon from "./assets/svg/insta-icon.svg";
 import youtubeIcon from "./assets/svg/youtube-icon.svg";
@@ -141,6 +141,7 @@ export function App() {
           }}
 
         />
+
       </div>
 
     </ZoomProvider>
@@ -153,10 +154,9 @@ const useStyles = tss.create(({ theme }) => ({
     "backgroundColor": theme.colors.backgroundMain,
     "width": "100%",
     "position": "relative",
-    "overflow": "hidden",
+    "minHeight": "100%",
     "display": "flex",
     "flexDirection": "column",
-    "minHeight": "100%"
 
   },
   "body": {
