@@ -1,4 +1,4 @@
-import { useState, memo, useRef } from 'react';
+import { useState, memo, useRef, useEffect } from 'react';
 import type { ReactNode } from "react";
 import { tss } from "../theme";
 import { Text } from "../theme/Text";
@@ -6,6 +6,7 @@ import { useConstCallback } from "powerhooks/useConstCallback";
 import { Logo } from "./Logo";
 import type { Link } from "../tools/link";
 import { LinkButton } from "./LinkButton";
+import { getScrollableParent } from "powerhooks/getScrollableParent";
 
 
 export type HeaderProps = {
@@ -32,22 +33,42 @@ export function Header(props: HeaderProps) {
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
+    useEffect(()=>{
+        if(ref.current === null){
+            return;
+        };
 
-    const { classes, cx, theme } = useStyles({ isOpen, zoomProviderInterval, "classesOverrides": props.classes });
+
+        const scrollableParent = getScrollableParent({
+            "doReturnElementIfScrollable": true,
+            "element": ref.current
+        });
+
+
+        scrollableParent.style.overflow = (()=>{
+            if(!isOpen){
+                return "";
+            }
+
+            return "hidden";
+        })()
+
+    }, [ref.current, isOpen])
 
     const toggleMenu = useConstCallback(() => {
         setIsOpen(!isOpen);
     })
 
-
     const handleMenuItemClick = useConstCallback(() => {
         setIsOpen(false);
     })
 
+    const { classes, cx, theme } = useStyles({ isOpen, zoomProviderInterval, "classesOverrides": props.classes });
+
 
     return (
         <header ref={ref} className={cx(classes.root, className)}>
-            <ToggleMenuButton 
+            <ToggleMenuButton
                 isActive={isOpen}
                 onClick={toggleMenu}
                 className={classes.toggleMenuButton}
@@ -146,7 +167,7 @@ export function Header(props: HeaderProps) {
 
 const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomProviderInterval">>().create(({ isOpen, zoomProviderInterval, theme }) => {
     const openHeaderHeight = (() => {
-        function getHeight(referenceHeight: number){
+        function getHeight(referenceHeight: number) {
             if (zoomProviderInterval === undefined) {
                 return referenceHeight
             }
@@ -167,7 +188,7 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
     const transitionTime = 600;
     return ({
         "root": {
-            "position": "fixed",
+            //"position": "fixed",
             "top": 0,
             "left": 0,
             "width": "100%",
@@ -195,7 +216,7 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
             "marginBottom": theme.spacing.textGap
         },
         "menu": {
-            "position": "fixed",
+            "position": "absolute",
             "display": "flex",
             "alignItems": "center",
             "top": isOpen ? 0 : -openHeaderHeight,
