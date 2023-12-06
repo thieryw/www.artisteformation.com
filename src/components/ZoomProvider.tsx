@@ -5,16 +5,24 @@ import type { ReactNode } from "react";
 
 export type ZoomProviderProps = {
 
-    referenceWidth: number;
-    minEffectivenessWidth: number;
+    widthRange: {
+        min: number;
+        max: number;
+
+    }
     children: ReactNode;
 }
 
 export const ZoomProvider = memo((props: ZoomProviderProps) => {
-    const {children, ...rest} = props;
-    const { classes, theme } = useStyles({ ...rest })
+    const {children, widthRange: {max, min}} = props;
+    const { classes, theme } = useStyles({ 
+        "widthRange": {
+            max,
+            min
+        }
+     })
 
-    const isWithinInterval = theme.windowInnerWidth <= props.referenceWidth && theme.windowInnerWidth >= props.minEffectivenessWidth;
+    const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
 
     useEffect(() => {
         const body = document.body;
@@ -37,10 +45,9 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
 
 
 const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create(({
-    minEffectivenessWidth,
-    referenceWidth,
+    widthRange: {max, min},
     theme }) => {
-        const isWithinInterval = theme.windowInnerWidth <= referenceWidth && theme.windowInnerWidth >= minEffectivenessWidth;
+        const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
         return ({"root": {
             "position": "relative",
             "width": "100%",
@@ -49,10 +56,10 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create((
         "inner": {
             ...(isWithinInterval ? {
                 "position": isWithinInterval ? "absolute" : "relative",
-                "transform": `scale(${theme.windowInnerWidth / referenceWidth})`,
+                "transform": `scale(${theme.windowInnerWidth / max})`,
                 "transformOrigin": "top left",
-                "width": referenceWidth,
-                "height": theme.windowInnerHeight / (theme.windowInnerWidth / referenceWidth),
+                "width": max,
+                "height": theme.windowInnerHeight / (theme.windowInnerWidth / max),
             } : {
                 "width": "100%"
             }),

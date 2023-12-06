@@ -13,9 +13,12 @@ import siteLogo from "./assets/svg/logo.svg";
 import ReactMarkdown from "react-markdown";
 import { ZoomProvider } from "./components/ZoomProvider";
 import { Footer } from "./components/Footer";
+import { FixedComponent } from "./components/FixedComponent";
 
-const referenceWidth = 1920;
-const minEffectivenessWidth = 0;
+const widthRange = {
+  "min": 0,
+  "max": 1920
+}
 
 
 export function App() {
@@ -54,53 +57,55 @@ export function App() {
 
   return (
     <ZoomProvider
-      minEffectivenessWidth={minEffectivenessWidth}
-      referenceWidth={referenceWidth}
+      widthRange={widthRange}
     >
       <div className={classes.root}>
-        <Header
-          zoomProviderInterval={{
-            "min": minEffectivenessWidth,
-            "max": referenceWidth
-          }}
-          links={links}
-          currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
-          logo={siteLogo}
-          contact={<div>
-            <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
-            <a className={classes.email} href={`mailto:${t("email")}`}><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
-            <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
-          </div>}
-          smallPrint={
-            <div>
-              <a className={classes.legalLink} {...routes.legal().link}><Text typo="quote">{t("legalLink")}</Text></a>
-              <Text typo="quote">{t("copyRight")}</Text>
-              <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
-            </div>
-          }
-          logoLinks={[
-            {
-              "href": "",
-              "logo": fbIcon,
-              "label": "Facebook link"
-            },
-            {
-              "href": "",
-              "logo": instaIcon,
-              "label": "Instagram link",
-            },
-            {
-              "href": "",
-              "logo": youtubeIcon,
-              "label": "Youtube link"
+        <FixedComponent
+          className={classes.headerWrapper}
+          widthRange={widthRange}
+        >
+          <Header
+            zoomProviderInterval={widthRange}
+            links={links}
+            currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
+            logo={siteLogo}
+            contact={<div>
+              <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
+              <a className={classes.email} href={`mailto:${t("email")}`}><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
+              <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
+            </div>}
+            smallPrint={
+              <div>
+                <a className={classes.legalLink} {...routes.legal().link}><Text typo="quote">{t("legalLink")}</Text></a>
+                <Text typo="quote">{t("copyRight")}</Text>
+                <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
+              </div>
             }
-          ]}
-          buttonLink={{
-            "label": t("appointmentLink"),
-            ...routes.contact().link
-          }}
+            logoLinks={[
+              {
+                "href": "",
+                "logo": fbIcon,
+                "label": "Facebook link"
+              },
+              {
+                "href": "",
+                "logo": instaIcon,
+                "label": "Instagram link",
+              },
+              {
+                "href": "",
+                "logo": youtubeIcon,
+                "label": "Youtube link"
+              }
+            ]}
+            buttonLink={{
+              "label": t("appointmentLink"),
+              ...routes.contact().link
+            }}
 
-        />
+          />
+
+        </FixedComponent>
         <div className={classes.body}>
           {route.name === "home" && <Home />}
         </div>
@@ -157,6 +162,13 @@ const useStyles = tss.create(({ theme }) => ({
     "minHeight": "100%",
     "display": "flex",
     "flexDirection": "column",
+
+  },
+  "headerWrapper": {
+    "zIndex": 4000,
+    "width": "100%",
+    "height": 200,
+    "top": 300
 
   },
   "body": {

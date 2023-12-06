@@ -185,7 +185,7 @@ const useStyles = tss.create(({ theme }) => ({
     },
 
     "paragraph": {
-        "width": 325,
+        "width": 350,
         "height": 195,
         "display": "flex",
         "flexDirection": "column",
