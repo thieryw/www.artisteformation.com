@@ -2,7 +2,7 @@ import { tss } from "../theme/tss"
 import { declareComponentKeys } from "../i18n";
 import { Text } from "../theme/Text"
 import { useTranslation } from "../i18n";
-import { Carousel } from "../components/Slider";
+import { Slider } from "../components/Slider";
 import slide1 from "../assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
 import slide2 from "../assets/svg/comment/Slide 2 - Processus/2-creation-du-parcours.svg";
 import slide3 from "../assets/svg/comment/Slide 2 - Processus/3-pilotage.svg";
@@ -17,7 +17,7 @@ export function Home() {
     return (
         <div className={classes.root}>
             <Text typo="siteTitle">{t("title")}</Text>
-            <Carousel 
+            <Slider 
                 variant="numbered"
                 slides={[
                     {
