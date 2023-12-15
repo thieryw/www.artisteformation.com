@@ -36,6 +36,7 @@ export const typography: Record<Typography, CSSObject> = {
         "color": "rgba(125, 125, 125, 0.09)",
         "fontFamily": "Satoshi-Bold",
         "fontSize": `${130 / baseFontSizePx}em`,
+        "marginBlock": 0
     },
     "splashScreen": {
         "color": "#3B3051",
@@ -72,14 +73,16 @@ export const typography: Record<Typography, CSSObject> = {
         "fontSize": `${64 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
-        "lineHeight": "1.15em"
+        "lineHeight": "1.15em",
+        "marginBlock": 0
     },
     "heading3": {
         "color": "#3B3051",
         "fontSize": `${48 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
-        "lineHeight": "1.20em"
+        "lineHeight": "1.20em",
+        "marginBlock": 0
     },
     "heading4": {
         "color": "#3B3051",
@@ -105,7 +108,8 @@ export const typography: Record<Typography, CSSObject> = {
         "fontFamily": "Satoshi-Bold",
         "color": "rgba(125, 125, 125, 0.6)",
         "fontSize": `${14 / baseFontSizePx}em`,
-        "marginBlock": 0
+        "marginBlock": 0,
+        "letterSpacing": "0.2em"
     },
     "carouselItem": {
         "fontFamily": "Satoshi-Bold",
@@ -116,7 +120,8 @@ export const typography: Record<Typography, CSSObject> = {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${18 / baseFontSizePx}em`,
         "color": "#3B3051",
-        "marginBlock": 0
+        "marginBlock": 0,
+        "lineHeight": "2em"
     },
     "quote": {
         "fontFamily": "Satoshi-Medium",
