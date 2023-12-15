@@ -6,6 +6,7 @@ export type TextProps = {
     typo: Typography;
     className?: string;
     children: ReactNode;
+    style?: React.CSSProperties;
 };
 
 const tagMap: Record<Typography, keyof JSX.IntrinsicElements> = {
@@ -27,11 +28,11 @@ const tagMap: Record<Typography, keyof JSX.IntrinsicElements> = {
 }
 
 export const Text = memo((props: TextProps) => {
-    const { children, typo, className } = props;
+    const { children, typo, className, style } = props;
     const { classes, cx } = useStyles({ typo })
     const ComponentTag = tagMap[typo];
 
-    return <ComponentTag className={cx(classes.root, className)}>{children}</ComponentTag>
+    return <ComponentTag style={style} className={cx(classes.root, className)}>{children}</ComponentTag>
 
 })
 
