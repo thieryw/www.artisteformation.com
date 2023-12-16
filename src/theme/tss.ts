@@ -114,7 +114,8 @@ export const typography: Record<Typography, CSSObject> = {
     "carouselItem": {
         "fontFamily": "Satoshi-Bold",
         "color": "rgba(125, 125, 125, 0.6)",
-        "fontSize": `${20 / baseFontSizePx}em`
+        "fontSize": `${20 / baseFontSizePx}em`,
+        "marginBlock": 0
     },
     "paragraph": {
         "fontFamily": "Satoshi-Medium",

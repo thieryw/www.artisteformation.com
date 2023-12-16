@@ -3,9 +3,12 @@ import { declareComponentKeys } from "../i18n";
 import { Text } from "../theme/Text"
 import { useTranslation } from "../i18n";
 import { Slider } from "../components/Slider";
-import slide1 from "../assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
+import slide1 from "../assets/jpg/comment/Slide 1 - Vos droits/1-intermittent-du-spectacle.jpeg";
+import slide2 from "../assets/jpg/comment/Slide 1 - Vos droits/2-salarie.jpeg";
+import slide3 from "../assets/jpg/comment/Slide 1 - Vos droits/3-createur-dentreprise.jpeg";
+/*import slide1 from "../assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
 import slide2 from "../assets/svg/comment/Slide 2 - Processus/2-creation-du-parcours.svg";
-import slide3 from "../assets/svg/comment/Slide 2 - Processus/3-pilotage.svg";
+import slide3 from "../assets/svg/comment/Slide 2 - Processus/3-pilotage.svg";*/
 
 export function Home() {
 
@@ -18,37 +21,40 @@ export function Home() {
         <div className={classes.root}>
             <Text typo="siteTitle">{t("title")}</Text>
             <Slider 
-                variant="numbered"
+                variant="named"
                 slides={[
                     {
+                        "name": "01. / ENGAGEMENT",
+                        "smallSurtitle": "COMMENT CA MARCHE",
                         "title": "Example Titre 1",
                         "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus ornare interdum. Proin eu interdum dui. Nam at consequat libero. Cras laoreet ex dolor, sed viverra purus imperdiet ac.",
-                        "secondParagraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus ornare interdum. Integer pellentesque odio vitae ipsum semper varius.",
+                        "imageUrl": slide1,
                         "button": {
                             "label": "robin des bois",
                             "href": "",
                         },
-                        "leftIllustrationUrl": slide1
                     },
                     {
                         "title": "Example Titre 2",
+                        "name": "02. / FINANCEMENT",
+                        "smallSurtitle": "COMMENT CA MARCHE",
+                        "imageUrl": slide2,
                         "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus ornare interdum. Proin eu interdum dui. Nam at consequat libero. Cras laoreet ex dolor, sed viverra purus imperdiet ac.",
-                        "secondParagraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus ornare interdum. Integer pellentesque odio vitae ipsum semper varius.",
                         "button": {
                             "label": "robin des bois",
                             "href": "",
                         },
-                        "leftIllustrationUrl": slide2
                     },
                     {
                         "title": "Example Titre 3",
+                        "name": "03. / ANALYSE & REPONSE",
+                        "smallSurtitle": "COMMENT CA MARCHE",
+                        "imageUrl": slide3,
                         "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus ornare interdum. Proin eu interdum dui. Nam at consequat libero. Cras laoreet ex dolor, sed viverra purus imperdiet ac.",
-                        "secondParagraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus ornare interdum. Integer pellentesque odio vitae ipsum semper varius.",
                         "button": {
                             "label": "robin des bois",
                             "href": "",
                         },
-                        "leftIllustrationUrl": slide3
                     },
                 ]}
             />
