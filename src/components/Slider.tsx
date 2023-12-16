@@ -12,12 +12,16 @@ namespace Slider {
     export type Slide = Pick<ArticleProps, "smallSurtitle" | "title" | "paragraph" | "secondParagraph" | "button">
     export type Numbered = {
         variant: "numbered",
+        className?: string;
+        classes?: Partial<ReturnType<typeof useStyles>["classes"]>
         slides: (Slide & {
             leftIllustrationUrl?: string;
         })[];
     };
     export type Named = {
         variant: "named",
+        className?: string;
+        classes?: Partial<ReturnType<typeof useStyles>["classes"]>
         slides: (Slide & {
             name: string;
             imageUrl?: string;
@@ -30,7 +34,7 @@ export type SliderProps = Slider.Numbered | Slider.Named;
 
 
 export const Slider = memo((props: SliderProps) => {
-    const { slides, variant } = props;
+    const { slides, variant, className } = props;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [previousIndex, setPreviousIndex] = useState<number | null>(null)
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -86,11 +90,13 @@ export const Slider = memo((props: SliderProps) => {
     })
 
 
-    const { classes, theme } = useStyles({
-        currentIndex
+    const { classes, theme, cx } = useStyles({
+        variant,
+        "hasImage": variant === "named" && slides[0].imageUrl !== undefined,
+        "classesOverrides": props.classes,
     });
 
-    return <div>
+    return <div className={cx(classes.root, className)}>
 
         <div className={classes.inner}>
             {
@@ -101,6 +107,7 @@ export const Slider = memo((props: SliderProps) => {
                     }
                     return <div className={classes.illustrations}>{
                         slides.map(({ leftIllustrationUrl }, index) => <Illustration
+                            variant="numbered"
                             illustrationUrl={leftIllustrationUrl ?? ""}
                             vector={calculateVector(index)}
                             isActive={index === currentIndex}
@@ -109,6 +116,45 @@ export const Slider = memo((props: SliderProps) => {
                     }
                     </div>
 
+                })()
+            }
+            {
+                (() => {
+                    if (variant !== "named") {
+                        return undefined;
+                    }
+
+                    return <div className={classes.slideLinkWrapper}>
+                        {
+                            slides.map(({ name }, index) => <button onClick={handleNavigation(index)} style={{
+                                "marginBottom": index !== slides.length - 1 ? 31 : undefined
+                            }} className={classes.slideLink}>
+                                <Text style={{
+                                    "color": index === currentIndex ? theme.colors.bloodOrange : undefined
+                                }} className={classes.slideLinkText} typo="carouselItem">{name}</Text>
+                            </button>)
+                        }
+
+                    </div>
+
+                })()
+            }
+            {
+                (() => {
+                    if (variant !== "named") {
+                        return undefined;
+                    }
+
+                    return <div className={classes.illustrations}>{
+                        slides.map(({ imageUrl }, index) => <Illustration
+                            variant="named"
+                            illustrationUrl={imageUrl ?? ""}
+                            vector={calculateVector(index)}
+                            isActive={index === currentIndex}
+                            key={index}
+                        />)
+                    }
+                    </div>
                 })()
             }
             <div className={classes.slidesWrapper}>
@@ -167,86 +213,119 @@ export const Slider = memo((props: SliderProps) => {
     </div>
 })
 
-const useStyles = tss.withParams<{ currentIndex: number }>().create(({ theme }) => ({
-    "root": {
+const useStyles = tss
+    .withParams<{variant: SliderProps["variant"]; hasImage: boolean; }>()
+    .create(({ theme, variant, hasImage }) => ({
+        "root": {
+            ...(() => {
+                const value = 132
+                return {
 
-    },
-    "numberedButtons": {
-        "display": "flex",
-        "flexDirection": "column",
-        "alignItems": "center"
+                    "paddingTop": value,
+                    "paddingBottom": value
+                }
+            })()
 
-    },
-    "numberedButton": {
-        "background": "none",
-        "width": 96,
-        "height": 96,
-        "borderRadius": "100%",
-        "display": "flex",
-        "justifyContent": "center",
-        "alignItems": "center",
-        "transition": "background 500ms",
-        "cursor": "pointer"
+        },
+        "slideLinkWrapper": {
+            "display": "flex",
+            "flexDirection": "column",
+            "marginRight": 95,
+            "alignSelf": "flex-start",
+            "alignItems": "flex-start",
+            "position": "relative",
+            "top": hasImage ? 150 : 60
+        },
+        "imageWrapper": {},
+        "slideLink": {
+            "border": "none",
+            "textAlign": "left",
+            "backgroundColor": "transparent",
+            "cursor": "pointer",
+        },
+        "slideLinkText": {
+            "transition": "color 500ms",
+            ":hover": {
+                "color": theme.colors.bloodOrange
+            }
+        },
+        "numberedButtons": {
+            "display": "flex",
+            "flexDirection": "column",
+            "alignItems": "center"
 
-    },
-    "numberedButtonWrapper": {
-        "display": "flex",
-        "flexDirection": "column",
-        "alignItems": "center"
-    },
-    "numberedButtonText": {
-        "transition": "color 500ms"
-    },
-    "numberedButtonSeparator": {
-        "width": 1,
-        "height": 174,
-        "backgroundColor": theme.colors.darkGray3
+        },
+        "numberedButton": {
+            "background": "none",
+            "width": 96,
+            "height": 96,
+            "borderRadius": "100%",
+            "display": "flex",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "transition": "background 500ms",
+            "cursor": "pointer"
 
-    },
-    "inner": {
-        "display": "flex",
-        "position": "relative",
-        "alignItems": "center"
+        },
+        "numberedButtonWrapper": {
+            "display": "flex",
+            "flexDirection": "column",
+            "alignItems": "center"
+        },
+        "numberedButtonText": {
+            "transition": "color 500ms"
+        },
+        "numberedButtonSeparator": {
+            "width": 1,
+            "height": 174,
+            "backgroundColor": theme.colors.darkGray3
 
-    },
-    "leftImageWrapper": {
-        "marginRight": theme.spacing.nonCenteredSectionSide
+        },
+        "inner": {
+            "display": "flex",
+            "position": "relative",
+            "alignItems": variant === "numbered" ? "center" : undefined
 
-    },
-    "slideNumber": {
-        "position": "absolute",
-        "bottom": 0,
-        "right": 0,
-        "lineHeight": "0.8em"
+        },
+        "leftImageWrapper": {
+            "marginRight": theme.spacing.nonCenteredSectionSide
 
-    },
-    "slides": {
-        "overflowX": "hidden",
-        "display": "grid",
-        "alignItems": "center",
+        },
+        "slideNumber": {
+            "position": "absolute",
+            "bottom": 0,
+            "right": 0,
+            "lineHeight": "0.8em"
 
-    },
-    "slidesWrapper": {
-        "position": "relative",
-        "width": 690,
-        "marginRight": 182
+        },
+        "slides": {
+            "overflowX": "hidden",
+            "display": "grid",
+            "alignItems": "center",
 
-    },
-    "illustrations": {
-        "display": "grid",
-        "alignItems": "center",
-        "marginRight": theme.spacing.nonCenteredSectionSide
+        },
+        "slidesWrapper": {
+            "position": "relative",
+            "width": 690,
+            "marginRight": variant === "numbered" ? 182 : undefined
 
-    },
-    "slide": {}
-}))
+        },
+        "illustrations": {
+            "display": "grid",
+            "alignItems": "center",
+            "marginRight": variant === "numbered" ? theme.spacing.nonCenteredSectionSide : theme.spacing.pageTitleGap,
+            "marginTop": variant === "named" ? theme.spacing.sectionTitleGap : undefined
+
+        },
+        "slide": {}
+    }))
 
 
 const { animate } = (() => {
 
     function getAnimation(translateInitialPercentage: number, duration: number, delay: number) {
 
-        const percentage = (1 - duration/(duration + delay)) * 100;
+        const percentage = (1 - duration / (duration + delay)) * 100;
 
         return `${keyframes`
             0%, ${percentage}% {
@@ -314,14 +393,19 @@ const { Slide } = (() => {
         const {
             slide: { button, title, ...rest },
             vector,
-            isActive
+            isActive,
         } = props;
 
 
         const { classes, cx } = useStyles({
             vector,
-            isActive
-
+            isActive,
+            "hasOnlyOneParagraph": (
+                rest.paragraph === undefined ||
+                rest.secondParagraph === undefined
+            ) &&
+                !(rest.paragraph === undefined &&
+                    rest.paragraph === undefined)
         });
         return <div className={classes.root}>
             <Article
@@ -354,10 +438,11 @@ const { Slide } = (() => {
     });
 
     const useStyles = tss
-        .withParams<Omit<SlideProps, "slide">>()
+        .withParams<Omit<SlideProps, "slide"> & { hasOnlyOneParagraph: boolean }>()
         .create(({
             vector,
-            isActive
+            isActive,
+            hasOnlyOneParagraph
         }) => {
 
 
@@ -369,6 +454,7 @@ const { Slide } = (() => {
 
                     "gridColumn": 1,
                     "gridRow": 1,
+                    "width": hasOnlyOneParagraph ? 326 : undefined
 
 
                 },
@@ -385,9 +471,13 @@ const { Slide } = (() => {
                     "position": "relative",
                 },
                 "smallSurtitleWrapper": {
-                    "overflow": "hidden"
+                    "overflow": "hidden",
+                    "opacity": isActive ? 1 : 0,
+                    "pointerEvents": !isActive ? "none" : undefined
                 },
-                "smallTitle": {},
+                "smallTitle": {
+                    "marginBottom": hasOnlyOneParagraph ? undefined : 22
+                },
                 "paragraphWrapper": {
                 },
                 "button": {
@@ -402,7 +492,7 @@ const { Slide } = (() => {
                     "transition": "opacity 1000ms",
                 },
                 "firstParagraph": {
-                    "transitionDelay": !isActive ? undefined : "800ms"
+                    "transitionDelay": !isActive ? undefined : "800ms",
                 },
                 "secondParagraph": {
                     "transitionDelay": !isActive ? undefined : "1300ms"
@@ -421,17 +511,18 @@ const { Illustration } = (() => {
         illustrationUrl: string;
         vector: Parameters<typeof Slide>["0"]["vector"];
         isActive: boolean;
+        variant: SliderProps["variant"];
 
     };
 
 
     const Illustration = memo((props: IllustrationProps) => {
 
-        const { illustrationUrl, vector, isActive } = props;
+        const { illustrationUrl, vector, isActive, variant } = props;
 
         console.log(isActive);
 
-        const { classes } = useStyles({ vector, isActive });
+        const { classes } = useStyles({ vector, isActive, variant });
         return <div className={classes.root}>
             <div className={classes.imageWrapper}>
                 <img className={classes.image} src={illustrationUrl} alt="carouselIllustration" />
@@ -441,8 +532,8 @@ const { Illustration } = (() => {
     });
 
     const useStyles = tss
-        .withParams<Pick<IllustrationProps, "vector" | "isActive">>()
-        .create(({ vector, isActive }) => {
+        .withParams<Pick<IllustrationProps, "vector" | "isActive" | "variant">>()
+        .create(({ vector, isActive, variant, theme }) => {
 
 
             return ({
@@ -450,10 +541,15 @@ const { Illustration } = (() => {
                     "gridColumn": 1,
                     "gridRow": 1,
                     "overflow": "hidden",
-                    "position": "relative"
+                    "position": "relative",
+                    "maxWidth": variant === "numbered" ? 350 : 557,
+                    "width": variant === "numbered" ? 350 : 557,
+                    "border": variant === "named" ? `solid ${theme.colors.white} 10px` : undefined,
+                    "boxShadow": variant === "named" ? "-7px 32px 99px 0 rgba(0, 0, 0, 0.08)" : undefined
                 },
                 "imageWrapper": {
                     "position": "relative",
+                    "width": "100%",
                     "zIndex": !isActive ? 3000 : 2000,
 
                     ...animate({
@@ -462,6 +558,9 @@ const { Illustration } = (() => {
                     })
                 },
                 "image": {
+                    "width": "100%",
+                    "objectFit": "cover",
+                    "display": "block"
 
                 }
 
