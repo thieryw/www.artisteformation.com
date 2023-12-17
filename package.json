@@ -21,7 +21,8 @@
     "type-route": "^1.0.1",
     "i18n": "^0.15.1",
     "react-svg": "^16.1.31",
-    "react-markdown": "^9.0.1"
+    "react-markdown": "^9.0.1",
+    "framer-motion": "10.16.16"
   },
   "devDependencies": {
     "dir-image-converter": "^0.0.17",
