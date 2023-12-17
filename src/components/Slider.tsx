@@ -126,7 +126,7 @@ export const Slider = memo((props: SliderProps) => {
 
                     return <div className={classes.slideLinkWrapper}>
                         {
-                            slides.map(({ name }, index) => <button onClick={handleNavigation(index)} style={{
+                            slides.map(({ name }, index) => <button key={name} onClick={handleNavigation(index)} style={{
                                 "marginBottom": index !== slides.length - 1 ? 31 : undefined
                             }} className={classes.slideLink}>
                                 <Text style={{
@@ -520,7 +520,6 @@ const { Illustration } = (() => {
 
         const { illustrationUrl, vector, isActive, variant } = props;
 
-        console.log(isActive);
 
         const { classes } = useStyles({ vector, isActive, variant });
         return <div className={classes.root}>
