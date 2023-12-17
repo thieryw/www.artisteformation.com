@@ -1,3 +1,4 @@
+import { useRef, useReducer } from "react";
 import { tss } from "../theme/tss"
 import { declareComponentKeys } from "../i18n";
 import { Text } from "../theme/Text"
@@ -9,18 +10,43 @@ import slide3 from "../assets/jpg/comment/Slide 1 - Vos droits/3-createur-dentre
 /*import slide1 from "../assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
 import slide2 from "../assets/svg/comment/Slide 2 - Processus/2-creation-du-parcours.svg";
 import slide3 from "../assets/svg/comment/Slide 2 - Processus/3-pilotage.svg";*/
+import { motion } from "framer-motion";
+import { useIntersectionObserver } from "../tools/useIntersectionObserver";
+import type { Variant } from "framer-motion";
 
 export function Home() {
 
 
     const { t } = useTranslation({ Home });
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
+    const variant = useRef<Record<string, Variant>>({
+        "hidden": {
+            "opacity": 0,
+            "y": -40
+        },
+        "show": {}
+    })
+    const { ref } = useIntersectionObserver({
+        "callback": ({ entry }) => {
+            if(!entry.isIntersecting){
+                variant.current.show = {};
+                forceUpdate();
+                return;
+            }
+            variant.current.show = {
+                "opacity": 1,
+                "y": 0
+            }
+            forceUpdate();
+        },
+        "threshold": 1
+    }, [])
 
     const { classes } = useStyles()
 
     return (
         <div className={classes.root}>
-            <Text typo="siteTitle">{t("title")}</Text>
-            <Slider 
+            <Slider
                 variant="named"
                 slides={[
                     {
@@ -58,6 +84,24 @@ export function Home() {
                     },
                 ]}
             />
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <motion.div
+                //viewport={{ "once": true, "margin": "-200px"}}
+                variants={variant.current}
+                initial="hidden"
+                animate="show"
+                ref={ref}
+                style={{
+                    "border": "solid red 2px"
+                }}
+            >
+                <Text typo="siteTitle">{t("title")}</Text>
+            </motion.div>
+            <Text typo="siteTitle">{t("title")}</Text>
+            <Text typo="siteTitle">{t("title")}</Text>
         </div>
     )
 }
