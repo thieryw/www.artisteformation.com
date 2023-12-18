@@ -17,7 +17,7 @@ export const {
 	useResolveLocalizedString,
 	getTranslation 
 } = createI18nApi<
-	typeof import ("pages/Home").i18n |
+	typeof import ("pages/home/Home").i18n |
 	typeof import ("App").i18n
 >()(
 	{ languages, fallbackLanguage },
@@ -44,12 +44,18 @@ export const {
 				"footerLinkButtonLabel": "DÎTES-NOUS TOUT !"
 			},
 			"Home": {
-				"title": "Vite + React",
-				"count": "count is",
-				"edit": "Edit",
-				"code": "src/App.tsx",
-				"save": "and save to test HMR",
-				"learnMore": "Click on the Vite and React logos to learn more"
+				"title": "Artiste Formation",
+				"subtitle": "Révélateur de Carrières Artistiques",
+				"introTitle": "Simple. Humain. Expert.",
+				"introSubtitle": "INTRODUCTION",
+				"introParagraph": "Expert dans la création de parcours d’évolution professionnelle sur mesure pour les artistes, techniciens du spectacle vivant et de l’audiovisuel, Artiste Formation vous offre une opportunité unique de développer votre carrière artistique. Que vous souhaitiez acquérir de nouvelles compétences, donner vie à un projet professionnel, travailler avec un artiste en particulier : nous pouvons vous y aider.",
+				"introPartner": "Partenaires",
+				"introCarer": "Carrières boostées",
+				"introSatisfaction": "Satisfaction",
+				"introPartnerNumber": "359",
+				"introCarerNumber": "714",
+				"introSatisfactionPercentage": "98%"
+
 			}
 
 

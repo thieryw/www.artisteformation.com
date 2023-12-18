@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Home } from "./pages/Home";
+import { Home } from "./pages/home/Home";
 import { useRoute, routes, routeDefs } from "./router";
 import { Text } from "./theme/Text";
 import { tss } from "./theme/tss";

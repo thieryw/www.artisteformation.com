@@ -50,15 +50,17 @@ export const typography: Record<Typography, CSSObject> = {
         "fontSize": `${110 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
-        "lineHeight": "1em"
+        "lineHeight": "1em",
+        "marginBlock": 0
 
     },
     "heading1": {
         "color": "#3B3051",
         "fontSize": `${96 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
+        "fontFamily": "Zodiak-Light",
         "letterSpacing": "0.03em",
-        "lineHeight": "1.1em"
+        "lineHeight": "1.1em",
+        "marginBlock": 0
     },
     "menuItem": {
         "color": "#3B3051",

@@ -114,7 +114,6 @@ const useStyles = tss.withParams<
         "textTransform": "uppercase"
     },
     "title": {
-        "marginBottom": theme.spacing.textGap,
         "textAlign": isCentered ? "center" : "left"
     },
     "titleWrapper": {
