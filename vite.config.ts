@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import legacy from '@vitejs/plugin-legacy'
+import { resolve } from "path";
 
 
 
@@ -13,7 +14,12 @@ export default defineConfig({
       "targets": ['defaults', 'not IE 11'],
     })
   ],
+  "resolve": {
+    "alias": {
+      "@": resolve(__dirname, "src")
+    }
+
+  },
   "base": "/www.artisteformation.com/"
 })
 
-	
