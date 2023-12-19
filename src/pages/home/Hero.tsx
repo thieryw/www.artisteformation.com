@@ -43,12 +43,12 @@ export const Hero = memo(() => {
 const useStyles = tss.create(({theme}) => {
     return ({
         "root": {
-            "width": "100%",
+            //"width": "100%",
             "display": "flex",
             "minHeight": 700,
             "padding": 30,
             "boxSizing": "border-box",
-            "maxHeight": "100vh",
+            //"maxHeight": "100vh",
             "marginBottom": 266
         },
         "illustrationWrapper": {

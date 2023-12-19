@@ -49,8 +49,6 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create((
     theme }) => {
         const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
         return ({"root": {
-            "position": "relative",
-            "width": "100%",
 
         },
         "inner": {
@@ -60,6 +58,7 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create((
                 "transformOrigin": "top left",
                 "width": max,
                 "height": theme.windowInnerHeight / (theme.windowInnerWidth / max),
+                "overflowX": "hidden"
             } : {
                 "width": "100%"
             }),
