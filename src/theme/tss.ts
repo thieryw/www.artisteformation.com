@@ -129,7 +129,9 @@ export const typography: Record<Typography, CSSObject> = {
     "quote": {
         "fontFamily": "Satoshi-Medium",
         "fontSize": `${13 / baseFontSizePx}em`,
-        "color": "#7D7D7D"
+        "color": "#7D7D7D",
+        "marginBlock": 0,
+        "lineHeight": "2em"
     }
 }
 
@@ -152,8 +154,9 @@ function useContext() {
         
         },
         "colors": {
-            "backgroundMain": "#F5F5F5",
+            "backgroundMain": "#fafafa",
             "backgroundSecondary": "#F6F6F6",
+            "backgroundTertiary": "#F2F2F2",
             "darkGray": "#7D7D7D",
             "bloodOrange": "#F14C2C",
             "linden": "#72B0A8",

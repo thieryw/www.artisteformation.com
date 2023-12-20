@@ -13,7 +13,6 @@ import siteLogo from "./assets/svg/logo.svg";
 import ReactMarkdown from "react-markdown";
 import { ZoomProvider } from "./components/ZoomProvider";
 import { Footer } from "./components/Footer";
-import { FixedComponent } from "./components/FixedComponent";
 
 const widthRange = {
   "min": 0,
@@ -55,57 +54,64 @@ export function App() {
   ]), [])
 
 
-  return (
+  return (<>
+
+    <ZoomProvider
+      widthRange={widthRange}
+      className={classes.headerWrapper}
+      classes={{
+        "inner": classes.headerInner
+      }}
+    >
+      <Header
+        zoomProviderInterval={widthRange}
+        links={links}
+        currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
+        logo={siteLogo}
+        contact={<div>
+          <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
+          <a className={classes.email} href={`mailto:${t("email")}`}><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
+          <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
+        </div>}
+        smallPrint={
+          <div>
+            <a className={classes.legalLink} {...routes.legal().link}><Text typo="quote">{t("legalLink")}</Text></a>
+            <Text typo="quote">{t("copyRight")}</Text>
+            <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
+          </div>
+        }
+        logoLinks={[
+          {
+            "href": "",
+            "logo": fbIcon,
+            "label": "Facebook link"
+          },
+          {
+            "href": "",
+            "logo": instaIcon,
+            "label": "Instagram link",
+          },
+          {
+            "href": "",
+            "logo": youtubeIcon,
+            "label": "Youtube link"
+          }
+        ]}
+        buttonLink={{
+          "label": t("appointmentLink"),
+          ...routes.contact().link
+        }}
+
+      />
+
+    </ZoomProvider>
+
+
     <ZoomProvider
       widthRange={widthRange}
     >
       <div className={classes.root}>
-        <FixedComponent
-          className={classes.headerWrapper}
-          widthRange={widthRange}
-        >
-          <Header
-            zoomProviderInterval={widthRange}
-            links={links}
-            currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
-            logo={siteLogo}
-            contact={<div>
-              <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
-              <a className={classes.email} href={`mailto:${t("email")}`}><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
-              <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
-            </div>}
-            smallPrint={
-              <div>
-                <a className={classes.legalLink} {...routes.legal().link}><Text typo="quote">{t("legalLink")}</Text></a>
-                <Text typo="quote">{t("copyRight")}</Text>
-                <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
-              </div>
-            }
-            logoLinks={[
-              {
-                "href": "",
-                "logo": fbIcon,
-                "label": "Facebook link"
-              },
-              {
-                "href": "",
-                "logo": instaIcon,
-                "label": "Instagram link",
-              },
-              {
-                "href": "",
-                "logo": youtubeIcon,
-                "label": "Youtube link"
-              }
-            ]}
-            buttonLink={{
-              "label": t("appointmentLink"),
-              ...routes.contact().link
-            }}
 
-          />
-
-        </FixedComponent>
         <div className={classes.body}>
           {route.name === "home" && <Home />}
         </div>
@@ -150,6 +156,7 @@ export function App() {
       </div>
 
     </ZoomProvider>
+  </>
   )
 }
 
@@ -165,10 +172,15 @@ const useStyles = tss.create(({ theme }) => ({
 
   },
   "headerWrapper": {
-    "zIndex": 4000,
     "width": "100%",
-    "height": 200,
-    "top": 300
+    "height": 0,
+
+  },
+  "headerInner": {
+    "position": "fixed",
+    "zIndex": 4000,
+    "height": 0,
+    "overflowX": "unset"
 
   },
   "body": {
@@ -194,6 +206,8 @@ const useStyles = tss.create(({ theme }) => ({
   },
   "designerCredits": {
     ...theme.typography.quote,
+    "position": "relative",
+    "top": "-1em",
     "& a": {
       "color": theme.typography.quote.color
 

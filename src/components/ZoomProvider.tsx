@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 
 
 export type ZoomProviderProps = {
-
+    className?: string;
+    classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
     widthRange: {
         min: number;
         max: number;
@@ -14,12 +15,13 @@ export type ZoomProviderProps = {
 }
 
 export const ZoomProvider = memo((props: ZoomProviderProps) => {
-    const {children, widthRange: {max, min}} = props;
-    const { classes, theme } = useStyles({ 
+    const {children, widthRange: {max, min}, className} = props;
+    const { classes, theme, cx } = useStyles({ 
         "widthRange": {
             max,
             min
-        }
+        },
+        "classesOverrides": props.classes
      })
 
     const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
@@ -35,7 +37,7 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
     }, [isWithinInterval]);
 
 
-    return <div className={classes.root}>
+    return <div className={cx(classes.root, className)}>
         <div className={classes.inner}>
             {children}
         </div>
@@ -44,7 +46,7 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
 })
 
 
-const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create(({
+const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className" | "classes">>().create(({
     widthRange: {max, min},
     theme }) => {
         const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
@@ -58,7 +60,7 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children">>().create((
                 "transformOrigin": "top left",
                 "width": max,
                 "height": theme.windowInnerHeight / (theme.windowInnerWidth / max),
-                "overflowX": "hidden"
+                "overflowX": "hidden",
             } : {
                 "width": "100%"
             }),

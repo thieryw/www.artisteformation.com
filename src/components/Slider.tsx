@@ -146,13 +146,13 @@ export const Slider = memo((props: SliderProps) => {
                     }
 
                     return <div className={classes.illustrations}>{
-                        slides.map(({ imageUrl }, index) => <Illustration
+                        slides.map(({ imageUrl }, index) => imageUrl !== undefined  ? <Illustration
                             variant="named"
                             illustrationUrl={imageUrl ?? ""}
                             vector={calculateVector(index)}
                             isActive={index === currentIndex}
                             key={index}
-                        />)
+                        /> : undefined)
                     }
                     </div>
                 })()
@@ -217,14 +217,6 @@ const useStyles = tss
     .withParams<{variant: SliderProps["variant"]; hasImage: boolean; }>()
     .create(({ theme, variant, hasImage }) => ({
         "root": {
-            ...(() => {
-                const value = 132
-                return {
-
-                    "paddingTop": value,
-                    "paddingBottom": value
-                }
-            })()
 
         },
         "slideLinkWrapper": {

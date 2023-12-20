@@ -189,17 +189,18 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
     return ({
         "root": {
             //"position": "fixed",
+            "position": "relative",
             "top": 0,
             "left": 0,
             "width": "100%",
-            "height": 150,
-            "zIndex": 4000,
+            //"height": 150,
 
         },
         "toggleMenuButton": {
             "position": "absolute",
             "top": 125,
             "right": 186,
+            "zIndex": 4002
         },
         "linkButton": {
             "position": "absolute",
@@ -217,6 +218,7 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
         },
         "menu": {
             "position": "absolute",
+            "zIndex": 4001,
             "display": "flex",
             "alignItems": "center",
             "top": isOpen ? 0 : -openHeaderHeight,

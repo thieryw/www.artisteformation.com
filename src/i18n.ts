@@ -54,7 +54,25 @@ export const {
 				"introSatisfaction": "Satisfaction",
 				"introPartnerNumber": "359",
 				"introCarerNumber": "714",
-				"introSatisfactionPercentage": "98%"
+				"introSatisfactionPercentage": "98%",
+				"visionTitle": "Donnez vie à votre Vision",
+				"visionSmallCaption": "Enregistrement live de l’intégrale des 24 préludes de Chopin. Captation live lors d’une tournée nationale.",
+				"visionSmallCaptionDate": "2019",
+    			"sliderEngagementName": "01. / ENGAGEMENT",
+    			"sliderEngagementTitle": "100% sur mesure, 100% humain",
+    			"sliderEngagementParagraph1": "Chaque artiste est unique et demande une attention particulière, c’est la raison pour laquelle nous offrons un suivi entièrement sur mesure, sans la moindre automatisation. Chaque étape est soigneusement conçue et adaptée à vos besoins spécifiques.",
+    			"sliderEngagementParagraph2": "Nous croyons en votre talent et sommes déterminés à vous aider à le développer au maximum. Artiste Formation n’est pas qu’un centre de formation, c’est votre partenaire de confiance dans votre voyage artistique.",
+    			"sliderFinancingName": "02. / FINANCEMENT",
+    			"sliderFinancingTitle": "Pise en charge financière et administrative",
+    			"sliderFinancingParagraph1": "Ayant une connaissance approfondie de tous les droits de formation dans le monde artistique, nous mobilisons notre expertise afin d’obtenir une prise en charge financière partielle ou totale de votre parcours d'évolution professionnelle.",
+    			"sliderFinancingParagraph2": "Vos droits permettant de vous former régulièrement dans nos métiers artistiques, nous vous proposerons le parcours le plus adapté et vous délesterons de toute la partie administrative.",
+    			"sliderResponseName": "03. / ANALYSE & RÉPONSE",
+    			"sliderResponseTitle": "Écoute, analyse & préponse personnalisée.",
+    			"sliderResponseParagraph1": "Notre approche commence par une analyse complète de vos besoins et une étude ap-profondie des enjeux professionnels de votre secteur. Ce socle de départ pour votre projet de formation nous permettra d’assembler une équipe d'experts et de",
+    			"sliderResponseParagraph2": "bâtir un projet professionnel solide et performant. Artiste Formation vous offre un tremplin qui propulse votre carrière. révèle votre potentiel et vous permet de réinventer votre avenir artistique.",
+    			"sliderButtonLabel": "EN SAVOIR PLUS",
+    			"sliderMiniTitle" : "COMMENT ÇA MARCHE",
+
 
 			}
 
