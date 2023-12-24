@@ -72,6 +72,8 @@ export const {
     			"sliderResponseParagraph2": "bâtir un projet professionnel solide et performant. Artiste Formation vous offre un tremplin qui propulse votre carrière. révèle votre potentiel et vous permet de réinventer votre avenir artistique.",
     			"sliderButtonLabel": "EN SAVOIR PLUS",
     			"sliderMiniTitle" : "COMMENT ÇA MARCHE",
+				"certificationParagraph": "La certification qualité a été délivrée au titre de la catégorie d’action suivante :",
+				"certificationTitle": "ACTIONS DE FORMATION"
 
 
 			}

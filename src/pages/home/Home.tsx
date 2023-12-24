@@ -7,6 +7,7 @@ import pianistWebp from "@/assets/webp/home/pianist-pic.webp";
 import pianistIllustrationJpg from "@/assets/jpg/home/pianist-illustration.jpeg";
 import pianistIllustrationWebp from "@/assets/webp/home/pianist-illustration.webp";
 import { Slider } from "@/components/Slider";
+import { Certification } from "./Certification";
 
 
 export function Home() {
@@ -48,7 +49,7 @@ export function Home() {
 
             </section>
             <section className={classes.sliderSection}>
-                <Slider 
+                <Slider
                     variant="named"
                     slides={[
                         {
@@ -87,6 +88,7 @@ export function Home() {
                     ]}
                 />
             </section>
+            <Certification />
         </div>
     )
 }
@@ -172,6 +174,8 @@ export const { i18n } = declareComponentKeys<
     "sliderResponseParagraph1" |
     "sliderResponseParagraph2" |
     "sliderButtonLabel" |
-    "sliderMiniTitle"
+    "sliderMiniTitle" |
+    "certificationParagraph" |
+    "certificationTitle"
 
 >()({ Home });

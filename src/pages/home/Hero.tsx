@@ -43,18 +43,17 @@ export const Hero = memo(() => {
 const useStyles = tss.create(({theme}) => {
     return ({
         "root": {
-            //"width": "100%",
             "display": "flex",
             "minHeight": 700,
-            "padding": 30,
             "boxSizing": "border-box",
-            //"maxHeight": "100vh",
             "marginBottom": 266
         },
         "illustrationWrapper": {
             "width": "50%",
             "display": "grid",
-            "gridTemplateColumns": "repeat(2, 1fr)"
+            "gridTemplateColumns": "repeat(2, 1fr)",
+            "padding": 30,
+            "boxSizing": "border-box"
 
         },
         "image": {
@@ -69,7 +68,9 @@ const useStyles = tss.create(({theme}) => {
             "alignContent": "center",
             "justifyItems": "center",
             "minHeight": "100%",
-            "width": "50%"
+            "width": "50%",
+            "position": "relative",
+            "left": -15
 
         },
         "title": {

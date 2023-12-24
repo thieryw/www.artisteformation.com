@@ -20,7 +20,7 @@ export type Typography =
     "quote";
 
 
-const baseFontSizePx = parseInt(window.
+export const baseFontSizePx = parseInt(window.
     getComputedStyle(document.documentElement).
     fontSize.match(/\d+/g)?.[0] ?? "");
 
@@ -114,13 +114,13 @@ export const typography: Record<Typography, CSSObject> = {
         "letterSpacing": "0.2em"
     },
     "carouselItem": {
-        "fontFamily": "Satoshi-Bold",
+        "fontFamily": "Satoshi-Medium",
         "color": "rgba(125, 125, 125, 0.6)",
-        "fontSize": `${20 / baseFontSizePx}em`,
+        "fontSize": `${21 / baseFontSizePx}em`,
         "marginBlock": 0
     },
     "paragraph": {
-        "fontFamily": "Satoshi-Medium",
+        "fontFamily": "Satoshi-Regular",
         "fontSize": `${18 / baseFontSizePx}em`,
         "color": "#3B3051",
         "marginBlock": 0,
