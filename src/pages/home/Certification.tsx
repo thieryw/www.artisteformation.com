@@ -1,7 +1,8 @@
 import { memo } from "react";
 import { tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
-import badge from "@/assets/svg/home/badge-qualiopi.svg"
+import badge from "@/assets/svg/home/badge-qualiopi.svg";
+import card from "@/assets/svg/home/certification-card.svg";
 import { ReactSVG } from "react-svg";
 
 
@@ -32,7 +33,7 @@ const useStyles = tss.create(({ theme }) => {
             "marginBottom": 350
         },
         "inner": {
-            "backgroundColor": "#DC4A2D",
+            "background": `url(${card})`,
             "display": "flex",
             "justifyContent": "space-between",
             "alignItems": "center",
