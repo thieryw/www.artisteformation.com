@@ -8,6 +8,7 @@ import pianistIllustrationJpg from "@/assets/jpg/home/pianist-illustration.jpeg"
 import pianistIllustrationWebp from "@/assets/webp/home/pianist-illustration.webp";
 import { Slider } from "@/components/Slider";
 import { Certification } from "./Certification";
+import { Customers } from "./Customers";
 
 
 export function Home() {
@@ -89,6 +90,7 @@ export function Home() {
                 />
             </section>
             <Certification />
+            <Customers />
         </div>
     )
 }
@@ -140,10 +142,10 @@ const useStyles = tss
             "marginBottom": 210
         },
         "sliderSection": {
-            "paddingBottom": 165,
+            "paddingBottom": 300,
             "paddingTop": 315,
             "paddingLeft": 185
-        }
+        },
     }))
 
 export const { i18n } = declareComponentKeys<
@@ -176,6 +178,19 @@ export const { i18n } = declareComponentKeys<
     "sliderButtonLabel" |
     "sliderMiniTitle" |
     "certificationParagraph" |
-    "certificationTitle"
+    "certificationTitle" |
+    "customerSmallTitle" |
+    "customerTitle" |
+    "customerMusicTitle" |
+    "customerMusicParagraph" |
+    "customerCinemaTitle" |
+    "customerCinemaParagraph" |
+    "customerTheatreTitle" |
+    "customerTheatreParagraph" |
+    "customerMediaTitle" |
+    "customerMediaParagraph" |
+    "customerBusinessTitle" |
+    "customerBusinessParagraph" |
+    "customerButton"
 
 >()({ Home });

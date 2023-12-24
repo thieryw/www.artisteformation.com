@@ -73,7 +73,20 @@ export const {
     			"sliderButtonLabel": "EN SAVOIR PLUS",
     			"sliderMiniTitle" : "COMMENT ÇA MARCHE",
 				"certificationParagraph": "La certification qualité a été délivrée au titre de la catégorie d’action suivante :",
-				"certificationTitle": "ACTIONS DE FORMATION"
+				"certificationTitle": "ACTIONS DE FORMATION",
+				"customerSmallTitle": "CARRIÈRE",
+				"customerTitle": "Pour Qui ?",
+				"customerMusicTitle": "Musique",
+				"customerMusicParagraph": "Harmonisons votre carrière à hauteur de votre talent et orchestrons votre ascension.",
+				"customerCinemaTitle": "Cinéma",
+				"customerCinemaParagraph": "Artiste Formation est votre allié pour réaliser vos rêves sur grand écran. Action !",
+				"customerTheatreTitle": "Théâtre",
+				"customerTheatreParagraph": "Nous sommes votre metteur en scène pour une carrière applaudie.",
+				"customerMediaTitle": "Média",
+				"customerMediaParagraph": "à vos plumes ! Nous accompagnons votre quête journalistique.",
+				"customerBusinessTitle": "Entrepre-nariat",
+				"customerBusinessParagraph": "Visionnaires, concrétisez vos ambitions !",
+				"customerButton": "VOIR TOUT"
 
 
 			}

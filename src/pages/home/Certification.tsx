@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { tss, Text, baseFontSizePx } from "@/theme";
+import { tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import badge from "@/assets/svg/home/badge-qualiopi.svg"
 import { ReactSVG } from "react-svg";
@@ -28,7 +28,8 @@ const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
             "paddingLeft": theme.spacing.nonCenteredSectionSide,
-            "paddingRight": theme.spacing.nonCenteredSectionSide
+            "paddingRight": theme.spacing.nonCenteredSectionSide,
+            "marginBottom": 350
         },
         "inner": {
             "backgroundColor": "#DC4A2D",
