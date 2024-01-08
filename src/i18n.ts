@@ -18,7 +18,8 @@ export const {
 	getTranslation 
 } = createI18nApi<
 	typeof import ("pages/home/Home").i18n |
-	typeof import ("App").i18n
+	typeof import ("App").i18n |
+	typeof import ("pages/how/How").i18n
 >()(
 	{ languages, fallbackLanguage },
 	{
@@ -111,8 +112,55 @@ export const {
 
 
 
+			},
+			"How": {
+				"careerBoostTitle": "714",
+				"careerBoostSubtitle": "CARRIÈRES BOOSTÉES",
+				"careerBoostParagraph": "Artiste Formation, c’est plus de 700 carrières propulsées depuis 2019.",
+				"introTitle": "On vous explique tout.",
+				"introSurtitle": "COMMENT ?",
+				"introParagraph": "Lorsque vous faites le pas vers Artiste Formation, vous ouvrez la porte à une multitude de possibilités pour financer et construire votre parcours d'évolution professionnelle.",
+				"introSecondParagraph": "Intermittent du spectacle, demandeur d'emploi, travailleur indépendant ou salarié, nous avons les clés pour vous aider à obtenir du soutien.",
+				"sliderIntermittentName": "01. / INTERMITTENT",
+				"sliderIntermittentTitle": "Intermittent du spectacle",
+				"sliderIntermittentParagraph": "Vous travaillez dans le domaine artistique ? Nous travaillons en étroite collaboration avec l'AFDAS, l'organisme de financement qui gère vos droits à la formation. Nous vous orientons dans les démarches pour accéder à une prise en charge de vos formations.",
+				"sliderTenantName": "02. / SALARIÉ",
+				"sliderTenantTitle": "Salarié",
+				"sliderTenantParagraph": "Si vous êtes en poste, notre équipe vous assiste pour naviguer à travers les méandres du plan de développement des compétences, du CPF, et du CPF de transition professionnelle. Nous vous accompagnons pour maximiser vos chances de financement.",
+				"sliderCreatorName": "03. / CRÉATEUR D'ENTREPRISE",
+				"sliderCreatorTitle": "Créateur d'entreprise",
+				"sliderCreatorParagraph": "Lancer votre entreprise ne devrait pas être un parcours solitaire. Découvrez comment notre accompagnement sur-mesure peut transformer votre idée en succès. Ne laissez pas vos interrogations freiner vos ambitions. Votre rêve entrepreneurial mérite un allié de taille : nous sommes là pour cela.",
+				"sliderIndependentName": "04. / INDÉPENDANT",
+				"sliderIndependentTitle": "Travailleur",
+				"sliderIndependentParagraph": "Que vous soyez artisan, artiste ou professionnel libéral, nous explorons avec vous les différentes options de financement offertes par les chambres de commerce, le FIFPL, l'AFDAS ou le FAFCEA, en fonction de votre domaine d'activité.",
+				"sliderCompanyName": "05. / ENTREPRISE",
+				"sliderCompanyTitle": "Entreprise",
+				"sliderCompanyParagraph": "Artiste Formation vous offre des formations spécialisées pour les entreprises du spectacle et de l’audio-visuel. Améliorez les compétences de votre équipe et valorisez votre entreprise. Nous mettons l’ensemble des outils à disposition pour la montée en compétence de vos salariés et la réussite de vos productions.",
+				"sliderButtonLabel": "CONTACTEZ-NOUS",
+				"sliderSurtitle": "VOS DROITS",
+				"processTitle": "Vous choisissez, On s’occupe du reste.",
+				"processSubtitle": "PROCESSUS",
+				"processParagraph": "Votre rêve artistique n'a pas de limites, et c'est pourquoi notre approche est axée sur la personnalisation. Vous choisissez la direction que vous voulez prendre, et nous prenons le relais avec enthousiasme.",
+				"numberedSliderNeedsTitle": "Recueil des besoins & Sélection des intervenants.",
+				"numberedSliderNeedsParagraph": "Notre équipe commence par écouter vos besoins et aspirations, puis nous sélection-nons les experts les mieux adaptés à votre projet parmi notre vaste réseau de partenaires. Vous tenez à travailler avec quelqu’un en particulier qui ne fait pas encore partie de nos partenaires ?",
+				"numberedSliderNeedsSecondParagraph": "Ca tombe bien ! Nous pouvons lui proposer d’intégrer nos formateurs dans des conditions avantageuses. Tout est possible tant que vous pouvez l’imaginer !",
+				"numberedSliderNeedsButtonLabel": "DEVENIR INTERVENANT",
+				"numberedSliderCreationTitle": "Création du parcours & Proposition pédagogique",
+				"numberedSliderCreationParagraph": "Très vite, votre parcours artistique prend forme. Nous concevons pour vous un programme sur mesure, mêlant théorie et pratique pour une expérience unique et enrichissante, et vous soumettons cette proposition pédagogique.",
+				"numberedSliderCreationSecondParagraph": "Mais là encore nous ajustons tout selon vos retours pour vous garantir une entière satisfaction. Le projet est à votre service, c’est donc bien vous le maître à bord !",
+				"numberedSliderCreationButtonLabel": "CRÉER MON PARCOURS",
+				"numberedSliderPilotingTitle": "Pilotage du projet : Apprendre, grandir et créer.",
+				"numberedSliderPilotingParagraph": "Une fois que tout est en place, nous déroulons le projet et gérons chaque détail. Tout sera fluide et facile pour vous ! La paperasse administrative ? C'est pour nous ! Nous montons votre dossier de A à Z. Le transfert entre l'organisme de financement et les intervenants à rémunérer ?",
+				"numberedSliderPilotingSecondParagraph": "Nous le gérons. Une question ou un problème ? Il n’y a que des solutions ! Vous bénéficiez d’un accompagnement complet. Votre seul souci, c'est d'apprendre, de grandir et de créer.",
+				"numberedSliderPilotingButtonLabel": "JE ME LANCE !",
+				"valuesSurtitle": "VALEURS",
+				"valuesTitle": "Des valeurs qui font la différence.",
+				"valuesParagraph": "Chez Artiste Formation, nous comprenons que votre parcours est unique, et nous nous engageons à vous accompagner dans votre évolution professionnelle avec expertise, dévouement et une touche artistique qui fait toute la différence. ",
+				"valuesButtonLabel": "PLUS SUR NOUS",
+				"handicapTitle": "Situation de handicap,Nous sommes là.",
+				"handicapSubtitle": "ACCESSIBILITÉ",
+				"handicapParagraph": "Chez Artiste Formation, nos aménagements sont pensés individuellement, que ce soit pour l'accès physique, les supports pédagogiques ou les méthodes d'évaluation. Notre équipe se tient à votre disposition pour discuter de vos exigences et garantir que vous puissiez profiter pleinement de l'expérience de formation. De plus, nous sensibilisons également nos formateurs et les participants aux enjeux de l'inclusion, afin de favoriser une compréhension mutuelle et une atmosphère bienveillante.",
 			}
-
 
 		},
 	}
