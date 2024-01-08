@@ -98,7 +98,8 @@ export const typography: Record<Typography, CSSObject> = {
         "fontSize": `${36 / baseFontSizePx}em`,
         "fontFamily": "Zodiak-Regular",
         "letterSpacing": "0.03em",
-        "lineHeight": "1.2em"
+        "lineHeight": "1.2em",
+        "marginBlock": 0
     },
     "sectionPageOrButton": {
         "fontFamily": "Satoshi-Bold",

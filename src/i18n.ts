@@ -86,7 +86,29 @@ export const {
 				"customerMediaParagraph": "à vos plumes ! Nous accompagnons votre quête journalistique.",
 				"customerBusinessTitle": "Entrepre-nariat",
 				"customerBusinessParagraph": "Visionnaires, concrétisez vos ambitions !",
-				"customerButton": "VOIR TOUT"
+				"customerButton": "VOIR TOUT",
+				"review1Title": "Laura Salaison",
+				"review1Subtitle": "Violoniste",
+				"review1Paragraph": "Artiste Formation a transformé mon parcours de violoniste baroque. Je suis montée en compétences à mon rythme, j’ai pu produire un enregistrement pro dans la foulée et booster ma visibilité. Il y a clairement un avant et un après !",
+				"review2Title": "Jean Phillipe Salmonelle",
+				"review2Subtitle": "Gambiste",
+				"review2Paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam ipsum ac placerat consectetur.",
+				"review3Title": "Robin Desboit",
+				"review3Subtitle": "Keytariste",
+				"review3Paragraph": "Pellentesque vel nibh et nunc congue commodo. Donec pharetra vel est eu pulvinar.",
+				"reviewArticleSurtitle": "TESTIMONIAL",
+				"reviewArticleTitle": "Ce qu'ils disent de Nous",
+				"reviewArticleParagraph": "Vous aussi faites-nous confiance",
+				"reviewArticleButtonLabel": "CONTACTEZ-NOUS",
+				"historySubtitle": "À PROPOS",
+				"historyTitle": "Créé par des Artistes",
+				"historyParagraph": "L'histoire de César Guigue commence dans une famille de mélomanes, en 1983. Dès l'âge de 5 ans, il saisit un violon et ne le lâchera plus. À 14 ans, il obtient déjà plusieurs diplômes au Conservatoire de Bourgoin-Jallieu : violon, musique de chambre, piano et théorie musicale. Cette formation solide le propulse vers des réussites remarquables, notamment le Concours centralisé du Conservatoire de la Ville de Paris pour n’en citer qu’une.",
+				"historyButtonLabel": "SUITE DU RÉCIT",
+				"teachersSurTitle": "FORMATEURS",
+				"teachersTitle": "Nos Maestros",
+				"teachersParagraph": "Forts d’un immense réseau de plus de 350 partenaires à travers le territoire, notre engagement c’est aussi être capable de constituer autour de vous une équipe d'experts afin de bâtir un projet puissant.",
+				"teachersButtonLabel": "LES VOIR TOUS"
+
 
 
 			}

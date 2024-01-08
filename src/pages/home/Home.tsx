@@ -9,6 +9,9 @@ import pianistIllustrationWebp from "@/assets/webp/home/pianist-illustration.web
 import { Slider } from "@/components/Slider";
 import { Certification } from "./Certification";
 import { Customers } from "./Customers";
+import { Reviews } from "./Reviews";
+import { History } from "./History";
+import { Teachers } from "./Teachers";
 
 
 export function Home() {
@@ -91,6 +94,9 @@ export function Home() {
             </section>
             <Certification />
             <Customers />
+            <Reviews />
+            <History />
+            <Teachers />
         </div>
     )
 }
@@ -191,6 +197,28 @@ export const { i18n } = declareComponentKeys<
     "customerMediaParagraph" |
     "customerBusinessTitle" |
     "customerBusinessParagraph" |
-    "customerButton"
+    "customerButton" |
+    "review1Title" |
+    "review1Subtitle" |
+    "review1Paragraph" |
+    "review2Title" |
+    "review2Subtitle" |
+    "review2Paragraph" |
+    "review3Title" |
+    "review3Subtitle" |
+    "review3Paragraph" |
+    "reviewArticleSurtitle" |
+    "reviewArticleTitle" |
+    "reviewArticleParagraph" |
+    "reviewArticleButtonLabel" |
+    "historySubtitle" |
+    "historyTitle" |
+    "historyParagraph" |
+    "historyButtonLabel" |
+    "teachersSurTitle" |
+    "teachersTitle" |
+    "teachersParagraph" |
+    "teachersButtonLabel"
+
 
 >()({ Home });
