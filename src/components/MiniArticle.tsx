@@ -23,27 +23,41 @@ export const MiniArticle = memo((props: MiniArticleProps) => {
     return <div className={cx(classes.root, className)}>
         <div className={classes.titleWrapper}>
             <Text className={classes.numberTitle} typo="heading1">{numberTitle}</Text>
-            <Text className={classes.subtitle} typo="additionalTitle">{subtitle}</Text>
+            <Text className={classes.subtitle} typo="quote">{subtitle}</Text>
         </div>
 
-        <Text className={classes.paragraph} typo="paragraph">{paragraph}</Text>
+        <Text className={classes.paragraph} typo="quote">{paragraph}</Text>
 
     </div>
 });
 
 const useStyles = tss.withParams<Pick<MiniArticleProps, "titleColor">>().create(
-    ({ titleColor }) => {
+    ({ titleColor, theme }) => {
         return ({
             "root": {
+                "width": 200,
+                "display": "flex",
+                "flexDirection": "column",
+                "alignItems": "center",
+                "justifyContent": "center"
 
             },
             "titleWrapper": {
+                "marginBottom": 45
 
             },
-            "paragraph": {},
-            "numberTitle": {
-                "color": titleColor
+            "paragraph": {
+                "textAlign": "center",
+                "color": theme.colors.darkGray3
+
             },
-            "subtitle": {}
+            "numberTitle": {
+                "color": titleColor,
+                "textAlign": "center",
+            },
+            "subtitle": {
+                "textAlign": "center",
+                "color": theme.colors.darkGray3
+            }
         })
     })

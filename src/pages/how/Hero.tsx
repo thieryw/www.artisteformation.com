@@ -8,6 +8,7 @@ export const Hero = memo(() => {
 
     const { t } = useTranslation("How")
     const { classes, theme } = useStyles();
+
     return <section className={classes.root}>
         <MiniArticle 
             numberTitle={t("careerBoostTitle")}
@@ -15,9 +16,13 @@ export const Hero = memo(() => {
             paragraph={t("careerBoostParagraph")}
             titleColor={theme.colors.linden}
         />
-        <div></div>
+        <div className={classes.separator}></div>
 
         <Article 
+            classes={{
+                "firstParagraph": classes.paragraph,
+                "secondParagraph": classes.paragraph
+            }}
             smallSurtitle={t("introSurtitle")}
             title={<Text typo="heading1">{t("introTitle")}</Text>}
             paragraph={t("introParagraph")}
@@ -27,8 +32,35 @@ export const Hero = memo(() => {
     </section>
 })
 
-const useStyles = tss.create(() => {
+const useStyles = tss.create(({theme}) => {
     return ({
-        "root": {}
+        "root": {
+            "display": "flex",
+            "marginTop": 290,
+            ...(()=>{
+                const value = 242;
+                return {
+                    "paddingLeft": value,
+                    "paddingRight": value
+                }
+                
+            })()
+        },
+        "separator": {
+            "width": 0,
+            "height": 640,
+            "borderLeft": `solid ${theme.colors.darkGray3} 1px`,
+            ...(()=>{
+                const value = 155;
+                return {
+                    "marginLeft": value,
+                    "marginRight": value
+                }
+
+            })()
+        },
+        "paragraph": {
+            "color": theme.colors.indigo
+        }
     })
 })
