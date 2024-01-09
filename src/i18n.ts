@@ -157,7 +157,7 @@ export const {
 				"valuesTitle": "Des valeurs qui font la différence.",
 				"valuesParagraph": "Chez Artiste Formation, nous comprenons que votre parcours est unique, et nous nous engageons à vous accompagner dans votre évolution professionnelle avec expertise, dévouement et une touche artistique qui fait toute la différence. ",
 				"valuesButtonLabel": "PLUS SUR NOUS",
-				"handicapTitle": "Situation de handicap,Nous sommes là.",
+				"handicapTitle": "Situation de handicap, Nous sommes là.",
 				"handicapSubtitle": "ACCESSIBILITÉ",
 				"handicapParagraph": "Chez Artiste Formation, nos aménagements sont pensés individuellement, que ce soit pour l'accès physique, les supports pédagogiques ou les méthodes d'évaluation. Notre équipe se tient à votre disposition pour discuter de vos exigences et garantir que vous puissiez profiter pleinement de l'expérience de formation. De plus, nous sensibilisons également nos formateurs et les participants aux enjeux de l'inclusion, afin de favoriser une compréhension mutuelle et une atmosphère bienveillante.",
 			}

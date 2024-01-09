@@ -169,6 +169,15 @@ export const Slider = memo((props: SliderProps) => {
                                 key={index}
                                 isActive={currentIndex === index}
                                 vector={calculateVector(index)}
+                                className={classes.slide}
+                                classes={{
+                                    "article": classes.slideArticle,
+                                    "button": classes.slideButton,
+                                    "firstParagraph": classes.slideFirstParagraph,
+                                    "secondParagraph": classes.slideSecondParagraph,
+                                    "paragraphWrapper": classes.slideParagraphWrapper,
+                                    "paragraph": classes.slideParagraph,
+                                }}
                             />
 
                         )
@@ -312,7 +321,13 @@ const useStyles = tss
             "marginTop": variant === "named" ? theme.spacing.sectionTitleGap : undefined
 
         },
-        "slide": {}
+        "slide": {},
+        "slideArticle": {},
+        "slideButton": {},
+        "slideFirstParagraph": {},
+        "slideSecondParagraph": {},
+        "slideParagraphWrapper": {},
+        "slideParagraph": {}
     }))
 
 
@@ -321,9 +336,11 @@ const useStyles = tss
 const { Slide } = (() => {
 
     type SlideProps = {
+        className?: string;
         slide: SliderProps["slides"][number];
         isActive: boolean;
         vector: "comingFromTop" | "comingFromBottom" | "leavingToTop" | "leavingToBottom" | "staticHidden" | "staticVisible";
+        classes?: Partial<ReturnType<typeof useStyles>["classes"]>
 
     };
 
@@ -345,14 +362,15 @@ const { Slide } = (() => {
                 rest.secondParagraph === undefined
             ) &&
                 !(rest.paragraph === undefined &&
-                    rest.paragraph === undefined)
+                    rest.paragraph === undefined),
+            "classesOverrides": props.classes
         });
         return <div className={classes.root}>
             <Article
                 {
                 ...rest
                 }
-                title={<Text className={classes.title} typo="heading3">{title}</Text>}
+                title={<Text className={classes.title} typo="heading4">{title}</Text>}
                 className={classes.article}
 
                 classes={{
@@ -380,7 +398,7 @@ const { Slide } = (() => {
     });
 
     const useStyles = tss
-        .withParams<Omit<SlideProps, "slide"> & { hasOnlyOneParagraph: boolean }>()
+        .withParams<Pick<SlideProps, "vector" | "isActive"> & { hasOnlyOneParagraph: boolean }>()
         .create(({
             vector,
             isActive,
@@ -401,8 +419,6 @@ const { Slide } = (() => {
 
                 },
                 "article": {
-                    "height": "570px",
-                    "justifyContent": "space-between"
 
                 },
                 "title": {
