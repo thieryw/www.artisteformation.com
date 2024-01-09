@@ -15,6 +15,7 @@ namespace Slider {
         classes?: Partial<ReturnType<typeof useStyles>["classes"]>
         slides: (Slide & {
             leftIllustrationUrl?: string;
+            illustrationSources?: {srcSet: string; type: string}[];
         })[];
     };
     export type Named = {
@@ -24,6 +25,7 @@ namespace Slider {
         slides: (Slide & {
             name: string;
             imageUrl?: string;
+            imageSources?: {srcSet: string; type: string}[];
         })[];
     }
 
@@ -105,12 +107,13 @@ export const Slider = memo((props: SliderProps) => {
                         return undefined;
                     }
                     return <div className={classes.illustrations}>{
-                        slides.map(({ leftIllustrationUrl }, index) => <Illustration
+                        slides.map(({ leftIllustrationUrl, illustrationSources }, index) => <Illustration
                             variant="numbered"
                             illustrationUrl={leftIllustrationUrl ?? ""}
                             vector={calculateVector(index)}
                             isActive={index === currentIndex}
                             key={index}
+                            sources={illustrationSources}
                         />)
                     }
                     </div>
@@ -145,12 +148,13 @@ export const Slider = memo((props: SliderProps) => {
                     }
 
                     return <div className={classes.illustrations}>{
-                        slides.map(({ imageUrl }, index) => imageUrl !== undefined ? <Illustration
+                        slides.map(({ imageUrl, imageSources }, index) => imageUrl !== undefined ? <Illustration
                             variant="named"
                             illustrationUrl={imageUrl ?? ""}
                             vector={calculateVector(index)}
                             isActive={index === currentIndex}
                             key={index}
+                            sources={imageSources}
                         /> : undefined)
                     }
                     </div>
@@ -349,6 +353,7 @@ const { Slide } = (() => {
                 ...rest
                 }
                 title={<Text className={classes.title} typo="heading3">{title}</Text>}
+                className={classes.article}
 
                 classes={{
                     "titleWrapper": classes.titleWrapper,
@@ -356,7 +361,8 @@ const { Slide } = (() => {
                     "smallTitle": classes.smallTitle,
                     "paragraphWrapper": classes.paragraphWrapper,
                     "firstParagraph": cx(classes.paragraph, classes.firstParagraph),
-                    "secondParagraph": cx(classes.paragraph, classes.secondParagraph)
+                    "secondParagraph": cx(classes.paragraph, classes.secondParagraph),
+                    "root": cx(classes.article)
 
                 }}
             />
@@ -392,6 +398,11 @@ const { Slide } = (() => {
                     "gridRow": 1,
                     "width": hasOnlyOneParagraph ? 326 : undefined
 
+
+                },
+                "article": {
+                    "height": "570px",
+                    "justifyContent": "space-between"
 
                 },
                 "title": {
@@ -448,19 +459,28 @@ const { Illustration } = (() => {
         vector: Parameters<typeof Slide>["0"]["vector"];
         isActive: boolean;
         variant: SliderProps["variant"];
+        sources?: {srcSet: string; type: string}[]
 
     };
 
 
     const Illustration = memo((props: IllustrationProps) => {
 
-        const { illustrationUrl, vector, isActive, variant } = props;
+        const { illustrationUrl, vector, isActive, variant, sources } = props;
 
 
         const { classes } = useStyles({ vector, isActive, variant });
         return <div className={classes.root}>
             <div className={classes.imageWrapper}>
-                <img className={classes.image} src={illustrationUrl} alt="carouselIllustration" />
+                <picture>
+                    {
+                        sources !== undefined &&
+                        sources.map(({srcSet, type}, index) => <source key={index} srcSet={srcSet} type={type} />)
+                    }
+
+                    <img className={classes.image} src={illustrationUrl} alt="carousel illustration" />
+
+                </picture>
             </div>
         </div>
 

@@ -1,12 +1,14 @@
 import { memo } from "react";
 import { declareComponentKeys } from "@/i18n";
 import { Hero } from "./Hero";
+import { NamedSlider } from "./NamedSlider";
 
 
 
 export const How = memo(() => {
     return <div>
         <Hero />
+        <NamedSlider />
     </div>
 });
 

@@ -3,6 +3,7 @@ import { tss, Text } from "@/theme";
 import { MiniArticle } from "@/components/MiniArticle";
 import { Article } from "@/components/Article";
 import { useTranslation } from "@/i18n";
+import fresquePng from "@/assets/png/comment/fresque-comment.png"
 
 export const Hero = memo(() => {
 
@@ -10,24 +11,38 @@ export const Hero = memo(() => {
     const { classes, theme } = useStyles();
 
     return <section className={classes.root}>
-        <MiniArticle 
-            numberTitle={t("careerBoostTitle")}
-            subtitle={t("careerBoostSubtitle")}
-            paragraph={t("careerBoostParagraph")}
-            titleColor={theme.colors.linden}
-        />
-        <div className={classes.separator}></div>
+        <div className={classes.articleWrapper}>
+            <MiniArticle 
+                numberTitle={t("careerBoostTitle")}
+                subtitle={t("careerBoostSubtitle")}
+                paragraph={t("careerBoostParagraph")}
+                titleColor={theme.colors.linden}
+            />
+            <div className={classes.separator}></div>
 
-        <Article 
-            classes={{
-                "firstParagraph": classes.paragraph,
-                "secondParagraph": classes.paragraph
-            }}
-            smallSurtitle={t("introSurtitle")}
-            title={<Text typo="heading1">{t("introTitle")}</Text>}
-            paragraph={t("introParagraph")}
-            secondParagraph={t("introSecondParagraph")}
-        />
+            <Article 
+                classes={{
+                    "firstParagraph": classes.paragraph,
+                    "secondParagraph": classes.paragraph
+                }}
+                smallSurtitle={t("introSurtitle")}
+                title={<Text className={classes.title} typo="heading1">{t("introTitle")}</Text>}
+                paragraph={t("introParagraph")}
+                secondParagraph={t("introSecondParagraph")}
+            />
+
+        </div>
+
+        <div className={classes.fresque}>
+            <div className={classes.imageWrapper}>
+                <img className={classes.image} src={fresquePng} alt="fresque decorative"/>
+            </div>
+            <div className={classes.background}>
+
+            </div>
+
+
+        </div>
 
     </section>
 })
@@ -36,7 +51,11 @@ const useStyles = tss.create(({theme}) => {
     return ({
         "root": {
             "display": "flex",
+            "flexDirection": "column",
             "marginTop": 290,
+        },
+        "articleWrapper": {
+            "display": "flex",
             ...(()=>{
                 const value = 242;
                 return {
@@ -45,6 +64,7 @@ const useStyles = tss.create(({theme}) => {
                 }
                 
             })()
+
         },
         "separator": {
             "width": 0,
@@ -61,6 +81,37 @@ const useStyles = tss.create(({theme}) => {
         },
         "paragraph": {
             "color": theme.colors.indigo
+        },
+        "title": {
+            "width": 800
+        },
+        "fresque": {
+            "padding": 120,
+            "width": "100%",
+            "boxSizing": "border-box",
+            "position": "relative"
+
+        },
+        "image": {
+            "objectFit": "cover",
+            "width": "100%",
+            "height": "100%"
+
+        },
+        "imageWrapper": {
+            "position": "relative",
+            "zIndex": 200
+
+        },
+        "background": {
+            "width": "70%",
+            "height": "70%",
+            "backgroundColor": theme.colors.backgroundTertiary,
+            "position": "absolute",
+            "bottom": 0,
+            "left": 0,
+            "zIndex": 199
+
         }
     })
 })
