@@ -19,7 +19,8 @@ export const {
 } = createI18nApi<
 	typeof import ("pages/home/Home").i18n |
 	typeof import ("App").i18n |
-	typeof import ("pages/how/How").i18n
+	typeof import ("pages/how/How").i18n |
+	typeof import ("pages/teachers/Teachers").i18n
 >()(
 	{ languages, fallbackLanguage },
 	{
@@ -160,6 +161,23 @@ export const {
 				"handicapTitle": "Situation de handicap, Nous sommes là.",
 				"handicapSubtitle": "ACCESSIBILITÉ",
 				"handicapParagraph": "Chez Artiste Formation, nos aménagements sont pensés individuellement, que ce soit pour l'accès physique, les supports pédagogiques ou les méthodes d'évaluation. Notre équipe se tient à votre disposition pour discuter de vos exigences et garantir que vous puissiez profiter pleinement de l'expérience de formation. De plus, nous sensibilisons également nos formateurs et les participants aux enjeux de l'inclusion, afin de favoriser une compréhension mutuelle et une atmosphère bienveillante.",
+			},
+
+			"Teachers": {
+				"partnerNumberTitle": "359",
+				"partnerNumberSubtitle": "PARTENAIRES",
+				"partnerNumberParagraph": "Artiste Formation a su tisser un immense réseau de plus de 350 partenaires à travers le territoire.",
+				"introSurtitle": "FORMATEURS",
+				"introTitle": "Nos Maestros",
+				"introParagraph": "Réunissons autour de vous une équipe d'experts afin de bâtir un projet professionnel puissant et hautement performant ! Véritables références dans leur domaine respectif, chaque formateur apporte son expertise unique au travers de sa passion pour l’enseignement.",
+				"introSecondParagraph": "Leurs noms ne vous seront pas étrangers et pour cause, leur grand sens pédagogique conjugué à leurs carrières exceptionnelles en font des acteurs incontournables du secteur artistique.",
+				"familyTitle": "Et la grande famille s’agrandit !",
+				"familySubtitle": "devenir intervenant",
+				"familyParagraph": "L’une de nos principales forces est de maintenir notre réseau en constante évolution. Comment ? En nous montrant parfaitement ouverts à la suggestion et à la collaboration avec de nouvelles personnalités du monde du spectacle.",
+				"suggestionTitle": "Vous avez quelqu’un en tête ?",
+				"suggestionParagraph": "Vous tenez à travailler avec quelqu’un en particulier qui ne fait pas encore partie de nos partenaires ? Un professeur émérite ? Une personnalité complètement inédite ? Ca tombe bien ! Nous pouvons lui proposer d’intégrer nos formateurs dans des conditions avantageuses. Tout est possible tant que vous pouvez l’imaginer !",
+				"suggestionButtonLabel": "CONTACTEZ-NOUS"
+
 			}
 
 		},

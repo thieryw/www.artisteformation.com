@@ -14,6 +14,7 @@ import ReactMarkdown from "react-markdown";
 import { ZoomProvider } from "./components/ZoomProvider";
 import { Footer } from "./components/Footer";
 import { How } from "@/pages/how/How";
+import { Teachers } from "@/pages/teachers/Teachers"
 
 const widthRange = {
   "min": 0,
@@ -116,6 +117,8 @@ export function App() {
         <div className={classes.body}>
           {route.name === "home" && <Home />}
           {route.name === "how" && <How />}
+          {route.name === "teachers" && <Teachers />}
+
         </div>
         <Footer
           className={classes.footer}
