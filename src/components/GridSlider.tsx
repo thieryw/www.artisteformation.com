@@ -191,7 +191,7 @@ const useStyles = tss.create(({ theme }) => {
         "grid": {
             "display": "grid",
             "gridTemplateColumns": `repeat(5, ${dimensions.width}px)`,
-            "gridTemplateRows": `${dimensions.height}px auto`,
+            "gridTemplateRows": `${dimensions.width}px ${dimensions.height}px auto`,
             "gap": 24
 
         },
@@ -213,7 +213,7 @@ const useStyles = tss.create(({ theme }) => {
         },
         "imageWrapper": {
             "width": dimensions.width,
-            "height": dimensions.height
+            "height": dimensions.height,
 
         },
         "image": {

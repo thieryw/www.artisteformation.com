@@ -3,20 +3,20 @@ import { tss, Text } from "@/theme";
 import { MiniArticle } from "@/components/MiniArticle";
 import { Article } from "@/components/Article";
 import { useTranslation } from "@/i18n";
-import fresquePng from "@/assets/png/comment/fresque-comment.png"
+import fresquePng from "@/assets/png/formateurs/fresque-formateurs.png"
 
 export const Hero = memo(() => {
 
-    const { t } = useTranslation("How")
+    const { t } = useTranslation("Teachers")
     const { classes, theme } = useStyles();
 
     return <section className={classes.root}>
         <div className={classes.articleWrapper}>
             <MiniArticle 
-                numberTitle={t("careerBoostTitle")}
-                subtitle={t("careerBoostSubtitle")}
-                paragraph={t("careerBoostParagraph")}
-                titleColor={theme.colors.linden}
+                numberTitle={t("partnerNumberTitle")}
+                subtitle={t("partnerNumberSubtitle")}
+                paragraph={t("partnerNumberParagraph")}
+                titleColor={theme.colors.bloodOrangeVariant}
             />
             <div className={classes.separator}></div>
 
@@ -37,10 +37,6 @@ export const Hero = memo(() => {
             <div className={classes.imageWrapper}>
                 <img className={classes.image} src={fresquePng} alt="fresque decorative"/>
             </div>
-            <div className={classes.background}>
-
-            </div>
-
 
         </div>
 
@@ -93,6 +89,7 @@ const useStyles = tss.create(({theme}) => {
                     "paddingRight": value
                 }
             })(),
+
             "width": "100%",
             "boxSizing": "border-box",
             "position": "relative"
@@ -109,15 +106,5 @@ const useStyles = tss.create(({theme}) => {
             "zIndex": 200
 
         },
-        "background": {
-            "width": "70%",
-            "height": "85%",
-            "backgroundColor": theme.colors.backgroundTertiary,
-            "position": "absolute",
-            "bottom": -70,
-            "left": 0,
-            "zIndex": 199
-
-        }
     })
 })

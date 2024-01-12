@@ -20,7 +20,8 @@ export const {
 	typeof import ("pages/home/Home").i18n |
 	typeof import ("App").i18n |
 	typeof import ("pages/how/How").i18n |
-	typeof import ("pages/teachers/Teachers").i18n
+	typeof import ("pages/teachers/Teachers").i18n |
+	typeof import ("pages/about/About").i18n
 >()(
 	{ languages, fallbackLanguage },
 	{
@@ -178,6 +179,29 @@ export const {
 				"suggestionParagraph": "Vous tenez à travailler avec quelqu’un en particulier qui ne fait pas encore partie de nos partenaires ? Un professeur émérite ? Une personnalité complètement inédite ? Ca tombe bien ! Nous pouvons lui proposer d’intégrer nos formateurs dans des conditions avantageuses. Tout est possible tant que vous pouvez l’imaginer !",
 				"suggestionButtonLabel": "CONTACTEZ-NOUS"
 
+			},
+			"About": {
+				"pageTitle": "Créé par des Artistes",
+				"pageSubtitle": "À PROPOS",
+				"introParagraph": "Voici en quelques lignes, l’histoire ayant conduit à la naissance d’Artiste Formation. Il s’agit d’un récit que nous vous livrons en toute sincérité, et qui - vous le verrez - est constamment traversé par les valeurs humaines qui font battre le cœur de notre équipe. Voici où tout à commencé.",
+				"valuesTitle": "Ce qui retentit en Nous.",
+				"valuesSubtitle": "VALEURS",
+				"valuesParagraph": "Artiste Formation s'inscrit dans l'héritage de son fondateur : une compréhension profonde des artistes et de leurs besoins. Nous plaçons l'humain au coeur de tout ce que nous faisons. Notre centre est un espace où la musique se mêle à la convivialité, où les artistes trouvent le soutien nécessaire pour grandir.",
+				"teachingTitle": "Excellence Musicale & Pédagogique",
+				"teachingParagraph": "Nous sommes profondément engagés à offrir des programmes de formation de la plus haute qualité, dispensés par des experts de renommée internationale. Nous croyons en l'inspiration par l'exemplarité et en la transmission de connaissances qui transcendent générations et frontières.",
+				"goodWillTitle": "Bienveillance & Épanouissement",
+				"goodWillParagraph": "Nous comprenons que le développement artistique est intimement lié à l'épanouissement personnel. Nous nous engageons à créer un environnement où les artistes peuvent explorer leur créativité en toute confiance, trouver leur voix unique et développer leur plein potentiel.",
+				"adaptationTitle": "Adaptabilité & Innovation",
+				"adaptationParagraph": "La musique est en constante évolution. Notre engagement envers l'adaptabilité et l'innovation nous pousse à explorer de nouvelles méthodes pédagogiques, à intégrer les dernières avancées technologiques et à nous adapter aux besoins changeants des artistes.",
+				"sharingTitle": "Partage & Communauté",
+				"sharingParagraph": "Nous valorisons la création d'une communauté dynamique et inclusive. Nous encourageons les échanges entre artistes, les collaborations enrichissantes et les expériences partagées. Cette dimension sociale fait partie intégrante de notre approche, renforçant les connexions humaines au sein de notre espace artistique.",
+				"responsibilityTitle": "Responsabilité Environnementale & Sociétale",
+				"responsibilityParagraph": "L’Art peut avoir un impact positif sur la société et l'environnement. C'est pourquoi nous nous engageons à intégrer des pratiques durables dans nos opérations et à promouvoir des valeurs responsables au sein de notre communauté artistique. Nous visons à contribuer à un monde meilleur à travers la puissance des arts et de l'action collective.",
+				"approachTitle": "Chacune de ces valeurs compose la partition de notre approche.",
+				"approachParagraph": "Chez Artiste Formation, nous ne nous contentons pas de former des artistes compétents ; nous cultivons des esprits créatifs, des êtres humains épanouis et des membres engagés de la communauté artistique mondiale.",
+				"employeesTitle": "Nos petites mains.",
+				"employeesSubtitle": "L'ÉQUIPE",
+				"employeesParagraph": "Au cœur de notre orchestre pédagogique se trouvent des individus exceptionnels : Cécile GARCIA, coach en PNL et responsable de la gestion administrative, Elisabeth KNNABLIAN, experte en gestion financière, Marianne MAZAS, conseillère stratégie & création d’entreprise, David ZUILI, expert comptable, et enfin Emilie CROS, véritable couteau suisse d’Artiste Formation. En conjuguant leurs efforts, ils donnent vie à notre vision collective."
 			}
 
 		},
