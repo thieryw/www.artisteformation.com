@@ -181,7 +181,7 @@ export const {
 
 			},
 			"About": {
-				"pageTitle": "Créé par des Artistes",
+				"pageTitle": "Créé par des Artistes.",
 				"pageSubtitle": "À PROPOS",
 				"introParagraph": "Voici en quelques lignes, l’histoire ayant conduit à la naissance d’Artiste Formation. Il s’agit d’un récit que nous vous livrons en toute sincérité, et qui - vous le verrez - est constamment traversé par les valeurs humaines qui font battre le cœur de notre équipe. Voici où tout à commencé.",
 				"valuesTitle": "Ce qui retentit en Nous.",

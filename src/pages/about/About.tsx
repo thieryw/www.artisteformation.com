@@ -1,12 +1,15 @@
 import { memo } from "react";
 import { declareComponentKeys } from "@/i18n";
+import { Hero } from "./Hero";
+import { Bio } from "./Bio";
 
 
 
 
 export const About = memo(() => {
     return <div>
-        About
+        <Hero />
+        <Bio />
     </div>
 
 });
@@ -32,5 +35,5 @@ export const { i18n } = declareComponentKeys<
     "approachParagraph" |
     "employeesTitle" |
     "employeesSubtitle" |
-    "employeesParagraph" 
+    "employeesParagraph"
 >()({ About })

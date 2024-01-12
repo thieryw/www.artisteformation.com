@@ -1,20 +1,11 @@
 import { memo, useState, useEffect } from "react";
 import { partners } from "@/user/partners";
 import { GridSlider } from "@/components/GridSlider";
+import { loadWebpImage } from "@/tools/loadWebpImage";
 
 const partnerImageNames = partners.map(({ portraitUrl }) =>
     portraitUrl.match(/([^\/]+)(?=\.\w+$)/)?.[0])
 
-
-const loadWebpImage = async (path: string, name: string) => {
-    try {
-        const module = await import(`${path}/${name}.webp`);
-        return module.default as string;
-    } catch (e) {
-        console.error(e);
-        return undefined;
-    }
-};
 
 const loadWebpImages = async (path: string, imageNames: (string | undefined)[]) => {
     const loadedImages: (string | undefined)[] = [];
@@ -42,9 +33,9 @@ export const Slider = memo(() => {
 
 
     return <section>
-        <GridSlider 
-             slides={
-                partners.map(({fr: {description, name, profession}, portraitUrl}, index) => {
+        <GridSlider
+            slides={
+                partners.map(({ fr: { description, name, profession }, portraitUrl }, index) => {
                     return {
                         "imageUrl": webpImages[index],
                         "imageSources": [
@@ -59,13 +50,13 @@ export const Slider = memo(() => {
                             }
                         ],
                         description,
-                        name, 
+                        name,
                         profession
 
                     }
                 })
 
-             }
+            }
         />
 
     </section>
