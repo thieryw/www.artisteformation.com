@@ -142,7 +142,8 @@ export const GridSlider = memo((props: GridSliderProps) => {
                                 slide.imageSources !== undefined &&
                                 slide.imageSources.map((source, index) => <source
                                     key={index}
-                                    {...source}
+                                    srcSet={source.srcSet}
+                                    type={source.type}
                                 />)
                             }
 

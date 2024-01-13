@@ -25,11 +25,12 @@ export const Slider = memo(() => {
     const [webpImages, setImages] = useState<(string | undefined)[]>([]);
 
     useEffect(() => {
-        loadWebpImages("/www.artisteformation.com/src/assets/webp/formateurs/Galerie formateurs/", partnerImageNames)
+        loadWebpImages("/www.artisteformation.com/src/assets/webp/formateurs/galerie-formateur/", partnerImageNames)
             .then(loadedImages => {
                 setImages(loadedImages)
             })
     }, [])
+
 
 
     return <section>

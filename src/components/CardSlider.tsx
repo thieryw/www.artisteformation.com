@@ -84,7 +84,7 @@ export const CardSlider = memo((props: CardSliderProps) => {
         <div className={classes.cardWrapper}>
             <div className={classes.cards}>
                 {
-                    cards.map((card, index) => <Card vector={calculateVector(index)} isActive={currentIndex === index} {...card} cardNumber={index + 1} />)
+                    cards.map((card, index) => <Card key={index} vector={calculateVector(index)} isActive={currentIndex === index} {...card} cardNumber={index + 1} />)
                 }
 
             </div>
@@ -204,7 +204,7 @@ const { Card } = (() => {
             <Text className={classes.paragraph} typo="paragraph">{paragraph}</Text>
             <div className={classes.stars}>
                 {
-                    starArrayRef.current.map(() => <Logo width={24} height={24} logoUrl={starSvg} />)
+                    starArrayRef.current.map((_star, index) => <Logo key={index} width={24} height={24} logoUrl={starSvg} />)
                 }
             </div>
         </div>

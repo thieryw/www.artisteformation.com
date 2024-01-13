@@ -3,7 +3,7 @@ import { makeThisModuleAnExecutableRouteLister } from "github-pages-plugin-for-t
 import type { RouterOpts } from "type-route";
 
 const opts: RouterOpts = {
-	"scrollToTop": false
+	"scrollToTop": true
 }
 
 const publicUrl = import.meta.env.BASE_URL;

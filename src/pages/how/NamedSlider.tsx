@@ -3,16 +3,16 @@ import { tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Slider } from "@/components/Slider"
 import { routes } from "@/router";
-import jpgIntermittent from "@/assets/jpg/comment/Slide 1 - Vos droits/1-intermittent-du-spectacle.jpeg";
-import jpgSalarier from "@/assets/jpg/comment/Slide 1 - Vos droits/2-salarie.jpeg";
-import jpgCreator from "@/assets/jpg/comment/Slide 1 - Vos droits/3-createur-dentreprise.jpeg";
-import jpgIndependent from "@/assets/jpg/comment/Slide 1 - Vos droits/4-travailleur-independant.jpeg";
-import jpgCompany from "@/assets/jpg/comment/Slide 1 - Vos droits/5-entreprise.jpeg";
-import webpIntermittent from "@/assets/webp/comment/Slide 1 - Vos droits/1-intermittent-du-spectacle.webp";
-import webpSalarier from "@/assets/webp/comment/Slide 1 - Vos droits/2-salarie.webp";
-import webpCreator from "@/assets/webp/comment/Slide 1 - Vos droits/3-createur-dentreprise.webp";
-import webpIndependent from "@/assets/webp/comment/Slide 1 - Vos droits/4-travailleur-independant.webp";
-import webpCompany from "@/assets/webp/comment/Slide 1 - Vos droits/5-entreprise.webp";
+import jpgIntermittent from "@/assets/jpg/comment/slider/1-intermittent-du-spectacle.jpeg";
+import jpgSalarier from "@/assets/jpg/comment/slider/2-salarie.jpeg";
+import jpgCreator from "@/assets/jpg/comment/slider/3-createur-dentreprise.jpeg";
+import jpgIndependent from "@/assets/jpg/comment/slider/4-travailleur-independant.jpeg";
+import jpgCompany from "@/assets/jpg/comment/slider/5-entreprise.jpeg";
+import webpIntermittent from "@/assets/webp/comment/slider/1-intermittent-du-spectacle.webp";
+import webpSalarier from "@/assets/webp/comment/slider/2-salarie.webp";
+import webpCreator from "@/assets/webp/comment/slider/3-createur-dentreprise.webp";
+import webpIndependent from "@/assets/webp/comment/slider/4-travailleur-independant.webp";
+import webpCompany from "@/assets/webp/comment/slider/5-entreprise.webp";
 
 
 export const NamedSlider = memo(() => {

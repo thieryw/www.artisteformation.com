@@ -16,6 +16,7 @@ import { Footer } from "./components/Footer";
 import { How } from "@/pages/how/How";
 import { Teachers } from "@/pages/teachers/Teachers";
 import { About } from "@/pages/about/About";
+import { Logo } from "./components/Logo";
 
 const widthRange = {
   "min": 0,
@@ -57,6 +58,7 @@ export function App() {
   ]), [])
 
 
+
   return (<>
 
     <ZoomProvider
@@ -66,6 +68,24 @@ export function App() {
         "inner": classes.headerInner
       }}
     >
+      {
+        route.name !== "home" &&
+        <a {...routes.home().link}>
+          <Logo
+            logoUrl={siteLogo}
+            width={120}
+            className={classes.logo}
+          />
+
+        </a>
+
+      }
+      {
+        route.name !== "home" &&
+        <a {...routes.contact().link}>
+          <Text className={classes.contactLink} typo="additionalTitle">CONTACT</Text>
+        </a>
+      }
       <Header
         zoomProviderInterval={widthRange}
         links={links}
@@ -176,6 +196,20 @@ const useStyles = tss.create(({ theme }) => ({
     "minHeight": "100%",
     "display": "flex",
     "flexDirection": "column",
+
+  },
+  "logo": {
+    "position": "fixed",
+    "top": 50,
+    "left": 120,
+    "zIndex": 4000
+  },
+  "contactLink": {
+    "position": "fixed",
+    "top": 130,
+    "right": 70,
+    "zIndex": 4000,
+    "color": theme.colors.indigo
 
   },
   "headerWrapper": {

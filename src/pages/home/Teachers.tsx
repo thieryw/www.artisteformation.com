@@ -3,14 +3,14 @@ import { tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import { routes } from "@/router";
-import jpgCesar from "@/assets/jpg/formateurs/Galerie formateurs/2-cesar-guigue.jpeg";
-import jpgHerzog from "@/assets/jpg/formateurs/Galerie formateurs/6-mathieu-herzog.jpeg";
-import jpgPaillot from "@/assets/jpg/formateurs/Galerie formateurs/4-laurence-paillot.jpeg";
-import jpgRoger from "@/assets/jpg/formateurs/Galerie formateurs/8-patrick-roger.jpeg";
-import webpCesar from "@/assets/webp/formateurs/Galerie formateurs/2-cesar-guigue.webp";
-import webpHerzog from "@/assets/webp/formateurs/Galerie formateurs/6-mathieu-herzog.webp";
-import webpPaillot from "@/assets/webp/formateurs/Galerie formateurs/4-laurence-paillot.webp";
-import webpRoger from "@/assets/webp/formateurs/Galerie formateurs/8-patrick-roger.webp";
+import jpgCesar from "@/assets/jpg/formateurs/galerie-formateur/2-cesar-guigue.jpeg";
+import jpgHerzog from "@/assets/jpg/formateurs/galerie-formateur/6-mathieu-herzog.jpeg";
+import jpgPaillot from "@/assets/jpg/formateurs/galerie-formateur/4-laurence-paillot.jpeg";
+import jpgRoger from "@/assets/jpg/formateurs/galerie-formateur/8-patrick-roger.jpeg";
+import webpCesar from "@/assets/webp/formateurs/galerie-formateur/2-cesar-guigue.webp";
+import webpHerzog from "@/assets/webp/formateurs/galerie-formateur/6-mathieu-herzog.webp";
+import webpPaillot from "@/assets/webp/formateurs/galerie-formateur/4-laurence-paillot.webp";
+import webpRoger from "@/assets/webp/formateurs/galerie-formateur/8-patrick-roger.webp";
 
 
 const jpgArray = [
@@ -47,7 +47,7 @@ export const Teachers = memo(() => {
 
         <div className={classes.grid}>
             {
-                webpArray.map((webp, index) => <div>
+                webpArray.map((webp, index) => <div key={index}>
                     <picture>
                         <source srcSet={webp} type="image/webp" />
                         <source srcSet={jpgArray[index]} type="image/jpeg" />

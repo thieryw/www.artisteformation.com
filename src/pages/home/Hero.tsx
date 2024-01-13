@@ -23,7 +23,7 @@ export const Hero = memo(() => {
     return <div className={classes.root}>
         <div className={classes.illustrationWrapper}>
             {
-                fresqueWebp.current.map((webp, index) => <picture>
+                fresqueWebp.current.map((webp, index) => <picture key={index}>
                     <source srcSet={webp} type="image/webp" />
                     <source srcSet={fresqueJpg.current[index]} type="image/jpeg" />
                     <img className={classes.image} src={webp} alt="fresque de la banniere" />

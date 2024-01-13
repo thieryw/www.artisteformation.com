@@ -1,12 +1,12 @@
 import type { Language } from "@/i18n";
-import jpg1 from "@/assets/jpg/formateurs/Galerie formateurs/1-jerome-viollet.jpeg";
-import jpg2 from "@/assets/jpg/formateurs/Galerie formateurs/2-cesar-guigue.jpeg";
-import jpg3 from "@/assets/jpg/formateurs/Galerie formateurs/3-lucas-ciavatta.jpeg";
-import jpg4 from "@/assets/jpg/formateurs/Galerie formateurs/4-laurence-paillot.jpeg";
-import jpg5 from "@/assets/jpg/formateurs/Galerie formateurs/5-veronique-papillon.jpeg";
-import jpg6 from "@/assets/jpg/formateurs/Galerie formateurs/6-mathieu-herzog.jpeg";
-import jpg7 from "@/assets/jpg/formateurs/Galerie formateurs/7-marc-papillon.jpeg";
-import jpg8 from "@/assets/jpg/formateurs/Galerie formateurs/8-patrick-roger.jpeg";
+import jpg1 from "@/assets/jpg/formateurs/galerie-formateur/1-jerome-viollet.jpeg";
+import jpg2 from "@/assets/jpg/formateurs/galerie-formateur/2-cesar-guigue.jpeg";
+import jpg3 from "@/assets/jpg/formateurs/galerie-formateur/3-lucas-ciavatta.jpeg";
+import jpg4 from "@/assets/jpg/formateurs/galerie-formateur/4-laurence-paillot.jpeg";
+import jpg5 from "@/assets/jpg/formateurs/galerie-formateur/5-veronique-papillon.jpeg";
+import jpg6 from "@/assets/jpg/formateurs/galerie-formateur/6-mathieu-herzog.jpeg";
+import jpg7 from "@/assets/jpg/formateurs/galerie-formateur/7-marc-papillon.jpeg";
+import jpg8 from "@/assets/jpg/formateurs/galerie-formateur/8-patrick-roger.jpeg";
 
 export type Partner = Record<Language, {
     name: string;

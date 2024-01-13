@@ -1,6 +1,7 @@
 import { tss } from "../theme";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
+import { useRoute } from "@/router";
 
 
 export type ZoomProviderProps = {
@@ -15,21 +16,33 @@ export type ZoomProviderProps = {
 }
 
 export const ZoomProvider = memo((props: ZoomProviderProps) => {
-    const {children, widthRange: {max, min}, className} = props;
-    const { classes, theme, cx } = useStyles({ 
+    const { children, widthRange: { max, min }, className } = props;
+    const route = useRoute();
+    const innerRef = useRef<HTMLDivElement>(null);
+    const { classes, theme, cx } = useStyles({
         "widthRange": {
             max,
             min
         },
         "classesOverrides": props.classes
-     })
+    })
 
     const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
+
+    useEffect(()=>{
+        if(innerRef.current === null || !isWithinInterval){
+            return;
+        }
+        innerRef.current.scrollTo({
+            "top": 0
+        })
+
+    }, [innerRef.current, isWithinInterval, route.name])
 
     useEffect(() => {
         const body = document.body;
 
-        body.style.height = isWithinInterval ? "0px": "";
+        body.style.height = isWithinInterval ? "0px" : "";
 
         return () => {
             body.style.height = "";
@@ -38,7 +51,7 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
 
 
     return <div className={cx(classes.root, className)}>
-        <div className={classes.inner}>
+        <div ref={innerRef} className={classes.inner}>
             {children}
         </div>
     </div>
@@ -47,10 +60,11 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
 
 
 const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className" | "classes">>().create(({
-    widthRange: {max, min},
+    widthRange: { max, min },
     theme }) => {
-        const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
-        return ({"root": {
+    const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
+    return ({
+        "root": {
 
         },
         "inner": {
@@ -61,11 +75,12 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className
                 "width": max,
                 "height": theme.windowInnerHeight / (theme.windowInnerWidth / max),
                 "overflowX": "hidden",
+                "margin": "auto",
             } : {
                 "width": "100%"
             }),
-            "margin": "auto",
 
         }
     }
-)})
+    )
+})
