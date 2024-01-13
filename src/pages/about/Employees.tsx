@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { tss, Text } from "@/theme";
+import { tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import cecileJpg from "@/assets/jpg/a-propos/nos-petites-mains/1-cecile-garcia.jpeg";
