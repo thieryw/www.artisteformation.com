@@ -17,6 +17,7 @@ import { How } from "@/pages/how/How";
 import { Teachers } from "@/pages/teachers/Teachers";
 import { About } from "@/pages/about/About";
 import { Logo } from "./components/Logo";
+import { Contact } from "@/pages/contact/Contact";
 
 const widthRange = {
   "min": 0,
@@ -140,6 +141,8 @@ export function App() {
           {route.name === "how" && <How />}
           {route.name === "teachers" && <Teachers />}
           {route.name === "about" && <About />}
+          {route.name === "contact" && <Contact />}
+
 
         </div>
         <Footer

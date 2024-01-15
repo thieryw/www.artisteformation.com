@@ -21,7 +21,8 @@ export const {
 	typeof import ("App").i18n |
 	typeof import ("pages/how/How").i18n |
 	typeof import ("pages/teachers/Teachers").i18n |
-	typeof import ("pages/about/About").i18n
+	typeof import ("pages/about/About").i18n |
+	typeof import ("pages/contact/Contact").i18n
 >()(
 	{ languages, fallbackLanguage },
 	{
@@ -202,6 +203,19 @@ export const {
 				"employeesTitle": "Nos petites mains.",
 				"employeesSubtitle": "L'ÉQUIPE",
 				"employeesParagraph": "Au cœur de notre orchestre pédagogique se trouvent des individus exceptionnels : Cécile GARCIA, coach en PNL et responsable de la gestion administrative, Elisabeth KNNABLIAN, experte en gestion financière, Marianne MAZAS, conseillère stratégie & création d’entreprise, David ZUILI, expert comptable, et enfin Emilie CROS, véritable couteau suisse d’Artiste Formation. En conjuguant leurs efforts, ils donnent vie à notre vision collective."
+			},
+			"Contact": {
+				"pageTitle": "Prêt(e) à vous lancer ?",
+				"pageSubtitle": "CONTACT",
+				"introParagraph": "Commençons par une analyse complète de vos besoins pour un projet de formation taillé sur mesure. Nous vous proposons un rendez-vous personnalisé de xx minutes au cours duquel nous apprendrons à nous connaître, et ferons émerger les premières solutions concrètes pour propulser votre carrière.",
+				"formTitle": "Dîtes-nous tout !",
+				"formNamePlaceholder": "nom",
+				"formTelPlaceholder": "téléphone",
+				"formEmailPlaceholder": "mail",
+				"formMessagePlaceholder": "message",
+				"formSend": "ENVOYER",
+				"bookingTitle": "Booker directement un créneau",
+				"bookingButtonLabel": "FIXER UN RDV"
 			}
 
 		},
