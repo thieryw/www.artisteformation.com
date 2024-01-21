@@ -12,6 +12,7 @@ import { Customers } from "./Customers";
 import { Reviews } from "./Reviews";
 import { History } from "./History";
 import { Teachers } from "./Teachers";
+import { breakpointValues } from "@/theme";
 
 
 export function Home() {
@@ -19,7 +20,7 @@ export function Home() {
 
     const { t } = useTranslation("Home");
 
-    const { classes, cx } = useStyles()
+    const { classes, cx, theme } = useStyles()
 
 
     return (
@@ -29,27 +30,54 @@ export function Home() {
             <section className={classes.visionSection}>
                 <div className={classes.backgroundSection}></div>
                 <div className={classes.visionLeft}>
-                    <Text className={classes.visionTitle} typo="heading2">{t("visionTitle")}</Text>
+                    {
+                        (()=>{
+                            if(theme.windowInnerWidth < breakpointValues.sm){
+                                return undefined;
+                            }
+
+                            return <Text className={classes.visionTitle} typo="heading2">{t("visionTitle")}</Text>
+
+                        })()
+                    }
                     <picture>
                         <source srcSet={pianistWebp} type="image/webp" />
                         <source srcSet={pianistJpg} type="image/jpeg" />
                         <img className={classes.visionPicture} src={pianistWebp} alt="Pianist" />
                     </picture>
+                    {
+                        (()=>{
+                            if(theme.windowInnerWidth >= breakpointValues.sm){
+                                return undefined;
+                            }
+
+                            return <Text className={classes.visionTitleMobile} typo="heading2">{t("visionTitle")}</Text>
+
+                        })()
+                    }
                 </div>
-                <div className={classes.visionRight}>
-                    <picture>
-                        <source srcSet={pianistIllustrationWebp} type="image/webp" />
-                        <source srcSet={pianistIllustrationJpg} type="image/jpeg" />
-                        <img className={cx(classes.visionPicture, classes.visionIllustration)} src={pianistIllustrationWebp} alt="Pianist" />
-                    </picture>
-                    <div className={classes.captionWrapper}>
-                        <div className={classes.smallDivider}></div>
-                        <Text className={classes.visionParagraph} typo="quote">{t("visionSmallCaption")}</Text>
-                        <Text typo="quote">{t("visionSmallCaptionDate")}</Text>
+                {
+                    (()=>{
+                        if(theme.windowInnerWidth < breakpointValues.sm){
+                            return undefined
+                        }
+                        return <div className={classes.visionRight}>
+                        <picture>
+                            <source srcSet={pianistIllustrationWebp} type="image/webp" />
+                            <source srcSet={pianistIllustrationJpg} type="image/jpeg" />
+                            <img className={cx(classes.visionPicture, classes.visionIllustration)} src={pianistIllustrationWebp} alt="Pianist" />
+                        </picture>
+                        <div className={classes.captionWrapper}>
+                            <div className={classes.smallDivider}></div>
+                            <Text className={classes.visionParagraph} typo="quote">{t("visionSmallCaption")}</Text>
+                            <Text typo="quote">{t("visionSmallCaptionDate")}</Text>
+
+                        </div>
 
                     </div>
+                    })()
 
-                </div>
+                }
 
             </section>
             <section className={classes.sliderSection}>
@@ -112,17 +140,55 @@ const useStyles = tss
         "backgroundSection": {
             "position": "absolute",
             "backgroundColor": theme.colors.backgroundTertiary,
-            "width": "100%",
-            "height": 590,
-            "top": 277
+            ...(()=>{
+                if(theme.windowInnerWidth >= breakpointValues.sm){
+                    return {
+                        "width": "100%",
+                        "height": 590,
+                        "top": 277,
+
+                    }
+                }
+                    return {
+                        "width": "80%",
+                        "height": "100%",
+                        "left": "20%"
+                    }
+            })()
 
         },
         "visionPicture": {
-            "width": 570,
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+
+                        "width": "100%",
+                        "objectFit": "cover"
+                    }
+                }
+
+                return {
+                    "width": 570
+                }
+
+            })()
         },
         "visionTitle": {
             "width": 430,
             "marginBottom": 330
+
+        },
+        "visionTitleMobile": {
+            "color": theme.colors.white,
+            "position": "relative",
+            "top": -150,
+            ...(() => {
+                const value = 40;
+                return {
+                    "paddingLeft": value,
+                    "paddingRight": value,
+                }
+            })()
 
         },
         "visionParagraph": {
@@ -134,7 +200,12 @@ const useStyles = tss
             "borderTop": `solid ${theme.colors.indigo} 2px`
         },
         "visionLeft": {
-            "marginRight": 210,
+            "marginRight": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return undefined;
+                }
+                return 210;
+            })(),
             "position": "relative"
         },
         "visionRight": { "position": "relative" },

@@ -2,6 +2,7 @@ import { memo } from "react";
 import { tss , Text} from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
+import { breakpointValues } from "@/theme";
 
 
 
@@ -9,13 +10,13 @@ export const Intro = memo(() => {
     const { classes } = useStyles();
     const { t } = useTranslation("Home");
     return <div className={classes.root}>
-        <Article 
+        <Article
             className={classes.article}
             title={t("introTitle")}
             smallSubtitle={t("introSubtitle")}
             paragraph={t("introParagraph")}
             isCentered={true}
-            classes={{"paragraphWrapper": classes.paragraph}}
+            classes={{ "paragraphWrapper": classes.paragraph }}
         />
         <div className={classes.divider}></div>
         <div className={classes.stats}>
@@ -46,11 +47,32 @@ const useStyles = tss.create(({ theme }) => {
             "gridTemplateColumns": "1fr",
             "justifyItems": "center",
             "gap": 65,
-            "marginBottom": 300
+            "marginBottom": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return 40;
+                }
+                return 300
+            })(),
+            ...(() => {
+                const value = 20;
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "paddingLeft": value,
+                        "paddingRight": value
+                    }
+                }
+
+                return undefined;
+            })()
 
         },
         "article": {
-            "width": 950
+            "width": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return undefined;
+                }
+                return 950;
+            })()
         },
         "paragraph": {
             "marginBottom": 0
@@ -58,26 +80,56 @@ const useStyles = tss.create(({ theme }) => {
         },
         "divider": {
             "height": 0,
-            "width": 1090,
+            "width": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return 250;
+                }
+                return 1090;
+            })(),
             "borderTop": `solid ${theme.colors.darkGray3} 1px`
         },
         "stats": {
             "display": "flex",
-            "alignItems": "center"
+            "alignItems": "center",
+            "flexDirection": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return "column";
+                }
+
+                return undefined
+            })()
 
         },
         "verticalDivider": {
-            "marginLeft": 90,
-            "marginRight": 90,
-            "height": 66,
-            "width": 0,
-            "borderLeft": `solid ${theme.colors.darkGray3} 1px`,
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "display": "none"
+
+
+                    }
+                }
+                return {
+                    "marginLeft": 90,
+                    "marginRight": 90,
+                    "height": 66,
+                    "width": 0,
+                    "borderLeft": `solid ${theme.colors.darkGray3} 1px`,
+
+                }
+            })()
 
         },
         "statWrapper": {
             "display": "flex",
             "flexDirection": "column",
-            "alignItems": "center"
+            "alignItems": "center",
+            "marginBottom": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return 45;
+                }
+                return undefined;
+            })()
 
         },
         "partners": {
@@ -95,6 +147,6 @@ const useStyles = tss.create(({ theme }) => {
             "color": theme.colors.bloodOrange
 
         }
-        
+
     })
 })

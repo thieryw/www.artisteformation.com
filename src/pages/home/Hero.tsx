@@ -11,6 +11,7 @@ import webpFresque3 from "@/assets/webp/home/fresque-home/fresque-home-03.webp";
 import webpFresque4 from "@/assets/webp/home/fresque-home/fresque-home-04.webp";
 import siteLogo from "@/assets/svg/logo.svg";
 import { Logo } from "@/components/Logo";
+import { breakpointValues } from "@/theme";
 
 
 
@@ -23,27 +24,39 @@ export const Hero = memo(() => {
     return <div className={classes.root}>
         <div className={classes.illustrationWrapper}>
             {
-                (() => {
-                    if (theme.windowInnerWidth >= 600) {
-                        return fresqueWebp.current.map((webp, index) => <picture key={index}>
-                            <source srcSet={webp} type="image/webp" />
-                            <source srcSet={fresqueJpg.current[index]} type="image/jpeg" />
-                            <img className={classes.image} src={webp} alt="fresque de la banniere" />
-                        </picture>)
-                    }
-                    return <picture>
-                        <source srcSet={fresqueWebp.current[1]} type="image/webp" />
-                        <source srcSet={fresqueJpg.current[1]} type="image/jpeg" />
-                        <img className={classes.image} src={fresqueWebp.current[1]} alt="fresque de la banniere" />
-                    </picture>
-                })()
+                theme.windowInnerWidth >= 600 &&
+                fresqueWebp.current.map((webp, index) => <picture key={index}>
+                    <source srcSet={webp} type="image/webp" />
+                    <source srcSet={fresqueJpg.current[index]} type="image/jpeg" />
+                    <img className={classes.image} src={webp} alt="fresque de la banniere" />
+                </picture>)
             }
         </div>
         <div className={classes.titleWrapper}>
-            <Logo width={180} logoUrl={siteLogo} />
+            <Logo width={(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return 95;
+                }
+                return 180;
+            })()} logoUrl={siteLogo} />
             <Text className={classes.title} typo="siteTitle">{t("title")}</Text>
-            <div className={classes.divider}></div>
+            {
+                theme.windowInnerWidth < breakpointValues.sm &&
+                <picture>
+                    <source srcSet={fresqueWebp.current[1]} type="image/webp" />
+                    <source srcSet={fresqueJpg.current[1]} type="image/jpeg" />
+                    <img className={classes.image} src={fresqueWebp.current[1]} alt="fresque de la banniere" />
+                </picture>
+            }
+            {
+                theme.windowInnerWidth >= 600 &&
+                <div className={classes.divider}></div>
+            }
             <Text className={classes.subtitle} typo="heading4">{t("subtitle")}</Text>
+            {
+                theme.windowInnerWidth < breakpointValues.sm &&
+                <div className={classes.verticalDivider}></div>
+            }
 
         </div>
     </div>
@@ -55,7 +68,18 @@ const useStyles = tss.create(({ theme }) => {
             "display": "flex",
             "minHeight": 700,
             "boxSizing": "border-box",
-            "marginBottom": 266
+            "marginBottom": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return 90;
+                }
+                return 265;
+            })(),
+            "flexDirection": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return "column";
+                }
+                return undefined;
+            })()
         },
         "illustrationWrapper": {
             "width": "50%",
@@ -77,9 +101,30 @@ const useStyles = tss.create(({ theme }) => {
             "alignContent": "center",
             "justifyItems": "center",
             "minHeight": "100%",
-            "width": "50%",
+            ...(() => {
+                const value = 25;
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "paddingLeft": value,
+                        "paddingRight": value,
+                    };
+                }
+                return undefined;
+
+            })(),
+            "width": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return undefined;
+                }
+                return "50%"
+            })(),
             "position": "relative",
-            "left": -15
+            "left": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return undefined;
+                }
+                return -15;
+            })()
 
         },
         "title": {
@@ -96,6 +141,12 @@ const useStyles = tss.create(({ theme }) => {
             "width": 550,
             "height": 0,
             "borderTop": `solid ${theme.colors.bloodOrange} 2px`
+
+        },
+        "verticalDivider": {
+            "width": 0,
+            "height": 90,
+            "border": `solid ${theme.colors.bloodOrange} 1px`
 
         }
     })

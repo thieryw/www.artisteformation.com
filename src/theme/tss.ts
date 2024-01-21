@@ -170,7 +170,6 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 12;
                 }
                 return 11;
-                return 14;
             })() / baseFontSizePx}em`,
             "marginBlock": 0,
             "letterSpacing": "0.2em"
