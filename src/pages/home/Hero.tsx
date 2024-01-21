@@ -16,18 +16,27 @@ import { Logo } from "@/components/Logo";
 
 
 export const Hero = memo(() => {
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
     const { t } = useTranslation("Home");
     const fresqueJpg = useRef([jpgFresque1, jpgFresque3, jpgFresque2, jpgFresque4]);
     const fresqueWebp = useRef([webpFresque1, webpFresque3, webpFresque2, webpFresque4]);
     return <div className={classes.root}>
         <div className={classes.illustrationWrapper}>
             {
-                fresqueWebp.current.map((webp, index) => <picture key={index}>
-                    <source srcSet={webp} type="image/webp" />
-                    <source srcSet={fresqueJpg.current[index]} type="image/jpeg" />
-                    <img className={classes.image} src={webp} alt="fresque de la banniere" />
-                </picture>)
+                (() => {
+                    if (theme.windowInnerWidth >= 600) {
+                        return fresqueWebp.current.map((webp, index) => <picture key={index}>
+                            <source srcSet={webp} type="image/webp" />
+                            <source srcSet={fresqueJpg.current[index]} type="image/jpeg" />
+                            <img className={classes.image} src={webp} alt="fresque de la banniere" />
+                        </picture>)
+                    }
+                    return <picture>
+                        <source srcSet={fresqueWebp.current[1]} type="image/webp" />
+                        <source srcSet={fresqueJpg.current[1]} type="image/jpeg" />
+                        <img className={classes.image} src={fresqueWebp.current[1]} alt="fresque de la banniere" />
+                    </picture>
+                })()
             }
         </div>
         <div className={classes.titleWrapper}>
@@ -40,7 +49,7 @@ export const Hero = memo(() => {
     </div>
 })
 
-const useStyles = tss.create(({theme}) => {
+const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
             "display": "flex",
