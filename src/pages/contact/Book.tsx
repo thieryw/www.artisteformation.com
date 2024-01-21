@@ -21,7 +21,7 @@ export const Book = memo(() => {
     </section>
 })
 
-const useStyles = tss.create(({ theme }) => {
+const useStyles = tss.create(() => {
     return ({
         "root": {
             "display": "flex",
