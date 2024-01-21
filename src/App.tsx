@@ -20,7 +20,7 @@ import { Logo } from "./components/Logo";
 import { Contact } from "@/pages/contact/Contact";
 
 const widthRange = {
-  "min": 0,
+  "min": 1200,
   "max": 1920
 }
 
@@ -57,6 +57,8 @@ export function App() {
       "routeName": "contact"
     },
   ]), [])
+
+  console.log("ok");
 
 
 

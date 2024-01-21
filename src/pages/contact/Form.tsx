@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { FormspreeProvider, useForm, ValidationError } from "@formspree/react";
 import { useTranslation } from "@/i18n";
-import { tss, typography, Text } from "@/theme";
+import { tss, Text } from "@/theme";
 
 
 export const Form = memo(() => {
@@ -110,7 +110,7 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
                 "outline": "none"
             },
             "::placeholder": {
-                ...typography.additionalTitle,
+                ...theme.typography.additionalTitle,
                 "textTransform": "uppercase"
             },
 
@@ -123,7 +123,7 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
                 "outline": "none"
             },
             "::placeholder": {
-                ...typography.additionalTitle,
+                ...theme.typography.additionalTitle,
                 "textTransform": "uppercase"
             },
             "borderBottom": `solid ${theme.colors.backgroundTertiary} 2px`,

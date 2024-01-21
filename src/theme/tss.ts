@@ -25,116 +25,166 @@ export const baseFontSizePx = parseInt(window.
     fontSize.match(/\d+/g)?.[0] ?? "");
 
 
+function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
 
-export const typography: Record<Typography, CSSObject> = {
-    "transition": {
-        "color": "#FFFFFF",
-        "fontSize": `${196 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular"
-    },
-    "carousel": {
-        "color": "rgba(125, 125, 125, 0.09)",
-        "fontFamily": "Satoshi-Bold",
-        "fontSize": `${130 / baseFontSizePx}em`,
-        "marginBlock": 0
-    },
-    "splashScreen": {
-        "color": "#3B3051",
-        "fontSize": `${128 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "lineHeight": "1em"
-    },
-    "siteTitle": {
-        "color": "#3B3051",
-        "fontSize": `${110 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "lineHeight": "1em",
-        "marginBlock": 0
+    return {
+        "transition": {
+            "color": "#FFFFFF",
+            "fontSize": `${(()=>{
+                if(windowInnerWidth < 1200 && windowInnerWidth >= 600 ){
+                    return 64;
+                }
+                if(windowInnerWidth < 600){
+                    return 52;
+                }
+                return 196;
 
-    },
-    "heading1": {
-        "color": "#3B3051",
-        "fontSize": `${96 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Light",
-        "letterSpacing": "0.03em",
-        "lineHeight": "1.1em",
-        "marginBlock": 0
-    },
-    "menuItem": {
-        "color": "#3B3051",
-        "fontSize": `${75 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "listStyleType": "none",
-        "lineHeight": "1em"
-    },
-    "heading2": {
-        "color": "#3B3051",
-        "fontSize": `${64 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "lineHeight": "1.15em",
-        "marginBlock": 0
-    },
-    "heading3": {
-        "color": "#3B3051",
-        "fontSize": `${48 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "lineHeight": "1.20em",
-        "marginBlock": 0
-    },
-    "heading4": {
-        "color": "#3B3051",
-        "fontSize": `${40 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "marginBlock": 0
-    },
-    "heading5": {
-        "color": "#3B3051",
-        "fontSize": `${36 / baseFontSizePx}em`,
-        "fontFamily": "Zodiak-Regular",
-        "letterSpacing": "0.03em",
-        "lineHeight": "1.2em",
-        "marginBlock": 0
-    },
-    "sectionPageOrButton": {
-        "fontFamily": "Satoshi-Bold",
-        "letterSpacing": "0.12em",
-        "color": "#F14C2C",
-        "fontSize": `${14 / baseFontSizePx}em`
-    },
-    "additionalTitle": {
-        "fontFamily": "Satoshi-Bold",
-        "color": "rgba(125, 125, 125, 0.6)",
-        "fontSize": `${14 / baseFontSizePx}em`,
-        "marginBlock": 0,
-        "letterSpacing": "0.2em"
-    },
-    "carouselItem": {
-        "fontFamily": "Satoshi-Medium",
-        "color": "rgba(125, 125, 125, 0.6)",
-        "fontSize": `${21 / baseFontSizePx}em`,
-        "marginBlock": 0
-    },
-    "paragraph": {
-        "fontFamily": "Satoshi-Regular",
-        "fontSize": `${18 / baseFontSizePx}em`,
-        "color": "#3B3051",
-        "marginBlock": 0,
-        "lineHeight": "2em"
-    },
-    "quote": {
-        "fontFamily": "Satoshi-Medium",
-        "fontSize": `${13 / baseFontSizePx}em`,
-        "color": "#7D7D7D",
-        "marginBlock": 0,
-        "lineHeight": "2em"
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular"
+        },
+        "carousel": {
+            "color": "rgba(125, 125, 125, 0.09)",
+            "fontFamily": "Satoshi-Bold",
+            "fontSize": `${130 / baseFontSizePx}em`,
+            "marginBlock": 0
+        },
+        "splashScreen": {
+            "color": "#3B3051",
+            "fontSize": `${(()=>{
+            if(windowInnerWidth  < 1200 && windowInnerWidth >= 600){
+                return 45;
+            }
+                if (windowInnerWidth < 600) {
+                    return 40;
+                }
+                return 128;
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "0.03em",
+            "lineHeight": "1em"
+        },
+        "siteTitle": {
+            "color": "#3B3051",
+            "fontSize": `${(() => {
+                if (windowInnerWidth < 1200) {
+                    return 52;
+                }
+                return 110;
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiac-Regular",
+            "letterSpacing": "0.03em",
+            "lineHeight": "1em",
+            "marginBlock": 0,
+            "fontWeight": 400
+
+        },
+        "heading1": {
+            "color": "#3B3051",
+            "fontSize": `${(() => {
+                if (windowInnerWidth > 1200) {
+                    return 96;
+                }
+                return 50;
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Light",
+            "letterSpacing": "0.03em",
+            "lineHeight": "1.1em",
+            "marginBlock": 0
+        },
+        "menuItem": {
+            "color": "#3B3051",
+            "fontSize": `${(() => {
+                if (windowInnerWidth < 1200) {
+                    return 40;
+                }
+                return 75;
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "0.03em",
+            "listStyleType": "none",
+            "lineHeight": "1em"
+        },
+        "heading2": {
+            "color": "#3B3051",
+            "fontSize": `${64 / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "0.03em",
+            "lineHeight": "1.15em",
+            "marginBlock": 0
+        },
+        "heading3": {
+            "color": "#3B3051",
+            "fontSize": `${(() => {
+                if (windowInnerWidth < 1200 && windowInnerWidth >= 600) {
+                    return 32;
+                }
+                if (windowInnerWidth < 600) {
+                    return 30;
+                }
+                return 48;
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "0.03em",
+            "lineHeight": "1.20em",
+            "marginBlock": 0
+        },
+        "heading4": {
+            "color": "#3B3051",
+            "fontSize": `${(() => {
+                if (windowInnerWidth < 1200) {
+                    return 23;
+                }
+                return 40;
+            })() / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "0.03em",
+            "marginBlock": 0
+        },
+        "heading5": {
+            "color": "#3B3051",
+            "fontSize": `${36 / baseFontSizePx}em`,
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "0.03em",
+            "lineHeight": "1.2em",
+            "marginBlock": 0
+        },
+        "sectionPageOrButton": {
+            "fontFamily": "Satoshi-Bold",
+            "letterSpacing": "0.12em",
+            "color": "#F14C2C",
+            "fontSize": `${14 / baseFontSizePx}em`
+        },
+        "additionalTitle": {
+            "fontFamily": "Satoshi-Bold",
+            "color": "rgba(125, 125, 125, 0.6)",
+            "fontSize": `${14 / baseFontSizePx}em`,
+            "marginBlock": 0,
+            "letterSpacing": "0.2em"
+        },
+        "carouselItem": {
+            "fontFamily": "Satoshi-Medium",
+            "color": "rgba(125, 125, 125, 0.6)",
+            "fontSize": `${21 / baseFontSizePx}em`,
+            "marginBlock": 0
+        },
+        "paragraph": {
+            "fontFamily": "Satoshi-Regular",
+            "fontSize": `${18 / baseFontSizePx}em`,
+            "color": "#3B3051",
+            "marginBlock": 0,
+            "lineHeight": "2em"
+        },
+        "quote": {
+            "fontFamily": "Satoshi-Medium",
+            "fontSize": `${13 / baseFontSizePx}em`,
+            "color": "#7D7D7D",
+            "marginBlock": 0,
+            "lineHeight": "2em"
+        }
+
     }
 }
+
 
 function useContext() {
     const windowInnerWidth = useWindowInnerSize().windowInnerWidth;
@@ -152,7 +202,7 @@ function useContext() {
             "iconSpacing": 18,
             "footerPaddingRightLeft": 210,
             "titleWidth": 300
-        
+
         },
         "colors": {
             "backgroundMain": "#fafafa",
@@ -171,7 +221,7 @@ function useContext() {
         },
         windowInnerWidth,
         windowInnerHeight,
-        typography
+        "typography": getTypography(windowInnerWidth)
     };
 
 
