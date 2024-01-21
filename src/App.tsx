@@ -58,10 +58,6 @@ export function App() {
     },
   ]), [])
 
-  console.log("ok");
-
-
-
   return (<>
 
     <ZoomProvider

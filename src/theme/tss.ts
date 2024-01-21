@@ -106,7 +106,15 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         },
         "heading2": {
             "color": "#3B3051",
-            "fontSize": `${64 / baseFontSizePx}em`,
+            "fontSize": `${(()=>{
+                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                    return 40;
+                }
+                if(windowInnerWidth < 600){
+                    return 40;
+                }
+                return 64;
+            })() / baseFontSizePx}em`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "lineHeight": "1.15em",
@@ -157,19 +165,43 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "additionalTitle": {
             "fontFamily": "Satoshi-Bold",
             "color": "rgba(125, 125, 125, 0.6)",
-            "fontSize": `${14 / baseFontSizePx}em`,
+            "fontSize": `${(()=>{
+                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                    return 12;
+                }
+                return 11;
+                return 14;
+            })() / baseFontSizePx}em`,
             "marginBlock": 0,
             "letterSpacing": "0.2em"
         },
         "carouselItem": {
             "fontFamily": "Satoshi-Medium",
             "color": "rgba(125, 125, 125, 0.6)",
-            "fontSize": `${21 / baseFontSizePx}em`,
+            "fontSize": `${(()=>{
+                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                    return 18;
+                }
+                if(windowInnerWidth < 600){
+                    return 14;
+                }
+                return 21
+                
+            })() / baseFontSizePx}em`,
             "marginBlock": 0
         },
         "paragraph": {
             "fontFamily": "Satoshi-Regular",
-            "fontSize": `${18 / baseFontSizePx}em`,
+            "fontSize": `${(()=>{
+                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                    return 17;
+                }
+                if(windowInnerWidth < 600){
+                    return 13
+                }
+                return 18;
+
+            })() / baseFontSizePx}em`,
             "color": "#3B3051",
             "marginBlock": 0,
             "lineHeight": "2em"
