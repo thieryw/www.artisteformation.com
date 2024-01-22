@@ -1,5 +1,5 @@
 import { memo, useRef, useState, useEffect } from "react";
-import { Text, tss } from "@/theme";
+import { Text, tss, breakpointValues } from "@/theme";
 import { Logo } from "./Logo";
 import starSvg from "@/assets/svg/star-svgrepo-com.svg";
 import navArrow from "@/assets/svg/nav-arrow.svg";
@@ -21,7 +21,7 @@ export type CardSliderProps = {
 
 export const CardSlider = memo((props: CardSliderProps) => {
     const { className, cards } = props;
-    const { classes, cx } = useStyles();
+    const { classes, cx, theme } = useStyles();
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [previousIndex, setPreviousIndex] = useState<number | null>(null)
@@ -88,8 +88,17 @@ export const CardSlider = memo((props: CardSliderProps) => {
                 }
 
             </div>
-            <div className={cx(classes.backgroundCard, classes.backgroundCard1)}></div>
-            <div className={cx(classes.backgroundCard, classes.backgroundCard2)}></div>
+            {
+                (()=>{
+                    if(theme.windowInnerWidth < breakpointValues.sm){
+                        return undefined;
+                    }
+                    return <>
+                        <div className={cx(classes.backgroundCard, classes.backgroundCard1)}></div>
+                        <div className={cx(classes.backgroundCard, classes.backgroundCard2)}></div>
+                    </>
+                })()
+            }
 
         </div>
         <div className={classes.buttonWrapper}>
@@ -110,13 +119,15 @@ const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
             "display": "flex",
+            "position": "relative",
 
         },
         "cardWrapper": {
             "display": "grid",
             "maxWidth": 461,
             "height": 770,
-            "position": "relative"
+            "position": "relative",
+
         },
         "cards": {
             "backgroundColor": theme.colors.white,
@@ -124,7 +135,7 @@ const useStyles = tss.create(({ theme }) => {
             "gridColumn": 1,
             "gridRow": 1,
             "position": "relative",
-            "zIndex": 200
+            "zIndex": 200,
 
         },
         "button": {
@@ -135,20 +146,36 @@ const useStyles = tss.create(({ theme }) => {
             "display": "flex",
             "justifyContent": "center",
             "alignItems": "center",
-            "transition": "background 500ms",
             "cursor": "pointer",
-            "border": `solid ${theme.colors.darkGray3} 2px`,
             "& svg": {
                 "fill": theme.colors.darkGray3,
                 "transition": "fill 500ms"
 
             },
-            ":hover": {
-                "backgroundColor": theme.colors.bloodOrange,
-                "& svg": {
-                    "fill": theme.colors.white
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "border": "none",
+                        "transition": "border-color 500ms",
+                        ":hover": {
+                            "border": `solid ${theme.colors.darkGray3} 1px`,
+                        }
+
+                    }
                 }
-            }
+                return {
+                    "border": `solid ${theme.colors.darkGray3} 2px`,
+                    "transition": "background 500ms",
+                    ":hover": {
+                        "backgroundColor": theme.colors.bloodOrange,
+                        "& svg": {
+                            "fill": theme.colors.white
+                        }
+                    }
+
+                }
+
+            })(),
         },
         "backgroundCard": {
             "gridColumn": 1,
@@ -165,8 +192,25 @@ const useStyles = tss.create(({ theme }) => {
 
         },
         "buttonWrapper": {
-            "marginTop": 190,
-            "marginLeft": 130
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "position": "absolute",
+                        "zIndex": 201,
+                        "display": "flex",
+                        "flexDirection": "row-reverse",
+                        "justifyContent": "center",
+                        "top": -75,
+                        "right": -10
+
+                    }
+                }
+                return {
+                    "marginTop": 190,
+                    "marginLeft": 130,
+
+                }
+            })()
         },
         "button1": {
             "marginBottom": 23,
@@ -187,10 +231,17 @@ const { Card } = (() => {
         const { cardNumber, paragraph, stars, subtitle, title, isActive, vector } = props;
 
         const starArrayRef = useRef((new Array(stars)).fill(undefined));
-        const { classes } = useStyles({ isActive, vector });
+        const { classes, theme } = useStyles({ isActive, vector });
 
         return <div className={classes.root}>
-            <Text className={classes.cardNumber} typo="additionalTitle">0{cardNumber}.</Text>
+            {
+                (() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return undefined;
+                    }
+                    return <Text className={classes.cardNumber} typo="additionalTitle">0{cardNumber}.</Text>
+                })()
+            }
             <div className={classes.titlesWrapper}>
                 <div className={classes.titleWrapper}>
                     <Text className={classes.title} typo="heading5">{title}</Text>
@@ -220,15 +271,31 @@ const { Card } = (() => {
                 "justifyContent": "space-between",
                 "flexDirection": "column",
                 "pointerEvents": isActive ? "none" : undefined,
-
                 ...(() => {
-                    const value = 65;
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        const value = 25;
+
+                        return {
+                            "alignItems": "center",
+                            "paddingLeft": value,
+                            "paddingRight": value
+                        }
+
+                    }
                     return {
-                        "paddingLeft": value,
-                        "paddingRight": value
+                        ...(() => {
+                            const value = 65;
+                            return {
+                                "paddingLeft": value,
+                                "paddingRight": value
+                            }
+
+                        })(),
+
                     }
 
                 })(),
+
                 "paddingTop": 98,
                 "paddingBottom": 132,
                 "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)"
@@ -237,7 +304,14 @@ const { Card } = (() => {
             "paragraph": {
                 "transition": "opacity 500ms",
                 "transitionDelay": isActive ? "800ms" : undefined,
-                "opacity": isActive ? 1 : 0
+                "opacity": isActive ? 1 : 0,
+                ...(() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return {
+                            "textAlign": "center"
+                        }
+                    }
+                })()
 
             },
             "cardNumber": {
@@ -266,6 +340,13 @@ const { Card } = (() => {
                     "comingInDelay": 500
                 }),
 
+                ...(() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return {
+                            "textAlign": "center"
+                        }
+                    }
+                })()
 
             },
             "subtitle": {
@@ -274,6 +355,13 @@ const { Card } = (() => {
                     vector,
                     "comingInDelay": 800
                 }),
+                ...(() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return {
+                            "textAlign": "center"
+                        }
+                    }
+                })()
             }
         })
     })

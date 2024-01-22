@@ -1,7 +1,7 @@
 import { memo } from "react";
 import type { ReactNode } from "react";
 import type { Link } from "../tools/link";
-import { tss, Text } from "../theme";
+import { tss, Text, breakpointValues } from "../theme";
 import { Logo } from "./Logo";
 import { LinkButton } from "./LinkButton";
 
@@ -45,7 +45,12 @@ export const Footer = memo((props: FooterProps) => {
                 <div className={classes.logo}>
                     {
                         typeof siteLogo === "string" ?
-                            <Logo width={140} logoUrl={siteLogo} /> :
+                            <Logo width={(() => {
+                                if (theme.windowInnerWidth < breakpointValues.sm) {
+                                    return 120
+                                }
+                                return 146;
+                            })()} logoUrl={siteLogo} /> :
                             siteLogo
                     }
 
@@ -53,7 +58,7 @@ export const Footer = memo((props: FooterProps) => {
                 <div className={classes.siteTitle}>
                     {
                         typeof siteTitle === "string" ?
-                            <Text typo="heading3">{siteTitle}</Text> :
+                            <Text className={classes.title} typo="heading3">{siteTitle}</Text> :
                             siteTitle
                     }
 
@@ -62,7 +67,17 @@ export const Footer = memo((props: FooterProps) => {
             <div className={classes.links}>
                 {
                     links.map(({ label, href, onClick }, index) => <div style={{
-                        "marginRight": index !== links.length - 1 ? 100 : undefined
+                        ...(() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return {
+                                    "marginBottom": 33
+                                };
+                            }
+                            return {
+
+                                "marginRight": index !== links.length - 1 ? 100 : undefined
+                            };
+                        })(),
                     }} key={label}><Link
                             label={label}
                             href={href}
@@ -73,12 +88,17 @@ export const Footer = memo((props: FooterProps) => {
             </div>
 
         </div>
+
         <div className={classes.bottomElement}>
             <div className={classes.contact}>
                 {
                     contactTitle !== undefined &&
-                    <Text className={classes.contactTitle} typo="heading4">{contactTitle}</Text>
-
+                    (()=>{
+                        if(theme.windowInnerWidth < breakpointValues.sm){
+                            return undefined;
+                        }
+                        return <Text className={classes.contactTitle} typo="heading4">{contactTitle}</Text>
+                    })()
                 }
                 {
                     socialLinks !== undefined &&
@@ -106,27 +126,47 @@ export const Footer = memo((props: FooterProps) => {
                 }
 
             </div>
-            <div className={classes.paragraph}>
-                <Text typo="heading4">{paragraphTitle}</Text>
-                <Text className={classes.paragraphText} typo="paragraph">{paragraph}</Text>
-            </div>
-            <div className={classes.callToAction}>
-                {
-                    callToActionTitle !== undefined &&
-                    <Text typo="heading4">{callToActionTitle}</Text>
-                }
-                {
-                    buttonLink !== undefined &&
-                        <LinkButton 
-                            {...buttonLink}
-                            variant="filled"
-                        />
-                }
+            {
+                (()=>{
+                    if(theme.windowInnerWidth < breakpointValues.sm){
+                        return undefined;
+                    }
 
-            </div>
+                    return <div className={classes.paragraph}>
+                        <Text typo="heading4">{paragraphTitle}</Text>
+                        <Text className={classes.paragraphText} typo="paragraph">{paragraph}</Text>
+                    </div>
+
+                })()
+            }
+            {
+                (()=>{
+                    if(theme.windowInnerWidth < breakpointValues.sm){
+                        return undefined;
+                    }
+
+                    return <div className={classes.callToAction}>
+                        {
+                            callToActionTitle !== undefined &&
+                            <Text typo="heading4">{callToActionTitle}</Text>
+                        }
+                        {
+                            buttonLink !== undefined &&
+                            <LinkButton
+                                {...buttonLink}
+                                variant="filled"
+                            />
+                        }
+
+                    </div>
+
+                })()
+
+            }
 
 
         </div>
+
 
     </footer>
 })
@@ -139,49 +179,131 @@ const useStyles = tss.create(({ theme }) => ({
     },
     "bottomElement": {
         "display": "flex",
-        "justifyContent": "space-between",
-        "paddingLeft": 391,
-        "paddingRight": 258,
-        "paddingTop": 130,
-        "paddingBottom": 87,
-        "backgroundColor": theme.colors.lighterGray
+        ...(()=>{
+            if(theme.windowInnerWidth < breakpointValues.sm){
+                return {
+                    "flexDirection": "column",
+                    "alignItems": "center"
+                }
+            }
+
+            return {
+                "justifyContent": "space-between",
+                "paddingLeft": 391,
+                "paddingRight": 258,
+                "paddingTop": 130,
+                "paddingBottom": 87,
+                "backgroundColor": theme.colors.lighterGray,
+            }
+
+        })()
 
     },
     "titleAndLogoWrapper": {
         "display": "flex",
-        "alignItems": "center"
-    },
-    "logo": {
-        "marginRight": theme.spacing.listElementGap
-    },
-    "siteTitle": {
-        "width": theme.spacing.titleWidth
-    },
-    "upperElement": {
-        "position": "relative",
-        "height": theme.spacing.footerPaddingRightLeft,
-        "borderBottom": `solid ${theme.colors.darkGray3} 1px`,
-        "backgroundColor": theme.colors.backgroundSecondary,
-        "display": "flex",
-        "justifyContent": "space-between",
         "alignItems": "center",
         ...(() => {
-            const value = theme.spacing.footerPaddingRightLeft;
+            if (theme.windowInnerWidth >= 600) {
+                return undefined;
+
+            }
+
             return {
-                "paddingLeft": value,
-                "paddingRight": value
+                "flexDirection": "column"
 
             }
         })()
     },
+    "logo": {
+        ...(() => {
+            if (theme.windowInnerWidth < breakpointValues.sm) {
+                return {
+                    "marginBottom": 20
+
+                }
+            }
+            return {
+                "marginRight": theme.spacing.listElementGap
+
+            }
+
+        })(),
+    },
+    "siteTitle": {
+        "width": theme.spacing.titleWidth,
+        "marginBottom": (() => {
+            if (theme.windowInnerWidth < breakpointValues.sm) {
+                return 80;
+            }
+            return undefined;
+        })()
+    },
+    "title": {
+        ...(() => {
+            if (theme.windowInnerWidth >= breakpointValues.sm) {
+                return undefined;
+            }
+            return {
+                "textAlign": "center",
+                "fontSize": "3rem"
+            }
+        })()
+
+    },
+    "upperElement": {
+        "display": "flex",
+        ...(() => {
+            if (theme.windowInnerWidth < breakpointValues.sm) {
+                return {
+                    "flexDirection": "column"
+
+                }
+            }
+
+            return {
+
+                "position": "relative",
+                "height": theme.spacing.footerPaddingRightLeft,
+                "borderBottom": `solid ${theme.colors.darkGray3} 1px`,
+                "backgroundColor": theme.colors.backgroundSecondary,
+                "justifyContent": "space-between",
+                "alignItems": "center",
+                ...(() => {
+                    const value = theme.spacing.footerPaddingRightLeft;
+                    return {
+                        "paddingLeft": value,
+                        "paddingRight": value
+
+                    }
+                })()
+            }
+
+        })(),
+    },
     "links": {
         "display": "flex",
         "height": "100%",
+        ...(() => {
+            if (theme.windowInnerWidth >= 600) {
+                return undefined;
+            }
+
+            return {
+                "flexDirection": "column",
+                "alignItems": "center"
+            }
+        })()
     },
     "contact": {},
     "socialMedia": {
         "display": "flex",
-        "marginBottom": theme.spacing.textGap
+        "marginBottom": theme.spacing.textGap,
+        "marginTop": (()=>{
+            if(theme.windowInnerWidth < breakpointValues.sm){
+                return 30;
+            }
+            return undefined;
+        })()
     },
 
     "paragraph": {
@@ -246,11 +368,22 @@ const { Link } = (() => {
             "underline": {
                 "width": isActive ? "100%" : 0,
                 "transition": "width 300ms",
-                "height": 4,
                 "backgroundColor": theme.colors.bloodOrange,
                 "position": "absolute",
-                "bottom": 0,
-                "left": 0
+                "left": 0,
+                ...(() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return {
+                            "height": 2,
+                            "bottom": -10
+                        }
+                    }
+                    return {
+                        "bottom": 0,
+                        "height": 4,
+
+                    }
+                })()
             },
 
             "linkText": {

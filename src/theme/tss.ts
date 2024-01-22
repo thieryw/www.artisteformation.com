@@ -193,10 +193,10 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "fontFamily": "Satoshi-Regular",
             "fontSize": `${(()=>{
                 if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
-                    return 17;
+                    return 13;
                 }
                 if(windowInnerWidth < 600){
-                    return 13
+                    return 17
                 }
                 return 18;
 

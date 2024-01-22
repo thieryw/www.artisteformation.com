@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { tss } from "@/theme";
+import { breakpointValues, tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import { routes } from "@/router";
@@ -22,6 +22,9 @@ export const History = memo(() => {
                 ...routes.about().link,
                 "variant": "filled"
             }}
+            classes={{
+                "title": classes.mobileTitle
+            }}
 
         />
 
@@ -38,6 +41,17 @@ const useStyles = tss.create(({theme}) => {
             "backgroundColor": theme.colors.backgroundTertiary,
             "marginTop": 244,
             ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    const leftRight = 25;
+                    const topBottom = 80;
+                    return {
+                        "paddingTop": topBottom, 
+                        "paddingBottom": topBottom,
+                        "paddingLeft": leftRight,
+                        "paddingRight": leftRight
+
+                    }
+                }
                 const value = 175;
 
                 return {
@@ -46,6 +60,17 @@ const useStyles = tss.create(({theme}) => {
 
                 }
             })()
+        },
+        "mobileTitle": {
+            "fontSize": "3rem",
+            ...(()=>{
+                const value = 40;
+                return {
+                    "paddingRight": value,
+                    "paddingLeft": value
+                }
+            })()
+
         },
         "article": {
             "maxWidth": 950,

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Home } from "./pages/home/Home";
 import { useRoute, routes, routeDefs } from "./router";
 import { Text } from "./theme/Text";
-import { tss } from "./theme/tss";
+import { breakpointValues, tss } from "./theme/tss";
 import { Header } from "./components/Header";
 import type { HeaderProps } from "./components/Header";
 import { declareComponentKeys, useTranslation } from "./i18n";
@@ -149,7 +149,7 @@ export function App() {
           currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
           siteLogo={siteLogo}
           contactTitle={t("footerContactTitle")}
-          smallPrint={<div>
+          smallPrint={<div className={classes.smallPrint}>
             <Text typo="quote">{t("copyRight")}</Text>
             <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
           </div>}
@@ -197,6 +197,20 @@ const useStyles = tss.create(({ theme }) => ({
     "minHeight": "100%",
     "display": "flex",
     "flexDirection": "column",
+
+  },
+  "smallPrint": {
+    ...(()=>{
+      if(theme.windowInnerWidth < breakpointValues.sm){
+        return {
+          "display": "flex",
+          "flexDirection": "column",
+          "alignItems": "center",
+          "marginBottom": 80
+        }
+      }
+    })()
+
 
   },
   "logo": {

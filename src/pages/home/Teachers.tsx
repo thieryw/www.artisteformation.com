@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { tss } from "@/theme";
+import { tss, breakpointValues, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import { routes } from "@/router";
@@ -29,21 +29,33 @@ const webpArray = [
 
 
 export const Teachers = memo(() => {
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
     const { t } = useTranslation("Home");
     return <section className={classes.root}>
-        <Article
-            className={classes.article}
-            smallSurtitle={t("teachersSurTitle")}
-            title={t("teachersTitle")}
-            paragraph={t("teachersParagraph")}
-            button={{
-                "label": t("teachersButtonLabel"),
-                ...routes.teachers().link,
-            }}
-            hasSmallLine={true}
+        {
+            (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return <div className={classes.mobileTitleWrapper}>
+                        <Text className={classes.mobileTitle} typo="heading2">{t("teachersTitle")}</Text>
+                        <Text className={classes.mobileSurtitle} typo="additionalTitle">{t("teachersSurTitle")}</Text>
 
-        />
+                    </div>;
+                }
+
+                return <Article
+                    className={classes.article}
+                    smallSurtitle={t("teachersSurTitle")}
+                    title={t("teachersTitle")}
+                    paragraph={t("teachersParagraph")}
+                    button={{
+                        "label": t("teachersButtonLabel"),
+                        ...routes.teachers().link,
+                    }}
+                    hasSmallLine={true}
+
+                />
+            })()
+        }
 
         <div className={classes.grid}>
             {
@@ -56,38 +68,95 @@ export const Teachers = memo(() => {
                 </div>)
             }
         </div>
+        {
+            (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return <Article
+                        paragraph={t("teachersParagraph")}
+                        button={{
+                            "label": t("teachersButtonLabel"),
+                            ...routes.teachers().link,
+                        }}
+                        isCentered={true}
+                    />
+                }
+            })()
+        }
 
 
     </section>
 })
 
-const useStyles = tss.create(() => {
+const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
             "display": "flex",
             "alignItems": "center",
-            "justifyContent": "center",
-            ...(()=>{
-                const value = 245;
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "flexDirection": "column",
+                        ...(()=>{
+                            const leftRight = 25;
+                            const topBottom = 70;
+                            return {
+                                "paddingLeft": leftRight,
+                                "paddingRight": leftRight,
+                                "paddingTop": topBottom,
+                                "paddingBottom": topBottom
+                            }
+                        })()
+                    }
+                }
                 return {
-                    "paddingTop": value,
-                    "paddingBottom": value
+                    "justifyContent": "center",
+                    ...(() => {
+                        const value = 245;
+                        return {
+                            "paddingTop": value,
+                            "paddingBottom": value
+
+                        }
+                    })(),
 
                 }
             })()
         },
+        "mobileTitleWrapper": {
+            "display": "flex",
+            "flexDirection": "column",
+            "alignItems": "center"
+
+        },
+        "mobileTitle": {
+            "fontSize": "3rem",
+            "marginBottom": 40,
+            "textAlign": "center"
+        },
+        "mobileSurtitle": {
+            "color": theme.colors.bloodOrange,
+            "marginBottom": 55
+        },
         "article": {
             "maxWidth": 319,
             "marginRight": 134
-            
-
         },
         "grid": {
             "display": "grid",
             "gap": 8,
             "gridTemplateColumns": "repeat(2, 1fr)",
-            "width": 660,
-            "marginLeft": 134
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "marginBottom": 50
+                    }
+                }
+                return {
+                    "width": 660,
+                    "marginLeft": 134,
+
+                }
+            })()
         },
         "image": {
             "objectFit": "cover",

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { tss } from "@/theme";
+import { tss, breakpointValues, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { CardSlider } from "@/components/CardSlider";
 import { Article } from "@/components/Article";
@@ -9,21 +9,28 @@ import { routes } from "@/router";
 
 
 export const Reviews = memo(() => {
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
     const { t } = useTranslation("Home");
     return <section className={classes.root}>
-        <Article
-            className={classes.article}
-            smallSurtitle={t("reviewArticleSurtitle")}
-            title={t("reviewArticleTitle")}
-            hasSmallLine={true}
-            paragraph={t("reviewArticleParagraph")}
-            button={{
-                "label": t("reviewArticleButtonLabel"),
-                ...routes.contact().link
-            }}
+        {
+            (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return <Text className={classes.mobileTitle} typo="additionalTitle">{t("reviewArticleSurtitle")}</Text>
+                }
+                return <Article
+                    className={classes.article}
+                    smallSurtitle={t("reviewArticleSurtitle")}
+                    title={t("reviewArticleTitle")}
+                    hasSmallLine={true}
+                    paragraph={t("reviewArticleParagraph")}
+                    button={{
+                        "label": t("reviewArticleButtonLabel"),
+                        ...routes.contact().link
+                    }}
 
-        />
+                />
+            })()
+        }
         <CardSlider
             className={classes.slider}
             cards={[
@@ -47,23 +54,73 @@ export const Reviews = memo(() => {
                 },
             ]}
         />
+        {
+            (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return <Article 
+                        className={classes.mobileArticle}
+                        isCentered={true}
+                        paragraph={t("reviewArticleParagraph")}
+                        button={{
+                            "label": t("reviewArticleButtonLabel"),
+                            ...routes.contact().link
+                        }}
+
+                    />
+                }
+            })()
+        }
 
     </section>
 })
 
-const useStyles = tss.create(() => {
+const useStyles = tss.create(({theme}) => {
     return ({
-        "root": { 
+        "root": {
             "display": "flex",
-            "justifyContent": "center"
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "flexDirection": "column",
+
+                        ...(()=>{
+                            const value = 25;
+                            return {
+                                "paddingRight": value,
+                                "paddingLeft": value
+                            }
+                        })()
+                    }
+                }
+                return {
+                    "justifyContent": "center",
+                }
+            })()
+        },
+        "mobileTitle": {
+            "color": theme.colors.bloodOrange,
+            "textAlign": "center",
+            "marginBottom": 90
+
         },
         "article": {
             "width": 292,
             "marginRight": 140
 
         },
+        "mobileArticle": {
+            "marginTop": 90
+
+        },
         "slider": {
-            "marginLeft": 140
+
+
+            "marginLeft": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return undefined;
+                }
+                return 140;
+            })(),
 
         }
 
