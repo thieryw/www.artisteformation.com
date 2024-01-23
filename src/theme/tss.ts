@@ -225,11 +225,21 @@ function useContext() {
             "sectionTopBottomPadding": 220,
             "textGap": 50,
             "sectionTitleGap": 70,
-            "buttonGap": 75,
+            "buttonGap": (()=>{
+                if(windowInnerWidth < breakpointValues.sm){
+                    return 40;
+                }
+                return 75
+            })(),
             "pageTitleGap": 110,
             "nonCenteredHeroSide": 430,
             "nonCenteredSectionSide": 190,
-            "listElementGap": 40,
+            "listElementGap": (()=>{
+                if(windowInnerWidth < breakpointValues.sm){
+                    return 20;
+                }
+                return 40;
+            })(),
             "iconSpacing": 18,
             "footerPaddingRightLeft": 210,
             "titleWidth": 300

@@ -130,23 +130,99 @@ export function Header(props: HeaderProps) {
                         </div>
                     })()
                 }
-                <div className={classes.linksWrapper}>
+                <div className={classes.mobileWrapper}>
                     {
-                        links.map(({ href, label, onClick }, index) => <div
-                            onClick={handleMenuItemClick}
-                            key={label}
-                            style={{
-                                "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap
-                            }}
-                        >
-                            <Link
+                        (() => {
+                            if (logo === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
+                                return undefined;
+                            }
+                            return <div className={classes.mobileLogoWrapper}>
+                                {
+                                    typeof logo === "string" ?
+                                        <Logo width={90} logoUrl={logo} /> :
+                                        logo
+                                }
+                            </div>
+
+
+                        })()
+                    }
+
+                    <div className={classes.linksWrapper}>
+                        {
+                            links.map(({ href, label, onClick }, index) => <div
+                                onClick={handleMenuItemClick}
                                 key={label}
-                                href={href}
-                                onClick={onClick}
-                                label={label}
-                                isActive={label === currentLinkLabel}
-                            />
-                        </div>)
+                                style={{
+                                    "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap
+                                }}
+                            >
+                                <Link
+                                    key={label}
+                                    href={href}
+                                    onClick={onClick}
+                                    label={label}
+                                    isActive={label === currentLinkLabel}
+                                />
+                            </div>)
+                        }
+
+                    </div>
+                    {
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return <>
+                                    {
+                                        buttonLink !== undefined &&
+                                        <LinkButton
+                                            {
+                                            ...buttonLink
+                                            }
+                                            className={classes.linkButton}
+                                        />
+
+                                    }
+                                </>
+
+                            }
+                            return undefined;
+                        })()
+
+                    }
+
+                    {
+                        (() => {
+                            if (logoLinks === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
+                                return undefined;
+                            }
+                            return <div className={classes.logoLinks}>
+                                {
+                                    logoLinks.map(({ logo, label, ...rest }, index) => <a
+                                        key={label}
+                                        {...rest}
+                                        aria-label={label}
+                                        style={{
+                                            "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
+
+                                        }}
+                                    >{typeof logo === "string" ?
+                                        <Logo width={62} logoUrl={logo} /> :
+                                        logo
+                                        }
+                                    </a>)
+                                }
+                            </div>
+                        })()
+                    }
+                    {
+                        (() => {
+                            if (smallPrint === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
+                                return undefined;
+                            }
+                            return <div>
+                                {smallPrint}
+                            </div>
+                        })()
                     }
 
                 </div>
@@ -199,6 +275,23 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
             })(),
 
         },
+        "mobileWrapper": {
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "alignItems": "flex-start",
+                        "paddingLeft": 25
+
+                    }
+                }
+                return {
+
+                }
+            })()
+
+        },
         "toggleMenuButton": {
             "position": "absolute",
             "zIndex": 4002,
@@ -218,11 +311,19 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
             })()
         },
         "linkButton": {
-            "position": "absolute",
-            "top": 100,
-            "right": 290,
             "transition": `opacity ${transitionTime}ms, background-color 300ms`,
             "opacity": isOpen ? 1 : 0,
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {}
+                }
+                return {
+
+                    "position": "absolute",
+                    "top": 100,
+                    "right": 290,
+                }
+            })()
 
 
         },
@@ -231,18 +332,33 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
             "marginTop": theme.spacing.textGap,
             "marginBottom": theme.spacing.textGap
         },
+        "mobileLogoWrapper": {
+            "marginTop": 20,
+            "marginBottom": 60
+
+        },
         "menu": {
             "position": "absolute",
             "zIndex": 4001,
             "display": "flex",
-            "alignItems": "center",
+            "alignItems": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return undefined;
+                }
+                return "center"
+            })(),
             "top": isOpen ? 0 : -openHeaderHeight,
             "transition": `top ${transitionTime}ms`,
             "height": openHeaderHeight,
             "width": "100%",
             "backgroundColor": theme.colors.lighterGray,
-            "overflow": "hidden",
-            "pointerEvents": !isOpen ? "none" : undefined
+            "overflow": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return "auto";
+                }
+                return "hidden";
+            })(),
+            "pointerEvents": !isOpen ? "none" : undefined,
         },
         "contactWrapper": {
             "marginRight": 392,
@@ -259,7 +375,13 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
         "linksWrapper": {
             "transition": `opacity ${transitionTime}ms`,
             "opacity": isOpen ? 1 : 0,
-            "transitionDelay": !isOpen ? undefined : `${transitionTime / 2}ms`
+            "transitionDelay": !isOpen ? undefined : `${transitionTime / 2}ms`,
+            "marginBottom": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return 40;
+                }
+                return undefined;
+            })()
 
         }
 

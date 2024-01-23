@@ -80,46 +80,53 @@ export function Home() {
                 }
 
             </section>
-            <section className={classes.sliderSection}>
-                <Slider
-                    variant="named"
-                    slides={[
-                        {
-                            "name": t("sliderEngagementName"),
-                            "smallSurtitle": t("sliderMiniTitle"),
-                            "title": t("sliderEngagementTitle"),
-                            "paragraph": t("sliderEngagementParagraph1"),
-                            "secondParagraph": t("sliderEngagementParagraph2"),
-                            "button": {
-                                "href": "",
-                                "label": t("sliderButtonLabel")
-                            }
-                        },
-                        {
-                            "name": t("sliderFinancingName"),
-                            "smallSurtitle": t("sliderMiniTitle"),
-                            "title": t("sliderFinancingTitle"),
-                            "paragraph": t("sliderFinancingParagraph1"),
-                            "secondParagraph": t("sliderFinancingParagraph2"),
-                            "button": {
-                                "href": "",
-                                "label": t("sliderButtonLabel")
-                            }
-                        },
-                        {
-                            "name": t("sliderResponseName"),
-                            "smallSurtitle": t("sliderMiniTitle"),
-                            "title": t("sliderResponseTitle"),
-                            "paragraph": t("sliderResponseParagraph1"),
-                            "secondParagraph": t("sliderResponseParagraph2"),
-                            "button": {
-                                "href": "",
-                                "label": t("sliderButtonLabel")
-                            }
-                        }
-                    ]}
-                />
-            </section>
+            {
+                (()=>{
+                    if(theme.windowInnerWidth < breakpointValues.sm){
+                        return undefined;
+                    }
+                    return <section className={classes.sliderSection}>
+                        <Slider
+                            variant="named"
+                            slides={[
+                                {
+                                    "name": t("sliderEngagementName"),
+                                    "smallSurtitle": t("sliderMiniTitle"),
+                                    "title": t("sliderEngagementTitle"),
+                                    "paragraph": t("sliderEngagementParagraph1"),
+                                    "secondParagraph": t("sliderEngagementParagraph2"),
+                                    "button": {
+                                        "href": "",
+                                        "label": t("sliderButtonLabel")
+                                    }
+                                },
+                                {
+                                    "name": t("sliderFinancingName"),
+                                    "smallSurtitle": t("sliderMiniTitle"),
+                                    "title": t("sliderFinancingTitle"),
+                                    "paragraph": t("sliderFinancingParagraph1"),
+                                    "secondParagraph": t("sliderFinancingParagraph2"),
+                                    "button": {
+                                        "href": "",
+                                        "label": t("sliderButtonLabel")
+                                    }
+                                },
+                                {
+                                    "name": t("sliderResponseName"),
+                                    "smallSurtitle": t("sliderMiniTitle"),
+                                    "title": t("sliderResponseTitle"),
+                                    "paragraph": t("sliderResponseParagraph1"),
+                                    "secondParagraph": t("sliderResponseParagraph2"),
+                                    "button": {
+                                        "href": "",
+                                        "label": t("sliderButtonLabel")
+                                    }
+                                }
+                            ]}
+                        />
+                    </section>
+                })()
+            }
             <Certification />
             <Customers />
             <Reviews />
@@ -140,8 +147,8 @@ const useStyles = tss
         "backgroundSection": {
             "position": "absolute",
             "backgroundColor": theme.colors.backgroundTertiary,
-            ...(()=>{
-                if(theme.windowInnerWidth >= breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth >= breakpointValues.sm) {
                     return {
                         "width": "100%",
                         "height": 590,
@@ -149,11 +156,11 @@ const useStyles = tss
 
                     }
                 }
-                    return {
-                        "width": "80%",
-                        "height": "100%",
-                        "left": "20%"
-                    }
+                return {
+                    "width": "80%",
+                    "height": "100%",
+                    "left": "20%"
+                }
             })()
 
         },
