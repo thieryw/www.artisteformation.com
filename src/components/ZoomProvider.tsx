@@ -77,7 +77,9 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className
                 "overflowX": "hidden",
                 "margin": "auto",
             } : {
-                "width": "100%"
+                "width": "100%",
+                "height": "100vh",
+                "overflowX": "hidden",
             }),
 
         }

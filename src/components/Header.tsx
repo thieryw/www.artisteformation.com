@@ -1,6 +1,6 @@
 import { useState, memo, useRef, useEffect } from 'react';
 import type { ReactNode } from "react";
-import { tss } from "../theme";
+import { breakpointValues, tss } from "../theme";
 import { Text } from "../theme/Text";
 import { useConstCallback } from "powerhooks/useConstCallback";
 import { Logo } from "./Logo";
@@ -31,29 +31,7 @@ export type HeaderProps = {
 export function Header(props: HeaderProps) {
     const { zoomProviderInterval, links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
 
-    useEffect(()=>{
-        if(ref.current === null){
-            return;
-        };
-
-
-        const scrollableParent = getScrollableParent({
-            "doReturnElementIfScrollable": true,
-            "element": ref.current
-        });
-
-
-        scrollableParent.style.overflow = (()=>{
-            if(!isOpen){
-                return "";
-            }
-
-            return "hidden";
-        })()
-
-    }, [ref.current, isOpen])
 
     const toggleMenu = useConstCallback(() => {
         setIsOpen(!isOpen);
@@ -67,7 +45,7 @@ export function Header(props: HeaderProps) {
 
 
     return (
-        <header ref={ref} className={cx(classes.root, className)}>
+        <header className={cx(classes.root, className)}>
             <ToggleMenuButton
                 isActive={isOpen}
                 onClick={toggleMenu}
@@ -75,67 +53,84 @@ export function Header(props: HeaderProps) {
             />
             <div className={classes.menu} role="menu">
                 {
-                    buttonLink !== undefined &&
-                    <LinkButton
-                        {
-                        ...buttonLink
+                    (() => {
+                        if (theme.windowInnerWidth < breakpointValues.sm) {
+                            return undefined
                         }
-                        className={classes.linkButton}
-                    />
+                        return <>
+                            {
+                                buttonLink !== undefined &&
+                                <LinkButton
+                                    {
+                                    ...buttonLink
+                                    }
+                                    className={classes.linkButton}
+                                />
+
+                            }
+                        </>
+                    })()
 
                 }
-                <div className={classes.contactWrapper}>
+                {
+                    (() => {
+                        if (theme.windowInnerWidth < breakpointValues.sm) {
+                            return undefined;
+                        }
+                        return <div className={classes.contactWrapper}>
 
-                    {
-                        logo !== undefined &&
-                        <div>
                             {
-                                typeof logo === "string" ?
-                                    <Logo width={119} logoUrl={logo} /> :
-                                    logo
-                            }
-                        </div>
-                    }
-                    {
-
-                        contact !== undefined &&
-                        <div className={classes.contact}>
-                            {
-                                contact
-                            }
-                        </div>
-                    }
-
-                    {
-                        logoLinks !== undefined &&
-                        <div className={classes.logoLinks}>
-                            {
-                                logoLinks.map(({ logo, label, ...rest }, index) => <a
-                                    key={label}
-                                    {...rest}
-                                    aria-label={label}
-                                    style={{
-                                        "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
-
-                                    }}
-                                >{typeof logo === "string" ?
-                                    <Logo width={62} logoUrl={logo} /> :
-                                    logo
+                                logo !== undefined &&
+                                <div>
+                                    {
+                                        typeof logo === "string" ?
+                                            <Logo width={119} logoUrl={logo} /> :
+                                            logo
                                     }
-                                </a>)
+                                </div>
                             }
+                            {
+
+                                contact !== undefined &&
+                                <div className={classes.contact}>
+                                    {
+                                        contact
+                                    }
+                                </div>
+                            }
+
+                            {
+                                logoLinks !== undefined &&
+                                <div className={classes.logoLinks}>
+                                    {
+                                        logoLinks.map(({ logo, label, ...rest }, index) => <a
+                                            key={label}
+                                            {...rest}
+                                            aria-label={label}
+                                            style={{
+                                                "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
+
+                                            }}
+                                        >{typeof logo === "string" ?
+                                            <Logo width={62} logoUrl={logo} /> :
+                                            logo
+                                            }
+                                        </a>)
+                                    }
+                                </div>
+                            }
+                            {
+                                smallPrint !== undefined &&
+                                <div>
+                                    {smallPrint}
+                                </div>
+
+                            }
+
+
                         </div>
-                    }
-                    {
-                        smallPrint !== undefined &&
-                        <div>
-                            {smallPrint}
-                        </div>
-
-                    }
-
-
-                </div>
+                    })()
+                }
                 <div className={classes.linksWrapper}>
                     {
                         links.map(({ href, label, onClick }, index) => <div
@@ -188,19 +183,40 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
     const transitionTime = 600;
     return ({
         "root": {
-            //"position": "fixed",
             "position": "relative",
             "top": 0,
             "left": 0,
-            "width": "100%",
-            //"height": 150,
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "width": "100vw"
+
+                    }
+                }
+                return {
+                    "width": "100%",
+
+                }
+            })(),
 
         },
         "toggleMenuButton": {
             "position": "absolute",
-            "top": 125,
-            "right": 186,
-            "zIndex": 4002
+            "zIndex": 4002,
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "top": 45,
+                        "right": 35
+
+                    }
+                }
+                return {
+                    "top": 125,
+                    "right": 186,
+
+                }
+            })()
         },
         "linkButton": {
             "position": "absolute",

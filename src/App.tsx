@@ -27,7 +27,7 @@ const widthRange = {
 
 export function App() {
   const route = useRoute();
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const { t } = useTranslation({ App });
   const links = useMemo<(HeaderProps["links"][number] & { routeName: keyof typeof routeDefs })[]>(() => ([
     {
@@ -68,7 +68,7 @@ export function App() {
       }}
     >
       {
-        route.name !== "home" &&
+        (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&
         <a {...routes.home().link}>
           <Logo
             logoUrl={siteLogo}
@@ -80,7 +80,7 @@ export function App() {
 
       }
       {
-        route.name !== "home" &&
+        (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&
         <a {...routes.contact().link}>
           <Text className={classes.contactLink} typo="additionalTitle">CONTACT</Text>
         </a>
@@ -228,8 +228,18 @@ const useStyles = tss.create(({ theme }) => ({
 
   },
   "headerWrapper": {
-    "width": "100%",
     "height": 0,
+    ...(()=>{
+      if(theme.windowInnerWidth < breakpointValues.sm){
+        return {
+
+        }
+      }
+      return {
+        "width": "100%",
+
+      }
+    })()
 
   },
   "headerInner": {
