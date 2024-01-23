@@ -39,7 +39,6 @@ const useStyles = tss.create(({theme}) => {
             "justifyContent": "center",
             "alignItems": "center",
             "backgroundColor": theme.colors.backgroundTertiary,
-            "marginTop": 244,
             ...(()=>{
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     const leftRight = 25;
@@ -48,7 +47,8 @@ const useStyles = tss.create(({theme}) => {
                         "paddingTop": topBottom, 
                         "paddingBottom": topBottom,
                         "paddingLeft": leftRight,
-                        "paddingRight": leftRight
+                        "paddingRight": leftRight,
+                        "marginTop": 100
 
                     }
                 }
@@ -56,7 +56,8 @@ const useStyles = tss.create(({theme}) => {
 
                 return {
                     "paddingTop": value,
-                    "paddingBottom": value
+                    "paddingBottom": value,
+                    "marginTop": 244,
 
                 }
             })()

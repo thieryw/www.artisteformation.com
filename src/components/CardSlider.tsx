@@ -10,10 +10,17 @@ export type CardSliderProps = {
     className?: string;
     classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
     cards: {
-        title: string;
-        subtitle: string;
-        paragraph: string;
-        stars: number;
+        title?: string;
+        subtitle?: string;
+        paragraph?: string;
+        stars?: number;
+        image?: {
+            src: string;
+            sources?: {
+                srcSet: string | undefined;
+                type: string | undefined;
+            }[]
+        }
     }[];
 
 }
@@ -21,11 +28,16 @@ export type CardSliderProps = {
 
 export const CardSlider = memo((props: CardSliderProps) => {
     const { className, cards } = props;
-    const { classes, cx, theme } = useStyles();
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [previousIndex, setPreviousIndex] = useState<number | null>(null)
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [mobileActiveButton, setMobileActiveButton] = useState<"prev" | "next">("next");
+    const { classes, cx, theme } = useStyles({
+        mobileActiveButton,
+        "classesOverrides": props.classes
+    });
+
 
     useEffect(() => {
 
@@ -72,6 +84,9 @@ export const CardSlider = memo((props: CardSliderProps) => {
         if(isTransitioning){
             return;
         }
+        if(theme.windowInnerWidth < breakpointValues.sm){
+            setMobileActiveButton(direction);
+        }
         setPreviousIndex(currentIndex);
         switch(direction){
             case "next": setCurrentIndex(currentIndex === cards.length - 1 ? 0 : currentIndex + 1); break;
@@ -106,7 +121,7 @@ export const CardSlider = memo((props: CardSliderProps) => {
                 <Logo logoUrl={navArrow} />
 
             </button>
-            <button onClick={handleSlide("prev")} className={classes.button}>
+            <button onClick={handleSlide("prev")} className={cx(classes.button, classes.button2)}>
 
                 <Logo logoUrl={navArrow} />
             </button>
@@ -115,7 +130,7 @@ export const CardSlider = memo((props: CardSliderProps) => {
     </div>
 })
 
-const useStyles = tss.create(({ theme }) => {
+const useStyles = tss.withParams<{mobileActiveButton: "prev" | "next"}>().create(({ theme, mobileActiveButton }) => {
     return ({
         "root": {
             "display": "flex",
@@ -125,7 +140,12 @@ const useStyles = tss.create(({ theme }) => {
         "cardWrapper": {
             "display": "grid",
             "maxWidth": 461,
-            "height": 770,
+            "height": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return undefined
+                }
+                return  770
+            })(),
             "position": "relative",
 
         },
@@ -157,9 +177,6 @@ const useStyles = tss.create(({ theme }) => {
                     return {
                         "border": "none",
                         "transition": "border-color 500ms",
-                        ":hover": {
-                            "border": `solid ${theme.colors.darkGray3} 1px`,
-                        }
 
                     }
                 }
@@ -214,7 +231,21 @@ const useStyles = tss.create(({ theme }) => {
         },
         "button1": {
             "marginBottom": 23,
-            "transform": "rotate(180deg)"
+            "transform": "rotate(180deg)",
+            "border": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm && mobileActiveButton === "next"){
+                    return `solid ${theme.colors.darkGray3} 1px`
+                }
+                return undefined;
+            })()
+        },
+        "button2": {
+            "border": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm && mobileActiveButton === "prev"){
+                    return `solid ${theme.colors.darkGray3} 1px`
+                }
+                return undefined;
+            })()
         }
     })
 })
@@ -228,10 +259,14 @@ const { Card } = (() => {
         vector: "comingFromTop" | "comingFromBottom" | "leavingToTop" | "leavingToBottom" | "staticHidden" | "staticVisible";
     }
     const Card = memo((props: CardProps) => {
-        const { cardNumber, paragraph, stars, subtitle, title, isActive, vector } = props;
+        const { cardNumber, paragraph, stars, subtitle, title, isActive, vector, image } = props;
 
         const starArrayRef = useRef((new Array(stars)).fill(undefined));
-        const { classes, theme } = useStyles({ isActive, vector });
+        const { classes, theme } = useStyles({ 
+            isActive, 
+            vector ,
+            "hasImage": image !== undefined
+        });
 
         return <div className={classes.root}>
             {
@@ -242,26 +277,105 @@ const { Card } = (() => {
                     return <Text className={classes.cardNumber} typo="additionalTitle">0{cardNumber}.</Text>
                 })()
             }
-            <div className={classes.titlesWrapper}>
-                <div className={classes.titleWrapper}>
-                    <Text className={classes.title} typo="heading5">{title}</Text>
+            {
+                image !== undefined && 
+                <div className={classes.imageWrapper}>
+                    <div className={classes.pictureWrapper}>
+                        <picture>
+                            {
+                                image.sources !== undefined &&
+                                image.sources.map(({ srcSet, type }) => <source
+                                    key={srcSet}
+                                    srcSet={srcSet}
+                                    type={type}
+                                />)
+                            }
+                            <img className={classes.image} src={image.src} alt="card illustration" />
+                        </picture>
+
+                    </div>
 
                 </div>
-                <div className={classes.subtitleWrapper}>
-                    <Text className={classes.subtitle} typo="paragraph">{subtitle}</Text>
-                </div>
 
-            </div>
-            <Text className={classes.paragraph} typo="paragraph">{paragraph}</Text>
-            <div className={classes.stars}>
-                {
-                    starArrayRef.current.map((_star, index) => <Logo key={index} width={24} height={24} logoUrl={starSvg} />)
-                }
-            </div>
+
+            }
+            {
+                (()=>{
+                    if (image !== undefined) {
+                        return <div className={classes.textWrapper}>
+
+                            {
+                                (title !== undefined || subtitle !== undefined) &&
+                                <div className={classes.titlesWrapper}>
+                                    {
+                                        title !== undefined &&
+                                        <div className={classes.titleWrapper}>
+                                            <Text className={classes.title} typo="heading5">{title}</Text>
+
+                                        </div>
+                                    }
+                                    {
+                                        subtitle !== undefined &&
+                                        <div className={classes.subtitleWrapper}>
+                                            <Text className={classes.subtitle} typo="paragraph">{subtitle}</Text>
+                                        </div>
+                                    }
+
+                                </div>
+                            }
+                            {
+                                paragraph !== undefined &&
+                                <Text className={classes.paragraph} typo="paragraph">{paragraph}</Text>
+                            }
+                            {
+                                stars !== undefined &&
+                                <div className={classes.stars}>
+                                    {
+                                        starArrayRef.current.map((_star, index) => <Logo key={index} width={24} height={24} logoUrl={starSvg} />)
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                    return <>
+                        {
+                            (title !== undefined || subtitle !== undefined) &&
+                            <div className={classes.titlesWrapper}>
+                                {
+                                    title !== undefined &&
+                                    <div className={classes.titleWrapper}>
+                                        <Text className={classes.title} typo="heading5">{title}</Text>
+
+                                    </div>
+                                }
+                                {
+                                    subtitle !== undefined &&
+                                    <div className={classes.subtitleWrapper}>
+                                        <Text className={classes.subtitle} typo="paragraph">{subtitle}</Text>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        {
+                            paragraph !== undefined &&
+                            <Text className={classes.paragraph} typo="paragraph">{paragraph}</Text>
+                        }
+                        {
+                            stars !== undefined &&
+                            <div className={classes.stars}>
+                                {
+                                    starArrayRef.current.map((_star, index) => <Logo key={index} width={24} height={24} logoUrl={starSvg} />)
+                                }
+                            </div>
+                        }
+                    </>
+                })()
+            }
         </div>
     });
 
-    const useStyles = tss.withParams<{ isActive: boolean; vector: CardProps["vector"]; }>().create(({ isActive, vector, theme }) => {
+    const useStyles = tss.withParams<{ isActive: boolean; vector: CardProps["vector"]; hasImage: boolean; }>().create(({ isActive, vector, theme, hasImage }) => {
         return ({
             "root": {
                 "gridColumn": 1,
@@ -272,13 +386,18 @@ const { Card } = (() => {
                 "flexDirection": "column",
                 "pointerEvents": isActive ? "none" : undefined,
                 ...(() => {
+                    if (hasImage) {
+                        return {};
+                    }
                     if (theme.windowInnerWidth < breakpointValues.sm) {
                         const value = 25;
 
                         return {
                             "alignItems": "center",
                             "paddingLeft": value,
-                            "paddingRight": value
+                            "paddingRight": value,
+                            "paddingTop": 55,
+                            "paddingBottom": 70,
                         }
 
                     }
@@ -291,13 +410,13 @@ const { Card } = (() => {
                             }
 
                         })(),
+                        "paddingTop": 98,
+                        "paddingBottom": 132,
 
                     }
 
                 })(),
 
-                "paddingTop": 98,
-                "paddingBottom": 132,
                 "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)"
 
             },
@@ -312,6 +431,44 @@ const { Card } = (() => {
                         }
                     }
                 })()
+
+            },
+            "imageWrapper": {
+
+                "overflow": "hidden",
+                "justifySelf": "flex-start"
+            },
+            "textWrapper": {
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "space-between",
+                "alignItems": "center",
+                ...(() => {
+                    if (!hasImage) {
+                        return {};
+                    }
+                    const value = 30;
+                    return {
+
+                        "paddingTop": value,
+                        "paddingBottom": value,
+                        "paddingLeft": value,
+                        "paddingRight": value
+                    }
+                })()
+
+            },
+            "pictureWrapper": {
+                ...animate({
+                    vector,
+                    "comingInDuration": 600
+                })
+
+            },
+            "image": {
+                "width": "100%",
+                "objectFit": "cover",
+                "display": "block"
 
             },
             "cardNumber": {
