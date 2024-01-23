@@ -1,4 +1,4 @@
-import { useState, memo, useRef, useEffect } from 'react';
+import { useState, memo, useRef } from 'react';
 import type { ReactNode } from "react";
 import { breakpointValues, tss } from "../theme";
 import { Text } from "../theme/Text";
@@ -6,7 +6,6 @@ import { useConstCallback } from "powerhooks/useConstCallback";
 import { Logo } from "./Logo";
 import type { Link } from "../tools/link";
 import { LinkButton } from "./LinkButton";
-import { getScrollableParent } from "powerhooks/getScrollableParent";
 
 
 export type HeaderProps = {
