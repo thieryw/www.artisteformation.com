@@ -3,7 +3,6 @@ import { tss, Text, breakpointValues } from "@/theme";
 import { useTranslation } from "@/i18n";
 import badge from "@/assets/svg/home/badge-qualiopi.svg";
 import card from "@/assets/svg/home/certification-card.svg";
-import { ReactSVG } from "react-svg";
 
 
 
