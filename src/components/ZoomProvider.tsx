@@ -93,7 +93,7 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className
                 "transformOrigin": "top left",
                 "width": max,
                 "height": theme.windowInnerHeight / (theme.windowInnerWidth / max),
-                "overflowX": "hidden",
+                //"overflowX": "hidden",
                 "margin": "auto",
             } : {
                 "width": "100%",
