@@ -2,6 +2,7 @@ import { tss } from "../theme";
 import { memo, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { useRoute } from "@/router";
+import { isMobile } from "react-device-detect";
 
 
 export type ZoomProviderProps = {
@@ -32,8 +33,8 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
     const isWithinInterval = (theme.windowInnerWidth <= max && theme.windowInnerWidth >= min) && (window.screen.width <= max && window.screen.width >= min);
 
     useEffect(() => {
-        function handleResize(){
-            if(window.screen.width <= max && window.screen.width >= min){
+        function handleResize() {
+            if (window.screen.width <= max && window.screen.width >= min) {
                 return;
             }
             window.location.reload();
@@ -93,7 +94,7 @@ const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className
                 "transformOrigin": "top left",
                 "width": max,
                 "height": theme.windowInnerHeight / (theme.windowInnerWidth / max),
-                //"overflowX": "hidden",
+                "overflowX": isMobile ? undefined : "hidden",
                 "margin": "auto",
             } : {
                 "width": "100%",
