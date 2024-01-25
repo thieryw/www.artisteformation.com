@@ -27,10 +27,29 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
         "classesOverrides": props.classes
     })
 
-    const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
 
-    useEffect(()=>{
-        if(innerRef.current === null || !isWithinInterval){
+
+    const isWithinInterval = (theme.windowInnerWidth <= max && theme.windowInnerWidth >= min) && (window.screen.width <= max && window.screen.width >= min);
+
+    useEffect(() => {
+        function handleResize(){
+            if(window.screen.width <= max && window.screen.width >= min){
+                return;
+            }
+            window.location.reload();
+        }
+
+        window.addEventListener("resize", handleResize);
+
+
+        return () => window.removeEventListener("resize", handleResize);
+
+
+
+    }, [min, max])
+
+    useEffect(() => {
+        if (innerRef.current === null || !isWithinInterval) {
             return;
         }
         innerRef.current.scrollTo({
@@ -62,7 +81,7 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
 const useStyles = tss.withParams<Omit<ZoomProviderProps, "children" | "className" | "classes">>().create(({
     widthRange: { max, min },
     theme }) => {
-    const isWithinInterval = theme.windowInnerWidth <= max && theme.windowInnerWidth >= min;
+    const isWithinInterval = (theme.windowInnerWidth <= max && theme.windowInnerWidth >= min) && (window.screen.width <= max && window.screen.width >= min);
     return ({
         "root": {
 

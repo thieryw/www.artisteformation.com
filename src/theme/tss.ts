@@ -218,15 +218,14 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
 
 
 function useContext() {
-    const windowInnerWidth = useWindowInnerSize().windowInnerWidth;
-    const windowInnerHeight = useWindowInnerSize().windowInnerHeight;
+    let {windowInnerHeight, windowInnerWidth} = useWindowInnerSize();
     const theme = {
         "spacing": {
             "sectionTopBottomPadding": 220,
             "textGap": 50,
             "sectionTitleGap": 70,
-            "buttonGap": (()=>{
-                if(windowInnerWidth < breakpointValues.sm){
+            "buttonGap": (() => {
+                if (windowInnerWidth < breakpointValues.sm) {
                     return 40;
                 }
                 return 75
@@ -234,8 +233,8 @@ function useContext() {
             "pageTitleGap": 110,
             "nonCenteredHeroSide": 430,
             "nonCenteredSectionSide": 190,
-            "listElementGap": (()=>{
-                if(windowInnerWidth < breakpointValues.sm){
+            "listElementGap": (() => {
+                if (windowInnerWidth < breakpointValues.sm) {
                     return 20;
                 }
                 return 40;

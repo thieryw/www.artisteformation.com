@@ -20,7 +20,7 @@ import { Logo } from "./components/Logo";
 import { Contact } from "@/pages/contact/Contact";
 
 const widthRange = {
-  "min": 1200,
+  "min": 600,
   "max": 1920
 }
 
