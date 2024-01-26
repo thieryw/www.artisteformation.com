@@ -13,6 +13,7 @@ import mediaJpg from "@/assets/jpg/home/media.jpeg";
 import mediaWebp from "@/assets/webp/home/media.webp";
 import theatreJpg from "@/assets/jpg/home/theatre.jpeg";
 import theatreWebp from "@/assets/webp/home/theatre.webp";
+import patternSvg from "@/assets/svg/pattern.svg";
 
 
 
@@ -20,7 +21,7 @@ import theatreWebp from "@/assets/webp/home/theatre.webp";
 export const Customers = memo(() => {
     const { classes, cx, theme } = useStyles();
     const { t } = useTranslation("Home");
-    return <section className={classes.root}>
+    return <><section className={classes.root}>
         <div className={classes.inner}>
             <div className={classes.titleWrapper}>
                 <Text className={classes.title} typo="additionalTitle">{t("customerSmallTitle")}</Text>
@@ -204,6 +205,18 @@ export const Customers = memo(() => {
 
         </div>
     </section>
+        {
+            (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return undefined;
+
+                }
+                return <div className={classes.bottomDiv}>
+
+                </div>;
+            })()
+        }
+    </>
 })
 
 const useStyles = tss.create(({ theme }) => {
@@ -211,6 +224,7 @@ const useStyles = tss.create(({ theme }) => {
         "root": {
             "display": "flex",
             "position": "relative",
+            "zIndex": 4001,
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
@@ -226,12 +240,28 @@ const useStyles = tss.create(({ theme }) => {
             })(),
 
         },
+        "bottomDiv": {
+            "backgroundColor": theme.colors.bloodOrange,
+            "backgroundImage": `url("${patternSvg}")`,
+            "backgroundBlendMode": "overlay",
+            "backgroundSize": "cover",
+            "backgroundRepeat": "no-repeat",
+            "width": "100%",
+            "height": 680,
+            "position": "relative",
+            "top": -300,
+            "zIndex": 4000
+
+        },
         "inner": {
             "backgroundColor": theme.colors.indigo,
+            "backgroundImage": `url("${patternSvg}")`,
+            "backgroundSize": "cover",
+            "backgroundBlendMode": "overlay",
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
-                        ...(()=>{
+                        ...(() => {
                             const topBottom = 100;
                             const rightLeft = 25;
                             return {
@@ -247,14 +277,14 @@ const useStyles = tss.create(({ theme }) => {
                 return {
                     "borderLeft": `solid ${theme.colors.darkYellow} 10px`,
                     "width": 940,
-                    "marginBottom": 400,
+                    //"marginBottom": 400,
 
                 }
             })()
         },
         "titleWrapper": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginBottom": 150,
                         "display": "flex",
@@ -264,8 +294,8 @@ const useStyles = tss.create(({ theme }) => {
                     }
                 }
                 return {
-            "paddingTop": 100,
-            "paddingLeft": 113,
+                    "paddingTop": 100,
+                    "paddingLeft": 113,
 
                 }
             })()

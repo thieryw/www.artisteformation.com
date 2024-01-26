@@ -202,7 +202,9 @@ const useStyles = tss.withParams<
     "logo": {
       ...(() => {
         if (theme.windowInnerWidth < breakpointValues.sm) {
-          return {}
+          return {
+            "marginBottom": 20
+          }
         }
         return {
           "marginRight": 16
@@ -212,7 +214,9 @@ const useStyles = tss.withParams<
     "titleWrapper": {
       ...(() => {
         if (theme.windowInnerWidth < breakpointValues.sm) {
-          return {}
+          return {
+            "textAlign": "center"
+          }
         }
         return {
           "marginLeft": 16

@@ -182,9 +182,10 @@ const useStyles = tss.withParams<{mobileActiveButton: "prev" | "next"}>().create
                 }
                 return {
                     "border": `solid ${theme.colors.darkGray3} 2px`,
-                    "transition": "background 500ms",
+                    "transition": "background 500ms, border-color 500ms",
                     ":hover": {
                         "backgroundColor": theme.colors.bloodOrange,
+                        "borderColor": theme.colors.bloodOrange,
                         "& svg": {
                             "fill": theme.colors.white
                         }

@@ -63,12 +63,20 @@ const useStyles = tss.create(({ theme }) => {
                     "alignItems": "center",
                     "paddingLeft": 180,
                     "paddingRight": theme.spacing.sectionTopBottomPadding,
-                    "background": `url(${card})`,
+                    "backgroundImage": `url(${card})`,
+                    "backgroundSize": "cover",
+                    "backgroundRepeat": "no-repeat"
                 }
             })()
         },
         "badge": {
-            "marginBottom": 65
+
+            "marginBottom": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return 65;
+
+                }
+            })()
         },
         "svg": {
             "width": "100%",
@@ -77,20 +85,26 @@ const useStyles = tss.create(({ theme }) => {
         "textWrapper": {
             "display": "flex",
             "flexDirection": "column",
-            "alignItems": "center",
-            ...(()=>{
-                const value = 30;
-                return {
-                    "paddingLeft": value,
-                    "paddingRight": value
+            "alignItems": (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return "center"
+                }
+            })(),
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    const value = 30;
+                    return {
+                        "paddingLeft": value,
+                        "paddingRight": value
+                    }
                 }
             })()
         },
         "paragraph": {
             "marginBottom": 15,
             "color": theme.colors.white,
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "textAlign": "center",
                         "marginBottom": 35
@@ -102,8 +116,8 @@ const useStyles = tss.create(({ theme }) => {
         },
         "title": {
             "color": theme.colors.white,
-            "textAlign": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "textAlign": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return "center";
                 }
                 return undefined;
