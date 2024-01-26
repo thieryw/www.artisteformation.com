@@ -48,7 +48,7 @@ const useStyles = tss.create(({theme}) => {
         "root": {
             "display": "flex",
             "flexDirection": "column",
-            "marginTop": 290,
+            "paddingTop": 290,
         },
         "articleWrapper": {
             "display": "flex",

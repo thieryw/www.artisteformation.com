@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { Home } from "./pages/home/Home";
 import { useRoute, routes, routeDefs } from "./router";
 import { Text } from "./theme/Text";
@@ -18,7 +18,8 @@ import { Teachers } from "@/pages/teachers/Teachers";
 import { About } from "@/pages/about/About";
 import { Logo } from "./components/Logo";
 import { Contact } from "@/pages/contact/Contact";
-
+import { TransitionComponent } from "@/components/TransitionComponent";
+import pattern from "@/assets/svg/pattern.svg";
 const widthRange = {
   "min": 600,
   "max": 1920
@@ -27,7 +28,6 @@ const widthRange = {
 
 export function App() {
   const route = useRoute();
-  const { classes, theme } = useStyles();
   const { t } = useTranslation({ App });
   const links = useMemo<(HeaderProps["links"][number] & { routeName: keyof typeof routeDefs })[]>(() => ([
     {
@@ -57,6 +57,31 @@ export function App() {
       "routeName": "contact"
     },
   ]), [])
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  const { classes, theme } = useStyles({
+    isTransitioning
+  });
+
+  useEffect(() => {
+
+    const startTransition = () => {
+      setIsTransitioning(true);
+    };
+
+    const endTransition = () => {
+      setIsTransitioning(false);
+    };
+
+    startTransition();
+
+    const transitionDelay = 3000; 
+    const timer = setTimeout(() => endTransition(), transitionDelay);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [route.name]);
 
   return (<>
 
@@ -132,8 +157,34 @@ export function App() {
     <ZoomProvider
       widthRange={widthRange}
     >
-      <div className={classes.root}>
+      <TransitionComponent
+        isActive={isTransitioning}
+        zoomProviderInterval={widthRange}
+        backgroundColor={(()=>{
+          switch(route.name){
+            case "how": return theme.colors.bloodOrange;
+            case "teachers": return theme.colors.linden;
+            case "about": return theme.colors.darkYellow;
+            case "contact": return theme.colors.indigo;
+            default: return theme.colors.backgroundTertiary;
+          }
+        })()}
+        logoUrl={route.name === "home" ? siteLogo : undefined}
+        splashScreenTitle={route.name === "home" ? t("siteTitle") : undefined}
+        backgroundImage={route.name !== "home" && route.name !== "legal" ? pattern : undefined}
+        transitionText={(()=>{
+          switch(route.name){
+            case "how": return t("howLink");
+            case "about": return t("aboutLink");
+            case "contact": return t("contactLink");
+            case "teachers": return t("teachersLink");
+            default: return undefined;
+          }
 
+        })()}
+      />
+
+      <div className={classes.root}>
         <div className={classes.body}>
           {route.name === "home" && <Home />}
           {route.name === "how" && <How />}
@@ -181,27 +232,34 @@ export function App() {
 
         />
 
+
+
       </div>
+
 
     </ZoomProvider>
   </>
   )
 }
 
-const useStyles = tss.create(({ theme }) => ({
+const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ theme, isTransitioning }) => ({
 
   "root": {
     "backgroundColor": theme.colors.backgroundMain,
     "width": "100%",
     "position": "relative",
     "minHeight": "100%",
-    "display": "flex",
     "flexDirection": "column",
+    "transition": "opacity 600ms",
+    "transitionDelay": isTransitioning ? undefined : "600ms",
+    "opacity": isTransitioning ? 0 : 1,
+    "height": isTransitioning ? 0 : undefined,
+    "overflow": isTransitioning ? "hidden" : undefined
 
   },
   "smallPrint": {
-    ...(()=>{
-      if(theme.windowInnerWidth < breakpointValues.sm){
+    ...(() => {
+      if (theme.windowInnerWidth < breakpointValues.sm) {
         return {
           "display": "flex",
           "flexDirection": "column",
@@ -229,8 +287,12 @@ const useStyles = tss.create(({ theme }) => ({
   },
   "headerWrapper": {
     "height": 0,
-    ...(()=>{
-      if(theme.windowInnerWidth < breakpointValues.sm){
+    "transition": "opacity 1ms",
+    "transitionDelay": isTransitioning ? undefined : "600ms",
+    "opacity": isTransitioning ? 0 : 1,
+    "pointerEvents": isTransitioning ? "none" : undefined,
+    ...(() => {
+      if (theme.windowInnerWidth < breakpointValues.sm) {
         return {
 
         }
