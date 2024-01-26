@@ -31,9 +31,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "transition": {
             "color": "#FFFFFF",
             "fontSize": `${(()=>{
-                if(windowInnerWidth < 1200 && windowInnerWidth >= 600 ){
+                /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600 ){
                     return 64;
-                }
+                }*/
                 if(windowInnerWidth < 600){
                     return 52;
                 }
@@ -51,9 +51,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "splashScreen": {
             "color": "#3B3051",
             "fontSize": `${(()=>{
-            if(windowInnerWidth  < 1200 && windowInnerWidth >= 600){
+            /*if(windowInnerWidth  < 1200 && windowInnerWidth >= 600){
                 return 45;
-            }
+            }*/
                 if (windowInnerWidth < 600) {
                     return 40;
                 }
@@ -66,7 +66,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "siteTitle": {
             "color": "#3B3051",
             "fontSize": `${(() => {
-                if (windowInnerWidth < 1200) {
+                if (windowInnerWidth < 600) {
                     return 52;
                 }
                 return 110;
@@ -81,7 +81,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "heading1": {
             "color": "#3B3051",
             "fontSize": `${(() => {
-                if (windowInnerWidth > 1200) {
+                if (windowInnerWidth > 600) {
                     return 96;
                 }
                 return 50;
@@ -94,7 +94,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "menuItem": {
             "color": "#3B3051",
             "fontSize": `${(() => {
-                if (windowInnerWidth < 1200) {
+                if (windowInnerWidth < 600) {
                     return 40;
                 }
                 return 75;
@@ -107,9 +107,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "heading2": {
             "color": "#3B3051",
             "fontSize": `${(()=>{
-                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
                     return 40;
-                }
+                }*/
                 if(windowInnerWidth < 600){
                     return 40;
                 }
@@ -123,9 +123,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "heading3": {
             "color": "#3B3051",
             "fontSize": `${(() => {
-                if (windowInnerWidth < 1200 && windowInnerWidth >= 600) {
+                /*if (windowInnerWidth < 1200 && windowInnerWidth >= 600) {
                     return 32;
-                }
+                }*/
                 if (windowInnerWidth < 600) {
                     return 30;
                 }
@@ -139,7 +139,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "heading4": {
             "color": "#3B3051",
             "fontSize": `${(() => {
-                if (windowInnerWidth < 1200) {
+                if (windowInnerWidth < 600) {
                     return 23;
                 }
                 return 40;
@@ -166,9 +166,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "fontFamily": "Satoshi-Bold",
             "color": "rgba(125, 125, 125, 0.6)",
             "fontSize": `${(()=>{
-                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
                     return 12;
-                }
+                }*/
                 return 11;
             })() / baseFontSizePx}em`,
             "marginBlock": 0,
@@ -178,9 +178,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "fontFamily": "Satoshi-Medium",
             "color": "rgba(125, 125, 125, 0.6)",
             "fontSize": `${(()=>{
-                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
                     return 18;
-                }
+                }*/
                 if(windowInnerWidth < 600){
                     return 14;
                 }
@@ -192,9 +192,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
         "paragraph": {
             "fontFamily": "Satoshi-Regular",
             "fontSize": `${(()=>{
-                if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
+                /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
                     return 13;
-                }
+                }*/
                 if(windowInnerWidth < 600){
                     return 17
                 }
