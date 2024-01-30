@@ -1,7 +1,6 @@
 import { CSSObject } from "@emotion/react";
 import { createTss } from "tss-react";
 import { useWindowInnerSize } from "powerhooks/useWindowInnerSize";
-import { browserName } from "react-device-detect";
 
 export type Typography =
     "transition" |
