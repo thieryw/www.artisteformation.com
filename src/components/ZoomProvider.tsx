@@ -20,6 +20,7 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
     const { children, widthRange: { max, min }, className } = props;
     const route = useRoute();
     const innerRef = useRef<HTMLDivElement>(null);
+    const initialScreenWidthRef = useRef(window.screen.width);
     const { classes, theme, cx } = useStyles({
         "widthRange": {
             max,
@@ -35,6 +36,9 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
     useEffect(() => {
         function handleResize() {
             if (window.screen.width <= max && window.screen.width >= min) {
+                if(initialScreenWidthRef.current > max || initialScreenWidthRef.current < min){
+                    window.location.reload();
+                }
                 return;
             }
             window.location.reload();

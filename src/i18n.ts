@@ -111,7 +111,9 @@ export const {
 				"teachersSurTitle": "FORMATEURS",
 				"teachersTitle": "Nos Maestros",
 				"teachersParagraph": "Forts d’un immense réseau de plus de 350 partenaires à travers le territoire, notre engagement c’est aussi être capable de constituer autour de vous une équipe d'experts afin de bâtir un projet puissant.",
-				"teachersButtonLabel": "LES VOIR TOUS"
+				"teachersButtonLabel": "LES VOIR TOUS",
+				"mobileTabSurtitle": "COMMENT ?",
+				"mobileTabTitle": "On vous explique."
 
 
 

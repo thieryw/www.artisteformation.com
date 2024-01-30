@@ -1,6 +1,6 @@
 import { memo } from "react";
 import type { ReactNode } from "react";
-import { tss, Text } from "../theme";
+import { tss, Text, breakpointValues } from "../theme";
 import { LinkButton, type LinkButtonProps } from "./LinkButton";
 
 export type ArticleProps = {
@@ -134,16 +134,32 @@ const useStyles = tss.withParams<
         "marginBottom": theme.spacing.textGap,
         ...(hasSecondParagraph ? {
             "display": "flex",
-            "flexDirection": isCentered ? "column" : undefined
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "flexDirection": "column"
+                        
+                    }
+                }
+                return {
+                    "flexDirection": isCentered ? "column" : undefined,
+
+                }
+            })()
         } : {})
     },
     "paragraph": {
         "textAlign": isCentered ? "center" : "left",
         "color": theme.colors.darkGray,
-        "flex": 1
+        "flex": 1,
     },
     "firstParagraph": {
         ...(() => {
+            if(theme.windowInnerWidth < breakpointValues.sm){
+                return {
+                    "marginBottom": theme.spacing.textGap
+                }
+            }
             if (!hasSecondParagraph) {
                 return {};
             }

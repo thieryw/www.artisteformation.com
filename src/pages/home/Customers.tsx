@@ -261,6 +261,7 @@ const useStyles = tss.create(({ theme }) => {
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
+                        "width": "100%",
                         ...(() => {
                             const topBottom = 100;
                             const rightLeft = 25;

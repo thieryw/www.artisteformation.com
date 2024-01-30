@@ -1,6 +1,7 @@
 import { CSSObject } from "@emotion/react";
 import { createTss } from "tss-react";
 import { useWindowInnerSize } from "powerhooks/useWindowInnerSize";
+import { browserName } from "react-device-detect";
 
 export type Typography =
     "transition" |
@@ -71,11 +72,11 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 }
                 return 110;
             })() / baseFontSizePx}em`,
-            "fontFamily": "Zodiac-Regular",
+            "fontFamily": "Zodiac-Light",
             "letterSpacing": "0.03em",
             "lineHeight": "1em",
             "marginBlock": 0,
-            "fontWeight": 400
+            "fontWeight": 300
 
         },
         "heading1": {
@@ -160,7 +161,8 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "fontFamily": "Satoshi-Bold",
             "letterSpacing": "0.12em",
             "color": "#F14C2C",
-            "fontSize": `${14 / baseFontSizePx}em`
+            "fontSize": `${14 / baseFontSizePx}em`,
+            "marginBlock": "0"
         },
         "additionalTitle": {
             "fontFamily": "Satoshi-Bold",
@@ -182,7 +184,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 18;
                 }*/
                 if(windowInnerWidth < 600){
-                    return 14;
+                    return 18;
                 }
                 return 21
                 
@@ -217,12 +219,17 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
 }
 
 
-function useContext() {
+export function useContext() {
     let {windowInnerHeight, windowInnerWidth} = useWindowInnerSize();
     const theme = {
         "spacing": {
             "sectionTopBottomPadding": 220,
-            "textGap": 50,
+            "textGap": (()=>{
+                if(windowInnerWidth < breakpointValues.sm){
+                    return 25;
+                }
+                return 50;
+            })(),
             "sectionTitleGap": 70,
             "buttonGap": (() => {
                 if (windowInnerWidth < breakpointValues.sm) {

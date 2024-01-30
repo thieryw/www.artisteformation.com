@@ -13,6 +13,7 @@ import { Reviews } from "./Reviews";
 import { History } from "./History";
 import { Teachers } from "./Teachers";
 import { breakpointValues } from "@/theme";
+import { MobileTabs } from "./MobileTabs";
 
 
 export function Home() {
@@ -31,8 +32,8 @@ export function Home() {
                 <div className={classes.backgroundSection}></div>
                 <div className={classes.visionLeft}>
                     {
-                        (()=>{
-                            if(theme.windowInnerWidth < breakpointValues.sm){
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
                                 return undefined;
                             }
 
@@ -46,8 +47,8 @@ export function Home() {
                         <img className={classes.visionPicture} src={pianistWebp} alt="Pianist" />
                     </picture>
                     {
-                        (()=>{
-                            if(theme.windowInnerWidth >= breakpointValues.sm){
+                        (() => {
+                            if (theme.windowInnerWidth >= breakpointValues.sm) {
                                 return undefined;
                             }
 
@@ -57,33 +58,33 @@ export function Home() {
                     }
                 </div>
                 {
-                    (()=>{
-                        if(theme.windowInnerWidth < breakpointValues.sm){
+                    (() => {
+                        if (theme.windowInnerWidth < breakpointValues.sm) {
                             return undefined
                         }
                         return <div className={classes.visionRight}>
-                        <picture>
-                            <source srcSet={pianistIllustrationWebp} type="image/webp" />
-                            <source srcSet={pianistIllustrationJpg} type="image/jpeg" />
-                            <img className={cx(classes.visionPicture, classes.visionIllustration)} src={pianistIllustrationWebp} alt="Pianist" />
-                        </picture>
-                        <div className={classes.captionWrapper}>
-                            <div className={classes.smallDivider}></div>
-                            <Text className={classes.visionParagraph} typo="quote">{t("visionSmallCaption")}</Text>
-                            <Text typo="quote">{t("visionSmallCaptionDate")}</Text>
+                            <picture>
+                                <source srcSet={pianistIllustrationWebp} type="image/webp" />
+                                <source srcSet={pianistIllustrationJpg} type="image/jpeg" />
+                                <img className={cx(classes.visionPicture, classes.visionIllustration)} src={pianistIllustrationWebp} alt="Pianist" />
+                            </picture>
+                            <div className={classes.captionWrapper}>
+                                <div className={classes.smallDivider}></div>
+                                <Text className={classes.visionParagraph} typo="quote">{t("visionSmallCaption")}</Text>
+                                <Text typo="quote">{t("visionSmallCaptionDate")}</Text>
+
+                            </div>
 
                         </div>
-
-                    </div>
                     })()
 
                 }
 
             </section>
             {
-                (()=>{
-                    if(theme.windowInnerWidth < breakpointValues.sm){
-                        return undefined;
+                (() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return <MobileTabs />;
                     }
                     return <section className={classes.sliderSection}>
                         <Slider
@@ -296,7 +297,9 @@ export const { i18n } = declareComponentKeys<
     "teachersSurTitle" |
     "teachersTitle" |
     "teachersParagraph" |
-    "teachersButtonLabel"
+    "teachersButtonLabel" |
+    "mobileTabSurtitle" |
+    "mobileTabTitle"
 
 
 >()({ Home });

@@ -138,14 +138,19 @@ const useStyles = tss.withParams<{mobileActiveButton: "prev" | "next"}>().create
 
         },
         "cardWrapper": {
-            "display": "grid",
-            "maxWidth": 461,
-            "height": (()=>{
+            ...(()=>{
                 if(theme.windowInnerWidth < breakpointValues.sm){
-                    return undefined
+                    return {
+
+                    }
                 }
-                return  770
+                return {
+                    "maxWidth": 461,
+                    "height": 770
+
+                }
             })(),
+            "display": "grid",
             "position": "relative",
 
         },
