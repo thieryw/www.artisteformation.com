@@ -165,6 +165,10 @@ export const {
 				"handicapTitle": "Situation de handicap, Nous sommes là.",
 				"handicapSubtitle": "ACCESSIBILITÉ",
 				"handicapParagraph": "Chez Artiste Formation, nos aménagements sont pensés individuellement, que ce soit pour l'accès physique, les supports pédagogiques ou les méthodes d'évaluation. Notre équipe se tient à votre disposition pour discuter de vos exigences et garantir que vous puissiez profiter pleinement de l'expérience de formation. De plus, nous sensibilisons également nos formateurs et les participants aux enjeux de l'inclusion, afin de favoriser une compréhension mutuelle et une atmosphère bienveillante.",
+				"mobileTabNeeds": "01. / RECEUIL DES BESOINS",
+				"mobileTabCreation": "02. / CRÉATION DU PARCOURS",
+				"mobileTabPiloting": "03. / PILOTAGE DU PROJET"
+
 			},
 
 			"Teachers": {

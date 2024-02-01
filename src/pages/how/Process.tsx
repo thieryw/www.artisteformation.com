@@ -1,9 +1,11 @@
 import { memo } from "react"
-import { tss } from "@/theme";
+import { breakpointValues, tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import logo from "@/assets/svg/logo.svg";
 import { Logo } from "@/components/Logo";
+import jpg from "@/assets/jpg/comment/slider/1-intermittent-du-spectacle.jpeg";
+import webp from "@/assets/webp/comment/slider/1-intermittent-du-spectacle.webp";
 
 
 export const Process = memo(() => {
@@ -12,33 +14,90 @@ export const Process = memo(() => {
     const { classes, theme } = useStyles();
 
     return <section className={classes.root}>
+        {
+            (()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return <div>
+                        <div>
+                            <picture>
+                                <source srcSet={webp} type="image/webp" />
+                                <source srcSet={jpg} type="image/jpeg" />
+                                <img className={classes.mobileImage} src={webp} alt="photographer" />
+                            </picture>
 
-        <Article
-            className={classes.article}
-            isCentered={true}
-            title={t("processTitle")}
-            smallSubtitle={t("processSubtitle")}
-            paragraph={t("processParagraph")}
-        />
+                        </div>
+                        <Article 
+                            smallSurtitle={t("processSubtitle")}
+                            title={t("processTitle")}
+                            isCentered={true}
+                            className={classes.mobileArticle}
+                        />
+                    </div>
 
-        <Logo fill={theme.colors.darkGray3} width={145} logoUrl={logo} />
+                }
+                return <>
+                    <Article
+                        className={classes.article}
+                        isCentered={true}
+                        title={t("processTitle")}
+                        smallSubtitle={t("processSubtitle")}
+                        paragraph={t("processParagraph")}
+                    />
+
+                    <Logo fill={theme.colors.darkGray3} width={145} logoUrl={logo} />
+                </>
+            })()
+        }
+
 
 
     </section>
 })
 
-const useStyles = tss.create(({theme}) => {
+const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
             "display": "flex",
             "flexDirection": "column",
             "alignItems": "center",
-            "backgroundColor": theme.colors.backgroundTertiary,
-            "paddingTop": 360,
-            "paddingBottom": 160
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return undefined;
+                }
+                return {
+
+                    "backgroundColor": theme.colors.backgroundTertiary,
+                    "paddingTop": 360,
+                    "paddingBottom": 160,
+                }
+            })()
         },
         "article": {
-            "width": 680,
+            ...(()=>{
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                    }
+
+                }
+                return {
+                    "width": 680
+
+                }
+            })()
+        },
+        "mobileImage": {
+            "objectFit": "cover",
+            "width": "100%",
+            "marginBottom": 80
+        },
+        "mobileArticle": {
+            ...(()=>{
+                const value = 25;
+                return {
+                    "paddingLeft": value,
+                    "paddingRight": value
+                }
+            })()
         }
 
     })

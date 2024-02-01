@@ -7,20 +7,30 @@ import { NumberedSlider } from "./NumberedSlider";
 import { Values } from "./Values";
 import { Handicap } from "./Handicap";
 import { Reviews } from "../home/Reviews";
+import { MobileTabs } from "./MobileTabs";
+import { breakpointValues, useContext } from "@/theme";
 
 
 
 
 export const How = memo(() => {
+    const { theme } = useContext();
     return <div>
         <Hero />
         <NamedSlider />
         <Process />
-        <NumberedSlider />
+        {
+            (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm){
+                return <MobileTabs />
+                }
+                    return <NumberedSlider />
+            })()
+        }
         <Values />
         <Handicap />
         <div style={{
-            ...(()=>{
+            ...(() => {
                 const value = 230;
                 return {
                     "paddingTop": value,
@@ -80,5 +90,8 @@ export const { i18n } = declareComponentKeys<
     "valuesButtonLabel" |
     "handicapTitle" |
     "handicapSubtitle" |
-    "handicapParagraph"
+    "handicapParagraph" |
+    "mobileTabNeeds" |
+    "mobileTabCreation" |
+    "mobileTabPiloting"
 >()({ How })
