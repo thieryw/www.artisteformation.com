@@ -21,17 +21,17 @@ export const How = memo(() => {
         <Process />
         {
             (() => {
-                if (theme.windowInnerWidth < breakpointValues.sm){
-                return <MobileTabs />
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return <MobileTabs />
                 }
-                    return <NumberedSlider />
+                return <NumberedSlider />
             })()
         }
         <Values />
         <Handicap />
         <div style={{
             ...(() => {
-                const value = 230;
+                const value = theme.windowInnerWidth < breakpointValues.sm ? 80 : 230;
                 return {
                     "paddingTop": value,
                     "paddingBottom": value
