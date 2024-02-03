@@ -1,7 +1,9 @@
 import { memo, useState, useEffect } from "react";
 import { partners } from "@/user/partners";
 import { GridSlider } from "@/components/GridSlider";
+import { MobileSlider } from "@/components/MobileSlider";
 import { loadWebpImage } from "@/tools/loadWebpImage";
+import { breakpointValues, useContext } from "@/theme"
 
 const partnerImageNames = partners.map(({ portraitUrl }) =>
     portraitUrl.match(/([^\/]+)(?=\.\w+$)/)?.[0])
@@ -23,6 +25,7 @@ const loadWebpImages = async (path: string, imageNames: (string | undefined)[]) 
 
 export const Slider = memo(() => {
     const [webpImages, setImages] = useState<(string | undefined)[]>([]);
+    const { theme } = useContext()
 
     useEffect(() => {
         loadWebpImages("/www.artisteformation.com/src/assets/webp/formateurs/galerie-formateur/", partnerImageNames)
@@ -34,31 +37,66 @@ export const Slider = memo(() => {
 
 
     return <section>
-        <GridSlider
-            slides={
-                partners.map(({ fr: { description, name, profession }, portraitUrl }, index) => {
-                    return {
-                        "imageUrl": webpImages[index],
-                        "imageSources": [
-                            {
-                                "srcSet": webpImages[index],
-                                "type": "image/webp"
+        {
+            (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return <MobileSlider 
+                        startingPercentage={9}
+                        slides={
+                            partners.map(({ fr: { name, profession }, portraitUrl }, index) => {
+                                return {
+                                    "title": name,
+                                    "paragraph": profession,
+                                    "image": {
+                                        "src": webpImages[index] ?? portraitUrl,
+                                        "alt": "teacher portrait",
+                                        "sources": [
+                                            {
+                                                "srcSet": webpImages[index],
+                                                "type": "image/webp"
 
-                            },
-                            {
-                                "srcSet": portraitUrl,
-                                "type": "image/jpeg"
+                                            },
+                                            {
+                                                "srcSet": portraitUrl,
+                                                "type": "image/jpeg"
+                                            }
+
+                                        ]
+
+                                    }
+                                }
+                            })
+                        }
+
+                    />
+                }
+                return <GridSlider
+                    slides={
+                        partners.map(({ fr: { description, name, profession }, portraitUrl }, index) => {
+                            return {
+                                "imageUrl": webpImages[index],
+                                "imageSources": [
+                                    {
+                                        "srcSet": webpImages[index],
+                                        "type": "image/webp"
+
+                                    },
+                                    {
+                                        "srcSet": portraitUrl,
+                                        "type": "image/jpeg"
+                                    }
+                                ],
+                                description,
+                                name,
+                                profession
+
                             }
-                        ],
-                        description,
-                        name,
-                        profession
+                        })
 
                     }
-                })
-
-            }
-        />
+                />
+            })()
+        }
 
     </section>
 })

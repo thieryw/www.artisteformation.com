@@ -2,31 +2,74 @@ import { memo } from "react";
 import { Article } from "@/components/Article";
 import familyJpg from "@/assets/jpg/formateurs/devenir-intervenant.jpeg";
 import familyWebp from "@/assets/webp/formateurs/devenir-intervenant.webp";
-import { tss } from "@/theme";
+import familyMobileJpg from "@/assets/jpg/formateurs/devenir-intervenant-mobile.jpeg";
+import familyMobileWebp from "@/assets/webp/formateurs/devenir-intervenant-mobile.webp";
+import { breakpointValues, tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { routes } from "@/router";
+import { Text } from "@/theme"
 
 
 
 export const Family = memo(() => {
     const { t } = useTranslation("Teachers");
-    const { classes } = useStyles();
+    const { classes, theme } = useStyles();
+
+    const images = (() => {
+        if (theme.windowInnerWidth < breakpointValues.sm) {
+            return {
+                "webp": familyMobileWebp,
+                "jpg": familyMobileJpg
+            }
+        }
+        return {
+            "webp": familyWebp,
+            "jpg": familyJpg
+        }
+    })()
     return <>
         <section className={classes.root}>
             <div className={classes.wrapper}>
-                <Article
-                    className={classes.article}
-                    isCentered={true}
-                    title={t("familyTitle")}
-                    smallSubtitle={t("familySubtitle")}
-                    paragraph={t("familyParagraph")}
+                {
+                    (()=>{
+                        if(theme.windowInnerWidth < breakpointValues.sm){
+                            return undefined;
+                        }
+                        return <Article
+                            className={classes.article}
+                            isCentered={true}
+                            title={t("familyTitle")}
+                            smallSubtitle={t("familySubtitle")}
+                            paragraph={t("familyParagraph")}
 
-                />
-                <picture>
-                    <source srcSet={familyWebp} type="image/webp" />
-                    <source srcSet={familyJpg} type="image/jpeg" />
-                    <img className={classes.image} src={familyWebp} alt="family" />
-                </picture>
+                        />
+                    })()
+                }
+                <div className={classes.titleAndImageWrapper}>
+                    <div className={classes.imageWrapper}>
+                        <picture>
+                            <source srcSet={images.webp} type="image/webp" />
+                            <source srcSet={images.jpg} type="image/jpeg" />
+
+                            <img className={classes.image} src={images.webp} alt="famille" />
+                        </picture>
+
+                    </div>
+
+                    {
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return <div className={classes.mobileTitle}>
+                                    <Text style={{
+                                        "color": theme.colors.white,
+                                        "marginTop": 25
+                                    }} typo="heading1">{t("familyTitle")}</Text>
+                                </div>
+                            }
+                        })()
+                    }
+
+                </div>
             </div>
 
         </section>
@@ -36,6 +79,11 @@ export const Family = memo(() => {
                 title={t("suggestionTitle")}
                 isCentered={true}
                 paragraph={t("suggestionParagraph")}
+                smallSurtitle={(()=>{
+                    if(theme.windowInnerWidth < breakpointValues.sm){
+                        return t("familySubtitle")
+                    }
+                })()}
                 button={{
                     "label": t("suggestionButtonLabel"),
                     ...routes.contact().link
@@ -51,34 +99,137 @@ const useStyles = tss.create(({ theme }) => {
     const articleWidth = 700;
     return ({
         "root": {
-            "backgroundColor": theme.colors.backgroundTertiary,
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "marginTop": 90,
+                        "marginBottom": 60
+                    }
+                }
+                return {
+                    "backgroundColor": theme.colors.backgroundTertiary,
+
+                }
+            })()
 
         },
         "wrapper": {
-            "display": "flex",
-            "flexDirection": "column",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "position": "relative",
-            "top": imageHeight / 2
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "marginTop": 20
+
+                    }
+
+                }
+                return {
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "alignItems": "center",
+                    "justifyContent": "center",
+                    "position": "relative",
+                    "top": imageHeight / 2,
+
+                }
+            })()
 
         },
         "article": {
             "width": articleWidth,
-            "marginBottom": 40
+            "marginBottom": 40,
+
         },
         "image": {
-            "height": imageHeight
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "objectFit": "cover",
+                        "width": "100%",
+                        "height": "100%"
+
+                    }
+                }
+                return {
+                    "height": imageHeight,
+                }
+            })()
+
 
         },
         "suggestions": {
-            "display": "flex",
-            "justifyContent": "center"
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "marginBottom": 90
+
+                    }
+                }
+                return {
+                    "display": "flex",
+                    "justifyContent": "center",
+
+                }
+            })()
         },
         "suggestionsArticle": {
-            "width": articleWidth,
-            "paddingTop": imageHeight / 2 + 100,
-            "paddingBottom": 220
-        }
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        ...(() => {
+                            const value = 25;
+                            return {
+                                "paddingLeft": value,
+                                "paddingRight": value
+                            }
+                        })()
+
+                    }
+                }
+                return {
+                    "width": articleWidth,
+                    "paddingTop": imageHeight / 2 + 100,
+                    "paddingBottom": 220,
+
+                }
+            })()
+        },
+
+        "imageWrapper": {
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "width": "100%",
+                        "height": "100%",
+                        "gridRow": 1,
+                        "gridColumn": 1,
+
+                    }
+                }
+            })()
+
+        },
+        "titleAndImageWrapper": {
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "display": "grid",
+                        "marginBottom": 35
+                    }
+                }
+            })()
+
+        },
+        "mobileTitle": {
+            "gridRow": 1,
+            "gridColumn": 1,
+            "backdropFilter": "brightness(70%)",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-end",
+            "paddingLeft": 25,
+            "paddingRight": 50,
+            "paddingBottom": 45
+
+        },
     })
 })
