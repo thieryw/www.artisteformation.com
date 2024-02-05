@@ -68,9 +68,6 @@ export const NamedSlider = memo(() => {
                 return <Slider
                     className={classes.slider}
                     variant="named"
-                    classes={{
-                        "slideArticle": classes.slideArticle
-                    }}
                     slides={[
                         {
                             "name": t("sliderIntermittentName"),
@@ -206,11 +203,6 @@ const useStyles = tss.create(({theme}) => {
         "slider": {
             "position": "relative",
             "left": 260
-        },
-        "slideArticle": {
-            "height": 550,
-            "justifyContent": "space-between",
-
         },
         "mobileWrapper": {
             ...(() => {

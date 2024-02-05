@@ -22,7 +22,7 @@ export const {
 	typeof import ("pages/how/How").i18n |
 	typeof import ("pages/teachers/Teachers").i18n |
 	typeof import ("pages/about/About").i18n |
-	typeof import ("pages/contact/Contact").i18n
+	typeof import ("pages/contact/Contact").i18n 
 >()(
 	{ languages, fallbackLanguage },
 	{
@@ -208,7 +208,9 @@ export const {
 				"approachParagraph": "Chez Artiste Formation, nous ne nous contentons pas de former des artistes compétents ; nous cultivons des esprits créatifs, des êtres humains épanouis et des membres engagés de la communauté artistique mondiale.",
 				"employeesTitle": "Nos petites mains.",
 				"employeesSubtitle": "L'ÉQUIPE",
-				"employeesParagraph": "Au cœur de notre orchestre pédagogique se trouvent des individus exceptionnels : Cécile GARCIA, coach en PNL et responsable de la gestion administrative, Elisabeth KNNABLIAN, experte en gestion financière, Marianne MAZAS, conseillère stratégie & création d’entreprise, David ZUILI, expert comptable, et enfin Emilie CROS, véritable couteau suisse d’Artiste Formation. En conjuguant leurs efforts, ils donnent vie à notre vision collective."
+				"employeesParagraph": "Au cœur de notre orchestre pédagogique se trouvent des individus exceptionnels : Cécile GARCIA, coach en PNL et responsable de la gestion administrative, Elisabeth KNNABLIAN, experte en gestion financière, Marianne MAZAS, conseillère stratégie & création d’entreprise, David ZUILI, expert comptable, et enfin Emilie CROS, véritable couteau suisse d’Artiste Formation. En conjuguant leurs efforts, ils donnent vie à notre vision collective.",
+				"employeesParagraphMobile": "Au cœur de notre orchestre pédagogique se trouvent des individus exceptionnels qui conjuguent leurs efforts et donnent vie à notre vision collective.",
+				"contactButtonLabel": "CONTACTEZ-NOUS"
 			},
 			"Contact": {
 				"pageTitle": "Prêt(e) à vous lancer ?",

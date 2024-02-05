@@ -43,5 +43,7 @@ export const { i18n } = declareComponentKeys<
     "approachParagraph" |
     "employeesTitle" |
     "employeesSubtitle" |
-    "employeesParagraph"
+    "employeesParagraph" |
+    "employeesParagraphMobile" |
+    "contactButtonLabel" 
 >()({ About })

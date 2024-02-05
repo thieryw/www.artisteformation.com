@@ -39,13 +39,13 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 }
                 return 196;
 
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular"
         },
         "carousel": {
             "color": "rgba(125, 125, 125, 0.09)",
             "fontFamily": "Satoshi-Bold",
-            "fontSize": `${130 / baseFontSizePx}em`,
+            "fontSize": `${130 / baseFontSizePx}rem`,
             "marginBlock": 0
         },
         "splashScreen": {
@@ -58,7 +58,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 40;
                 }
                 return 128;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "lineHeight": "1em"
@@ -70,7 +70,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 52;
                 }
                 return 110;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiac-Light",
             "letterSpacing": "0.03em",
             "lineHeight": "1em",
@@ -85,7 +85,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 96;
                 }
                 return 50;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Light",
             "letterSpacing": "0.03em",
             "lineHeight": "1.1em",
@@ -98,7 +98,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 40;
                 }
                 return 75;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "listStyleType": "none",
@@ -114,7 +114,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 40;
                 }
                 return 64;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "lineHeight": "1.15em",
@@ -130,7 +130,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 30;
                 }
                 return 48;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "lineHeight": "1.20em",
@@ -143,14 +143,14 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 23;
                 }
                 return 40;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "marginBlock": 0
         },
         "heading5": {
             "color": "#3B3051",
-            "fontSize": `${36 / baseFontSizePx}em`,
+            "fontSize": `${36 / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "lineHeight": "1.2em",
@@ -160,7 +160,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "fontFamily": "Satoshi-Bold",
             "letterSpacing": "0.12em",
             "color": "#F14C2C",
-            "fontSize": `${14 / baseFontSizePx}em`,
+            "fontSize": `${14 / baseFontSizePx}rem`,
             "marginBlock": "0"
         },
         "additionalTitle": {
@@ -171,7 +171,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 12;
                 }*/
                 return 11;
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "marginBlock": 0,
             "letterSpacing": "0.2em"
         },
@@ -187,7 +187,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 }
                 return 21
                 
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "marginBlock": 0
         },
         "paragraph": {
@@ -201,7 +201,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 }
                 return 18;
 
-            })() / baseFontSizePx}em`,
+            })() / baseFontSizePx}rem`,
             "color": "#3B3051",
             "marginBlock": 0,
             "lineHeight": "2em"

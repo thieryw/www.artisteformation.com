@@ -99,7 +99,27 @@ export const CardSlider = memo((props: CardSliderProps) => {
         <div className={classes.cardWrapper}>
             <div className={classes.cards}>
                 {
-                    cards.map((card, index) => <Card key={index} vector={calculateVector(index)} isActive={currentIndex === index} {...card} cardNumber={index + 1} />)
+                    cards.map((card, index) => <Card 
+                        classes={{
+                            "cardNumber": classes.cardNumber,
+                            "image": classes.cardImage,
+                            "imageWrapper": classes.cardImageWrapper,
+                            "paragraph": classes.cardParagraph,
+                            "pictureWrapper": classes.cardPictureWrapper,
+                            "root": classes.cardRoot,
+                            "stars": classes.cardStars,
+                            "subtitle": classes.cardSubtitle,
+                            "subtitleWrapper": classes.cardSubtitleWrapper,
+                            "textWrapper": classes.cardTextWrapper,
+                            "title": classes.cardTitle,
+                            "titleWrapper": classes.cardTitleWrapper
+                        }}
+                        key={index} 
+                        vector={calculateVector(index)} 
+                        isActive={currentIndex === index} 
+                        {...card} 
+                        cardNumber={index + 1} 
+                    />)
                 }
 
             </div>
@@ -146,7 +166,7 @@ const useStyles = tss.withParams<{mobileActiveButton: "prev" | "next"}>().create
                 }
                 return {
                     "maxWidth": 461,
-                    "height": 770
+                    //"height": 770
 
                 }
             })(),
@@ -252,7 +272,19 @@ const useStyles = tss.withParams<{mobileActiveButton: "prev" | "next"}>().create
                 }
                 return undefined;
             })()
-        }
+        },
+        "cardNumber": {},
+        "cardImage": {},
+        "cardImageWrapper": {},
+        "cardParagraph": {},
+        "cardPictureWrapper": {},
+        "cardRoot": {},
+        "cardStars": {},
+        "cardSubtitle": {},
+        "cardSubtitleWrapper": {},
+        "cardTitle": {},
+        "cardTitleWrapper": {},
+        "cardTextWrapper": {},
     })
 })
 
@@ -260,21 +292,24 @@ const useStyles = tss.withParams<{mobileActiveButton: "prev" | "next"}>().create
 const { Card } = (() => {
     type CardProps = CardSliderProps["cards"][number] &
     {
+        className?: string;
+        classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
         cardNumber: number;
         isActive: boolean;
         vector: "comingFromTop" | "comingFromBottom" | "leavingToTop" | "leavingToBottom" | "staticHidden" | "staticVisible";
     }
     const Card = memo((props: CardProps) => {
-        const { cardNumber, paragraph, stars, subtitle, title, isActive, vector, image } = props;
+        const { className, cardNumber, paragraph, stars, subtitle, title, isActive, vector, image } = props;
 
         const starArrayRef = useRef((new Array(stars)).fill(undefined));
-        const { classes, theme } = useStyles({ 
+        const { classes, theme, cx } = useStyles({ 
             isActive, 
             vector ,
-            "hasImage": image !== undefined
+            "hasImage": image !== undefined,
+            "classesOverrides": props.classes
         });
 
-        return <div className={classes.root}>
+        return <div className={cx(classes.root, className)}>
             {
                 (() => {
                     if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -388,7 +423,7 @@ const { Card } = (() => {
                 "zIndex": 200,
                 "gridRow": 1,
                 "display": "flex",
-                "justifyContent": "space-between",
+                //"justifyContent": "space-between",
                 "flexDirection": "column",
                 "pointerEvents": isActive ? "none" : undefined,
                 ...(() => {
@@ -436,7 +471,8 @@ const { Card } = (() => {
                             "textAlign": "center"
                         }
                     }
-                })()
+                })(),
+                "marginBottom": 40
 
             },
             "imageWrapper": {
@@ -479,9 +515,11 @@ const { Card } = (() => {
             },
             "cardNumber": {
                 "opacity": isActive ? 1 : 0,
+                "marginBottom": 65
 
             },
             "titlesWrapper": {
+                "marginBottom": 40
 
             },
             "titleWrapper": {
@@ -495,7 +533,9 @@ const { Card } = (() => {
             },
             "stars": {
                 "display": "flex",
-                "opacity": isActive ? 1 : 0
+                "transition": "opacity 500ms",
+                "transitionDelay": isActive ? "1200ms" : undefined,
+                "opacity": isActive ? 1 : 0,
             },
             "title": {
                 ...animate({
@@ -506,7 +546,7 @@ const { Card } = (() => {
                 ...(() => {
                     if (theme.windowInnerWidth < breakpointValues.sm) {
                         return {
-                            "textAlign": "center"
+                            "textAlign": "center",
                         }
                     }
                 })()

@@ -436,7 +436,9 @@ const { Slide } = (() => {
                 "smallSurtitleWrapper": {
                     "overflow": "hidden",
                     "opacity": isActive ? 1 : 0,
-                    "pointerEvents": !isActive ? "none" : undefined
+                    "pointerEvents": !isActive ? "none" : undefined,
+                    "transition": "opacity 500ms",
+                    "transitionDelay": !isActive ? undefined : "1200ms",
                 },
                 "smallTitle": {
                     "marginBottom": hasOnlyOneParagraph ? undefined : 22
@@ -447,7 +449,9 @@ const { Slide } = (() => {
                     "position": "relative",
                     "zIndex": isActive ? 2 : undefined,
                     "opacity": isActive ? 1 : 0,
-                    "pointerEvents": !isActive ? "none" : undefined
+                    "pointerEvents": !isActive ? "none" : undefined,
+                    "transition": "opacity 500ms",
+                    "transitionDelay": !isActive ? undefined : "700ms",
 
                 },
                 "paragraph": {
