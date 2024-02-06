@@ -1,14 +1,14 @@
 import { memo } from 'react';
 import { FormspreeProvider, useForm, ValidationError } from "@formspree/react";
 import { useTranslation } from "@/i18n";
-import { tss, Text } from "@/theme";
+import { tss, Text, breakpointValues } from "@/theme";
 
 
 export const Form = memo(() => {
 
     const [state, handleSubmit] = useForm("xjvnkepy")
     const { t } = useTranslation("Contact");
-    const {classes } = useStyles();
+    const {classes, theme } = useStyles();
 
 
 
@@ -16,6 +16,13 @@ export const Form = memo(() => {
         <FormspreeProvider project="2385580700561571129">
             <div className={classes.root}>
                 <div className={classes.wrapper}>
+                    {
+                        (()=>{
+                            if(theme.windowInnerWidth < breakpointValues.sm){
+                                return <div className={classes.mobileSeparator}></div>
+                            }
+                        })()
+                    }
                     <Text className={classes.formTitle} typo="heading2">{t("formTitle")}</Text>
                     <form className={classes.form} onSubmit={handleSubmit}>
                         <input
@@ -84,17 +91,72 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "marginTop": 110,
+                        ...(()=>{
+                            const value = 25;
+                            return {
+                                "paddingLeft": value,
+                                "paddingRight": value
+                            }
+                        })()
+                    }
+                }
+            })()
+
+
+        },
+        "mobileSeparator": {
+            "width": 85,
+            "height": 0,
+            "borderTop": `solid ${theme.colors.bloodOrange} 2px`,
+            "transform": "rotate(90deg)"
 
         },
         "wrapper": {
-            "width": 840,
             "background": theme.colors.white,
-            "padding": 120,
-            "boxSizing": "border-box"
+            "boxSizing": "border-box",
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "alignItems": "center",
+                        ...(()=>{
+                            const value = 25;
+                            return {
+                                "paddingLeft": value,
+                                "paddingRight": value,
+                                "paddingBottom": 55
+                            }
+                        })()
+                    }
+                }
+                return {
+                    "padding": 120,
+                    "width": 840,
+                }
+            })()
 
         },
         "formTitle": {
-            "marginBottom": 80
+            "marginBottom": 80,
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "textAlign": "center",
+                        "width": 300,
+                        "marginTop": 100
+
+                    }
+                }
+                return {
+
+                }
+            })()
 
 
         },
@@ -131,7 +193,6 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
         },
         "button": {
             "width": 225,
-            "marginTop": 100,
             "height": 75,
             "border": `solid 1px`,
             "borderColor": theme.colors.bloodOrange,
@@ -145,7 +206,19 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
             },
             ":hover": {
                 "backgroundColor": "transparent"
-            }
+            },
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "marginTop": 60
+
+                    }
+                }
+                return {
+
+                    "marginTop": 100,
+                }
+            })()
 
         },
         "buttonText": {
