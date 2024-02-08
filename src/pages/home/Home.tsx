@@ -70,8 +70,12 @@ export function Home() {
                             </picture>
                             <div className={classes.captionWrapper}>
                                 <div className={classes.smallDivider}></div>
-                                <Text className={classes.visionParagraph} typo="quote">{t("visionSmallCaption")}</Text>
-                                <Text typo="quote">{t("visionSmallCaptionDate")}</Text>
+                                <Text style={{
+                                    "color": theme.colors.darkGray2
+                                }} className={classes.visionParagraph} typo="paragraph">{t("visionSmallCaption")}</Text>
+                                <Text style={{
+                                    "color": theme.colors.darkGray2
+                                }} typo="paragraph">{t("visionSmallCaptionDate")}</Text>
 
                             </div>
 

@@ -75,7 +75,7 @@ export function App() {
 
     startTransition();
 
-    const transitionDelay = 3000; 
+    const transitionDelay = 2000; 
     const timer = setTimeout(() => endTransition(), transitionDelay);
 
     return () => {

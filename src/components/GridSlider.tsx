@@ -215,12 +215,18 @@ const useStyles = tss.create(({ theme }) => {
         "imageWrapper": {
             "width": dimensions.width,
             "height": dimensions.height,
+            "overflow": "hidden"
 
         },
         "image": {
             "width": "100%",
             "height": "100%",
-            "objectFit": "cover"
+            "objectFit": "cover",
+            "transition": "transform 500ms",
+            ":hover": {
+                "cursor": "pointer",
+                "transform": "scale(1.1)"
+            }
         }
 
     })

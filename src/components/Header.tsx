@@ -434,9 +434,10 @@ const { ToggleMenuButton } = (() => {
         },
         "line": {
             "display": "block",
-            "height": 2,
+            "height": 0,
+            "borderTop": `solid ${theme.colors.bloodOrange} 2px`,
             "width": "100%",
-            "background": theme.colors.bloodOrange,
+            //"background": theme.colors.bloodOrange,
             "transition": "all 0.3s ease"
         },
         "line1": {

@@ -1,4 +1,4 @@
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import jpgFresque1 from "@/assets/jpg/home/fresque-home/fresque-home-01.jpeg";
@@ -12,6 +12,7 @@ import webpFresque4 from "@/assets/webp/home/fresque-home/fresque-home-04.webp";
 import siteLogo from "@/assets/svg/logo.svg";
 import { Logo } from "@/components/Logo";
 import { breakpointValues } from "@/theme";
+import { motion } from "framer-motion";
 
 
 
@@ -19,17 +20,100 @@ import { breakpointValues } from "@/theme";
 export const Hero = memo(() => {
     const { classes, theme } = useStyles();
     const { t } = useTranslation("Home");
-    const fresqueJpg = useRef([jpgFresque1, jpgFresque3, jpgFresque2, jpgFresque4]);
-    const fresqueWebp = useRef([webpFresque1, webpFresque3, webpFresque2, webpFresque4]);
     return <div className={classes.root}>
-        <div className={classes.illustrationWrapper}>
+        <div 
+            className={classes.illustrationWrapper}
+        >
             {
                 theme.windowInnerWidth >= 600 &&
-                fresqueWebp.current.map((webp, index) => <picture key={index}>
-                    <source srcSet={webp} type="image/webp" />
-                    <source srcSet={fresqueJpg.current[index]} type="image/jpeg" />
-                    <img className={classes.image} src={webp} alt="fresque de la banniere" />
-                </picture>)
+                <>
+                    <motion.div
+                        initial={{
+                            "opacity": 0, "x": -100, "y": -100
+                        }}
+                        animate={{
+                            "opacity": 1, "x": 0, "y": 0
+                        }}
+                        transition={{
+                            "ease": "easeOut",
+                            "duration": 1,
+                            "delay": 3
+                        }}
+
+                    >
+                        <picture>
+
+                            <source srcSet={webpFresque1} type="image/webp" />
+                            <source srcSet={jpgFresque1} type="image/jpeg" />
+                            <img className={classes.image} src={webpFresque1} alt="fresque de la banniere" />
+                        </picture>
+
+                    </motion.div>
+                    <motion.div
+                        initial={{
+                            "opacity": 0, "x": 100, "y": -100
+                        }}
+                        animate={{
+                            "opacity": 1, "x": 0, "y": 0
+                        }}
+                        transition={{
+                            "ease": "easeOut",
+                            "duration": 1,
+                            "delay": 3.1
+                        }}
+                    >
+                        <picture>
+
+                            <source srcSet={webpFresque3} type="image/webp" />
+                            <source srcSet={jpgFresque3} type="image/jpeg" />
+                            <img className={classes.image} src={webpFresque3} alt="fresque de la banniere" />
+                        </picture>
+
+                    </motion.div>
+                    <motion.div
+
+                        initial={{
+                            "opacity": 0, "x": -100, "y": 100
+                        }}
+                        animate={{
+                            "opacity": 1, "x": 0, "y": 0
+                        }}
+                        transition={{
+                            "ease": "easeOut",
+                            "duration": 1,
+                            "delay": 3.2
+                        }}
+                    >
+                        <picture>
+
+                            <source srcSet={webpFresque2} type="image/webp" />
+                            <source srcSet={jpgFresque2} type="image/jpeg" />
+                            <img className={classes.image} src={webpFresque2} alt="fresque de la banniere" />
+                        </picture>
+
+                    </motion.div>
+                    <motion.div
+                        initial={{
+                            "opacity": 0, "x": 100, "y": 100
+                        }}
+                        animate={{
+                            "opacity": 1, "x": 0, "y": 0
+                        }}
+                        transition={{
+                            "ease": "easeOut",
+                            "duration": 1,
+                            "delay": 3.3
+                        }}
+                    >
+                        <picture>
+
+                            <source srcSet={webpFresque4} type="image/webp" />
+                            <source srcSet={jpgFresque4} type="image/jpeg" />
+                            <img className={classes.image} src={webpFresque4} alt="fresque de la banniere" />
+                        </picture>
+
+                    </motion.div>
+                </>
             }
         </div>
         <div className={classes.titleWrapper}>
@@ -39,20 +123,54 @@ export const Hero = memo(() => {
                 }
                 return 180;
             })()} logoUrl={siteLogo} />
-            <Text className={classes.title} typo="siteTitle">{t("title")}</Text>
+            <motion.div
+                initial={{"opacity": 0}}
+                animate={{"opacity": 1}}
+                transition={{
+                    "ease": "easeOut",
+                    "delay": 3.4,
+                    "duration": 1
+                }}
+            >
+                <Text className={classes.title} typo="siteTitle">{t("title")}</Text>
+            </motion.div>
             {
                 theme.windowInnerWidth < breakpointValues.sm &&
                 <picture>
-                    <source srcSet={fresqueWebp.current[1]} type="image/webp" />
-                    <source srcSet={fresqueJpg.current[1]} type="image/jpeg" />
-                    <img className={classes.image} src={fresqueWebp.current[1]} alt="fresque de la banniere" />
+                    <source srcSet={webpFresque3} type="image/webp" />
+                    <source srcSet={jpgFresque3} type="image/jpeg" />
+                    <img className={classes.image} src={webpFresque3} alt="fresque de la banniere" />
                 </picture>
             }
             {
                 theme.windowInnerWidth >= 600 &&
-                <div className={classes.divider}></div>
+                <motion.div 
+                    className={classes.divider}
+                    initial={{
+                        "width": 0,
+                    }}
+                    animate={{
+                        "width": 550
+                    }}
+                    transition={{
+                        "delay": 3.5,
+                        "ease": "easeInOut",
+                        "duration": 1
+                    }}
+                >
+                </motion.div>
             }
-            <Text className={classes.subtitle} typo="heading4">{t("subtitle")}</Text>
+            <motion.div
+                initial={{"opacity": 0}}
+                animate={{"opacity": 1}}
+                transition={{
+                    "ease": "easeOut",
+                    "delay": 3.7,
+                    "duration": 1
+                }}
+            >
+                <Text className={classes.subtitle} typo="heading4">{t("subtitle")}</Text>
+            </motion.div>
             {
                 theme.windowInnerWidth < breakpointValues.sm &&
                 <div className={classes.verticalDivider}></div>

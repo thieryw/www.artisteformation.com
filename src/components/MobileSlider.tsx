@@ -182,7 +182,6 @@ const useStyles = tss.withParams<{ numberOfSlides: number }>().create(({ numberO
     return ({
         "root": {
             "position": "relative",
-            "zIndex": 5000
         },
 
         "carousel": {
