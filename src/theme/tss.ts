@@ -71,7 +71,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 }
                 return 110;
             })() / baseFontSizePx}rem`,
-            "fontFamily": "Zodiac-Light",
+            "fontFamily": "Zodiak-Regular",
             "letterSpacing": "0.03em",
             "lineHeight": "1em",
             "marginBlock": 0,
