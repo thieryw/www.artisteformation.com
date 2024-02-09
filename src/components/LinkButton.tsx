@@ -43,10 +43,20 @@ const useStyles = tss.withParams<Required<Pick<LinkButtonProps, "variant">>>().w
         })(),
         "transition": "background-color 300ms",
         [`&:hover .${classes.linkLabel}`]: {
-            "color": theme.colors.white
+            "color": (()=>{
+                switch(variant){
+                    case "filled": return theme.colors.indigo;
+                    case "outlined": return theme.colors.white;
+                }
+            })()
         },
         ":hover": {
-            "backgroundColor": theme.colors.darkGray
+            "backgroundColor": (()=>{
+                switch(variant){
+                    case "filled": return theme.colors.white;
+                    case "outlined": return theme.colors.bloodOrange;
+                }
+            })()
         }
 
     },

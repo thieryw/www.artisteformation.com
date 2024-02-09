@@ -249,7 +249,7 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
 
         }
         if (theme.windowInnerHeight < 800) {
-            getHeight(800);
+            return getHeight(800);
         }
 
         return getHeight(theme.windowInnerHeight);

@@ -164,7 +164,7 @@ const useStyles = tss.withParams<
 
     }
     if (theme.windowInnerHeight < 800) {
-      getHeight(800);
+       return getHeight(800);
     }
 
     return getHeight(theme.windowInnerHeight);
@@ -185,7 +185,7 @@ const useStyles = tss.withParams<
       "zIndex": 4500,
       "display": "flex",
       "alignItems": "center",
-      "justifyContent": "center"
+      "justifyContent": "center",
 
 
     },
