@@ -36,6 +36,10 @@ export const ZoomProvider = memo((props: ZoomProviderProps) => {
     useEffect(() => {
         function handleResize() {
             if(initialScreenWidthRef.current < min || initialScreenWidthRef.current > max){
+                if(window.screen.width <= max && window.screen.width >= min){
+                    window.location.reload();
+
+                }
                 initialScreenWidthRef.current = window.screen.width
                 return;
             }
