@@ -11,7 +11,6 @@ import instaIcon from "./assets/svg/insta-icon.svg";
 import youtubeIcon from "./assets/svg/youtube-icon.svg";
 import siteLogo from "./assets/svg/logo.svg";
 import ReactMarkdown from "react-markdown";
-import { ZoomProvider } from "./components/ZoomProvider";
 import { Footer } from "./components/Footer";
 import { How } from "@/pages/how/How";
 import { Teachers } from "@/pages/teachers/Teachers";
@@ -20,12 +19,18 @@ import { Logo } from "./components/Logo";
 import { Contact } from "@/pages/contact/Contact";
 import { TransitionComponent } from "@/components/TransitionComponent";
 import pattern from "@/assets/svg/pattern.svg";
-const widthRange = {
-  "min": 600,
-  "max": 1920
-}
+import { enableScreenScaler } from "screen-scaler/react";
 
+enableScreenScaler({
+  targetWindowInnerWidth: ({ zoomFactor, actualWindowInnerWidth }) => {
+    if (actualWindowInnerWidth < 600 || actualWindowInnerWidth >= 1920) {
+      return actualWindowInnerWidth;
+    }
+    return 1920 * zoomFactor;
+  },
 
+  rootDivId: "root"
+});
 export function App() {
   const route = useRoute();
   const { t } = useTranslation({ App });
@@ -75,7 +80,7 @@ export function App() {
 
     startTransition();
 
-    const transitionDelay = 2000; 
+    const transitionDelay = 2000;
     const timer = setTimeout(() => endTransition(), transitionDelay);
 
     return () => {
@@ -84,14 +89,7 @@ export function App() {
   }, [route.name]);
 
   return (<>
-
-    <ZoomProvider
-      widthRange={widthRange}
-      className={classes.headerWrapper}
-      classes={{
-        "inner": classes.headerInner
-      }}
-    >
+    <div className={classes.headerWrapper}>
       {
         (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&
         <a {...routes.home().link}>
@@ -111,7 +109,6 @@ export function App() {
         </a>
       }
       <Header
-        zoomProviderInterval={widthRange}
         links={links}
         currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
         logo={siteLogo}
@@ -151,93 +148,88 @@ export function App() {
 
       />
 
-    </ZoomProvider>
+    </div>
 
 
-    <ZoomProvider
-      widthRange={widthRange}
-    >
-      <TransitionComponent
-        isActive={isTransitioning}
-        zoomProviderInterval={widthRange}
-        backgroundColor={(()=>{
-          switch(route.name){
-            case "how": return theme.colors.bloodOrange;
-            case "teachers": return theme.colors.linden;
-            case "about": return theme.colors.darkYellow;
-            case "contact": return theme.colors.indigo;
-            default: return theme.colors.backgroundTertiary;
-          }
-        })()}
-        logoUrl={route.name === "home" ? siteLogo : undefined}
-        splashScreenTitle={route.name === "home" ? t("siteTitle") : undefined}
-        backgroundImage={route.name !== "home" && route.name !== "legal" ? pattern : undefined}
-        transitionText={(()=>{
-          switch(route.name){
-            case "how": return t("howLink");
-            case "about": return t("aboutLink");
-            case "contact": return t("contactLink");
-            case "teachers": return t("teachersLink");
-            default: return undefined;
-          }
-
-        })()}
-      />
-
-      <div className={classes.root}>
-        <div className={classes.body}>
-          {route.name === "home" && <Home />}
-          {route.name === "how" && <How />}
-          {route.name === "teachers" && <Teachers />}
-          {route.name === "about" && <About />}
-          {route.name === "contact" && <Contact />}
 
 
-        </div>
-        <Footer
-          className={classes.footer}
-          links={links}
-          currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
-          siteLogo={siteLogo}
-          contactTitle={t("footerContactTitle")}
-          smallPrint={<div className={classes.smallPrint}>
-            <Text typo="quote">{t("copyRight")}</Text>
-            <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
-          </div>}
-          socialLinks={[
-            {
-              "href": "",
-              "icon": fbIcon,
-              "label": "facebook link"
-            },
-            {
-              "href": "",
-              "icon": instaIcon,
-              "label": "instagram link"
-            },
-            {
-              "href": "",
-              "icon": youtubeIcon,
-              "label": "youtube link"
-            },
-          ]}
-          siteTitle={t("siteTitle")}
-          paragraphTitle={t("footerParagraphTitle")}
-          paragraph={t("footerParagraph")}
-          callToActionTitle={t("footerCallToActionTitle")}
-          buttonLink={{
-            "label": t("footerLinkButtonLabel"),
-            ...routes.contact().link
-          }}
+    <TransitionComponent
+      isActive={isTransitioning}
+      backgroundColor={(() => {
+        switch (route.name) {
+          case "how": return theme.colors.bloodOrange;
+          case "teachers": return theme.colors.linden;
+          case "about": return theme.colors.darkYellow;
+          case "contact": return theme.colors.indigo;
+          default: return theme.colors.backgroundTertiary;
+        }
+      })()}
+      logoUrl={route.name === "home" ? siteLogo : undefined}
+      splashScreenTitle={route.name === "home" ? t("siteTitle") : undefined}
+      backgroundImage={route.name !== "home" && route.name !== "legal" ? pattern : undefined}
+      transitionText={(() => {
+        switch (route.name) {
+          case "how": return t("howLink");
+          case "about": return t("aboutLink");
+          case "contact": return t("contactLink");
+          case "teachers": return t("teachersLink");
+          default: return undefined;
+        }
 
-        />
+      })()}
+    />
 
+    <div className={classes.root}>
+      <div className={classes.body}>
+        {route.name === "home" && <Home />}
+        {route.name === "how" && <How />}
+        {route.name === "teachers" && <Teachers />}
+        {route.name === "about" && <About />}
+        {route.name === "contact" && <Contact />}
 
 
       </div>
+      <Footer
+        className={classes.footer}
+        links={links}
+        currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
+        siteLogo={siteLogo}
+        contactTitle={t("footerContactTitle")}
+        smallPrint={<div className={classes.smallPrint}>
+          <Text typo="quote">{t("copyRight")}</Text>
+          <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
+        </div>}
+        socialLinks={[
+          {
+            "href": "",
+            "icon": fbIcon,
+            "label": "facebook link"
+          },
+          {
+            "href": "",
+            "icon": instaIcon,
+            "label": "instagram link"
+          },
+          {
+            "href": "",
+            "icon": youtubeIcon,
+            "label": "youtube link"
+          },
+        ]}
+        siteTitle={t("siteTitle")}
+        paragraphTitle={t("footerParagraphTitle")}
+        paragraph={t("footerParagraph")}
+        callToActionTitle={t("footerCallToActionTitle")}
+        buttonLink={{
+          "label": t("footerLinkButtonLabel"),
+          ...routes.contact().link
+        }}
+
+      />
 
 
-    </ZoomProvider>
+
+    </div>
   </>
   )
 }
@@ -288,6 +280,9 @@ const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ them
   "headerWrapper": {
     "height": 0,
     "transition": "opacity 1ms",
+    "position": "fixed",
+    "zIndex": 4000,
+    //"overflowX": "unset",
     "transitionDelay": isTransitioning ? undefined : "600ms",
     "opacity": isTransitioning ? 0 : 1,
     "pointerEvents": isTransitioning ? "none" : undefined,
@@ -302,13 +297,6 @@ const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ them
 
       }
     })()
-
-  },
-  "headerInner": {
-    "position": "fixed",
-    "zIndex": 4000,
-    "height": 0,
-    "overflowX": "unset"
 
   },
   "body": {

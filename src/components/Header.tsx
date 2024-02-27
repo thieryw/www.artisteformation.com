@@ -15,11 +15,6 @@ export type HeaderProps = {
     contact?: ReactNode;
     smallPrint?: ReactNode;
     buttonLink?: Link;
-    zoomProviderInterval?: {
-        min: number;
-        max: number;
-
-    },
     logoLinks?: ({
         logo: ReactNode;
     } & Link)[],
@@ -28,8 +23,9 @@ export type HeaderProps = {
 }
 
 export function Header(props: HeaderProps) {
-    const { zoomProviderInterval, links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
+    const { links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
     const [isOpen, setIsOpen] = useState(false);
+
 
 
     const toggleMenu = useConstCallback(() => {
@@ -40,7 +36,7 @@ export function Header(props: HeaderProps) {
         setIsOpen(false);
     })
 
-    const { classes, cx, theme } = useStyles({ isOpen, zoomProviderInterval, "classesOverrides": props.classes });
+    const { classes, cx, theme } = useStyles({ isOpen, "classesOverrides": props.classes });
 
 
     return (
@@ -235,26 +231,7 @@ export function Header(props: HeaderProps) {
 
 
 
-const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomProviderInterval">>().create(({ isOpen, zoomProviderInterval, theme }) => {
-    const openHeaderHeight = (() => {
-        function getHeight(referenceHeight: number) {
-            if (zoomProviderInterval === undefined) {
-                return referenceHeight
-            }
-            if (theme.windowInnerWidth >= zoomProviderInterval.min && theme.windowInnerWidth <= zoomProviderInterval.max) {
-                return referenceHeight / (theme.windowInnerWidth / zoomProviderInterval.max);
-            }
-
-            return referenceHeight;
-
-        }
-        if (theme.windowInnerHeight < 800) {
-            return getHeight(800);
-        }
-
-        return getHeight(theme.windowInnerHeight);
-
-    })();
+const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme }) => {
     const transitionTime = 600;
     return ({
         "root": {
@@ -276,8 +253,8 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
 
         },
         "mobileWrapper": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "display": "flex",
                         "flexDirection": "column",
@@ -338,26 +315,27 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
 
         },
         "menu": {
-            "position": "absolute",
+            "position": "fixed",
             "zIndex": 4001,
             "display": "flex",
-            "alignItems": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "alignItems": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return undefined;
                 }
                 return "center"
             })(),
-            "top": isOpen ? 0 : -openHeaderHeight,
+            "top": isOpen ? 0 : -theme.windowInnerHeight,
             "transition": `top ${transitionTime}ms`,
-            "height": openHeaderHeight,
+            "height": theme.windowInnerHeight,
             "width": "100%",
             "backgroundColor": theme.colors.lighterGray,
-            "overflow": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "overflow": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return "auto";
                 }
                 return "hidden";
             })(),
+            //"overflow": "hidden",
             "pointerEvents": !isOpen ? "none" : undefined,
         },
         "contactWrapper": {
@@ -376,8 +354,8 @@ const useStyles = tss.withParams<{ isOpen: boolean } & Pick<HeaderProps, "zoomPr
             "transition": `opacity ${transitionTime}ms`,
             "opacity": isOpen ? 1 : 0,
             "transitionDelay": !isOpen ? undefined : `${transitionTime / 2}ms`,
-            "marginBottom": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "marginBottom": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return 40;
                 }
                 return undefined;

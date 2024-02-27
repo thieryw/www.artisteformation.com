@@ -12,11 +12,6 @@ type TransitionComponentProps = {
   backgroundColor?: string;
   backgroundImage?: string;
   logoUrl?: string;
-  zoomProviderInterval: {
-    min: number;
-    max: number;
-
-  },
   isActive: boolean;
 }
 
@@ -42,7 +37,6 @@ type TransitionComponentProps = {
   };
 export const TransitionComponent = memo((props: TransitionComponentProps) => {
   const {
-    zoomProviderInterval,
     className,
     transitionText,
     splashScreenTitle,
@@ -52,7 +46,6 @@ export const TransitionComponent = memo((props: TransitionComponentProps) => {
     isActive
   } = props;
   const { classes, cx, theme } = useStyles({
-    zoomProviderInterval,
     "backgroundColor": backgroundColor ?? "blue",
     "backgroundImage": backgroundImage ?? "",
     isActive,
@@ -138,41 +131,20 @@ const useStyles = tss.withParams<
   Required<
     Pick<
       TransitionComponentProps,
-      "zoomProviderInterval" |
       "backgroundColor" |
       "backgroundImage" |
       "isActive"
     >
   >
 >().create(({
-  zoomProviderInterval,
   theme,
   backgroundColor,
   backgroundImage,
   isActive
 }) => {
-  const height = (() => {
-    function getHeight(referenceHeight: number) {
-      if (zoomProviderInterval === undefined) {
-        return referenceHeight
-      }
-      if (theme.windowInnerWidth >= zoomProviderInterval.min && theme.windowInnerWidth <= zoomProviderInterval.max) {
-        return referenceHeight / (theme.windowInnerWidth / zoomProviderInterval.max);
-      }
-
-      return referenceHeight;
-
-    }
-    if (theme.windowInnerHeight < 800) {
-       return getHeight(800);
-    }
-
-    return getHeight(theme.windowInnerHeight);
-
-  })();
   return ({
     "root": {
-      height,
+      "height": "100%",
       "width": "100%",
       "backgroundColor": backgroundColor,
       "backgroundImage": `url("${backgroundImage}")`,
@@ -180,7 +152,7 @@ const useStyles = tss.withParams<
       "backgroundSize": "contain",
       "position": "absolute",
       "transition": isActive ? undefined : "top 800ms",
-      "top": isActive ? 0 : -height,
+      "top": isActive ? 0 : "-100%",
       "left": 0,
       "zIndex": 4500,
       "display": "flex",

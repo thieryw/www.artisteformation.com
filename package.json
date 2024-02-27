@@ -24,7 +24,8 @@
     "react-svg": "^16.1.31",
     "tsafe": "^1.6.5",
     "tss-react": "^4.9.3",
-    "type-route": "^1.0.1"
+    "type-route": "^1.0.1",
+    "screen-scaler": "^1.2.7"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
