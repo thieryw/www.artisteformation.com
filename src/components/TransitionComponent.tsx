@@ -144,12 +144,7 @@ const useStyles = tss.withParams<
 }) => {
   return ({
     "root": {
-      "height": (()=>{
-        if(theme.windowInnerWidth < breakpointValues.sm){
-          return "100vh";
-        }
-        return "100%";
-      })(),
+      "height": "100%",
       "width": "100%",
       "backgroundColor": backgroundColor,
       "backgroundImage": `url("${backgroundImage}")`,
