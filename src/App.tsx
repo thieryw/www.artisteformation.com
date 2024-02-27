@@ -88,6 +88,29 @@ export function App() {
     };
   }, [route.name]);
 
+  const [initialScreenWidth] = useState(theme.windowInnerWidth);
+
+  useEffect(()=>{
+    function handleResize() {
+      if (initialScreenWidth < breakpointValues.sm) {
+        if(window.screen.width < breakpointValues.sm){
+          return;
+        }
+        window.location.reload();
+        return;
+      }
+
+      if(window.screen.width >= breakpointValues.sm){
+        return;
+      }
+      window.location.reload();
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+
+  }, [])
+
   return (<>
     <div className={classes.headerWrapper}>
       {
