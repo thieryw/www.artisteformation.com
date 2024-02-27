@@ -40,7 +40,8 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 196;
 
             })() / baseFontSizePx}rem`,
-            "fontFamily": "Zodiak-Regular"
+            "fontFamily": "Zodiak-Regular",
+            "fontWeight": 300
         },
         "carousel": {
             "color": "rgba(125, 125, 125, 0.09)",
@@ -60,8 +61,9 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 128;
             })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
-            "lineHeight": "1em"
+            "letterSpacing": "-0.03em",
+            "lineHeight": "1em",
+            "fontWeight": 300
         },
         "siteTitle": {
             "color": "#3B3051",
@@ -72,7 +74,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 110;
             })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
+            "letterSpacing": "-0.03em",
             "lineHeight": "1em",
             "marginBlock": 0,
             "fontWeight": 300
@@ -86,10 +88,11 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 }
                 return 50;
             })() / baseFontSizePx}rem`,
-            "fontFamily": "Zodiak-Light",
-            "letterSpacing": "0.03em",
+            "fontFamily": "Zodiak-Regular",
+            "letterSpacing": "-0.03em",
             "lineHeight": "1.1em",
-            "marginBlock": 0
+            "marginBlock": 0,
+            "fontWeight": 300
         },
         "menuItem": {
             "color": "#3B3051",
@@ -100,7 +103,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 75;
             })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
+            "letterSpacing": "-0.03em",
             "listStyleType": "none",
             "lineHeight": "1em"
         },
@@ -116,9 +119,10 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 64;
             })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
+            "letterSpacing": "-0.03em",
             "lineHeight": "1.15em",
-            "marginBlock": 0
+            "marginBlock": 0,
+            "fontWeight": 300
         },
         "heading3": {
             "color": "#3B3051",
@@ -132,9 +136,10 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 48;
             })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
+            "letterSpacing": "-0.03em",
             "lineHeight": "1.20em",
-            "marginBlock": 0
+            "marginBlock": 0,
+            "fontWeight": 300
         },
         "heading4": {
             "color": "#3B3051",
@@ -145,35 +150,32 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 return 40;
             })() / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
-            "marginBlock": 0
+            "letterSpacing": "-0.03em",
+            "marginBlock": 0,
+            "fontWeight": 300
         },
         "heading5": {
             "color": "#3B3051",
             "fontSize": `${36 / baseFontSizePx}rem`,
             "fontFamily": "Zodiak-Regular",
-            "letterSpacing": "0.03em",
+            "letterSpacing": "-0.03em",
             "lineHeight": "1.2em",
-            "marginBlock": 0
+            "marginBlock": 0,
+            "fontWeight": 300
         },
         "sectionPageOrButton": {
             "fontFamily": "Satoshi-Bold",
             "letterSpacing": "0.12em",
             "color": "#F14C2C",
-            "fontSize": `${14 / baseFontSizePx}rem`,
-            "marginBlock": "0"
+            "fontSize": `${11 / baseFontSizePx}rem`,
+            "marginBlock": "0",
         },
         "additionalTitle": {
             "fontFamily": "Satoshi-Bold",
             "color": "rgba(125, 125, 125, 0.6)",
-            "fontSize": `${(()=>{
-                /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
-                    return 12;
-                }*/
-                return 11;
-            })() / baseFontSizePx}rem`,
+            "fontSize": `${13 / baseFontSizePx}rem`,
             "marginBlock": 0,
-            "letterSpacing": "0.2em"
+            "letterSpacing": "0.1em"
         },
         "carouselItem": {
             "fontFamily": "Satoshi-Medium",
@@ -185,13 +187,13 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                 if(windowInnerWidth < 600){
                     return 18;
                 }
-                return 21
+                return 20
                 
             })() / baseFontSizePx}rem`,
             "marginBlock": 0
         },
         "paragraph": {
-            "fontFamily": "Satoshi-Regular",
+            "fontFamily": "Satoshi-Medium",
             "fontSize": `${(()=>{
                 /*if(windowInnerWidth < 1200 && windowInnerWidth >= 600){
                     return 13;
