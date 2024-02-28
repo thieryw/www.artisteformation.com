@@ -32,7 +32,18 @@ const useStyles = tss.withParams<Required<Pick<LinkButtonProps, "variant">>>().w
         "textDecoration": "none",
     },
     "inner": {
-        "padding": "25px 50px 25px 50px",
+        ...(()=>{
+            const topBottom = 25;
+            const leftRight = 62;
+            return {
+                "paddingLeft": leftRight,
+                "paddingRight": leftRight,
+                "paddingTop": topBottom,
+                "paddingBottom": topBottom
+            }
+            
+        })(),
+        //"padding": "25px 50px 25px 50px",
         "border": `solid ${theme.colors.bloodOrange} 1px`,
         "backgroundColor": (()=>{
             switch(variant){

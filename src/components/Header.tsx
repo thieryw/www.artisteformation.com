@@ -281,8 +281,8 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                     }
                 }
                 return {
-                    "top": 125,
-                    "right": 186,
+                    "top": 80,
+                    "right": 220,
 
                 }
             })()
@@ -297,8 +297,8 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 return {
 
                     "position": "absolute",
-                    "top": 100,
-                    "right": 290,
+                    "top": 55,
+                    "right": 324,
                 }
             })()
 

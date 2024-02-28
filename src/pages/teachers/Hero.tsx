@@ -40,7 +40,7 @@ export const Hero = memo(() => {
                             numberTitle={t("partnerNumberTitle")}
                             subtitle={t("partnerNumberSubtitle")}
                             paragraph={t("partnerNumberParagraph")}
-                            titleColor={theme.colors.bloodOrangeVariant}
+                            titleColor={theme.colors.darkYellow}
                         />
                         <div className={classes.separator}></div>
 

@@ -370,7 +370,7 @@ const { Slide } = (() => {
                 {
                 ...rest
                 }
-                title={<Text className={classes.title} typo="heading4">{title}</Text>}
+                title={<Text className={classes.title} typo="heading2">{title}</Text>}
                 className={classes.article}
 
                 classes={{

@@ -122,7 +122,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "letterSpacing": "-0.03em",
             "lineHeight": "1.15em",
             "marginBlock": 0,
-            "fontWeight": 300
+            "fontWeight": 300,
         },
         "heading3": {
             "color": "#3B3051",
@@ -167,7 +167,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "fontFamily": "Satoshi-Bold",
             "letterSpacing": "0.12em",
             "color": "#F14C2C",
-            "fontSize": `${11 / baseFontSizePx}rem`,
+            "fontSize": `${14 / baseFontSizePx}rem`,
             "marginBlock": "0",
         },
         "additionalTitle": {
@@ -175,7 +175,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
             "color": "rgba(125, 125, 125, 0.6)",
             "fontSize": `${13 / baseFontSizePx}rem`,
             "marginBlock": 0,
-            "letterSpacing": "0.1em"
+            "letterSpacing": "0.03em"
         },
         "carouselItem": {
             "fontFamily": "Satoshi-Medium",

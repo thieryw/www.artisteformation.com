@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { tss } from "@/theme";
+import { tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Slider } from "@/components/Slider"
 import svg1 from "@/assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
@@ -22,7 +22,7 @@ export const NumberedSlider = memo(() => {
             }}
             slides={[
                 {
-                    "title": t("numberedSliderNeedsTitle"),
+                    "title": <Text typo="heading3">{t("numberedSliderNeedsTitle")}</Text>,
                     "paragraph": t("numberedSliderNeedsParagraph"),
                     "secondParagraph": t("numberedSliderNeedsSecondParagraph"),
                     "button": {
@@ -32,7 +32,7 @@ export const NumberedSlider = memo(() => {
                     "leftIllustrationUrl": svg1
                 },
                 {
-                    "title": t("numberedSliderCreationTitle"),
+                    "title": <Text typo="heading3">{t("numberedSliderCreationTitle")}</Text>,
                     "paragraph": t("numberedSliderCreationParagraph"),
                     "secondParagraph": t("numberedSliderCreationSecondParagraph"),
                     "button": {
@@ -42,7 +42,7 @@ export const NumberedSlider = memo(() => {
                     "leftIllustrationUrl": svg2
                 },
                 {
-                    "title": t("numberedSliderPilotingTitle"),
+                    "title": <Text typo="heading3">{t("numberedSliderPilotingTitle")}</Text>,
                     "paragraph": t("numberedSliderPilotingParagraph"),
                     "secondParagraph": t("numberedSliderPilotingSecondParagraph"),
                     "button": {

@@ -83,7 +83,7 @@ export const NamedSlider = memo(() => {
                                 }
                             ],
                             "smallSurtitle": t("sliderSurtitle"),
-                            "title": t("sliderIntermittentTitle"),
+                            "title": <Text typo="heading3">{t("sliderIntermittentTitle")}</Text>,
                             "paragraph": t("sliderIntermittentParagraph"),
                             "button": {
                                 "label": t("sliderButtonLabel"),
@@ -104,7 +104,7 @@ export const NamedSlider = memo(() => {
                                 }
                             ],
                             "smallSurtitle": t("sliderSurtitle"),
-                            "title": t("sliderTenantTitle"),
+                            "title": <Text typo="heading3">{t("sliderTenantTitle")}</Text>,
                             "paragraph": t("sliderTenantParagraph"),
                             "button": {
                                 "label": t("sliderButtonLabel"),
@@ -125,7 +125,7 @@ export const NamedSlider = memo(() => {
                                 }
                             ],
                             "smallSurtitle": t("sliderSurtitle"),
-                            "title": t("sliderCreatorTitle"),
+                            "title": <Text typo="heading3">{t("sliderCreatorTitle")}</Text>,
                             "paragraph": t("sliderCreatorParagraph"),
                             "button": {
                                 "label": t("sliderButtonLabel"),
@@ -146,7 +146,7 @@ export const NamedSlider = memo(() => {
                                 }
                             ],
                             "smallSurtitle": t("sliderSurtitle"),
-                            "title": t("sliderIndependentTitle"),
+                            "title": <Text typo="heading3">{t("sliderIndependentTitle")}</Text>,
                             "paragraph": t("sliderIndependentParagraph"),
                             "button": {
                                 "label": t("sliderButtonLabel"),
@@ -167,7 +167,7 @@ export const NamedSlider = memo(() => {
                                 }
                             ],
                             "smallSurtitle": t("sliderSurtitle"),
-                            "title": t("sliderCompanyTitle"),
+                            "title": <Text typo="heading3">{t("sliderCompanyTitle")}</Text>,
                             "paragraph": t("sliderCompanyParagraph"),
                             "button": {
                                 "label": t("sliderButtonLabel"),

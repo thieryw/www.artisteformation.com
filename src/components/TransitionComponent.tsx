@@ -144,7 +144,7 @@ const useStyles = tss.withParams<
 }) => {
   return ({
     "root": {
-      "height": "100%",
+      "height": theme.windowInnerHeight,
       "width": "100%",
       "backgroundColor": backgroundColor,
       "backgroundImage": `url("${backgroundImage}")`,
@@ -152,7 +152,7 @@ const useStyles = tss.withParams<
       "backgroundSize": "contain",
       "position": "absolute",
       "transition": isActive ? undefined : "top 800ms",
-      "top": isActive ? 0 : "-100%",
+      "top": isActive ? 0 : -theme.windowInnerHeight,
       "left": 0,
       "zIndex": 4500,
       "display": "flex",

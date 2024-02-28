@@ -111,7 +111,7 @@ export function App() {
 
   }, [])
 
-  return (<>
+  return (<div className={classes.root}>
     <div className={classes.headerWrapper}>
       {
         (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&
@@ -128,7 +128,7 @@ export function App() {
       {
         (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&
         <a {...routes.contact().link}>
-          <Text className={classes.contactLink} typo="additionalTitle">CONTACT</Text>
+          <Text className={classes.contactLink} typo="sectionPageOrButton">CONTACT</Text>
         </a>
       }
       <Header
@@ -202,7 +202,7 @@ export function App() {
       })()}
     />
 
-    <div className={classes.root}>
+    <div className={classes.bodyWrapper}>
       <div className={classes.body}>
         {route.name === "home" && <Home />}
         {route.name === "how" && <How />}
@@ -253,13 +253,17 @@ export function App() {
 
 
     </div>
-  </>
+  </div>
   )
 }
 
 const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ theme, isTransitioning }) => ({
 
   "root": {
+    "position": "relative"
+
+  },
+  "bodyWrapper": {
     "backgroundColor": theme.colors.backgroundMain,
     "width": "100%",
     "position": "relative",
@@ -287,15 +291,15 @@ const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ them
 
   },
   "logo": {
-    "position": "fixed",
+    "position": "absolute",
     "top": 50,
     "left": 120,
     "zIndex": 4000
   },
   "contactLink": {
-    "position": "fixed",
-    "top": 130,
-    "right": 70,
+    "position": "absolute",
+    "top": 85,
+    "right": 105,
     "zIndex": 4000,
     "color": theme.colors.indigo
 
@@ -303,7 +307,7 @@ const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ them
   "headerWrapper": {
     "height": 0,
     "transition": "opacity 1ms",
-    "position": "fixed",
+    "position": "absolute",
     "zIndex": 4000,
     //"overflowX": "unset",
     "transitionDelay": isTransitioning ? undefined : "600ms",

@@ -41,7 +41,7 @@ export const Article = memo((props: ArticleProps) => {
         {
             smallSurtitle !== undefined &&
             <div className={classes.smallSurtitleWrapper}>
-                <Text className={classes.smallTitle} typo="additionalTitle">{smallSurtitle}</Text>
+                <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSurtitle}</Text>
             </div>
         }
 
@@ -63,7 +63,7 @@ export const Article = memo((props: ArticleProps) => {
         {
             smallSubtitle !== undefined &&
             <div className={classes.smallSubtitleWrapper}>
-                <Text className={classes.smallTitle} typo="additionalTitle">{smallSubtitle}</Text>
+                <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSubtitle}</Text>
             </div>
         }
         {

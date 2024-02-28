@@ -63,19 +63,26 @@ const useStyles = tss.create(({theme}) => {
             })()
         },
         "mobileTitle": {
-            "fontSize": "3rem",
             ...(()=>{
-                const value = 40;
-                return {
-                    "paddingRight": value,
-                    "paddingLeft": value
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "fontSize": "3rem",
+                        ...(() => {
+                            const value = 40;
+                            return {
+                                "paddingRight": value,
+                                "paddingLeft": value
+                            }
+                        })()
+
+                    }
                 }
             })()
 
         },
         "article": {
             "maxWidth": 950,
-            
+
 
         },
 
