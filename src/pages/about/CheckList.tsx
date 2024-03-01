@@ -84,7 +84,10 @@ export const CheckList = memo(() => {
                         })()
                     }</Text>
                     <Article
-                        title={<Text typo="heading3">{title}</Text>}
+                        title={<Text style={{
+                            "minWidth": index !== 0 ? undefined : 500
+                        }}
+                            typo="heading3">{title}</Text>}
                         paragraph={paragraph}
                         hasSmallLine={true}
                         key={title}

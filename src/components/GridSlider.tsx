@@ -21,8 +21,8 @@ export type GridSliderProps = {
 
 };
 
-function getRandomNumber(){
-    return (Math.floor(Math.random() * (2 - 1 + 1)) + 1) as 1 | 2;
+function getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 export const GridSlider = memo((props: GridSliderProps) => {
@@ -38,12 +38,12 @@ export const GridSlider = memo((props: GridSliderProps) => {
         let i = 0;
 
         while(true){
-            if(i === slides.length - 1){
+            if(i === slides.length){
                 setGrid(array);
                 return;
             }
-            const rand: 1 | 2 = getRandomNumber();
-            const rand2: 1 | 2 = getRandomNumber();
+            const rand: 1 | 2 = getRandomNumber(1, 2) as 1 | 2;
+            const rand2: 1 | 2 = getRandomNumber(1, 2) as 1 | 2;
 
             switch(rand){
                 case 1 : array.push({
@@ -51,7 +51,7 @@ export const GridSlider = memo((props: GridSliderProps) => {
                     "imageUrl": slides[i].imageUrl,
                     "index": i
                 }); i++; break;
-                case 2 : (()=>{
+                default : (()=>{
                     switch(rand2){
                         case 1 : array.push("blank"); break;
                         case 2 : array.push("grey"); break;

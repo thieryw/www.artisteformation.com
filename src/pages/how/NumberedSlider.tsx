@@ -5,6 +5,7 @@ import { Slider } from "@/components/Slider"
 import svg1 from "@/assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
 import svg2 from "@/assets/svg/comment/Slide 2 - Processus/2-creation-du-parcours.svg";
 import svg3 from "@/assets/svg/comment/Slide 2 - Processus/3-pilotage.svg";
+import patternSvg from "@/assets/svg/pattern.svg";
 
 
 export const NumberedSlider = memo(() => {
@@ -17,7 +18,6 @@ export const NumberedSlider = memo(() => {
             variant="numbered"
             className={classes.slider}
             classes={{
-                "slideArticle": classes.slideArticle,
                 "inner": classes.sliderInner
             }}
             slides={[
@@ -65,6 +65,9 @@ const useStyles = tss.create(({theme}) => {
             "paddingLeft": 340,
             "paddingRight": 150,
             "backgroundColor": theme.colors.indigo,
+            "backgroundImage": `url("${patternSvg}")`,
+            "backgroundBlendMode": "soft-light",
+            "backgroundSize": "contain",
             ...(()=>{
                 const value = 150;
                 return {
@@ -78,9 +81,6 @@ const useStyles = tss.create(({theme}) => {
             "backgroundColor": theme.colors.white,
             "paddingTop": 155,
             "paddingBottom": 135
-        },
-        "slideArticle": {
-            "height": 580
         },
         "sliderInner": {
             "position": "relative",

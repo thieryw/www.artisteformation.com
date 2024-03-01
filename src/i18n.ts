@@ -100,7 +100,7 @@ export const {
 				"review3Title": "Robin Desboit",
 				"review3Subtitle": "Keytariste",
 				"review3Paragraph": "Pellentesque vel nibh et nunc congue commodo. Donec pharetra vel est eu pulvinar.",
-				"reviewArticleSurtitle": "TESTIMONIAL",
+				"reviewArticleSurtitle": "TÉMOIGNAGES",
 				"reviewArticleTitle": "Ce qu'ils disent de Nous",
 				"reviewArticleParagraph": "Vous aussi faites-nous confiance",
 				"reviewArticleButtonLabel": "CONTACTEZ-NOUS",

@@ -255,7 +255,6 @@ const useStyles = tss.create(({ theme }) => {
         },
         "inner": {
             "backgroundColor": theme.colors.indigo,
-            "backgroundImage": `url("${patternSvg}")`,
             "backgroundSize": "cover",
             "backgroundBlendMode": "overlay",
             ...(() => {

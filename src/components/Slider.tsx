@@ -305,7 +305,7 @@ const useStyles = tss
         "slides": {
             "overflowX": "hidden",
             "display": "grid",
-            "alignItems": "center",
+            "alignItems": "start",
 
         },
         "slidesWrapper": {
@@ -520,7 +520,7 @@ const { Illustration } = (() => {
                     "maxWidth": variant === "numbered" ? 350 : 557,
                     "width": variant === "numbered" ? 350 : 557,
                     "border": variant === "named" ? `solid ${theme.colors.white} 10px` : undefined,
-                    "boxShadow": variant === "named" ? "-7px 32px 99px 0 rgba(0, 0, 0, 0.08)" : undefined
+                    "boxShadow": variant === "named" ? "0px 2px 10px 2px rgba(0, 0, 0, 0.03)" : undefined
                 },
                 "imageWrapper": {
                     "position": "relative",

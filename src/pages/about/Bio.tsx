@@ -25,7 +25,7 @@ export const Bio = memo(() => {
 
     }, [])
 
-    const { classes, theme } = useStyles();
+    const { classes, theme, cx } = useStyles();
 
 
     return <div className={classes.root}>
@@ -73,7 +73,7 @@ export const Bio = memo(() => {
                         return <>
                             <div className={classes.paragraphWrapper}>
                                 <Text className={classes.cap} typo="heading2">{biography.paragraphs[0].fr.slice(0, 2)}</Text>
-                                <Text typo="paragraph">{biography.paragraphs[0].fr.slice(2)}</Text>
+                                <Text className={classes.text} typo="paragraph">{biography.paragraphs[0].fr.slice(2)}</Text>
                             </div>
                             <div className={classes.smallDivider}></div>
                         </>
@@ -93,7 +93,8 @@ export const Bio = memo(() => {
                                     return undefined;
                                 }
                                 return <Text
-                                    className={classes.paragraph}
+
+                                    className={cx(classes.paragraph, classes.text)}
                                     typo="paragraph"
                                     key={index}
                                 >
@@ -140,8 +141,8 @@ const useStyles = tss.create(({ theme }) => {
                 }
                 return {
             "display": "grid",
-            "gridTemplateColumns": "repeat(2, 500px)",
-            "gap": 55,
+            "gridTemplateColumns": "repeat(2, 450px)",
+            "gap": 50,
             "justifyContent": "center",
 
                 }
@@ -158,11 +159,14 @@ const useStyles = tss.create(({ theme }) => {
         "cap": {
             "float": "left",
             "marginRight": 10,
-            "lineHeight": "1em"
+            "lineHeight": "1em",
+        },
+        "text": {
+            "color": theme.colors.darkGray
         },
         "firstColumn": {
             "display": "grid",
-            "gap": 65
+            "gap": 50
 
         },
         "titleWrapper": {
@@ -172,7 +176,7 @@ const useStyles = tss.create(({ theme }) => {
                 }
                 return {
                     "display": "grid",
-                    "gridTemplateColumns": "repeat(2, 500px)",
+                    "gridTemplateColumns": "repeat(2, 450px)",
                     "gap": 55,
                     "justifyContent": "center",
 
@@ -200,7 +204,9 @@ const useStyles = tss.create(({ theme }) => {
         "smallDivider": {
             "width": 40,
             "height": 0,
-            "borderTop": `solid ${theme.colors.indigo} 3px`
+            "borderTop": `solid ${theme.colors.indigo} 3px`,
+            "position": "relative",
+            "top": -30
         },
         "secondColumn": {
             "display": "flex",
@@ -214,7 +220,7 @@ const useStyles = tss.create(({ theme }) => {
             "marginBottom": 60
         },
         "paragraph": {
-            "marginBottom": 50
+            "marginBottom": 40
 
         }
     })

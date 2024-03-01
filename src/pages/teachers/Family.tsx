@@ -96,7 +96,7 @@ export const Family = memo(() => {
 
 const useStyles = tss.create(({ theme }) => {
     const imageHeight = 490;
-    const articleWidth = 700;
+    const articleWidth = 600;
     return ({
         "root": {
             ...(()=>{

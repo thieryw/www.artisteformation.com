@@ -84,7 +84,9 @@ const useStyles = tss.create(({ theme }) => {
         },
         "subtitle": {
             "marginRight": 180,
-            "color": theme.colors.bloodOrange
+            "color": theme.colors.bloodOrange,
+            "position": "relative",
+            "top": "0.5rem"
         },
         "subtitleAndParagraph": {
             "display": "flex",

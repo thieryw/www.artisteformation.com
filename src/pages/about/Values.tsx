@@ -78,7 +78,7 @@ const useStyles = tss.create(({ theme }) => {
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     return undefined;
                 }
-                return 950;
+                return 700;
             })(),
 
         },

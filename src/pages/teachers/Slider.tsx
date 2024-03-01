@@ -3,7 +3,7 @@ import { partners } from "@/user/partners";
 import { GridSlider } from "@/components/GridSlider";
 import { MobileSlider } from "@/components/MobileSlider";
 import { loadWebpImage } from "@/tools/loadWebpImage";
-import { breakpointValues, useContext } from "@/theme"
+import { breakpointValues, useContext, tss } from "@/theme"
 
 const partnerImageNames = partners.map(({ portraitUrl }) =>
     portraitUrl.match(/([^\/]+)(?=\.\w+$)/)?.[0])
@@ -34,13 +34,15 @@ export const Slider = memo(() => {
             })
     }, [])
 
+    console.log(partners);
 
+    const { classes } = useStyles();
 
     return <section>
         {
             (() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
-                    return <MobileSlider 
+                    return <MobileSlider
                         startingPercentage={9}
                         slides={
                             partners.map(({ fr: { name, profession }, portraitUrl }, index) => {
@@ -71,6 +73,10 @@ export const Slider = memo(() => {
                     />
                 }
                 return <GridSlider
+
+                    classes={{
+                        "root": classes.slider
+                    }}
                     slides={
                         partners.map(({ fr: { description, name, profession }, portraitUrl }, index) => {
                             return {
@@ -99,4 +105,13 @@ export const Slider = memo(() => {
         }
 
     </section>
+})
+
+const useStyles = tss.create(() => {
+    return ({
+        "slider": {
+            "marginBottom": 245,
+
+        }
+    })
 })

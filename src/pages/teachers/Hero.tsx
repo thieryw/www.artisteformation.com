@@ -61,9 +61,6 @@ export const Hero = memo(() => {
                         <div className={classes.imageWrapper}>
                             <img className={classes.image} src={fresquePng} alt="fresque decorative" />
                         </div>
-                        <div className={classes.background}>
-
-                        </div>
 
 
                     </div>
@@ -143,16 +140,6 @@ const useStyles = tss.create(({ theme }) => {
         "imageWrapper": {
             "position": "relative",
             "zIndex": 200
-
-        },
-        "background": {
-            "width": "70%",
-            "height": "85%",
-            "backgroundColor": theme.colors.backgroundTertiary,
-            "position": "absolute",
-            "bottom": -70,
-            "left": 0,
-            "zIndex": 199
 
         },
         "mobileVersionWrapper": {

@@ -457,8 +457,7 @@ const { Card } = (() => {
                     }
 
                 })(),
-
-                "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)"
+                "boxShadow": "0px 2px 40px 2px rgba(0, 0, 0, 0.03)"
 
             },
             "paragraph": {
