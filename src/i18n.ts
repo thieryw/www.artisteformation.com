@@ -28,7 +28,7 @@ export const {
 	{
 		"fr": {
 			"App": {
-				"homeLink": "Acceuil",
+				"homeLink": "Accueil",
 				"howLink": "Comment ?",
 				"teachersLink": "Formateurs",
 				"aboutLink": "À propos",
@@ -71,7 +71,7 @@ export const {
     			"sliderFinancingParagraph1": "Ayant une connaissance approfondie de tous les droits de formation dans le monde artistique, nous mobilisons notre expertise afin d’obtenir une prise en charge financière partielle ou totale de votre parcours d'évolution professionnelle.",
     			"sliderFinancingParagraph2": "Vos droits permettant de vous former régulièrement dans nos métiers artistiques, nous vous proposerons le parcours le plus adapté et vous délesterons de toute la partie administrative.",
     			"sliderResponseName": "03. / ANALYSE & RÉPONSE",
-    			"sliderResponseTitle": "Écoute, analyse & préponse personnalisée.",
+    			"sliderResponseTitle": "Écoute, analyse & réponse personnalisée.",
     			"sliderResponseParagraph1": "Notre approche commence par une analyse complète de vos besoins et une étude ap-profondie des enjeux professionnels de votre secteur. Ce socle de départ pour votre projet de formation nous permettra d’assembler une équipe d'experts et de",
     			"sliderResponseParagraph2": "bâtir un projet professionnel solide et performant. Artiste Formation vous offre un tremplin qui propulse votre carrière. révèle votre potentiel et vous permet de réinventer votre avenir artistique.",
     			"sliderButtonLabel": "EN SAVOIR PLUS",
@@ -94,12 +94,12 @@ export const {
 				"review1Title": "Laura Salaison",
 				"review1Subtitle": "Violoniste",
 				"review1Paragraph": "Artiste Formation a transformé mon parcours de violoniste baroque. Je suis montée en compétences à mon rythme, j’ai pu produire un enregistrement pro dans la foulée et booster ma visibilité. Il y a clairement un avant et un après !",
-				"review2Title": "Jean Phillipe Salmonelle",
+				"review2Title": "Clémence Dubois",
 				"review2Subtitle": "Gambiste",
-				"review2Paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam ipsum ac placerat consectetur.",
-				"review3Title": "Robin Desboit",
-				"review3Subtitle": "Keytariste",
-				"review3Paragraph": "Pellentesque vel nibh et nunc congue commodo. Donec pharetra vel est eu pulvinar.",
+				"review2Paragraph": "AF m’a offert de concrétiser deux projets : j’ai passé un cap technique et musical en travaillant avec deux maîtres de musique ancienne, et j’ai pu monter un projet insolite avec un ensemble vocal mêlant viole de gambe et beatbox.",
+				"review3Title": "Ali Reza",
+				"review3Subtitle": "Cadreur",
+				"review3Paragraph": "Au début j’étais sceptique, mais ils m’ont donné tellement d’outils pour apprendre + ils m’ont aidé à faire un court-métrage avec équipe et matériel pro ! Je n’aurais pas du tout la même trajectoire sans eux, et maintenant ce sont des amis !",
 				"reviewArticleSurtitle": "TÉMOIGNAGES",
 				"reviewArticleTitle": "Ce qu'ils disent de Nous",
 				"reviewArticleParagraph": "Vous aussi faites-nous confiance",
@@ -223,7 +223,14 @@ export const {
 				"formMessagePlaceholder": "message",
 				"formSend": "ENVOYER",
 				"bookingTitle": "Booker directement un créneau",
-				"bookingButtonLabel": "FIXER UN RDV"
+				"bookingButtonLabel": "FIXER UN RDV",
+				"or": "OU",
+				"formNameNonValid": "Veuillez spécifier votre nom",
+				"formTelNonValid": "Veuillez spécifier un numéro de telephone",
+				"formEmailNonValid": "Veuillez spécifier un email",
+				"formMessageNonValid": "Veuillez formuler votre message",
+				"sending": "En cour d'envoi...",
+				"sent": "Message envoyé !"
 			}
 
 		},

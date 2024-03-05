@@ -10,6 +10,10 @@ export const Book = memo(() => {
     const { classes, theme } = useStyles();
 
     return <section className={classes.root}>
+        <Text style={{
+            "marginBottom": 110,
+            "color": theme.colors.darkGray3
+        }} typo="sectionPageOrButton">{t("or")}</Text>
 
         {
             (()=>{
@@ -54,7 +58,7 @@ const useStyles = tss.create(({ theme }) => {
                     }
                 }
                 return {
-                    "marginTop": 300,
+                    "marginTop": 150,
                     "marginBottom": 200,
 
                 }

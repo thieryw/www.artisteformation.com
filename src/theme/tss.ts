@@ -261,6 +261,7 @@ export function useContext() {
             "linden": "#72B0A8",
             "darkYellow": "#FAA219",
             "indigo": "#3B3051",
+            "lightGray": "#D9D9D9",
             "lighterGray": "#FAFAFA",
             "darkGray2": "rgba(125, 125, 125, 0.8)",
             "darkGray3": "rgba(125, 125, 125, 0.6)",

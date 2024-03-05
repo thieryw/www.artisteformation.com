@@ -25,7 +25,14 @@ export const { i18n } = declareComponentKeys<
     "formTelPlaceholder" |
     "formEmailPlaceholder" |
     "formMessagePlaceholder" |
+    "formNameNonValid" |
+    "formTelNonValid" |
+    "formEmailNonValid" |
+    "formMessageNonValid" |
     "formSend" |
     "bookingTitle" |
-    "bookingButtonLabel"
+    "bookingButtonLabel" |
+    "or" |
+    "sending" |
+    "sent"
 >()({ Contact })

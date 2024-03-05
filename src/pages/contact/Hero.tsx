@@ -108,6 +108,8 @@ const useStyles = tss.create(({ theme }) => {
                 return {
                     "marginRight": 180,
                     "color": theme.colors.bloodOrange,
+                    "position": "relative",
+                    "top": "0.5rem"
 
                 }
             })()

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { FormspreeProvider, useForm, ValidationError } from "@formspree/react";
 import { useTranslation } from "@/i18n";
 import { tss, Text, breakpointValues } from "@/theme";
@@ -8,17 +8,33 @@ export const Form = memo(() => {
 
     const [state, handleSubmit] = useForm("xjvnkepy")
     const { t } = useTranslation("Contact");
-    const {classes, theme } = useStyles();
+    const { classes, theme } = useStyles();
 
 
 
     return (
         <FormspreeProvider project="2385580700561571129">
             <div className={classes.root}>
+                {
+                    (() => {
+                        if (theme.windowInnerWidth < breakpointValues.sm) {
+                            return undefined;
+                        }
+                        return <div className={classes.grayDecoLine}></div>
+                    })()
+                }
                 <div className={classes.wrapper}>
                     {
-                        (()=>{
-                            if(theme.windowInnerWidth < breakpointValues.sm){
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return undefined;
+                            }
+                            return <div className={classes.decoLine}></div>
+                        })()
+                    }
+                    {
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
                                 return <div className={classes.mobileSeparator}></div>
                             }
                         })()
@@ -31,6 +47,11 @@ export const Form = memo(() => {
                             name="name"
                             id="name"
                             className={classes.inputField}
+                            required={true}
+                            onInvalid={(e: React.InvalidEvent<HTMLInputElement>) => e.target.setCustomValidity(t("formNameNonValid"))}
+                            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                e.target.setCustomValidity('')
+                            }
                         />
                         <ValidationError
                             prefix="Name"
@@ -43,6 +64,11 @@ export const Form = memo(() => {
                             name="tel"
                             id="tel"
                             className={classes.inputField}
+                            required={true}
+                            onInvalid={(e: React.InvalidEvent<HTMLInputElement>) => e.target.setCustomValidity(t("formTelNonValid"))}
+                            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                e.target.setCustomValidity('')
+                            }
                         />
                         <ValidationError
                             prefix="Tel"
@@ -50,11 +76,16 @@ export const Form = memo(() => {
                             errors={state.errors}
                         />
                         <input
-                            placeholder={t("formTelPlaceholder")}
+                            placeholder={t("formEmailPlaceholder")}
                             type="email"
                             name="email"
                             id="email"
                             className={classes.inputField}
+                            required={true}
+                            onInvalid={(e: React.InvalidEvent<HTMLInputElement>) => e.target.setCustomValidity(t("formEmailNonValid"))}
+                            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                e.target.setCustomValidity('')
+                            }
                         />
                         <ValidationError
                             prefix="Email"
@@ -66,12 +97,25 @@ export const Form = memo(() => {
                             id="message"
                             name="message"
                             placeholder={t("formMessagePlaceholder")}
+                            required={true}
+                            onInvalid={(e: React.InvalidEvent<HTMLTextAreaElement>) => e.target.setCustomValidity(t("formMessageNonValid"))}
+                            onInput={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                                e.target.setCustomValidity('')
+                            }
                         />
                         <ValidationError
                             prefix="Message"
                             field="message"
                             errors={state.errors}
                         />
+                        {
+                            state.submitting && 
+                            <Text className={classes.submissionMessage} typo="sectionPageOrButton">{t("sending")}</Text>
+                        }
+                        {
+                            (state.succeeded && !state.submitting) &&
+                            <Text className={classes.submissionMessage} typo="sectionPageOrButton">{t("sent")}</Text>
+                        }
                         <button className={classes.button} type="submit" disabled={state.submitting}>
                             <Text className={classes.buttonText} typo="sectionPageOrButton">{t("formSend")}</Text>
                         </button>
@@ -91,11 +135,12 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "position": "relative",
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginTop": 110,
-                        ...(()=>{
+                        ...(() => {
                             const value = 25;
                             return {
                                 "paddingLeft": value,
@@ -108,6 +153,32 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
 
 
         },
+        "submissionMessage": {
+            "color": theme.colors.indigo,
+            "textAlign": "center"
+
+        },
+        "decoLine": {
+            "width": 85,
+            "height": 0,
+            "borderTop": `solid ${theme.colors.bloodOrange} 2px`,
+            "position": "absolute",
+            "top": 0,
+            "right": 140,
+            "transform": "rotate(90deg)"
+
+        },
+        "grayDecoLine": {
+            "width": 700,
+            "height": 0,
+            "borderTop": `solid ${theme.colors.lightGray} 1px`,
+            "position": "absolute",
+            "top": "50%",
+            "right": 0,
+            "transform": "rotate(-30deg)",
+            "transformOrigin": "right"
+
+        },
         "mobileSeparator": {
             "width": 85,
             "height": 0,
@@ -118,14 +189,15 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
         "wrapper": {
             "background": theme.colors.white,
             "boxSizing": "border-box",
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "position": "relative",
+            "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)",
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
-                        "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)",
                         "display": "flex",
                         "flexDirection": "column",
                         "alignItems": "center",
-                        ...(()=>{
+                        ...(() => {
                             const value = 25;
                             return {
                                 "paddingLeft": value,
@@ -136,16 +208,25 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
                     }
                 }
                 return {
-                    "padding": 120,
                     "width": 840,
+                    ...(() => {
+                        const leftRight = 170;
+                        const topBottom = 140;
+                        return {
+                            "paddingTop": topBottom,
+                            "paddingBottom": topBottom,
+                            "paddingLeft": leftRight,
+                            "paddingRight": leftRight
+                        }
+                    })()
                 }
             })()
 
         },
         "formTitle": {
             "marginBottom": 80,
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "textAlign": "center",
                         "width": 300,
@@ -207,8 +288,8 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
             ":hover": {
                 "backgroundColor": "transparent"
             },
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginTop": 60
 

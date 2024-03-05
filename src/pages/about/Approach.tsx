@@ -73,6 +73,7 @@ const useStyles = tss.create(({ theme }) => {
 
         },
         "image": {
+            "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)",
             ...(()=>{
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     return {
