@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from "react";
-import type { ReactNode } from "react";
 import { tss } from "@/theme";
 import { useInView } from "react-intersection-observer";
 import { useDomRect } from "powerhooks/useDomRect";
@@ -7,13 +6,16 @@ import { useDomRect } from "powerhooks/useDomRect";
 
 export type PictureAnimatorProps = {
     className?: string;
-    children: ReactNode;
+    classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
+    src: string;
+    sources?: {srcSet: string; type: string}[];
+    alt?: string
 }
 
 export const PictureAnimator = memo((props: PictureAnimatorProps) => {
-    const { children, className } = props;
+    const { className, src, sources, alt } = props;
     const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.8 })
-    const { ref: imageWrapperRef, domRect: { width, height } } = useDomRect();
+    const { ref: imageRef, domRect: { width, height } } = useDomRect();
     const [isImageVisible, setIsImageVisible] = useState(inView);
     useEffect(() => {
         if (inView) {
@@ -25,35 +27,52 @@ export const PictureAnimator = memo((props: PictureAnimatorProps) => {
     const { classes, cx } = useStyles({
         "inView": isImageVisible,
         width,
-        height
+        height,
+        "classesOverrides": props.classes
     });
 
     return <div ref={ref} className={cx(classes.root, className)}>
 
-        <div
-            ref={imageWrapperRef}
-        >
-            <div className={classes.animatedDiv}>
+        <div className={classes.animatedDiv}>
+            <picture>
                 {
-                    children
+                    sources?.map((source, index) => <source key={index} {...source} />)
                 }
+                <img className={classes.image} ref={imageRef} src={src} alt={alt} />
 
-            </div>
+            </picture>
+
         </div>
     </div>
 
 })
 
-const useStyles = tss.withParams<{ inView: boolean; width: number; height: number }>().create(({ inView, width, height }) => {
-    console.log(width)
+const useStyles = tss.withParams<
+    {
+        inView: boolean;
+        width: number;
+        height: number;
+    }
+>().create(({ inView, width, height }) => {
     return ({
         "root": {
-            "position": "relative"
+            "position": "relative",
+            width,
+            height
         },
         "animatedDiv": {
 
             "position": "absolute",
-            "whiteSpace": "nowrap"
+            "whiteSpace": "nowrap",
+            "width": inView ? width : 0,
+            "transition": "width 1000ms",
+            "overflow": "hidden",
+            height
+        },
+        "image": {
+            "transform": `scale(${inView ? 1.2 : 1})`,
+            "transition": "transform 1000ms"
+
         }
     })
 })

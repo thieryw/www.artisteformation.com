@@ -43,14 +43,24 @@ export function Home() {
                         })()
                     }
 
-                    <PictureAnimator>
-                        <picture>
-                            <source srcSet={pianistWebp} type="image/webp" />
-                            <source srcSet={pianistJpg} type="image/jpeg" />
-                            <img className={classes.visionPicture} src={pianistWebp} alt="Pianist" />
-                        </picture>
+                    <PictureAnimator
+                        src={pianistWebp}
+                        classes={{
+                            "image": classes.visionPicture
+                        }}
+                        sources={[
+                            {
+                                "srcSet": pianistWebp,
+                                "type": "image/webp"
+                            },
+                            {
+                                "srcSet": pianistJpg,
+                                "type": "image/jpeg"
+                            }
+                        ]}
 
-                    </PictureAnimator>
+                    />
+
                     {
                         (() => {
                             if (theme.windowInnerWidth >= breakpointValues.sm) {
@@ -68,11 +78,23 @@ export function Home() {
                             return undefined
                         }
                         return <div className={classes.visionRight}>
-                            <picture>
-                                <source srcSet={pianistIllustrationWebp} type="image/webp" />
-                                <source srcSet={pianistIllustrationJpg} type="image/jpeg" />
-                                <img className={cx(classes.visionPicture, classes.visionIllustration)} src={pianistIllustrationWebp} alt="Pianist" />
-                            </picture>
+                            <PictureAnimator
+                                className={classes.visionIllustration}
+                                classes={{
+                                    "image": classes.visionPicture
+                                }}
+                                src={pianistIllustrationWebp}
+                                sources={[
+                                    {
+                                        "srcSet": pianistIllustrationWebp,
+                                        "type": "image/webp"
+                                    },
+                                    {
+                                        "srcSet": pianistIllustrationJpg,
+                                        "type": "image/jpeg"
+                                    }
+                                ]}
+                            />
                             <div className={classes.captionWrapper}>
                                 <div className={classes.smallDivider}></div>
                                 <Text style={{
@@ -179,7 +201,9 @@ const useStyles = tss
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
 
-                        "width": "100%",
+                        /*"width": "100%",
+                        "objectFit": "cover"*/
+                        "width": theme.windowInnerWidth,
                         "objectFit": "cover"
                     }
                 }
