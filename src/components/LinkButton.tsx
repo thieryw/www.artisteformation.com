@@ -1,6 +1,8 @@
 import { memo } from "react";
 import type { Link } from "../tools/link";
 import { tss, Text } from "../theme";
+import { useDomRect } from "powerhooks/useDomRect";
+import { relative } from "path";
 
 
 export type LinkButtonProps = Link & {
@@ -15,24 +17,36 @@ export type LinkButtonProps = Link & {
 
 export const LinkButton = memo((props: LinkButtonProps) => {
     const { href, label, onClick, className, variant } = props;
+    const { ref, domRect: { height } } = useDomRect();
     const { classes, cx } = useStyles({
         "variant": variant ?? "outlined",
+        "textHeight": height,
         "classesOverrides": props.classes
     });
     return <a className={cx(classes.root, className)} onClick={onClick} href={href}>
         <div className={classes.inner}>
 
-            <Text className={classes.linkLabel} typo="sectionPageOrButton">{label}</Text>
+            <div className={classes.textWrapper}>
+                <div ref={ref}>
+                    <Text className={classes.linkLabel} typo="sectionPageOrButton">{label}</Text>
+                </div>
+                <Text className={classes.linkLabel} typo="sectionPageOrButton">{label}</Text>
+            </div>
         </div>
     </a>
 });
 
-const useStyles = tss.withParams<Required<Pick<LinkButtonProps, "variant">>>().withNestedSelectors<"linkLabel">().create(({ theme, classes, variant }) => ({
+const useStyles = tss.withParams<Required<Pick<LinkButtonProps, "variant">> & { textHeight: number }>().withNestedSelectors<"linkLabel">().create(({ theme, classes, variant, textHeight }) => ({
     "root": {
         "textDecoration": "none",
     },
+    "textWrapper": {
+        "height": textHeight,
+        "overflow": "hidden"
+
+    },
     "inner": {
-        ...(()=>{
+        ...(() => {
             const topBottom = 25;
             const leftRight = 62;
             return {
@@ -41,39 +55,25 @@ const useStyles = tss.withParams<Required<Pick<LinkButtonProps, "variant">>>().w
                 "paddingTop": topBottom,
                 "paddingBottom": topBottom
             }
-            
+
         })(),
-        //"padding": "25px 50px 25px 50px",
         "border": `solid ${theme.colors.bloodOrange} 1px`,
-        "backgroundColor": (()=>{
-            switch(variant){
-                case "filled" : return theme.colors.bloodOrange;
+        "backgroundColor": (() => {
+            switch (variant) {
+                case "filled": return theme.colors.bloodOrange;
                 case "outlined": return undefined;
             }
 
         })(),
-        "transition": "background-color 300ms",
         [`&:hover .${classes.linkLabel}`]: {
-            "color": (()=>{
-                switch(variant){
-                    case "filled": return theme.colors.indigo;
-                    case "outlined": return theme.colors.white;
-                }
-            })()
+            "transform": `translateY(${-textHeight}px)`
+
         },
-        ":hover": {
-            "backgroundColor": (()=>{
-                switch(variant){
-                    case "filled": return theme.colors.white;
-                    case "outlined": return theme.colors.bloodOrange;
-                }
-            })()
-        }
 
     },
     "linkLabel": {
-        "color": (()=>{
-            switch(variant){
+        "color": (() => {
+            switch (variant) {
                 case "filled": return theme.colors.white;
                 case "outlined": return theme.colors.indigo;
             }
@@ -81,7 +81,7 @@ const useStyles = tss.withParams<Required<Pick<LinkButtonProps, "variant">>>().w
         })(),
         "textTransform": "uppercase",
         "marginBlock": 0,
-        "transition": "color 300ms"
+        "transition": "transform 500ms",
     }
 
 }))

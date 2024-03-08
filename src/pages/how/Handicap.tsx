@@ -27,6 +27,7 @@ export const Handicap = memo(() => {
                     }
                 })()
             }
+            isAnimated={true}
         />
 
     </section>

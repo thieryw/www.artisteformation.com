@@ -41,6 +41,7 @@ export const Family = memo(() => {
                             title={t("familyTitle")}
                             smallSubtitle={t("familySubtitle")}
                             paragraph={t("familyParagraph")}
+                            isAnimated={true}
 
                         />
                     })()
@@ -88,6 +89,7 @@ export const Family = memo(() => {
                     "label": t("suggestionButtonLabel"),
                     ...routes.contact().link
                 }}
+                isAnimated={true}
             />
         </section>
     </>

@@ -149,7 +149,7 @@ const useStyles = tss.withParams<
       "backgroundColor": backgroundColor,
       "backgroundImage": `url("${backgroundImage}")`,
       "backgroundBlendMode": "soft-light",
-      "backgroundSize": "contain",
+      "backgroundSize": "cover",
       "position": "absolute",
       "transition": isActive ? undefined : "top 800ms",
       "top": isActive ? 0 : -theme.windowInnerHeight,
@@ -158,6 +158,7 @@ const useStyles = tss.withParams<
       "display": "flex",
       "alignItems": "center",
       "justifyContent": "center",
+      "backgroundPosition": "center"
 
 
     },

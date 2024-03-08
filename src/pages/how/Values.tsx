@@ -35,6 +35,7 @@ export const Values = memo(() => {
                 "label": t("valuesButtonLabel"),
                 ...routes.about().link
             }}
+            isAnimated={true}
             {...(()=>{
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     return {

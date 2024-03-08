@@ -42,6 +42,7 @@ export const Process = memo(() => {
                         title={t("processTitle")}
                         smallSubtitle={t("processSubtitle")}
                         paragraph={t("processParagraph")}
+                        isAnimated={true}
                     />
 
                     <Logo fill={theme.colors.darkGray3} width={145} logoUrl={logo} />

@@ -39,6 +39,7 @@ export const Approach = memo(() => {
                         "paragraph": classes.paragraph
                     }}
                     className={classes.article}
+                    isAnimated={true}
                 />
             })()
         }

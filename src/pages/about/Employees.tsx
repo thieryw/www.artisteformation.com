@@ -35,6 +35,7 @@ export const Employees = memo(() => {
             className={classes.article}
             title={t("employeesTitle")}
             isCentered={true}
+            isAnimated={true}
             {
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {

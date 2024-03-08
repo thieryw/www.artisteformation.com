@@ -52,6 +52,7 @@ export const Teachers = memo(() => {
                         ...routes.teachers().link,
                     }}
                     hasSmallLine={true}
+                    isAnimated={true}
 
                 />
             })()

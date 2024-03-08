@@ -25,6 +25,7 @@ export const History = memo(() => {
             classes={{
                 "title": classes.mobileTitle
             }}
+            isAnimated={true}
 
         />
 

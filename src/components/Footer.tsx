@@ -112,6 +112,7 @@ export const Footer = memo((props: FooterProps) => {
                                     "marginRight": index === socialLinks.length - 1 ? undefined : theme.spacing.iconSpacing
 
                                 }}
+                                className={classes.socialMediaLink}
                             >{typeof icon === "string" ?
                                 <Logo width={62} logoUrl={icon} /> :
                                 icon
@@ -197,6 +198,13 @@ const useStyles = tss.create(({ theme }) => ({
             }
 
         })()
+
+    },
+    "socialMediaLink": {
+        ":hover": {
+            "transition": "transform 400ms",
+            "transform": "scale(1.05)"
+        }
 
     },
     "titleAndLogoWrapper": {

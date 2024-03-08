@@ -102,9 +102,9 @@ export function Header(props: HeaderProps) {
                                             key={label}
                                             {...rest}
                                             aria-label={label}
+                                            className={classes.logoLink}
                                             style={{
-                                                "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
-
+                                                "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing,
                                             }}
                                         >{typeof logo === "string" ?
                                             <Logo width={62} logoUrl={logo} /> :
@@ -250,6 +250,13 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
 
                 }
             })(),
+
+        },
+        "logoLink": {
+            "transition": "transform 400ms",
+            ":hover": {
+                "transform": "scale(1.05)"
+            }
 
         },
         "mobileWrapper": {

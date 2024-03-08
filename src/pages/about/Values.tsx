@@ -29,6 +29,7 @@ export const Values = memo(() => {
                     }
                 })()
             }
+            isAnimated={true}
         />
         <Logo className={classes.logo} width={145} logoUrl={logoSvg} />
 

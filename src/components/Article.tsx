@@ -1,7 +1,10 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import type { ReactNode } from "react";
 import { tss, Text, breakpointValues } from "../theme";
 import { LinkButton, type LinkButtonProps } from "./LinkButton";
+import { motion } from "framer-motion";
+import { Variant, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export type ArticleProps = {
     className?: string;
@@ -14,7 +17,48 @@ export type ArticleProps = {
     paragraph?: string;
     secondParagraph?: string;
     button?: Omit<LinkButtonProps, "classes" | "className">;
+    isAnimated?: boolean;
 };
+
+const containerVariants: Record<string, Variant> = {
+    "hidden": {
+        "opacity": 1
+    },
+    "visible": {
+        "opacity": 1,
+    },
+
+}
+const titleVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": 100,
+        "opacity": 0
+    },
+    "visible": {
+        "y": 0,
+        "opacity": 1
+    }
+};
+const smallTitleVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": 40
+    },
+    "visible": {
+        "y": 0
+    }
+};
+
+const paragraphAndButtonVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": 40,
+        "opacity": 0
+    },
+    "visible": {
+        "y": 0,
+        "opacity": 1
+    }
+};
+
 
 export const Article = memo((props: ArticleProps) => {
 
@@ -27,8 +71,18 @@ export const Article = memo((props: ArticleProps) => {
         secondParagraph,
         smallSubtitle,
         smallSurtitle,
-        title
+        title,
+        isAnimated = false
     } = props;
+    const controls = useAnimation();
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible")
+        }
+
+    }, [controls, inView])
 
     const { classes, cx } = useStyles({
         "isCentered": isCentered ?? false,
@@ -36,34 +90,112 @@ export const Article = memo((props: ArticleProps) => {
         "classesOverrides": props.classes
     });
 
-    return <div className={cx(classes.root, className)}>
+
+
+    return <motion.div
+        className={cx(classes.root, className)}
+        ref={ref}
+        {
+        ...(() => {
+            if (!isAnimated) {
+                return;
+            }
+            return {
+                "variants": containerVariants,
+                "animate": controls,
+                "initial": "hidden"
+            }
+        })()
+        }
+    >
 
         {
             smallSurtitle !== undefined &&
-            <div className={classes.smallSurtitleWrapper}>
-                <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSurtitle}</Text>
-            </div>
+            <motion.div
+                className={classes.smallSurtitleWrapper}
+            >
+                <motion.div
+                    {
+                    ...(() => {
+                        if (!isAnimated) {
+                            return undefined;
+                        }
+                        return {
+                            "variants": smallTitleVariants,
+                            "transition": {
+                                "ease": "easeInOut",
+                                "duration": 0.7,
+                                "delay": 0.4
+                            },
+                        }
+                    })()
+
+                    }
+                >
+                    <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSurtitle}</Text>
+                </motion.div>
+            </motion.div>
         }
 
         {
             title !== undefined &&
             <div className={classes.titleWrapper}>
-                {
-                    (() => {
-                        if (typeof title === "string") {
-                            return <Text className={classes.title} typo="heading2">{title}</Text>;
-                        };
-                        return title;
+                <motion.div
+                    {
+                    ...(() => {
+                        if (!isAnimated) {
+                            return undefined;
+                        }
+                        return {
+                            "variants": titleVariants,
+                            "transition": {
+                                "ease": "easeInOut",
+                                "duration": 0.7
+                            },
+                        }
                     })()
+                    }
+                >
+                    {
+                        (() => {
+                            if (typeof title === "string") {
+                                return <Text className={classes.title} typo="heading2">{title}</Text>;
+                            };
+                            return title;
+                        })()
 
-                }
+                    }
+
+                </motion.div>
 
             </div>
         }
         {
             smallSubtitle !== undefined &&
-            <div className={classes.smallSubtitleWrapper}>
-                <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSubtitle}</Text>
+            <div
+
+                className={classes.smallSubtitleWrapper}
+            >
+                <motion.div
+
+                    {
+                    ...(() => {
+                        if (!isAnimated) {
+                            return undefined;
+                        }
+                        return {
+                            "variants": smallTitleVariants,
+                            "transition": {
+                                "ease": "easeInOut",
+                                "duration": 0.7,
+                                "delay": 0.4
+                            },
+                        }
+                    })()
+                    }
+                >
+                    <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSubtitle}</Text>
+                </motion.div>
             </div>
         }
         {
@@ -75,24 +207,81 @@ export const Article = memo((props: ArticleProps) => {
             <div className={classes.paragraphWrapper}>
                 {
                     paragraph !== undefined &&
-                    <Text className={cx(classes.paragraph, classes.firstParagraph)} typo="paragraph">{paragraph}</Text>
+                    <motion.div
+                        {
+                        ...(() => {
+                            if (!isAnimated) {
+                                return undefined;
+                            }
+                            return {
+                                "variants": paragraphAndButtonVariants,
+                                "transition": {
+                                    "ease": "easeInOut",
+                                    "duration": 0.7,
+                                    "delay": 0.7
+                                },
+                            }
+                        })()
+                        }
+                    >
+                        <Text className={cx(classes.paragraph, classes.firstParagraph)} typo="paragraph">{paragraph}</Text>
+                    </motion.div>
                 }
                 {
                     secondParagraph !== undefined &&
-                    <Text className={cx(classes.paragraph, classes.secondParagraph)} typo="paragraph">{secondParagraph}</Text>
+                    <motion.div
+                        {
+                        ...(() => {
+                            if (!isAnimated) {
+                                return undefined;
+                            }
+                            return {
+                                "variants": paragraphAndButtonVariants,
+                                "transition": {
+                                    "ease": "easeInOut",
+                                    "duration": 0.7,
+                                    "delay": 0.9
+                                },
+                            }
+                        })()
+                        }
+                    >
+
+                        <Text className={cx(classes.paragraph, classes.secondParagraph)} typo="paragraph">{secondParagraph}</Text>
+                    </motion.div>
                 }
             </div>
         }
         {
             button !== undefined &&
-            <LinkButton
-                className={classes.button}
+            <motion.div
                 {
-                ...button
+                ...(() => {
+                    if (!isAnimated) {
+                        return undefined;
+                    }
+                    return {
+                        "variants": paragraphAndButtonVariants,
+                        "transition": {
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 1.1
+                        },
+                    }
+                })()
                 }
-            />
+
+            >
+                <LinkButton
+                    className={classes.button}
+                    {
+                    ...button
+                    }
+                />
+
+            </motion.div>
         }
-    </div>
+    </motion.div>
 })
 
 
@@ -109,7 +298,6 @@ const useStyles = tss.withParams<
         "justifyContent": "center"
     },
     "smallTitle": {
-        "marginBottom": theme.spacing.textGap,
         "color": theme.colors.bloodOrangeVariant,
         "textTransform": "uppercase"
     },
@@ -117,6 +305,7 @@ const useStyles = tss.withParams<
         "textAlign": isCentered ? "center" : "left"
     },
     "titleWrapper": {
+        "overflow": "hidden",
         "marginBottom": theme.spacing.textGap,
         "& > *": {
             "textAlign": isCentered ? "center" : "left"
@@ -134,11 +323,11 @@ const useStyles = tss.withParams<
         "marginBottom": theme.spacing.textGap,
         ...(hasSecondParagraph ? {
             "display": "flex",
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "flexDirection": "column"
-                        
+
                     }
                 }
                 return {
@@ -155,7 +344,7 @@ const useStyles = tss.withParams<
     },
     "firstParagraph": {
         ...(() => {
-            if(theme.windowInnerWidth < breakpointValues.sm){
+            if (theme.windowInnerWidth < breakpointValues.sm) {
                 return {
                     "marginBottom": theme.spacing.textGap
                 }
@@ -179,6 +368,12 @@ const useStyles = tss.withParams<
     },
     "secondParagraph": {},
     "button": {},
-    "smallSurtitleWrapper": {},
-    "smallSubtitleWrapper": {}
+    "smallSurtitleWrapper": {
+        "overflow": "hidden",
+        "marginBottom": theme.spacing.textGap,
+    },
+    "smallSubtitleWrapper": {
+        "overflow": "hidden",
+        "marginBottom": theme.spacing.textGap,
+    }
 }))

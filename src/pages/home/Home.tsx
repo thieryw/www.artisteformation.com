@@ -14,6 +14,7 @@ import { History } from "./History";
 import { Teachers } from "./Teachers";
 import { breakpointValues } from "@/theme";
 import { MobileTabs } from "./MobileTabs";
+import { PictureAnimator } from "@/components/PictureAnimator";
 
 
 export function Home() {
@@ -41,11 +42,15 @@ export function Home() {
 
                         })()
                     }
-                    <picture>
-                        <source srcSet={pianistWebp} type="image/webp" />
-                        <source srcSet={pianistJpg} type="image/jpeg" />
-                        <img className={classes.visionPicture} src={pianistWebp} alt="Pianist" />
-                    </picture>
+
+                    <PictureAnimator>
+                        <picture>
+                            <source srcSet={pianistWebp} type="image/webp" />
+                            <source srcSet={pianistJpg} type="image/jpeg" />
+                            <img className={classes.visionPicture} src={pianistWebp} alt="Pianist" />
+                        </picture>
+
+                    </PictureAnimator>
                     {
                         (() => {
                             if (theme.windowInnerWidth >= breakpointValues.sm) {

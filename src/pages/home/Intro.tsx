@@ -17,6 +17,7 @@ export const Intro = memo(() => {
             paragraph={t("introParagraph")}
             isCentered={true}
             classes={{ "paragraphWrapper": classes.paragraph }}
+            isAnimated={true}
         />
         <div className={classes.divider}></div>
         <div className={classes.stats}>

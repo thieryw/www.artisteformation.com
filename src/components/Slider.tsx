@@ -111,7 +111,6 @@ export const Slider = memo((props: SliderProps) => {
                             variant="numbered"
                             illustrationUrl={leftIllustrationUrl ?? ""}
                             vector={calculateVector(index)}
-                            isActive={index === currentIndex}
                             key={index}
                             sources={illustrationSources}
                         />)
@@ -152,7 +151,6 @@ export const Slider = memo((props: SliderProps) => {
                             variant="named"
                             illustrationUrl={imageUrl ?? ""}
                             vector={calculateVector(index)}
-                            isActive={index === currentIndex}
                             key={index}
                             sources={imageSources}
                         /> : undefined)
@@ -477,7 +475,6 @@ const { Illustration } = (() => {
     type IllustrationProps = {
         illustrationUrl: string;
         vector: Parameters<typeof Slide>["0"]["vector"];
-        isActive: boolean;
         variant: SliderProps["variant"];
         sources?: {srcSet: string; type: string}[]
 
@@ -486,10 +483,10 @@ const { Illustration } = (() => {
 
     const Illustration = memo((props: IllustrationProps) => {
 
-        const { illustrationUrl, vector, isActive, variant, sources } = props;
+        const { illustrationUrl, vector, variant, sources } = props;
 
 
-        const { classes } = useStyles({ vector, isActive, variant });
+        const { classes } = useStyles({ vector, variant });
         return <div className={classes.root}>
             <div className={classes.imageWrapper}>
                 <picture>
@@ -507,8 +504,8 @@ const { Illustration } = (() => {
     });
 
     const useStyles = tss
-        .withParams<Pick<IllustrationProps, "vector" | "isActive" | "variant">>()
-        .create(({ vector, isActive, variant, theme }) => {
+        .withParams<Pick<IllustrationProps, "vector" | "variant">>()
+        .create(({ vector, variant, theme }) => {
 
 
             return ({
@@ -525,11 +522,9 @@ const { Illustration } = (() => {
                 "imageWrapper": {
                     "position": "relative",
                     "width": "100%",
-                    "zIndex": !isActive ? 3000 : 2000,
 
                     ...animate({
                         vector,
-                        "comingInDuration": 600
                     })
                 },
                 "image": {
