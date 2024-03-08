@@ -2,7 +2,6 @@ import { memo } from "react";
 import type { Link } from "../tools/link";
 import { tss, Text } from "../theme";
 import { useDomRect } from "powerhooks/useDomRect";
-import { relative } from "path";
 
 
 export type LinkButtonProps = Link & {

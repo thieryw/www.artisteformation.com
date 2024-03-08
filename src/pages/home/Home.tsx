@@ -22,7 +22,7 @@ export function Home() {
 
     const { t } = useTranslation("Home");
 
-    const { classes, cx, theme } = useStyles()
+    const { classes, theme } = useStyles()
 
 
     return (
