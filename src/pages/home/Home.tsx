@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { tss, Text } from "@/theme"
 import { declareComponentKeys, useTranslation } from "@/i18n";
 import { Hero } from "./Hero";
@@ -15,6 +16,27 @@ import { Teachers } from "./Teachers";
 import { breakpointValues } from "@/theme";
 import { MobileTabs } from "./MobileTabs";
 import { PictureAnimator } from "@/components/PictureAnimator";
+import type { Variant } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const titleVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": "100%",
+    },
+    "visible": {
+        "y": 0,
+    }
+};
+
+const paragraphVariant: Record<string, Variant> = {
+    "hidden": {
+        "opacity": 0
+    },
+    "visible": {
+        "opacity": 1
+    }
+};
 
 
 export function Home() {
@@ -24,6 +46,14 @@ export function Home() {
 
     const { classes, theme } = useStyles()
 
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const controls = useAnimation();
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible")
+        }
+
+    }, [controls, inView])
 
     return (
         <div>
@@ -38,7 +68,24 @@ export function Home() {
                                 return undefined;
                             }
 
-                            return <Text className={classes.visionTitle} typo="heading2">{t("visionTitle")}</Text>
+                            return <div
+                                style={{
+                                    "overflow": "hidden"
+                                }}
+                                ref={ref}
+                            >
+                                <motion.div
+                                    variants={titleVariants}
+                                    initial="hidden"
+                                    animate={controls}
+                                    transition={{
+                                        "ease": "easeInOut",
+                                        "duration": 0.7
+                                    }}
+                                >
+                                    <Text className={classes.visionTitle} typo="heading2">{t("visionTitle")}</Text>
+                                </motion.div>
+                            </div>
 
                         })()
                     }
@@ -97,12 +144,24 @@ export function Home() {
                             />
                             <div className={classes.captionWrapper}>
                                 <div className={classes.smallDivider}></div>
-                                <Text style={{
-                                    "color": theme.colors.darkGray2
-                                }} className={classes.visionParagraph} typo="paragraph">{t("visionSmallCaption")}</Text>
-                                <Text style={{
-                                    "color": theme.colors.darkGray2
-                                }} typo="paragraph">{t("visionSmallCaptionDate")}</Text>
+
+                                <motion.div
+                                    variants={paragraphVariant}
+                                    initial="hidden"
+                                    animate={controls}
+                                    transition={{
+                                        "ease": "easeInOut",
+                                        "duration": 0.7
+                                    }}
+                                >
+                                    <Text style={{
+                                        "color": theme.colors.darkGray2
+                                    }} className={classes.visionParagraph} typo="paragraph">{t("visionSmallCaption")}</Text>
+                                    <Text style={{
+                                        "color": theme.colors.darkGray2
+                                    }} typo="paragraph">{t("visionSmallCaptionDate")}</Text>
+
+                                </motion.div>
 
                             </div>
 

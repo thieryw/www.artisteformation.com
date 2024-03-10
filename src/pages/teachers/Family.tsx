@@ -8,6 +8,7 @@ import { breakpointValues, tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { routes } from "@/router";
 import { Text } from "@/theme"
+import { PictureAnimator } from "@/components/PictureAnimator";
 
 
 
@@ -48,12 +49,31 @@ export const Family = memo(() => {
                 }
                 <div className={classes.titleAndImageWrapper}>
                     <div className={classes.imageWrapper}>
-                        <picture>
-                            <source srcSet={images.webp} type="image/webp" />
-                            <source srcSet={images.jpg} type="image/jpeg" />
+                        {
+                            (() => {
+                                if (theme.windowInnerWidth < breakpointValues.sm) {
+                                    return <picture>
+                                        <source srcSet={images.webp} type="image/webp" />
+                                        <source srcSet={images.jpg} type="image/jpeg" />
 
-                            <img className={classes.image} src={images.webp} alt="famille" />
-                        </picture>
+                                        <img className={classes.image} src={images.webp} alt="famille" />
+                                    </picture>
+                                }
+                                return <PictureAnimator 
+                                    src={images.webp}
+                                    sources={[
+                                        {
+                                            "srcSet": images.webp,
+                                            "type": "image/webp"
+                                        },
+                                        {
+                                            "srcSet": images.jpg,
+                                            "type": "image/jpeg"
+                                        },
+                                    ]}
+                                />
+                            })()
+                        }
 
                     </div>
 
@@ -80,8 +100,8 @@ export const Family = memo(() => {
                 title={t("suggestionTitle")}
                 isCentered={true}
                 paragraph={t("suggestionParagraph")}
-                smallSurtitle={(()=>{
-                    if(theme.windowInnerWidth < breakpointValues.sm){
+                smallSurtitle={(() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
                         return t("familySubtitle")
                     }
                 })()}
@@ -101,8 +121,8 @@ const useStyles = tss.create(({ theme }) => {
     const articleWidth = 600;
     return ({
         "root": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginTop": 90,
                         "marginBottom": 60
@@ -116,8 +136,8 @@ const useStyles = tss.create(({ theme }) => {
 
         },
         "wrapper": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginTop": 20
 
@@ -159,8 +179,8 @@ const useStyles = tss.create(({ theme }) => {
 
         },
         "suggestions": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginBottom": 90
 

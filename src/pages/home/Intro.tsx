@@ -1,14 +1,45 @@
-import { memo } from "react";
-import { tss , Text} from "@/theme";
+import { memo, useEffect } from "react";
+import { tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import { breakpointValues } from "@/theme";
+import type { Variant } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
+const titleWrapperVariants: Record<string, Variant> = {
+    "hidden": {
+        "opacity": 1
+    },
+    "visible": {
+        "opacity": 1,
+        "transition": {
+            "staggerChildren": 0.4
+        }
+    },
 
+}
+const titleVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": "100%",
+    },
+    "visible": {
+        "y": 0,
+    }
+};
 
 export const Intro = memo(() => {
     const { classes } = useStyles();
     const { t } = useTranslation("Home");
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const controls = useAnimation();
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible")
+        }
+
+    }, [controls, inView])
+
     return <div className={classes.root}>
         <Article
             className={classes.article}
@@ -20,22 +51,112 @@ export const Intro = memo(() => {
             isAnimated={true}
         />
         <div className={classes.divider}></div>
-        <div className={classes.stats}>
-            <div className={classes.statWrapper}>
-                <Text className={classes.partners} typo="heading1">{t("introPartnerNumber")}</Text>
-                <Text className={classes.statName} typo="additionalTitle">{t("introPartner")}</Text>
-            </div>
-            <div className={classes.verticalDivider}></div>
-            <div className={classes.statWrapper}>
-                <Text className={classes.carers} typo="heading1">{t("introCarerNumber")}</Text>
-                <Text className={classes.statName} typo="additionalTitle">{t("introCarer")}</Text>
+        <div
+            ref={ref}
+            className={classes.stats}
+        >
+            <motion.div
+                className={classes.statWrapper}
+                variants={titleWrapperVariants}
+                animate={controls}
+                initial="hidden"
+            >
+                <div className={classes.animatedWrapper}>
+                    <motion.div
+                        variants={titleVariants}
+                        transition={{
+                            "ease": "easeInOut",
+                            "duration": 0.7
+                        }}
+                    >
 
-            </div>
+                        <Text className={classes.partners} typo="heading1">{t("introPartnerNumber")}</Text>
+                    </motion.div>
+                </div>
+                <div className={classes.animatedWrapper}>
+                    <motion.div
+                        variants={titleVariants}
+                        transition={{
+                            "ease": "easeInOut",
+                            "duration": 0.7
+                        }}
+                    >
+                        <Text className={classes.statName} typo="additionalTitle">{t("introPartner")}</Text>
+
+                    </motion.div>
+                </div>
+            </motion.div>
+
             <div className={classes.verticalDivider}></div>
-            <div className={classes.statWrapper}>
-                <Text className={classes.satisfaction} typo="heading1">{t("introSatisfactionPercentage")}</Text>
-                <Text className={classes.statName} typo="additionalTitle">{t("introSatisfaction")}</Text>
-            </div>
+            <motion.div
+                className={classes.statWrapper}
+                variants={titleWrapperVariants}
+                animate={controls}
+                initial="hidden"
+            >
+                <div className={classes.animatedWrapper}>
+                    <motion.div
+                        variants={titleVariants}
+                        transition={{
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 0.4
+                        }}
+                    >
+
+                        <Text className={classes.carers} typo="heading1">{t("introCarerNumber")}</Text>
+                    </motion.div>
+                </div>
+                <div className={classes.animatedWrapper}>
+                    <motion.div
+                        variants={titleVariants}
+                        transition={{
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 0.4
+                        }}
+                    >
+                        <Text className={classes.statName} typo="additionalTitle">{t("introCarer")}</Text>
+
+                    </motion.div>
+                </div>
+            </motion.div>
+
+            <div className={classes.verticalDivider}></div>
+            <motion.div
+                className={classes.statWrapper}
+                variants={titleWrapperVariants}
+                animate={controls}
+                initial="hidden"
+            >
+                <div className={classes.animatedWrapper}>
+                    <motion.div
+                        variants={titleVariants}
+                        transition={{
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 0.8
+                        }}
+                    >
+
+                        <Text className={classes.satisfaction} typo="heading1">{t("introSatisfactionPercentage")}</Text>
+                    </motion.div>
+                </div>
+                <div className={classes.animatedWrapper}>
+                    <motion.div
+
+                        variants={titleVariants}
+                        transition={{
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 0.8
+                        }}
+                    >
+                        <Text className={classes.statName} typo="additionalTitle">{t("introSatisfaction")}</Text>
+
+                    </motion.div>
+                </div>
+            </motion.div>
 
         </div>
     </div>
@@ -48,8 +169,8 @@ const useStyles = tss.create(({ theme }) => {
             "gridTemplateColumns": "1fr",
             "justifyItems": "center",
             "gap": 65,
-            "marginBottom": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "marginBottom": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return 40;
                 }
                 return 300
@@ -65,6 +186,10 @@ const useStyles = tss.create(({ theme }) => {
 
                 return undefined;
             })()
+
+        },
+        "animatedWrapper": {
+            "overflow": "hidden"
 
         },
         "article": {

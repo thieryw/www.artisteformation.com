@@ -1,35 +1,64 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { tss, Text, breakpointValues } from "@/theme";
 import { useTranslation } from "@/i18n";
 import badge from "@/assets/svg/home/badge-qualiopi.svg";
 import card from "@/assets/svg/home/certification-card.svg";
+import type { Variant } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 
+const paragraphVariant: Record<string, Variant> = {
+    "hidden": {
+        "opacity": 0
+    },
+    "visible": {
+        "opacity": 1
+    }
+};
 
 
 export const Certification = memo(() => {
     const { classes } = useStyles();
     const { t } = useTranslation("Home");
-    return <section className={classes.root}>
-        <div className={classes.inner}>
-            <div className={classes.badge}>
-                {/*<ReactSVG className={classes.svg} src={badge} />*/}
-                <img className={classes.svg} src={badge} alt="badge qualiopi certification" />
-            </div>
-            <div className={classes.textWrapper}>
-                <Text className={classes.paragraph} typo="paragraph">{t("certificationParagraph")}</Text>
-                <Text className={classes.title} typo="carouselItem">{t("certificationTitle")}</Text>
-            </div>
-        </div>
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const controls = useAnimation();
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible")
+        }
 
-    </section>
+    }, [controls, inView])
+    return <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={controls}
+        variants={paragraphVariant}
+        transition={{
+            "ease": "easeInOut",
+            "duration": 1.1
+        }}
+    >
+        <section className={classes.root}>
+            <div className={classes.inner}>
+                <div className={classes.badge}>
+                    <img className={classes.svg} src={badge} alt="badge qualiopi certification" />
+                </div>
+                <div className={classes.textWrapper}>
+                    <Text className={classes.paragraph} typo="paragraph">{t("certificationParagraph")}</Text>
+                    <Text className={classes.title} typo="carouselItem">{t("certificationTitle")}</Text>
+                </div>
+            </div>
+
+        </section>
+    </motion.div>
 })
 
 const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                     }
                 }
@@ -50,8 +79,8 @@ const useStyles = tss.create(({ theme }) => {
                     "paddingBottom": value
                 }
             })(),
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
 
                         "flexDirection": "column",
@@ -71,8 +100,8 @@ const useStyles = tss.create(({ theme }) => {
         },
         "badge": {
 
-            "marginBottom": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "marginBottom": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return 65;
 
                 }
@@ -85,8 +114,8 @@ const useStyles = tss.create(({ theme }) => {
         "textWrapper": {
             "display": "flex",
             "flexDirection": "column",
-            "alignItems": (()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            "alignItems": (() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return "center"
                 }
             })(),

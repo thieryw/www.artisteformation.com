@@ -27,6 +27,7 @@ export const Reviews = memo(() => {
                         "label": t("reviewArticleButtonLabel"),
                         ...routes.contact().link
                     }}
+                    isAnimated={true}
 
                 />
             })()

@@ -5,8 +5,9 @@ import { Article } from "@/components/Article";
 import { routes } from  "@/router";
 import valuesJpg from "@/assets/jpg/comment/valeurs.jpeg";
 import valuesWebp from "@/assets/webp/comment/valeurs.webp";
-import valuesMobileJpg from "@/assets/jpg/comment/valeurs-mobile.jpeg"
-import valuesMobileWebp from "@/assets/webp/comment/valeurs-mobile.webp"
+import valuesMobileJpg from "@/assets/jpg/comment/valeurs-mobile.jpeg";
+import valuesMobileWebp from "@/assets/webp/comment/valeurs-mobile.webp";
+import { PictureAnimator } from "@/components/PictureAnimator";
 
 
 export const Values = memo(() => {
@@ -14,8 +15,8 @@ export const Values = memo(() => {
     const { t } = useTranslation("How")
     const { classes, theme } = useStyles();
 
-    const images = (()=>{
-        if(theme.windowInnerWidth < breakpointValues.sm){
+    const images = (() => {
+        if (theme.windowInnerWidth < breakpointValues.sm) {
             return {
                 "webp": valuesMobileWebp,
                 "jpg": valuesMobileJpg
@@ -36,8 +37,8 @@ export const Values = memo(() => {
                 ...routes.about().link
             }}
             isAnimated={true}
-            {...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            {...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "isCentered": true
 
@@ -53,12 +54,33 @@ export const Values = memo(() => {
 
         <div className={classes.titleAndImageWrapper}>
             <div className={classes.imageWrapper}>
-                <picture>
-                    <source srcSet={images.webp} type="image/webp" />
-                    <source srcSet={images.jpg} type="image/jpeg" />
+                {
+                    (() => {
+                        if (theme.windowInnerWidth < breakpointValues.sm) {
+                            return <picture>
+                                <source srcSet={images.webp} type="image/webp" />
+                                <source srcSet={images.jpg} type="image/jpeg" />
 
-                    <img className={classes.image} src={images.webp} alt="valeurs" />
-                </picture>
+                                <img className={classes.image} src={images.webp} alt="valeurs" />
+                            </picture>
+                        }
+                        return <PictureAnimator 
+                            src={images.webp}
+                            sources={[
+                                {
+                                    "srcSet": images.webp,
+                                    "type": "image/webp"
+                                },
+                                {
+                                    "srcSet": images.jpg,
+                                    "type": "image/jpeg"
+
+                                }
+                            ]}
+                        />
+
+                    })()
+                }
 
             </div>
 

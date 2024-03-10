@@ -42,6 +42,8 @@ export const Hero = memo(() => {
                             subtitle={t("careerBoostSubtitle")}
                             paragraph={t("careerBoostParagraph")}
                             titleColor={theme.colors.linden}
+                            isAnimated={true}
+                            animationDelay={2.8}
                         />
                         <div className={classes.separator}></div>
 
@@ -54,6 +56,8 @@ export const Hero = memo(() => {
                             title={<Text className={classes.title} typo="heading1">{t("introTitle")}</Text>}
                             paragraph={t("introParagraph")}
                             secondParagraph={t("introSecondParagraph")}
+                            isAnimated={true}
+                            animationDelay={2.2}
                         />
 
                     </div>

@@ -18,6 +18,7 @@ export type ArticleProps = {
     secondParagraph?: string;
     button?: Omit<LinkButtonProps, "classes" | "className">;
     isAnimated?: boolean;
+    animationDelay?: number;
 };
 
 const containerVariants: Record<string, Variant> = {
@@ -31,20 +32,10 @@ const containerVariants: Record<string, Variant> = {
 }
 const titleVariants: Record<string, Variant> = {
     "hidden": {
-        "y": 100,
-        "opacity": 0
+        "y": "100%",
     },
     "visible": {
         "y": 0,
-        "opacity": 1
-    }
-};
-const smallTitleVariants: Record<string, Variant> = {
-    "hidden": {
-        "y": 40
-    },
-    "visible": {
-        "y": 0
     }
 };
 
@@ -72,7 +63,8 @@ export const Article = memo((props: ArticleProps) => {
         smallSubtitle,
         smallSurtitle,
         title,
-        isAnimated = false
+        isAnimated = false,
+        animationDelay = 0
     } = props;
     const controls = useAnimation();
     const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
@@ -103,7 +95,7 @@ export const Article = memo((props: ArticleProps) => {
             return {
                 "variants": containerVariants,
                 "animate": controls,
-                "initial": "hidden"
+                "initial": "hidden",
             }
         })()
         }
@@ -111,7 +103,7 @@ export const Article = memo((props: ArticleProps) => {
 
         {
             smallSurtitle !== undefined &&
-            <motion.div
+            <div
                 className={classes.smallSurtitleWrapper}
             >
                 <motion.div
@@ -121,11 +113,11 @@ export const Article = memo((props: ArticleProps) => {
                             return undefined;
                         }
                         return {
-                            "variants": smallTitleVariants,
+                            "variants": titleVariants,
                             "transition": {
                                 "ease": "easeInOut",
                                 "duration": 0.7,
-                                "delay": 0.4
+                                "delay": animationDelay + 0.4
                             },
                         }
                     })()
@@ -134,7 +126,7 @@ export const Article = memo((props: ArticleProps) => {
                 >
                     <Text className={classes.smallTitle} typo="sectionPageOrButton">{smallSurtitle}</Text>
                 </motion.div>
-            </motion.div>
+            </div>
         }
 
         {
@@ -150,7 +142,8 @@ export const Article = memo((props: ArticleProps) => {
                             "variants": titleVariants,
                             "transition": {
                                 "ease": "easeInOut",
-                                "duration": 0.7
+                                "duration": 0.7,
+                                "delay": animationDelay
                             },
                         }
                     })()
@@ -184,11 +177,11 @@ export const Article = memo((props: ArticleProps) => {
                             return undefined;
                         }
                         return {
-                            "variants": smallTitleVariants,
+                            "variants": titleVariants,
                             "transition": {
                                 "ease": "easeInOut",
                                 "duration": 0.7,
-                                "delay": 0.4
+                                "delay": animationDelay + 0.4
                             },
                         }
                     })()
@@ -218,7 +211,7 @@ export const Article = memo((props: ArticleProps) => {
                                 "transition": {
                                     "ease": "easeInOut",
                                     "duration": 0.7,
-                                    "delay": 0.7
+                                    "delay": animationDelay + 0.7
                                 },
                             }
                         })()
@@ -240,7 +233,7 @@ export const Article = memo((props: ArticleProps) => {
                                 "transition": {
                                     "ease": "easeInOut",
                                     "duration": 0.7,
-                                    "delay": 0.9
+                                    "delay": animationDelay + 0.9
                                 },
                             }
                         })()
@@ -265,7 +258,7 @@ export const Article = memo((props: ArticleProps) => {
                         "transition": {
                             "ease": "easeInOut",
                             "duration": 0.7,
-                            "delay": 1.1
+                            "delay": animationDelay + 1.1
                         },
                     }
                 })()
