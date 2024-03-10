@@ -144,15 +144,29 @@ const useStyles = tss.withParams<
 }) => {
   return ({
     "root": {
-      "height": theme.windowInnerHeight,
       "width": "100%",
       "backgroundColor": backgroundColor,
       "backgroundImage": `url("${backgroundImage}")`,
       "backgroundBlendMode": "soft-light",
       "backgroundSize": "cover",
-      "position": "absolute",
+      "position": "fixed",
       "transition": isActive ? undefined : "top 800ms",
-      "top": isActive ? 0 : -theme.windowInnerHeight,
+      ...(()=>{
+        if(theme.windowInnerWidth < breakpointValues.sm){
+          return {
+            "top": isActive ? 0 : -theme.windowInnerHeight,
+            "height": "100vh"
+
+          }
+        }
+        return {
+          "top": isActive ? 0 : "-100%",
+          "height": "100%"
+
+        }
+      })(),
+
+
       "left": 0,
       "zIndex": 4500,
       "display": "flex",

@@ -325,24 +325,26 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "position": "fixed",
             "zIndex": 4001,
             "display": "flex",
-            "alignItems": (() => {
-                if (theme.windowInnerWidth < breakpointValues.sm) {
-                    return undefined;
-                }
-                return "center"
-            })(),
-            "top": isOpen ? 0 : -theme.windowInnerHeight,
             "transition": `top ${transitionTime}ms`,
-            "height": theme.windowInnerHeight,
             "width": "100%",
             "backgroundColor": theme.colors.lighterGray,
-            "overflow": (() => {
-                if (theme.windowInnerWidth < breakpointValues.sm) {
-                    return "auto";
+            ...(()=>{
+                if(theme.windowInnerWidth < breakpointValues.sm){
+                    return {
+                        "top": isOpen ? 0 : -theme.windowInnerHeight,
+                        "height": "100vh",
+                        "overflow": "auto"
+                    }
                 }
-                return "hidden";
+                return {
+                    "top": isOpen ? 0 : "-100%",
+                    "height": "100%",
+                    "overflow": "hidden",
+                    "minHeight": 650,
+                    "alignItems": "center"
+
+                }
             })(),
-            //"overflow": "hidden",
             "pointerEvents": !isOpen ? "none" : undefined,
         },
         "contactWrapper": {

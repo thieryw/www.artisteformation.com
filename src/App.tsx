@@ -64,9 +64,7 @@ export function App() {
   ]), [])
   const [isTransitioning, setIsTransitioning] = useState(true);
 
-  const { classes, theme } = useStyles({
-    isTransitioning
-  });
+  const { classes, theme } = useStyles();
 
   useEffect(() => {
 
@@ -257,7 +255,7 @@ export function App() {
   )
 }
 
-const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ theme, isTransitioning }) => ({
+const useStyles = tss.create(({ theme }) => ({
 
   "root": {
     "position": "relative"
@@ -270,10 +268,6 @@ const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ them
     "minHeight": "100%",
     "flexDirection": "column",
     "transition": "opacity 600ms",
-    "transitionDelay": isTransitioning ? undefined : "600ms",
-    "opacity": isTransitioning ? 0 : 1,
-    "height": isTransitioning ? 0 : undefined,
-    "overflow": isTransitioning ? "hidden" : undefined
 
   },
   "smallPrint": {
@@ -309,10 +303,6 @@ const useStyles = tss.withParams<{ isTransitioning: boolean; }>().create(({ them
     "transition": "opacity 1ms",
     "position": "absolute",
     "zIndex": 4000,
-    //"overflowX": "unset",
-    "transitionDelay": isTransitioning ? undefined : "600ms",
-    "opacity": isTransitioning ? 0 : 1,
-    "pointerEvents": isTransitioning ? "none" : undefined,
     ...(() => {
       if (theme.windowInnerWidth < breakpointValues.sm) {
         return {
