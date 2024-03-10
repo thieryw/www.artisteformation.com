@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useRef } from "react";
 import { Home } from "./pages/home/Home";
 import { useRoute, routes, routeDefs } from "./router";
 import { Text } from "./theme/Text";
@@ -20,6 +20,7 @@ import { Contact } from "@/pages/contact/Contact";
 import { TransitionComponent } from "@/components/TransitionComponent";
 import pattern from "@/assets/svg/pattern.svg";
 import { enableScreenScaler } from "screen-scaler/react";
+import { getScrollableParent } from "powerhooks/getScrollableParent";
 
 enableScreenScaler({
   targetWindowInnerWidth: ({ zoomFactor, actualWindowInnerWidth }) => {
@@ -65,6 +66,21 @@ export function App() {
   const [isTransitioning, setIsTransitioning] = useState(true);
 
   const { classes, theme } = useStyles();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(()=>{
+    if(ref.current === null){
+      return;
+    };
+    const scrollableParent = getScrollableParent({
+      "doReturnElementIfScrollable": true,
+      "element": ref.current
+    })
+    scrollableParent.scrollTo({
+      "top": 0,
+    })
+
+  }, [route.name, ref.current])
 
   useEffect(() => {
 
@@ -88,17 +104,17 @@ export function App() {
 
   const [initialScreenWidth] = useState(theme.windowInnerWidth);
 
-  useEffect(()=>{
+  useEffect(() => {
     function handleResize() {
       if (initialScreenWidth < breakpointValues.sm) {
-        if(window.screen.width < breakpointValues.sm){
+        if (window.screen.width < breakpointValues.sm) {
           return;
         }
         window.location.reload();
         return;
       }
 
-      if(window.screen.width >= breakpointValues.sm){
+      if (window.screen.width >= breakpointValues.sm) {
         return;
       }
       window.location.reload();
@@ -109,7 +125,7 @@ export function App() {
 
   }, [])
 
-  return (<div className={classes.root}>
+  return (<div ref={ref} className={classes.root}>
     <div className={classes.headerWrapper}>
       {
         (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&

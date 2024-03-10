@@ -9,13 +9,14 @@ export type PictureAnimatorProps = {
     classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
     src: string;
     sources?: {srcSet: string; type: string}[];
-    alt?: string
+    alt?: string;
+    animationDelay?: number;
 }
 
 export const PictureAnimator = memo((props: PictureAnimatorProps) => {
-    const { className, src, sources, alt } = props;
+    const { className, src, sources, alt, animationDelay = 0 } = props;
     const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.8 })
-    const { ref: imageRef, domRect: { width, height } } = useDomRect();
+    const { ref: imageRef, domRect: { width: imageWidth, height: imageHeight } } = useDomRect();
     const [isImageVisible, setIsImageVisible] = useState(inView);
     useEffect(() => {
         if (inView) {
@@ -26,9 +27,10 @@ export const PictureAnimator = memo((props: PictureAnimatorProps) => {
 
     const { classes, cx } = useStyles({
         "inView": isImageVisible,
-        width,
-        height,
-        "classesOverrides": props.classes
+        imageWidth,
+        imageHeight,
+        "classesOverrides": props.classes,
+        animationDelay
     });
 
     return <div ref={ref} className={cx(classes.root, className)}>
@@ -50,10 +52,13 @@ export const PictureAnimator = memo((props: PictureAnimatorProps) => {
 const useStyles = tss.withParams<
     {
         inView: boolean;
-        width: number;
-        height: number;
+        imageWidth: number;
+        imageHeight: number;
+        animationDelay: number;
     }
->().create(({ inView, width, height }) => {
+>().create(({ inView, imageHeight, imageWidth, animationDelay }) => {
+    const width = imageWidth / 1.2
+    const height = imageHeight / 1.2
     return ({
         "root": {
             "position": "relative",
@@ -66,13 +71,14 @@ const useStyles = tss.withParams<
             "whiteSpace": "nowrap",
             "width": inView ? width : 0,
             "transition": "width 1000ms",
+            "transitionDelay": `${animationDelay}ms`,
             "overflow": "hidden",
             height
         },
         "image": {
-            "transform": `scale(${inView ? 1.2 : 1})`,
-            "transition": "transform 1000ms"
-
+            "transform": `scale(${inView ? 1 : 1.2})`,
+            "transition": "transform 1000ms",
+            "transitionDelay": `${animationDelay}ms`
         }
     })
 })

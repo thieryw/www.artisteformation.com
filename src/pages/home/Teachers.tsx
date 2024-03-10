@@ -11,6 +11,7 @@ import webpCesar from "@/assets/webp/formateurs/galerie-formateur/2-cesar-guigue
 import webpHerzog from "@/assets/webp/formateurs/galerie-formateur/6-mathieu-herzog.webp";
 import webpPaillot from "@/assets/webp/formateurs/galerie-formateur/4-laurence-paillot.webp";
 import webpRoger from "@/assets/webp/formateurs/galerie-formateur/8-patrick-roger.webp";
+import { PictureAnimator } from "@/components/PictureAnimator";
 
 
 const jpgArray = [
@@ -61,11 +62,35 @@ export const Teachers = memo(() => {
         <div className={classes.grid}>
             {
                 webpArray.map((webp, index) => <div key={index}>
-                    <picture>
-                        <source srcSet={webp} type="image/webp" />
-                        <source srcSet={jpgArray[index]} type="image/jpeg" />
-                        <img className={classes.image} src={webp} alt="teacher portrait" />
-                    </picture>
+                    {
+                        (()=>{
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return <picture>
+                                    <source srcSet={webp} type="image/webp" />
+                                    <source srcSet={jpgArray[index]} type="image/jpeg" />
+                                    <img className={classes.image} src={webp} alt="teacher portrait" />
+                                </picture>
+                            }
+                            return <PictureAnimator 
+                                src={webp}
+                                alt="teacher portrait"
+                                classes={{
+                                    "image": classes.image
+                                }}
+                                animationDelay={400 * index}
+                                sources={[
+                                    {
+                                        "srcSet": webp,
+                                        "type": "images/webp"
+                                    },
+                                    {
+                                        "srcSet": jpgArray[index],
+                                        "type": "images/jpeg"
+                                    }
+                                ]}
+                            />
+                        })()
+                    }
                 </div>)
             }
         </div>
@@ -97,7 +122,7 @@ const useStyles = tss.create(({ theme }) => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "flexDirection": "column",
-                        ...(()=>{
+                        ...(() => {
                             const leftRight = 25;
                             const topBottom = 70;
                             return {
@@ -145,24 +170,35 @@ const useStyles = tss.create(({ theme }) => {
         "grid": {
             "display": "grid",
             "gap": 8,
-            "gridTemplateColumns": "repeat(2, 1fr)",
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
-                        "marginBottom": 50
+                        "marginBottom": 50,
+                        "gridTemplateColumns": "repeat(2, 1fr)",
                     }
                 }
                 return {
-                    "width": 660,
                     "marginLeft": 134,
+                    "gridTemplateColumns": "repeat(2, 322px)",
 
                 }
             })()
         },
         "image": {
-            "objectFit": "cover",
-            "height": "100%",
-            "width": "100%"
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return {
+                        "objectFit": "cover",
+                        "height": "100%",
+                        "width": "100%",
+
+                    }
+                }
+                return {
+                    "objectFit": "cover",
+                    "width": 322,
+                }
+            })()
         }
 
     })

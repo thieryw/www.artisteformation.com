@@ -27,11 +27,9 @@ type TransitionComponentProps = {
 
   const childVariants = {
     "hidden": {
-      "opacity": 0,
-      "y": -100
+      "y": "100%"
     },
     "visible": {
-      "opacity": 1,
       "y": 0
     }
   };
@@ -109,16 +107,20 @@ export const TransitionComponent = memo((props: TransitionComponentProps) => {
         >
           {
             Array.from(transitionText).map((char, index) =>
-              <motion.div
-                variants={childVariants}
-                transition={{
-                  "ease": "easeOut",
-                  "duration": char === " " ? 0 : 0.7
-                }} 
-                key={index}
-              >
-                <Text typo="transition">{char === " " ? "\u00A0" : char}</Text>
-              </motion.div>)
+              <div style={{ "overflow": "hidden" }}>
+                <motion.div
+                  variants={childVariants}
+                  transition={{
+                    "ease": "easeInOut",
+                    "duration": char === " " ? 0 : 0.7
+                  }}
+                  key={index}
+                >
+                  <Text style={{"marginBlock": 0}} typo="transition">{char === " " ? "\u00A0" : char}</Text>
+                </motion.div>
+
+              </div>
+            )
           }
         </motion.div>
       }
@@ -151,8 +153,8 @@ const useStyles = tss.withParams<
       "backgroundSize": "cover",
       "position": "fixed",
       "transition": isActive ? undefined : "top 800ms",
-      ...(()=>{
-        if(theme.windowInnerWidth < breakpointValues.sm){
+      ...(() => {
+        if (theme.windowInnerWidth < breakpointValues.sm) {
           return {
             "top": isActive ? 0 : -theme.windowInnerHeight,
             "height": "100vh"
