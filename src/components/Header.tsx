@@ -332,7 +332,7 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     return {
                         "top": isOpen ? 0 : -window.screen.height,
-                        "height": "100%",
+                        "height": "100vh",
                         "overflow": "auto"
                     }
                 }
