@@ -47,64 +47,160 @@ export function Header(props: HeaderProps) {
                 className={classes.toggleMenuButton}
             />
             <div className={classes.menu} role="menu">
-                {
-                    (() => {
-                        if (theme.windowInnerWidth < breakpointValues.sm) {
-                            return undefined
-                        }
-                        return <>
-                            {
-                                buttonLink !== undefined &&
-                                <LinkButton
-                                    {
-                                    ...buttonLink
-                                    }
-                                    className={classes.linkButton}
-                                />
-
+                <div className={classes.menuInner}>
+                    {
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return undefined
                             }
-                        </>
-                    })()
+                            return <>
+                                {
+                                    buttonLink !== undefined &&
+                                    <LinkButton
+                                        {
+                                        ...buttonLink
+                                        }
+                                        className={classes.linkButton}
+                                    />
 
-                }
-                {
-                    (() => {
-                        if (theme.windowInnerWidth < breakpointValues.sm) {
-                            return undefined;
-                        }
-                        return <div className={classes.contactWrapper}>
+                                }
+                            </>
+                        })()
 
-                            {
-                                logo !== undefined &&
-                                <div>
+                    }
+                    {
+                        (() => {
+                            if (theme.windowInnerWidth < breakpointValues.sm) {
+                                return undefined;
+                            }
+                            return <div className={classes.contactWrapper}>
+
+                                {
+                                    logo !== undefined &&
+                                    <div>
+                                        {
+                                            typeof logo === "string" ?
+                                                <Logo width={119} logoUrl={logo} /> :
+                                                logo
+                                        }
+                                    </div>
+                                }
+                                {
+
+                                    contact !== undefined &&
+                                    <div className={classes.contact}>
+                                        {
+                                            contact
+                                        }
+                                    </div>
+                                }
+
+                                {
+                                    logoLinks !== undefined &&
+                                    <div className={classes.logoLinks}>
+                                        {
+                                            logoLinks.map(({ logo, label, ...rest }, index) => <a
+                                                key={label}
+                                                {...rest}
+                                                aria-label={label}
+                                                className={classes.logoLink}
+                                                style={{
+                                                    "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing,
+                                                }}
+                                            >{typeof logo === "string" ?
+                                                <Logo width={62} logoUrl={logo} /> :
+                                                logo
+                                                }
+                                            </a>)
+                                        }
+                                    </div>
+                                }
+                                {
+                                    smallPrint !== undefined &&
+                                    <div>
+                                        {smallPrint}
+                                    </div>
+
+                                }
+
+
+                            </div>
+                        })()
+                    }
+                    <div className={classes.mobileWrapper}>
+                        {
+                            (() => {
+                                if (logo === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
+                                    return undefined;
+                                }
+                                return <div className={classes.mobileLogoWrapper}>
                                     {
                                         typeof logo === "string" ?
-                                            <Logo width={119} logoUrl={logo} /> :
+                                            <Logo width={90} logoUrl={logo} /> :
                                             logo
                                     }
                                 </div>
-                            }
-                            {
 
-                                contact !== undefined &&
-                                <div className={classes.contact}>
-                                    {
-                                        contact
-                                    }
-                                </div>
+
+                            })()
+                        }
+
+                        <div className={classes.linksWrapper}>
+                            {
+                                links.map(({ href, label, onClick }, index) => <div
+                                    onClick={handleMenuItemClick}
+                                    key={label}
+                                    style={{
+                                        "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap
+                                    }}
+                                >
+                                    <Link
+                                        key={label}
+                                        href={href}
+                                        onClick={onClick}
+                                        label={label}
+                                        isActive={label === currentLinkLabel}
+                                    />
+                                </div>)
                             }
 
-                            {
-                                logoLinks !== undefined &&
-                                <div className={classes.logoLinks}>
+                        </div>
+                        {
+                            (() => {
+                                if (theme.windowInnerWidth < breakpointValues.sm) {
+                                    return <>
+                                        {
+                                            buttonLink !== undefined &&
+                                            <LinkButton
+                                                {
+                                                ...buttonLink
+                                                }
+                                                className={classes.linkButton}
+                                            />
+
+                                        }
+                                    </>
+
+                                }
+                                return undefined;
+                            })()
+
+                        }
+
+                        {
+                            (() => {
+                                if (logoLinks === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
+                                    return undefined;
+                                }
+                                return <div className={classes.logoLinks}>
                                     {
                                         logoLinks.map(({ logo, label, ...rest }, index) => <a
                                             key={label}
                                             {...rest}
                                             aria-label={label}
-                                            className={classes.logoLink}
                                             style={{
-                                                "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing,
+                                                "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
+
                                             }}
                                         >{typeof logo === "string" ?
                                             <Logo width={62} logoUrl={logo} /> :
@@ -113,114 +209,20 @@ export function Header(props: HeaderProps) {
                                         </a>)
                                     }
                                 </div>
-                            }
-                            {
-                                smallPrint !== undefined &&
-                                <div>
+                            })()
+                        }
+                        {
+                            (() => {
+                                if (smallPrint === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
+                                    return undefined;
+                                }
+                                return <div>
                                     {smallPrint}
                                 </div>
-
-                            }
-
-
-                        </div>
-                    })()
-                }
-                <div className={classes.mobileWrapper}>
-                    {
-                        (() => {
-                            if (logo === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
-                                return undefined;
-                            }
-                            return <div className={classes.mobileLogoWrapper}>
-                                {
-                                    typeof logo === "string" ?
-                                        <Logo width={90} logoUrl={logo} /> :
-                                        logo
-                                }
-                            </div>
-
-
-                        })()
-                    }
-
-                    <div className={classes.linksWrapper}>
-                        {
-                            links.map(({ href, label, onClick }, index) => <div
-                                onClick={handleMenuItemClick}
-                                key={label}
-                                style={{
-                                    "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap
-                                }}
-                            >
-                                <Link
-                                    key={label}
-                                    href={href}
-                                    onClick={onClick}
-                                    label={label}
-                                    isActive={label === currentLinkLabel}
-                                />
-                            </div>)
+                            })()
                         }
 
                     </div>
-                    {
-                        (() => {
-                            if (theme.windowInnerWidth < breakpointValues.sm) {
-                                return <>
-                                    {
-                                        buttonLink !== undefined &&
-                                        <LinkButton
-                                            {
-                                            ...buttonLink
-                                            }
-                                            className={classes.linkButton}
-                                        />
-
-                                    }
-                                </>
-
-                            }
-                            return undefined;
-                        })()
-
-                    }
-
-                    {
-                        (() => {
-                            if (logoLinks === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
-                                return undefined;
-                            }
-                            return <div className={classes.logoLinks}>
-                                {
-                                    logoLinks.map(({ logo, label, ...rest }, index) => <a
-                                        key={label}
-                                        {...rest}
-                                        aria-label={label}
-                                        style={{
-                                            "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing
-
-                                        }}
-                                    >{typeof logo === "string" ?
-                                        <Logo width={62} logoUrl={logo} /> :
-                                        logo
-                                        }
-                                    </a>)
-                                }
-                            </div>
-                        })()
-                    }
-                    {
-                        (() => {
-                            if (smallPrint === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
-                                return undefined;
-                            }
-                            return <div>
-                                {smallPrint}
-                            </div>
-                        })()
-                    }
-
                 </div>
 
             </div>
@@ -321,15 +323,32 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "marginBottom": 60
 
         },
+        "menuInner": {
+
+            "display": "flex",
+            "position": "relative",
+            "height": "100%",
+            ...(() => {
+                const value = 150;
+                if (theme.windowInnerHeight < 650) {
+                    return {
+                        "paddingTop": value,
+                        "paddingBottom": value
+                    }
+                }
+                return {
+                    "alignItems": "center",
+                }
+            })()
+        },
         "menu": {
             "position": "fixed",
             "zIndex": 4001,
-            "display": "flex",
             "transition": `top ${transitionTime}ms`,
             "width": "100%",
             "backgroundColor": theme.colors.lighterGray,
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "top": isOpen ? 0 : -theme.windowInnerHeight,
                         "height": theme.windowInnerHeight,
@@ -339,10 +358,7 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 return {
                     "top": isOpen ? 0 : "-100%",
                     "height": "100%",
-                    "overflow": "hidden",
-                    "minHeight": 650,
-                    "alignItems": "center"
-
+                    "overflow": theme.windowInnerHeight < 650 ? "auto" : "hidden",
                 }
             })(),
             "pointerEvents": !isOpen ? "none" : undefined,
