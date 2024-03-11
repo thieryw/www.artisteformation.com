@@ -20,6 +20,9 @@ export default defineConfig({
     }
 
   },
-  "base": "/www.artisteformation.com/"
+  "base": "/www.artisteformation.com/",
+  "server": {
+    "host": true
+  }
 })
 
