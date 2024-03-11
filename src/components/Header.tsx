@@ -330,7 +330,7 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "height": "100%",
             ...(() => {
                 const value = 150;
-                if (theme.windowInnerHeight < 650) {
+                if (theme.windowInnerHeight < 650 && theme.windowInnerWidth >= breakpointValues.sm) {
                     return {
                         "paddingTop": value,
                         "paddingBottom": value
@@ -351,7 +351,7 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "top": isOpen ? 0 : -theme.windowInnerHeight,
-                        "height": theme.windowInnerHeight,
+                        "height": "100dvh",
                         "overflow": "auto"
                     }
                 }
