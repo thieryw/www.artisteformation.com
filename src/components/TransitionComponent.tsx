@@ -157,7 +157,7 @@ const useStyles = tss.withParams<
         if (theme.windowInnerWidth < breakpointValues.sm) {
           return {
             "top": isActive ? 0 : -window.screen.height,
-            "height": window.screen.height
+            "height": "100%"
 
           }
         }
