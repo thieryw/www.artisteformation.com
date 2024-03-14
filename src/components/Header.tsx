@@ -1,4 +1,4 @@
-import { useState, memo, useRef } from 'react';
+import { useState, memo, useRef, useEffect } from 'react';
 import type { ReactNode } from "react";
 import { breakpointValues, tss } from "../theme";
 import { Text } from "../theme/Text";
@@ -6,6 +6,73 @@ import { useConstCallback } from "powerhooks/useConstCallback";
 import { Logo } from "./Logo";
 import type { Link } from "../tools/link";
 import { LinkButton } from "./LinkButton";
+import type { Variants } from "framer-motion";
+import {motion, useAnimation} from "framer-motion";
+
+const linksVariants: Variants = {
+    "hidden": {
+        "opacity": 1
+    },
+    "visible": {
+        "opacity": 1,
+        "transition": {
+            "staggerChildren": 0.1,
+            "delay": 1.2
+        }
+
+    }
+}
+
+const linkVariants: Variants = {
+    "hidden": {
+        "y": "100%"
+    },
+    "visible": {
+        "y": 0
+    }
+}
+
+const buttonVariants: Variants = {
+    "hidden": {
+        "opacity": 0
+    },
+    "visible": {
+        "opacity": 1
+    }
+
+}
+const logoVariants: Variants = {
+    "hidden": {
+        "opacity": 0,
+        "scale": 0.8
+    },
+    "visible": {
+        "opacity": 1,
+        "scale": 1
+
+    }
+}
+
+const socialLinksVariants: Variants = {
+    "hidden": {
+        "opacity": 1
+    },
+    "visible": {
+        "opacity": 1,
+        "transition": {
+            "delay": 1.8,
+            "staggerChildren": 0.1
+        }
+    }
+}
+const socialLinkVariants: Variants = {
+    "hidden": {
+        "x": "-100%"
+    },
+    "visible": {
+        "x": 0
+    }
+}
 
 
 export type HeaderProps = {
@@ -25,6 +92,16 @@ export type HeaderProps = {
 export function Header(props: HeaderProps) {
     const { links, className, logoLinks, currentLinkLabel, logo, contact, smallPrint, buttonLink } = props;
     const [isOpen, setIsOpen] = useState(false);
+    const controls = useAnimation();
+
+    useEffect(()=>{
+        if(isOpen){
+            controls.start("visible");
+            return;
+        };
+        controls.start("hidden")
+
+    }, [isOpen, controls])
 
 
 
@@ -56,12 +133,23 @@ export function Header(props: HeaderProps) {
                             return <>
                                 {
                                     buttonLink !== undefined &&
-                                    <LinkButton
-                                        {
-                                        ...buttonLink
-                                        }
-                                        className={classes.linkButton}
-                                    />
+                                    <motion.div
+                                        initial="hidden"
+                                        variants={buttonVariants}
+                                        animate={controls}
+                                        transition={{
+                                            "ease": "easeInOut",
+                                            "duration": 0.9,
+                                            "delay": 1.4
+                                        }}
+                                    >
+                                        <LinkButton
+                                            {
+                                            ...buttonLink
+                                            }
+                                            className={classes.linkButton}
+                                        />
+                                    </motion.div>
 
                                 }
                             </>
@@ -77,49 +165,95 @@ export function Header(props: HeaderProps) {
 
                                 {
                                     logo !== undefined &&
-                                    <div>
+                                    <motion.div
+                                        initial="hidden"
+                                        variants={logoVariants}
+                                        animate={controls}
+                                        transition={{
+                                            "ease": "easeInOut",
+                                            "delay": 1.4,
+                                            "duration": 0.8
+                                        }}
+                                    >
                                         {
                                             typeof logo === "string" ?
                                                 <Logo width={119} logoUrl={logo} /> :
                                                 logo
                                         }
-                                    </div>
+                                    </motion.div>
                                 }
                                 {
 
                                     contact !== undefined &&
-                                    <div className={classes.contact}>
+                                    <motion.div 
+                                        className={classes.contact}
+                                        initial="hidden"
+                                        variants={buttonVariants}
+                                        animate={controls}
+                                        transition={{
+                                            "ease": "easeInOut",
+                                            "delay": 1.2,
+                                            "duration": 0.9
+                                        }}
+
+                                    >
                                         {
                                             contact
                                         }
-                                    </div>
+                                    </motion.div>
                                 }
 
                                 {
                                     logoLinks !== undefined &&
-                                    <div className={classes.logoLinks}>
+                                    <motion.div 
+                                        className={classes.logoLinks}
+                                        initial="hidden"
+                                        animate={controls}
+                                        variants={socialLinksVariants}
+                                    >
                                         {
-                                            logoLinks.map(({ logo, label, ...rest }, index) => <a
-                                                key={label}
-                                                {...rest}
-                                                aria-label={label}
+                                            logoLinks.map(({ logo, label, ...rest }, index) => <div
                                                 className={classes.logoLink}
                                                 style={{
+                                                    "overflow": "hidden",
                                                     "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing,
                                                 }}
-                                            >{typeof logo === "string" ?
-                                                <Logo width={62} logoUrl={logo} /> :
-                                                logo
-                                                }
-                                            </a>)
+                                            >
+                                                <motion.div
+                                                    variants={socialLinkVariants}
+                                                    transition={{
+                                                        "ease": "easeInOut",
+                                                        "duration": 0.8
+                                                    }}
+                                                >
+                                                    <a
+                                                        key={label}
+                                                        {...rest}
+                                                        aria-label={label}
+                                                    >{typeof logo === "string" ?
+                                                        <Logo width={62} logoUrl={logo} /> :
+                                                        logo
+                                                        }
+                                                    </a>
+                                                </motion.div>
+                                            </div>)
                                         }
-                                    </div>
+                                    </motion.div>
                                 }
                                 {
                                     smallPrint !== undefined &&
-                                    <div>
+                                    <motion.div
+                                        initial="hidden"
+                                        variants={buttonVariants}
+                                        animate={controls}
+                                        transition={{
+                                            "ease": "easeInOut",
+                                            "duration": 0.9,
+                                            "delay": 1.4
+                                        }}
+                                    >
                                         {smallPrint}
-                                    </div>
+                                    </motion.div>
 
                                 }
 
@@ -145,26 +279,42 @@ export function Header(props: HeaderProps) {
                             })()
                         }
 
-                        <div className={classes.linksWrapper}>
+                        <motion.div
+                            initial="hidden"
+                            animate={controls}
+                            variants={linksVariants}
+                            className={classes.linksWrapper}
+                        >
                             {
                                 links.map(({ href, label, onClick }, index) => <div
                                     onClick={handleMenuItemClick}
                                     key={label}
                                     style={{
-                                        "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap
+                                        "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap,
+                                        "overflow": "hidden"
                                     }}
                                 >
-                                    <Link
-                                        key={label}
-                                        href={href}
-                                        onClick={onClick}
-                                        label={label}
-                                        isActive={label === currentLinkLabel}
-                                    />
+                                    <motion.div
+                                        variants={linkVariants}
+                                        transition={{
+                                            "ease": "easeInOut",
+                                            "duration": 0.9
+                                        }}
+
+                                    >
+                                        <Link
+                                            key={label}
+                                            href={href}
+                                            onClick={onClick}
+                                            label={label}
+                                            isActive={label === currentLinkLabel}
+                                        />
+
+                                    </motion.div>
                                 </div>)
                             }
 
-                        </div>
+                        </motion.div>
                         {
                             (() => {
                                 if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -255,10 +405,10 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
 
         },
         "logoLink": {
-            "transition": "transform 400ms",
+            "transition": "transform 600ms",
             ":hover": {
-                "transform": "scale(1.05)"
-            }
+                "transform": "scale(1.1)",
+            },
 
         },
         "mobileWrapper": {

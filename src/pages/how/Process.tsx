@@ -2,7 +2,7 @@ import { memo } from "react"
 import { breakpointValues, tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
-import logo from "@/assets/svg/logo.svg";
+import logo from "@/assets/svg/grey-logo.svg";
 import { Logo } from "@/components/Logo";
 import jpg from "@/assets/jpg/comment/slider/1-intermittent-du-spectacle.jpeg";
 import webp from "@/assets/webp/comment/slider/1-intermittent-du-spectacle.webp";

@@ -1,9 +1,31 @@
-import React, { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { FormspreeProvider, useForm, ValidationError } from "@formspree/react";
 import { useTranslation } from "@/i18n";
 import { tss, Text, breakpointValues } from "@/theme";
+import { motion, useAnimation } from "framer-motion";
+import type { Variant } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 
+const titleVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": "100%",
+    },
+    "visible": {
+        "y": 0,
+    }
+};
+
+const buttonVariants: Record<string, Variant> = {
+    "hidden": {
+        "y": 40,
+        "opacity": 0
+    },
+    "visible": {
+        "y": 0,
+        "opacity": 1
+    }
+};
 export const Form = memo(() => {
 
     const [state, handleSubmit] = useForm("xjvnkepy")
@@ -11,10 +33,19 @@ export const Form = memo(() => {
     const { classes, theme } = useStyles();
 
 
+    const controls = useAnimation();
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible")
+        }
+
+    }, [controls, inView])
 
     return (
         <FormspreeProvider project="2385580700561571129">
-            <div className={classes.root}>
+            <div ref={ref} className={classes.root}>
                 {
                     (() => {
                         if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -39,7 +70,24 @@ export const Form = memo(() => {
                             }
                         })()
                     }
-                    <Text className={classes.formTitle} typo="heading2">{t("formTitle")}</Text>
+                    <div style={{
+                        "overflow": "hidden",
+                        "marginBottom": 80,
+                    }}>
+                        <motion.div
+                            initial="hidden"
+                            variants={titleVariants}
+                            animate={controls}
+                            transition={{
+                                "ease": "easeInOut",
+                                "duration": 0.7
+                            }}
+                        >
+
+                            <Text className={classes.formTitle} typo="heading2">{t("formTitle")}</Text>
+                        </motion.div>
+
+                    </div>
                     <form className={classes.form} onSubmit={handleSubmit}>
                         <input
                             placeholder={t("formNamePlaceholder")}
@@ -109,16 +157,31 @@ export const Form = memo(() => {
                             errors={state.errors}
                         />
                         {
-                            state.submitting && 
+                            state.submitting &&
                             <Text className={classes.submissionMessage} typo="sectionPageOrButton">{t("sending")}</Text>
                         }
                         {
                             (state.succeeded && !state.submitting) &&
                             <Text className={classes.submissionMessage} typo="sectionPageOrButton">{t("sent")}</Text>
                         }
-                        <button className={classes.button} type="submit" disabled={state.submitting}>
-                            <Text className={classes.buttonText} typo="sectionPageOrButton">{t("formSend")}</Text>
-                        </button>
+                        <motion.div
+                            initial="hidden"
+                            animate={controls}
+                            variants={buttonVariants}
+                            style={{
+                                "justifySelf": "center"
+                            }}
+                            transition={{
+                                "delay": 0.6,
+                                "ease": "easeInOut",
+                                "duration": 0.7
+                            }}
+                        >
+
+                            <button className={classes.button} type="submit" disabled={state.submitting}>
+                                <Text className={classes.buttonText} typo="sectionPageOrButton">{t("formSend")}</Text>
+                            </button>
+                        </motion.div>
                     </form>
 
                 </div>
@@ -224,7 +287,6 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
 
         },
         "formTitle": {
-            "marginBottom": 80,
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
@@ -280,7 +342,6 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
             "backgroundColor": theme.colors.bloodOrange,
             "transition": "background-color 500ms",
             "cursor": "pointer",
-            "justifySelf": "center",
             [`&:hover .${classes.buttonText}`]: {
                 "color": theme.colors.bloodOrange
 

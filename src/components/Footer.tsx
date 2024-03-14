@@ -201,9 +201,9 @@ const useStyles = tss.create(({ theme }) => ({
 
     },
     "socialMediaLink": {
+        "transition": "transform 600ms",
         ":hover": {
-            "transition": "transform 400ms",
-            "transform": "scale(1.05)"
+            "transform": "scale(1.1)"
         }
 
     },

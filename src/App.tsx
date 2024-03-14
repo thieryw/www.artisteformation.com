@@ -216,7 +216,9 @@ export function App() {
       })()}
     />
 
-    <div className={classes.bodyWrapper}>
+    <div style={{
+      "opacity": isTransitioning ? 0 : 1
+    }} className={classes.bodyWrapper}>
       <div className={classes.body}>
         {route.name === "home" && <Home />}
         {route.name === "how" && <How />}

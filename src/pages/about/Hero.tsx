@@ -5,6 +5,7 @@ import fresquePng from "@/assets/png/a-propos/fresque-a-propos.png"
 import fresqueMobilePng from "@/assets/png/a-propos/fresque-a-propos-mobile.png";
 import logoSvg from "@/assets/svg/logo.svg";
 import { Logo } from "@/components/Logo";
+import { motion } from "framer-motion";
 
 export const Hero = memo(() => {
 
@@ -39,10 +40,68 @@ export const Hero = memo(() => {
                 return <>
                     <div className={classes.articleWrapper}>
                         <div className={classes.background}></div>
-                        <Text className={classes.title} typo="heading1">{t("pageTitle")}</Text>
+                        <div style={{
+                            "overflow": "hidden",
+                            "marginBottom": 90
+                        }}>
+                            <motion.div
+                                initial={{
+                                    "y": "100%"
+                                }}
+                                animate={{
+                                    "y": 0,
+                                    "transition": {
+                                        "ease": "easeInOut",
+                                        "duration": 0.7,
+                                        "delay": 2.4
+                                    }
+                                }}
+                            >
+                                <Text className={classes.title} typo="heading1">{t("pageTitle")}</Text>
+                            </motion.div>
+                        </div>
                         <div className={classes.subtitleAndParagraph}>
-                            <Text className={classes.subtitle} typo="additionalTitle">{t("pageSubtitle")}</Text>
-                            <Text className={classes.paragraph} typo="paragraph">{t("introParagraph")}</Text>
+                            <div style={{
+                                "overflow": "hidden",
+                                "top": "0.5rem",
+                                "position": "relative"
+                            }}>
+                                <motion.div
+                                    initial={{
+                                        "y": "100%"
+                                    }}
+                                    animate={{
+                                        "y": 0,
+                                        "transition": {
+                                            "ease": "easeInOut",
+                                            "duration": 0.7,
+                                            "delay": 2.7
+                                        }
+                                    }}
+                                >
+                                    <Text className={classes.subtitle} typo="additionalTitle">{t("pageSubtitle")}</Text>
+                                </motion.div>
+                            </div>
+                            <div style={{
+                                "overflow": "hidden"
+                            }}>
+                                <motion.div
+                                    initial={{
+                                        "opacity": 0
+                                    }}
+                                    animate={{
+                                        "opacity": 1,
+                                        "transition": {
+                                            "ease": "easeInOut",
+                                            "duration": 0.7,
+                                            "delay": 3
+                                        }
+                                    }}
+                                >
+                                    <Text className={classes.paragraph} typo="paragraph">{t("introParagraph")}</Text>
+                                </motion.div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -85,8 +144,6 @@ const useStyles = tss.create(({ theme }) => {
         "subtitle": {
             "marginRight": 180,
             "color": theme.colors.bloodOrange,
-            "position": "relative",
-            "top": "0.5rem"
         },
         "subtitleAndParagraph": {
             "display": "flex",
@@ -100,7 +157,6 @@ const useStyles = tss.create(({ theme }) => {
         },
         "title": {
             "width": 620,
-            "marginBottom": 90,
             "position": "relative"
         },
         "fresque": {

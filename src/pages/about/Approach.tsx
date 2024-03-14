@@ -6,6 +6,7 @@ import approachJpg from "@/assets/jpg/a-propos/valeurs-2.jpeg";
 import approachWebp from "@/assets/webp/a-propos/valeurs-2.webp";
 import approachMobileJpg from "@/assets/jpg/a-propos/valeurs-mobile.jpeg";
 import approachMobileWebp from "@/assets/webp/a-propos/valeurs-mobile.webp";
+import { PictureAnimator } from "@/components/PictureAnimator";
 
 
 export const Approach = memo(() => {
@@ -44,11 +45,37 @@ export const Approach = memo(() => {
             })()
         }
 
-        <picture>
-            <source srcSet={images.webp} type="image/webp" />
-            <source srcSet={images.jpg} type="image/jpeg" />
-            <img className={classes.image} src={images.webp} alt="approach" />
-        </picture>
+        {
+            (()=>{
+                if (theme.windowInnerWidth < breakpointValues.sm) {
+                    return <picture>
+                        <source srcSet={images.webp} type="image/webp" />
+                        <source srcSet={images.jpg} type="image/jpeg" />
+                        <img className={classes.image} src={images.webp} alt="approach" />
+                    </picture>
+                }
+
+                return <PictureAnimator 
+                    src={images.webp}
+                    className={classes.imageWrapper}
+                    classes={{
+                        "image": classes.image
+                    }}
+                    sources={[
+                        {
+                            "srcSet": images.webp,
+                            "type": "image/webp"
+                        },
+                        {
+                            "srcSet": images.jpg,
+                            "type": "image/jpeg"
+                        }
+                    ]}
+                    alt="approach"
+                />
+
+            })()
+        }
 
 
     </section>
@@ -58,8 +85,8 @@ const useStyles = tss.create(({ theme }) => {
     const margin = 105;
     return ({
         "root": {
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "marginTop": 90
                     };
@@ -73,20 +100,22 @@ const useStyles = tss.create(({ theme }) => {
             })()
 
         },
+        "imageWrapper": {
+            "position": "relative",
+            "marginLeft": margin,
+            "top": -215,
+        },
         "image": {
             "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)",
-            ...(()=>{
-                if(theme.windowInnerWidth < breakpointValues.sm){
+            ...(() => {
+                if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
                         "objectFit": "cover",
                         "width": "100%"
                     };
                 }
                 return {
-                    "maxWidth": 605,
-                    "marginLeft": margin,
-                    "position": "relative",
-                    "top": -215,
+                    "width": 605,
 
                 }
             })()

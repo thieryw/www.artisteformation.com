@@ -5,6 +5,7 @@ import { Article } from "@/components/Article";
 import { CardSlider } from "@/components/CardSlider";
 import { LinkButton } from "@/components/LinkButton";
 import { routes } from "@/router";
+import pattern from "@/assets/svg/a-propos/background-pattern.svg"
 
 
 export const CheckList = memo(() => {
@@ -35,6 +36,7 @@ export const CheckList = memo(() => {
     const { classes, theme } = useStyles();
 
     return <section className={classes.root}>
+        <img className={classes.pattern} src={pattern} alt="pattern" />
         {
             (() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -91,6 +93,7 @@ export const CheckList = memo(() => {
                         paragraph={paragraph}
                         hasSmallLine={true}
                         key={title}
+                        isAnimated={true}
                     />
                 </div>)
 
@@ -105,6 +108,7 @@ export const CheckList = memo(() => {
 const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
+            "position": "relative",
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     const value = 25;
@@ -135,6 +139,13 @@ const useStyles = tss.create(({ theme }) => {
 
                 }
             })()
+
+        },
+        "pattern": {
+            "position": "absolute",
+            "top": -3,
+            "right": 0,
+            "width": 760
 
         },
         "number": {

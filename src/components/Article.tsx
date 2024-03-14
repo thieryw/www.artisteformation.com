@@ -50,6 +50,17 @@ const paragraphAndButtonVariants: Record<string, Variant> = {
     }
 };
 
+const smallDividerVariants: Record<string, Variant> = {
+    "hidden": {
+        "width": 0
+    },
+    "visible": {
+        "width": 50
+    }
+
+
+}
+
 
 export const Article = memo((props: ArticleProps) => {
 
@@ -193,7 +204,25 @@ export const Article = memo((props: ArticleProps) => {
         }
         {
             hasSmallLine &&
-            <div className={classes.smallLine}></div>
+            <motion.div 
+                className={classes.smallLine}
+                {
+                    ...(()=>{
+                        if(!isAnimated){
+                            return undefined
+                        }
+                        return {
+                            "variants": smallDividerVariants,
+                            "transition": {
+                                "ease": "easeInOut",
+                                "duration": 0.7,
+                                "delay": animationDelay + 0.55
+                            }
+                        }
+                    })()
+                }
+            ></motion.div>
+
         }
         {
             (paragraph !== undefined || secondParagraph) &&

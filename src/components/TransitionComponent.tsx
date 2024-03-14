@@ -1,5 +1,6 @@
-import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { memo, useEffect } from 'react';
+import type { Variants } from "framer-motion";
+import { motion, useAnimation } from 'framer-motion';
 import { tss, Text, breakpointValues } from "@/theme";
 import { Logo } from "@/components/Logo";
 
@@ -15,24 +16,25 @@ type TransitionComponentProps = {
   isActive: boolean;
 }
 
-  const containerVariants = {
-    "hidden": { "opacity": 1 },
-    "visible": {
-      "opacity": 1,
-      "transition": {
-        "staggerChildren": 0.10
-      }
-    }
-  };
 
-  const childVariants = {
-    "hidden": {
-      "y": "100%"
-    },
-    "visible": {
-      "y": 0
-    }
-  };
+const titleVariants: Variants = {
+  "hidden": {
+    "y": "100%"
+  },
+  "visible": {
+    "y": 0
+  }
+};
+
+const logoVariants: Variants = {
+  "hidden": {
+    "opacity": 0
+  },
+  "visible": {
+    "opacity": 1
+  }
+}
+
 export const TransitionComponent = memo((props: TransitionComponentProps) => {
   const {
     className,
@@ -50,6 +52,18 @@ export const TransitionComponent = memo((props: TransitionComponentProps) => {
     "classesOverrides": props.classes
 
   });
+  const controls = useAnimation();
+  useEffect(() => {
+    if (isActive) {
+      controls.start("visible")
+      return;
+    }
+
+    controls.start("hidden")
+
+
+
+  }, [isActive, controls])
 
 
   return <div
@@ -59,9 +73,14 @@ export const TransitionComponent = memo((props: TransitionComponentProps) => {
       {
         logoUrl !== undefined &&
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          initial={"hidden"}
+          animate={controls}
+          variants={logoVariants}
+          transition={{ 
+            "delay": 0.8,
+            "ease": "easeInOut",
+            "duration": 0.9
+          }}
         ><Logo
             className={classes.logo}
             width={(() => {
@@ -81,48 +100,43 @@ export const TransitionComponent = memo((props: TransitionComponentProps) => {
         <div className={classes.titleWrapper}>
           {
             splashScreenTitle.split(" ").map((title, index) =>
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  "ease": "easeOut",
-                  "delay": index === 0 ? 1 : 1.1,
-                  "duration": 1
-                }}
-              >
-                <Text typo="heading1">{title}</Text>
-              </motion.div>)
+              <div style={{ "overflow": "hidden" }}>
+                <motion.div
+                  key={index}
+                  variants={titleVariants}
+                  initial="hidden"
+                  animate={controls}
+                  transition={{
+                    "ease": "easeOut",
+                    "delay": index === 0 ? 1 : 1.1,
+                    "duration": 0.8
+                  }}
+                >
+                  <Text typo="heading1">{title}</Text>
+                </motion.div>
+              </div>
+            )
           }
         </div>
       }
       {
         transitionText !== undefined &&
-        <motion.div
-          className={classes.transitionTextWrapper}
-          animate="visible"
-          initial="hidden"
-          variants={containerVariants}
-          key={transitionText}
-        >
-          {
-            Array.from(transitionText).map((char, index) =>
-              <div style={{ "overflow": "hidden" }}>
-                <motion.div
-                  variants={childVariants}
-                  transition={{
-                    "ease": "easeInOut",
-                    "duration": char === " " ? 0 : 0.7
-                  }}
-                  key={index}
-                >
-                  <Text style={{"marginBlock": 0}} typo="transition">{char === " " ? "\u00A0" : char}</Text>
-                </motion.div>
+        <div style={{ "overflow": "hidden" }}>
+          <motion.div
+            initial="hidden"
+            animate={controls}
+            variants={titleVariants}
+            transition={{
+              "ease": "easeInOut",
+              "duration": 0.8,
+              "delay": 0.6
 
-              </div>
-            )
-          }
-        </motion.div>
+            }}
+          >
+            <Text style={{ "marginBlock": 0 }} typo="transition">{transitionText}</Text>
+          </motion.div>
+
+        </div>
       }
     </div>
 
@@ -152,12 +166,12 @@ const useStyles = tss.withParams<
       "backgroundBlendMode": "soft-light",
       "backgroundSize": "cover",
       "position": "fixed",
-      "transition": isActive ? undefined : "top 800ms",
+      "transition": "top 800ms",
       ...(() => {
         if (theme.windowInnerWidth < breakpointValues.sm) {
           return {
             "top": isActive ? 0 : -theme.windowInnerHeight,
-            "height": theme.windowInnerHeight,
+            "height": "100dvh",
 
           }
         }
@@ -213,8 +227,5 @@ const useStyles = tss.withParams<
       })()
 
     },
-    "transitionTextWrapper": {
-      "display": "flex",
-    }
   })
 })

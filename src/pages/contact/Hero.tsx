@@ -6,7 +6,7 @@ import fbIcon from "@/assets/svg/fb-icon.svg";
 import youtubeIcon from "@/assets/svg/youtube-icon.svg";
 import logoSvg from "@/assets/svg/logo.svg";
 import { Logo } from "@/components/Logo";
-
+import { motion } from "framer-motion";
 const socialMediaLinks = [
     {
         "href": "",
@@ -38,16 +38,88 @@ export const Hero = memo(() => {
                 }
             })()
         }
-        <Text className={classes.title} typo="heading1">{t("pageTitle")}</Text>
+        <div style={{
+            "overflow": "hidden",
+            "marginBottom": 90
+        }}>
+            <motion.div
+                initial={{
+                    "y": "100%"
+                }}
+                animate={{
+                    "y": 0,
+                    "transition": {
+                        "ease": "easeInOut",
+                        "duration": 0.7,
+                        "delay": 2.4
+                    }
+                }}
+            >
+                <Text className={classes.title} typo="heading1">{t("pageTitle")}</Text>
+            </motion.div>
+        </div>
         <div className={classes.subtitleAndParagraph}>
-            <Text className={classes.subtitle} typo="additionalTitle">{t("pageSubtitle")}</Text>
-            <Text className={classes.paragraph} typo="paragraph">{t("introParagraph")}</Text>
-            <div className={classes.socialMedia}>
+            <div style={{
+                "overflow": "hidden",
+                "top": "0.5rem",
+                "position": "relative"
+            }}>
+                <motion.div
+                    initial={{
+                        "y": "100%"
+                    }}
+                    animate={{
+                        "y": 0,
+                        "transition": {
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 2.7
+                        }
+                    }}
+                >
+                    <Text className={classes.subtitle} typo="additionalTitle">{t("pageSubtitle")}</Text>
+                </motion.div>
+            </div>
+            <div style={{
+                "overflow": "hidden"
+            }}>
+                <motion.div
+                    initial={{
+                        "opacity": 0
+                    }}
+                    animate={{
+                        "opacity": 1,
+                        "transition": {
+                            "ease": "easeInOut",
+                            "duration": 0.7,
+                            "delay": 3
+                        }
+                    }}
+                >
+                    <Text className={classes.paragraph} typo="paragraph">{t("introParagraph")}</Text>
+                </motion.div>
+            </div>
+            <motion.div 
+                className={classes.socialMedia}
+                initial={{
+                    "opacity": 0,
+                    "x": 40
+                }}
+                animate={{
+                    "opacity": 1,
+                    "x": 0,
+                    "transition": {
+                        "ease": "easeInOut",
+                        "duration": 0.7,
+                        "delay": 3.3
+                    }
+                }}
+            >
                 {
-                    socialMediaLinks.map(({ href, logo }, index) => <a href={href} key={index}><Logo logoUrl={logo} width={60} /></a>)
+                    socialMediaLinks.map(({ href, logo }, index) => <a className={classes.link} href={href} key={index}><Logo logoUrl={logo} width={60} /></a>)
                 }
 
-            </div>
+            </motion.div>
         </div>
     </section>
 })
@@ -62,7 +134,7 @@ const useStyles = tss.create(({ theme }) => {
                         "display": "flex",
                         "flexDirection": "column",
                         "alignItems": "center",
-                        ...(()=>{
+                        ...(() => {
                             const value = 25;
                             return {
                                 "paddingRight": value,
@@ -78,6 +150,13 @@ const useStyles = tss.create(({ theme }) => {
 
                 }
             })()
+        },
+        "link": {
+            "transition": "transform 600ms",
+            ":hover": {
+                "transform": "scale(1.1)"
+            }
+
         },
         "socialMedia": {
             "gap": 10,
@@ -109,7 +188,6 @@ const useStyles = tss.create(({ theme }) => {
                     "marginRight": 180,
                     "color": theme.colors.bloodOrange,
                     "position": "relative",
-                    "top": "0.5rem"
 
                 }
             })()
@@ -168,7 +246,6 @@ const useStyles = tss.create(({ theme }) => {
                 }
                 return {
                     "width": 800,
-                    "marginBottom": 90,
                     "position": "relative",
 
                 }

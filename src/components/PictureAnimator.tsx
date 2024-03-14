@@ -18,6 +18,23 @@ export const PictureAnimator = memo((props: PictureAnimatorProps) => {
     const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.8 })
     const { ref: imageRef, domRect: { width: imageWidth, height: imageHeight } } = useDomRect();
     const [isImageVisible, setIsImageVisible] = useState(inView);
+
+    const [imageDim, setImageDim] = useState({
+        imageWidth,
+        imageHeight
+    })
+
+    useEffect(()=>{
+        if(imageDim.imageWidth !== 0 && imageDim.imageHeight !== 0){
+            return;
+        }
+        setImageDim({
+                imageHeight,
+                imageWidth
+        })
+
+    }, [imageWidth, imageHeight])
+
     useEffect(() => {
         if (inView) {
             setIsImageVisible(true)
@@ -27,8 +44,8 @@ export const PictureAnimator = memo((props: PictureAnimatorProps) => {
 
     const { classes, cx } = useStyles({
         "inView": isImageVisible,
-        imageWidth,
-        imageHeight,
+        "imageWidth": imageDim.imageWidth,
+        "imageHeight": imageDim.imageHeight,
         "classesOverrides": props.classes,
         animationDelay
     });

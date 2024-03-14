@@ -177,6 +177,7 @@ export function Home() {
                         return <MobileTabs />;
                     }
                     return <section className={classes.sliderSection}>
+
                         <Slider
                             variant="named"
                             slides={[
@@ -321,7 +322,8 @@ const useStyles = tss
         "sliderSection": {
             "paddingBottom": 300,
             "paddingTop": 315,
-            "paddingLeft": 185
+            "paddingLeft": 185,
+            "position": "relative"
         },
     }))
 

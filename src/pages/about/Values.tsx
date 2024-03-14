@@ -3,7 +3,7 @@ import { breakpointValues, tss } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import { Logo } from "@/components/Logo";
-import logoSvg from "@/assets/svg/logo.svg";
+import logoSvg from "@/assets/svg/grey-logo.svg";
 
 
 export const Values = memo(() => {
@@ -43,6 +43,8 @@ const useStyles = tss.create(({ theme }) => {
             "display": "flex",
             "alignItems": "center",
             "justifyContent": "center",
+            "position": "relative",
+            "zIndex": 2,
             ...(()=>{
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     return {
