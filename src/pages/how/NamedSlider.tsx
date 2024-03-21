@@ -187,6 +187,7 @@ export const NamedSlider = memo(() => {
 const useStyles = tss.create(({theme}) => {
     return ({
         "root": {
+            "overflow": "hidden",
             ...(()=>{
                 if(theme.windowInnerWidth < breakpointValues.sm){
                     return undefined;

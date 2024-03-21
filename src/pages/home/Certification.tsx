@@ -1,57 +1,27 @@
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { tss, Text, breakpointValues } from "@/theme";
 import { useTranslation } from "@/i18n";
 import badge from "@/assets/svg/home/badge-qualiopi.svg";
-import card from "@/assets/svg/home/certification-card.svg";
-import type { Variant } from "framer-motion";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import card from "@/assets/jpg/home/backgroundCert.png";
 
 
-const paragraphVariant: Record<string, Variant> = {
-    "hidden": {
-        "opacity": 0
-    },
-    "visible": {
-        "opacity": 1
-    }
-};
 
 
 export const Certification = memo(() => {
     const { classes } = useStyles();
     const { t } = useTranslation("Home");
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
-    const controls = useAnimation();
-    useEffect(() => {
-        if (inView) {
-            controls.start("visible")
-        }
-
-    }, [controls, inView])
-    return <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={controls}
-        variants={paragraphVariant}
-        transition={{
-            "ease": "easeInOut",
-            "duration": 1.1
-        }}
-    >
-        <section className={classes.root}>
-            <div className={classes.inner}>
-                <div className={classes.badge}>
-                    <img className={classes.svg} src={badge} alt="badge qualiopi certification" />
-                </div>
-                <div className={classes.textWrapper}>
-                    <Text className={classes.paragraph} typo="paragraph">{t("certificationParagraph")}</Text>
-                    <Text className={classes.title} typo="carouselItem">{t("certificationTitle")}</Text>
-                </div>
+    return <section className={classes.root}>
+        <div className={classes.inner}>
+            <div className={classes.badge}>
+                <img className={classes.svg} src={badge} alt="badge qualiopi certification" />
             </div>
+            <div className={classes.textWrapper}>
+                <Text className={classes.paragraph} typo="paragraph">{t("certificationParagraph")}</Text>
+                <Text className={classes.title} typo="carouselItem">{t("certificationTitle")}</Text>
+            </div>
+        </div>
 
-        </section>
-    </motion.div>
+    </section>
 })
 
 const useStyles = tss.create(({ theme }) => {
@@ -72,6 +42,7 @@ const useStyles = tss.create(({ theme }) => {
         },
         "inner": {
             "display": "flex",
+                    "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)",
             ...(() => {
                 const value = 90;
                 return {
@@ -94,7 +65,8 @@ const useStyles = tss.create(({ theme }) => {
                     "paddingRight": theme.spacing.sectionTopBottomPadding,
                     "backgroundImage": `url(${card})`,
                     "backgroundSize": "cover",
-                    "backgroundRepeat": "no-repeat"
+                    "backgroundRepeat": "no-repeat",
+                    "border": "solid white 10px"
                 }
             })()
         },

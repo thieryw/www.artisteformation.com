@@ -171,7 +171,7 @@ export function Header(props: HeaderProps) {
                                         animate={controls}
                                         transition={{
                                             "ease": "easeInOut",
-                                            "delay": 1.4,
+                                            "delay": 0.9,
                                             "duration": 0.8
                                         }}
                                     >
@@ -192,7 +192,7 @@ export function Header(props: HeaderProps) {
                                         animate={controls}
                                         transition={{
                                             "ease": "easeInOut",
-                                            "delay": 1.2,
+                                            "delay": 0.7,
                                             "duration": 0.9
                                         }}
 
@@ -249,7 +249,7 @@ export function Header(props: HeaderProps) {
                                         transition={{
                                             "ease": "easeInOut",
                                             "duration": 0.9,
-                                            "delay": 1.4
+                                            "delay": 0.8
                                         }}
                                     >
                                         {smallPrint}
@@ -479,11 +479,9 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "position": "relative",
             "height": "100%",
             ...(() => {
-                const value = 150;
-                if (theme.windowInnerHeight < 650 && theme.windowInnerWidth >= breakpointValues.sm) {
+                if (theme.windowInnerHeight < 850 && theme.windowInnerWidth >= breakpointValues.sm) {
                     return {
-                        "paddingTop": value,
-                        "paddingBottom": value
+                        "paddingTop": 250,
                     }
                 }
                 return {
@@ -508,13 +506,13 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 return {
                     "top": isOpen ? 0 : "-100%",
                     "height": "100%",
-                    "overflow": theme.windowInnerHeight < 650 ? "auto" : "hidden",
+                    "overflow": theme.windowInnerHeight < 850 ? "auto" : "hidden",
                 }
             })(),
             "pointerEvents": !isOpen ? "none" : undefined,
         },
         "contactWrapper": {
-            "marginRight": 392,
+            "marginRight": 320,
             "marginLeft": 243,
             "transition": `opacity ${transitionTime}ms`,
             "opacity": isOpen ? 1 : 0,

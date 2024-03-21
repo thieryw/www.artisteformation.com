@@ -19,6 +19,8 @@ import { PictureAnimator } from "@/components/PictureAnimator";
 import type { Variant } from "framer-motion";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { routes } from "@/router";
+import logoBackground from "@/assets/svg/home/big-logo-background.svg"
 
 const titleVariants: Record<string, Variant> = {
     "hidden": {
@@ -70,7 +72,8 @@ export function Home() {
 
                             return <div
                                 style={{
-                                    "overflow": "hidden"
+                                    "overflow": "hidden",
+                                    "marginBottom": 330
                                 }}
                                 ref={ref}
                             >
@@ -180,15 +183,19 @@ export function Home() {
 
                         <Slider
                             variant="named"
+                            classes={{
+                                "slideSmallSurtitleWrapper": classes.smallSliderTitle,
+
+                            }}
                             slides={[
                                 {
                                     "name": t("sliderEngagementName"),
                                     "smallSurtitle": t("sliderMiniTitle"),
-                                    "title": t("sliderEngagementTitle"),
+                                    "title": <Text typo="heading2">{t("sliderEngagementTitle")}<br/>{t("sliderEngagementTitle2")}</Text>,
                                     "paragraph": t("sliderEngagementParagraph1"),
                                     "secondParagraph": t("sliderEngagementParagraph2"),
                                     "button": {
-                                        "href": "",
+                                        ...routes.how().link,
                                         "label": t("sliderButtonLabel")
                                     }
                                 },
@@ -199,7 +206,7 @@ export function Home() {
                                     "paragraph": t("sliderFinancingParagraph1"),
                                     "secondParagraph": t("sliderFinancingParagraph2"),
                                     "button": {
-                                        "href": "",
+                                        ...routes.how().link,
                                         "label": t("sliderButtonLabel")
                                     }
                                 },
@@ -210,12 +217,13 @@ export function Home() {
                                     "paragraph": t("sliderResponseParagraph1"),
                                     "secondParagraph": t("sliderResponseParagraph2"),
                                     "button": {
-                                        "href": "",
+                                        ...routes.how().link,
                                         "label": t("sliderButtonLabel")
                                     }
                                 }
                             ]}
                         />
+                        <img className={classes.backgroundLogo} src={logoBackground}  alt="background logo"/>
                     </section>
                 })()
             }
@@ -256,6 +264,12 @@ const useStyles = tss
             })()
 
         },
+        "backgroundLogo": {
+            "position": "absolute",
+            "top": 0,
+            "right": 0
+
+        },
         "visionPicture": {
             ...(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -276,7 +290,14 @@ const useStyles = tss
         },
         "visionTitle": {
             "width": 430,
-            "marginBottom": 330
+
+        },
+        "smallSliderTitle": {
+            "marginBottom": 10
+        },
+        "sliderTitleWrapper": {
+            "border": "solid red 2px",
+            "width": 700
 
         },
         "visionTitleMobile": {
@@ -344,6 +365,7 @@ export const { i18n } = declareComponentKeys<
     "visionSmallCaptionDate" |
     "sliderEngagementName" |
     "sliderEngagementTitle" |
+    "sliderEngagementTitle2" |
     "sliderEngagementParagraph1" |
     "sliderEngagementParagraph2" |
     "sliderFinancingName" |
@@ -369,6 +391,7 @@ export const { i18n } = declareComponentKeys<
     "customerMediaTitle" |
     "customerMediaParagraph" |
     "customerBusinessTitle" |
+    "customerBusinessTitle2" |
     "customerBusinessParagraph" |
     "customerButton" |
     "review1Title" |

@@ -17,6 +17,8 @@ import { Article } from "@/components/Article";
 import type { Variant } from "framer-motion";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { PictureAnimator } from "@/components/PictureAnimator";
+import { routes } from "@/router";
 
 
 const titleVariants: Record<string, Variant> = {
@@ -43,30 +45,42 @@ export const Customers = memo(() => {
         <div className={classes.inner}>
             <div ref={ref} className={classes.titleWrapper}>
                 <div>
-                    <motion.div
-                        variants={titleVariants}
-                        animate={controls}
-                        initial="hidden"
-                        transition={{
-                            "ease": "easeInOut",
-                            "duration": 0.7
-                        }}
-                    >
-                        <Text className={classes.title} typo="additionalTitle">{t("customerSmallTitle")}</Text>
-                    </motion.div>
-                    <motion.div
-                        variants={titleVariants}
-                        animate={controls}
-                        initial="hidden"
-                        transition={{
-                            "ease": "easeInOut",
-                            "duration": 0.7,
-                            "delay": 0.4
-                        }}
-                    >
+                    <div style={{
+                        "overflow": "hidden"
+                    }}>
+                        <motion.div
+                            variants={titleVariants}
+                            animate={controls}
+                            initial="hidden"
+                            transition={{
+                                "ease": "easeInOut",
+                                "duration": 0.7
+                            }}
+                        >
+                            <Text className={classes.title} typo="additionalTitle">{t("customerSmallTitle")}</Text>
+                        </motion.div>
 
-                        <Text className={cx(classes.title, classes.mainTitle)} typo="heading1">{t("customerTitle")}</Text>
-                    </motion.div>
+                    </div>
+                    <div style={{
+                        "overflow": "hidden",
+                        "top": 50,
+                        "position": "relative",
+                    }}>
+                        <motion.div
+                            variants={titleVariants}
+                            animate={controls}
+                            initial="hidden"
+                            transition={{
+                                "ease": "easeInOut",
+                                "duration": 0.7,
+                                "delay": 0.4
+                            }}
+                        >
+
+                            <Text className={cx(classes.title, classes.mainTitle)} typo="heading1">{t("customerTitle")}</Text>
+                        </motion.div>
+
+                    </div>
                 </div>
             </div>
             {
@@ -174,7 +188,7 @@ export const Customers = memo(() => {
                                 title={t("customerMusicTitle")}
                                 paragraph={t("customerMusicParagraph")}
                                 button={{
-                                    "href": "",
+                                    ...routes.contact().link,
                                     "label": t("customerButton"),
                                     "variant": "filled"
                                 }}
@@ -182,25 +196,47 @@ export const Customers = memo(() => {
                             />
 
                             <div>
-                                <picture>
-                                    <source srcSet={musicWebp} type="image/webp" />
-                                    <source srcSet={musicJpg} type="image/jpeg" />
-                                    <img className={classes.picture} src={musicWebp} alt="string musicians playing" />
-                                </picture>
+                                <PictureAnimator
+                                    src={musicWebp}
+                                    sources={[
+                                        {
+                                            "srcSet": musicWebp,
+                                            "type": "image/webp"
+                                        },
+                                        {
+                                            "srcSet": musicJpg,
+                                            "type": "image/jpeg"
+                                        }
+                                    ]}
+                                    classes={{
+                                        "image": classes.picture
+                                    }}
+                                />
                             </div>
                             <div>
-                                <picture>
-                                    <source srcSet={cinemaWebp} type="image/webp" />
-                                    <source srcSet={cinemaJpg} type="image/jpeg" />
-                                    <img className={classes.picture} src={cinemaWebp} alt="camera filming" />
-                                </picture>
+                                <PictureAnimator
+                                    src={cinemaWebp}
+                                    sources={[
+                                        {
+                                            "srcSet": cinemaWebp,
+                                            "type": "image/webp"
+                                        },
+                                        {
+                                            "srcSet": cinemaJpg,
+                                            "type": "image/jpeg"
+                                        }
+                                    ]}
+                                    classes={{
+                                        "image": classes.picture
+                                    }}
+                                />
                             </div>
                             <Article
                                 className={classes.firstGridArticle}
                                 title={t("customerCinemaTitle")}
                                 paragraph={t("customerCinemaParagraph")}
                                 button={{
-                                    "href": "",
+                                    ...routes.contact().link,
                                     "label": t("customerButton"),
                                     "variant": "filled"
                                 }}
@@ -220,11 +256,22 @@ export const Customers = memo(() => {
                                 }}
                             />
                             <div>
-                                <picture>
-                                    <source srcSet={enterpriseWebp} type="image/webp" />
-                                    <source srcSet={enterpriseJpg} type="image/jpeg" />
-                                    <img className={classes.picture} src={enterpriseWebp} alt="laptop" />
-                                </picture>
+                                <PictureAnimator
+                                    src={enterpriseWebp}
+                                    sources={[
+                                        {
+                                            "srcSet": enterpriseWebp,
+                                            "type": "image/webp"
+                                        },
+                                        {
+                                            "srcSet": enterpriseJpg,
+                                            "type": "image/jpeg"
+                                        }
+                                    ]}
+                                    classes={{
+                                        "image": classes.picture
+                                    }}
+                                />
                             </div>
                             <Article
                                 title={<Text typo="heading4">{t("customerMediaTitle")}</Text>}
@@ -237,14 +284,26 @@ export const Customers = memo(() => {
                                 }}
                             />
                             <div>
-                                <picture>
-                                    <source srcSet={theatreWebp} type="image/webp" />
-                                    <source srcSet={theatreJpg} type="image/jpeg" />
-                                    <img className={classes.picture} src={theatreWebp} alt="theatre scene" />
-                                </picture>
+
+                                <PictureAnimator
+                                    src={theatreWebp}
+                                    sources={[
+                                        {
+                                            "srcSet": theatreWebp,
+                                            "type": "image/webp"
+                                        },
+                                        {
+                                            "srcSet": theatreJpg,
+                                            "type": "image/jpeg"
+                                        }
+                                    ]}
+                                    classes={{
+                                        "image": classes.picture
+                                    }}
+                                />
                             </div>
                             <Article
-                                title={<Text style={{ "wordBreak": "break-all" }} typo="heading4">{t("customerBusinessTitle")}</Text>}
+                                title={<Text typo="heading4">{t("customerBusinessTitle")}<br/>{t("customerBusinessTitle2")}</Text>}
                                 paragraph={t("customerBusinessParagraph")}
                                 isAnimated={true}
                                 className={classes.secondGridArticle}
@@ -254,11 +313,22 @@ export const Customers = memo(() => {
                                 }}
                             />
                             <div>
-                                <picture>
-                                    <source srcSet={mediaWebp} type="image/webp" />
-                                    <source srcSet={mediaJpg} type="image/jpeg" />
-                                    <img className={classes.picture} src={mediaWebp} alt="man being interviewed" />
-                                </picture>
+                                <PictureAnimator
+                                    src={mediaWebp}
+                                    sources={[
+                                        {
+                                            "srcSet": mediaWebp,
+                                            "type": "image/webp"
+                                        },
+                                        {
+                                            "srcSet": mediaJpg,
+                                            "type": "image/jpeg"
+                                        }
+                                    ]}
+                                    classes={{
+                                        "image": classes.picture
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -296,7 +366,7 @@ const useStyles = tss.create(({ theme }) => {
                     }
                 }
                 return {
-                    "left": -120,
+                    "left": -60,
                     "justifyContent": "center",
 
                 }
@@ -367,17 +437,15 @@ const useStyles = tss.create(({ theme }) => {
             "color": theme.colors.white
         },
         "mainTitle": {
-            "position": "relative",
-            "top": 50
 
         },
         "firstGrid": {
             "display": "grid",
-            "gridTemplateColumns": "repeat(2, 1fr)"
+            "gridTemplateColumns": `repeat(2, ${940 / 2}px)`
         },
         "secondGrid": {
             "display": "grid",
-            "gridTemplateColumns": "repeat(3, 1fr)"
+            "gridTemplateColumns": `repeat(3, ${940 / 3}px)`
 
         },
         "gridWrapper": {
@@ -389,9 +457,9 @@ const useStyles = tss.create(({ theme }) => {
             "boxShadow": "0px 2px 20px 2px rgba(0, 0, 0, 0.1)"
         },
         "picture": {
-            "objectFit": "cover",
+            /*"objectFit": "cover",
             "height": "100%",
-            "width": "100%",
+            "width": "100%",*/
         },
         "firstGridArticle": {
             ...(() => {

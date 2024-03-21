@@ -175,6 +175,9 @@ export const Slider = memo((props: SliderProps) => {
                                     "secondParagraph": classes.slideSecondParagraph,
                                     "paragraphWrapper": classes.slideParagraphWrapper,
                                     "paragraph": classes.slideParagraph,
+                                    "smallSurtitleWrapper": classes.slideSmallSurtitleWrapper,
+                                    "title": classes.slideTitle,
+                                    "titleWrapper": classes.slideTitleWrapper
                                 }}
                             />
 
@@ -308,8 +311,8 @@ const useStyles = tss
         },
         "slidesWrapper": {
             "position": "relative",
-            "width": 690,
-            "marginRight": variant === "numbered" ? 182 : undefined
+            "width": 780,
+            "marginRight": variant === "numbered" ? 120 : undefined
 
         },
         "illustrations": {
@@ -325,7 +328,10 @@ const useStyles = tss
         "slideFirstParagraph": {},
         "slideSecondParagraph": {},
         "slideParagraphWrapper": {},
-        "slideParagraph": {}
+        "slideParagraph": {},
+        "slideSmallSurtitleWrapper": {},
+        "slideTitle": {},
+        "slideTitleWrapper": {}
     }))
 
 
@@ -458,9 +464,11 @@ const { Slide } = (() => {
                 },
                 "firstParagraph": {
                     "transitionDelay": !isActive ? undefined : "800ms",
+                    "width": 355
                 },
                 "secondParagraph": {
-                    "transitionDelay": !isActive ? undefined : "1300ms"
+                    "transitionDelay": !isActive ? undefined : "1300ms",
+                    "width": 355
                 }
 
             })

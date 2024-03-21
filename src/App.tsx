@@ -139,12 +139,9 @@ export function App() {
         </a>
 
       }
-      {
-        (route.name !== "home" && theme.windowInnerWidth >= breakpointValues.sm) &&
-        <a {...routes.contact().link}>
-          <Text className={classes.contactLink} typo="sectionPageOrButton">CONTACT</Text>
-        </a>
-      }
+      <a {...routes.contact().link}>
+        <Text className={classes.contactLink} typo="sectionPageOrButton">CONTACT</Text>
+      </a>
       <Header
         links={links}
         currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
@@ -163,7 +160,7 @@ export function App() {
         }
         logoLinks={[
           {
-            "href": "",
+            "href": "https://www.facebook.com/artisteformation/",
             "logo": fbIcon,
             "label": "Facebook link"
           },
@@ -173,7 +170,7 @@ export function App() {
             "label": "Instagram link",
           },
           {
-            "href": "",
+            "href": "https://www.youtube.com/@cfj757683",
             "logo": youtubeIcon,
             "label": "Youtube link"
           }
@@ -240,7 +237,7 @@ export function App() {
         </div>}
         socialLinks={[
           {
-            "href": "",
+            "href": "https://www.facebook.com/artisteformation/",
             "icon": fbIcon,
             "label": "facebook link"
           },
@@ -250,7 +247,7 @@ export function App() {
             "label": "instagram link"
           },
           {
-            "href": "",
+            "href": "https://www.youtube.com/@cfj757683",
             "icon": youtubeIcon,
             "label": "youtube link"
           },
@@ -343,11 +340,9 @@ const useStyles = tss.create(({ theme }) => ({
   },
   "contactText": {
     "color": theme.colors.darkGray,
-    "marginTop": "1em",
-    "marginBottom": "1em"
   },
   "contactTitle": {
-    "marginBlock": 0
+    "marginBlock": 0,
   },
   "email": {
     "textDecoration": "none"
