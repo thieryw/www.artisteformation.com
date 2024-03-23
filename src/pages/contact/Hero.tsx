@@ -9,7 +9,7 @@ import { Logo } from "@/components/Logo";
 import { motion } from "framer-motion";
 const socialMediaLinks = [
     {
-        "href": "",
+        "href": "https://www.facebook.com/artisteformation/",
         "logo": fbIcon
     },
     {
@@ -17,7 +17,7 @@ const socialMediaLinks = [
         "logo": instaIcon
     },
     {
-        "href": "",
+        "href": "https://www.youtube.com/@cfj757683",
         "logo": youtubeIcon
     },
 ]
@@ -33,7 +33,7 @@ export const Hero = memo(() => {
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return <>
                         <Logo className={classes.mobileLogo} logoUrl={logoSvg} width={70} />
-                        <Text className={classes.subtitleMobile} typo="additionalTitle">{t("pageSubtitle")}</Text>
+                        <Text className={classes.subtitleMobile} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
                     </>
                 }
             })()
@@ -77,7 +77,7 @@ export const Hero = memo(() => {
                         }
                     }}
                 >
-                    <Text className={classes.subtitle} typo="additionalTitle">{t("pageSubtitle")}</Text>
+                    <Text className={classes.subtitle} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
                 </motion.div>
             </div>
             <div style={{

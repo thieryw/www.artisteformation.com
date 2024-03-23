@@ -224,7 +224,7 @@ const useStyles = tss.withNestedSelectors<"buttonText">().create(({ theme, class
         "decoLine": {
             "width": 85,
             "height": 0,
-            "borderTop": `solid ${theme.colors.bloodOrange} 2px`,
+            "borderTop": `solid ${theme.colors.darkYellow} 4px`,
             "position": "absolute",
             "top": 0,
             "right": 140,

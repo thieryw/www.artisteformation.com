@@ -67,7 +67,7 @@ export const Book = memo(() => {
                     return <>
                         <Text style={{
                             "marginBottom": 60
-                        }} typo="additionalTitle">OU</Text>
+                        }} typo="additionalTitle">{t("or")}</Text>
                         <Text className={classes.title} typo="heading5">{t("bookingTitle")}</Text>
                     </>
                 }
@@ -101,7 +101,7 @@ export const Book = memo(() => {
         >
             <LinkButton
                 variant="outlined"
-                href=""
+                href="https://outlook.office365.com/book/cesarreservation@artisteformation.com/"
                 label={t("bookingButtonLabel")}
             />
 
@@ -146,7 +146,7 @@ const useStyles = tss.create(({ theme }) => {
                     }
                 }
                 return {
-                    "width": 700,
+                    "width": 650,
 
                 }
             })()

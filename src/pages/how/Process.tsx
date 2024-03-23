@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { breakpointValues, tss } from "@/theme";
+import { breakpointValues, tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 import logo from "@/assets/svg/grey-logo.svg";
@@ -39,7 +39,7 @@ export const Process = memo(() => {
                     <Article
                         className={classes.article}
                         isCentered={true}
-                        title={t("processTitle")}
+                        title={<Text typo="heading2">{t("processTitle")}<br/>{t("processTitle2")}</Text>}
                         smallSubtitle={t("processSubtitle")}
                         paragraph={t("processParagraph")}
                         isAnimated={true}

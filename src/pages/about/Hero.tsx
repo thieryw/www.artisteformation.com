@@ -25,7 +25,7 @@ export const Hero = memo(() => {
                         />
                         <Text style={{
                             "color": theme.colors.bloodOrange
-                        }} className={classes.mobileText} typo="additionalTitle">{t("pageSubtitle")}</Text>
+                        }} className={classes.mobileText} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
                         <Text className={classes.mobileText} typo="heading1">{t("pageTitle")}</Text>
                         <div className={classes.mobileImageWrapper}>
                             <img className={classes.mobileImage} src={fresqueMobilePng} alt="fresque" />
@@ -79,7 +79,7 @@ export const Hero = memo(() => {
                                         }
                                     }}
                                 >
-                                    <Text className={classes.subtitle} typo="additionalTitle">{t("pageSubtitle")}</Text>
+                                    <Text className={classes.subtitle} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
                                 </motion.div>
                             </div>
                             <div style={{

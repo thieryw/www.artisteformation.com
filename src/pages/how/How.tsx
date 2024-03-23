@@ -70,6 +70,7 @@ export const { i18n } = declareComponentKeys<
     "sliderButtonLabel" |
     "sliderSurtitle" |
     "processTitle" |
+    "processTitle2" |
     "processSubtitle" |
     "processParagraph" |
     "numberedSliderNeedsTitle" |
@@ -89,6 +90,7 @@ export const { i18n } = declareComponentKeys<
     "valuesParagraph" |
     "valuesButtonLabel" |
     "handicapTitle" |
+    "handicapTitle2" |
     "handicapSubtitle" |
     "handicapParagraph" |
     "mobileTabNeeds" |

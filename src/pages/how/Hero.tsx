@@ -124,7 +124,7 @@ const useStyles = tss.create(({ theme }) => {
             "color": theme.colors.indigo
         },
         "title": {
-            "width": 800
+            "width": 650
         },
         "fresque": {
             ...(() => {

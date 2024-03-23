@@ -139,16 +139,20 @@ export function App() {
         </a>
 
       }
-      <a {...routes.contact().link}>
-        <Text className={classes.contactLink} typo="sectionPageOrButton">CONTACT</Text>
-      </a>
+      {
+        theme.windowInnerWidth >= breakpointValues.sm &&
+        <a {...routes.contact().link}>
+          <Text className={classes.contactLink} typo="sectionPageOrButton">CONTACT</Text>
+        </a>
+
+      }
       <Header
         links={links}
         currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
         logo={siteLogo}
         contact={<div>
           <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
-          <a className={classes.email} href={`mailto:${t("email")}`}><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
+          <a className={classes.email} href="https://outlook.office365.com/book/cesarreservation@artisteformation.com/"><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
           <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
         </div>}
         smallPrint={

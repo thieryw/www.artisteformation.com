@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { breakpointValues, tss } from "@/theme";
+import { breakpointValues, tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Article } from "@/components/Article";
 
@@ -13,7 +13,7 @@ export const Handicap = memo(() => {
         <Article
             isCentered={true}
             className={classes.article}
-            title={t("handicapTitle")}
+            title={<Text typo="heading2">{t("handicapTitle")}<br/>{t("handicapTitle2")}</Text>}
             paragraph={t("handicapParagraph")}
             {
                 ...(()=>{

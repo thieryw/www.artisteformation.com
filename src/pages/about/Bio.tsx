@@ -81,7 +81,7 @@ export const Bio = memo(() => {
                         }}
 
                     >
-                        <Text className={classes.surtitle} typo="additionalTitle">{biography.fr.surtitle}</Text>
+                        <Text className={classes.surtitle} typo="sectionPageOrButton">{biography.fr.surtitle}</Text>
                     </motion.div>
                 </div>
                 <div

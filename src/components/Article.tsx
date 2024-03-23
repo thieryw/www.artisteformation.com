@@ -230,6 +230,7 @@ export const Article = memo((props: ArticleProps) => {
                 {
                     paragraph !== undefined &&
                     <motion.div
+                        className={classes.paragraphMotionWrapper}
                         {
                         ...(() => {
                             if (!isAnimated) {
@@ -252,6 +253,7 @@ export const Article = memo((props: ArticleProps) => {
                 {
                     secondParagraph !== undefined &&
                     <motion.div
+                        className={classes.paragraphMotionWrapper}
                         {
                         ...(() => {
                             if (!isAnimated) {
@@ -362,7 +364,10 @@ const useStyles = tss.withParams<
     "paragraph": {
         "textAlign": isCentered ? "center" : "left",
         "color": theme.colors.darkGray,
+    },
+    "paragraphMotionWrapper": {
         "flex": 1,
+
     },
     "firstParagraph": {
         ...(() => {
