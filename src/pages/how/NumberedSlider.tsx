@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { tss, Text, breakpointValues } from "@/theme";
+import { tss, Text } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Slider } from "@/components/Slider"
 import svg1 from "@/assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
