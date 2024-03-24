@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { tss, Text } from "@/theme";
+import { tss, Text, breakpointValues } from "@/theme";
 import { useTranslation } from "@/i18n";
 import { Slider } from "@/components/Slider"
 import svg1 from "@/assets/svg/comment/Slide 2 - Processus/1- recueil-des-besoins.svg";
@@ -63,8 +63,6 @@ export const NumberedSlider = memo(() => {
 const useStyles = tss.create(({ theme }) => {
     return ({
         "root": {
-            "paddingLeft": 340,
-            "paddingRight": 150,
             "backgroundColor": theme.colors.indigo,
             "backgroundImage": `url("${patternSvg}")`,
             "backgroundBlendMode": "soft-light",
@@ -76,7 +74,15 @@ const useStyles = tss.create(({ theme }) => {
                     "paddingBottom": value
 
                 }
-            })()
+            })(),
+            ...(theme.windowInnerWidth > 2000 ? {
+                "display": "flex",
+                "justifyContent": "center",
+            } : {
+                "paddingLeft": 340,
+                "paddingRight": 150,
+
+            })
         },
         "sliderTitle": {
             "width": 650

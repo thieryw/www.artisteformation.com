@@ -124,7 +124,6 @@ export function Header(props: HeaderProps) {
                 className={classes.toggleMenuButton}
             />
             <div className={classes.menu} role="menu">
-                <div className={classes.menuInner}>
                     {
                         (() => {
                             if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -144,10 +143,10 @@ export function Header(props: HeaderProps) {
                                         }}
                                     >
                                         <LinkButton
+                                        className={classes.linkButton}
                                             {
                                             ...buttonLink
                                             }
-                                            className={classes.linkButton}
                                         />
                                     </motion.div>
 
@@ -156,6 +155,9 @@ export function Header(props: HeaderProps) {
                         })()
 
                     }
+
+                <div className={classes.menuInner}>
+
                     {
                         (() => {
                             if (theme.windowInnerWidth < breakpointValues.sm) {
@@ -510,6 +512,10 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 }
             })(),
             "pointerEvents": !isOpen ? "none" : undefined,
+            ...(theme.windowInnerWidth > 2000 ? {
+                "display": "flex",
+                "justifyContent": "center"
+            } : {})
         },
         "contactWrapper": {
             "marginRight": 320,

@@ -28,41 +28,20 @@ export const Hero = memo(() => {
     const { classes, theme } = useStyles();
 
     return <section className={classes.root}>
-        {
-            (() => {
-                if (theme.windowInnerWidth < breakpointValues.sm) {
-                    return <>
-                        <Logo className={classes.mobileLogo} logoUrl={logoSvg} width={70} />
-                        <Text className={classes.subtitleMobile} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
-                    </>
-                }
-            })()
-        }
-        <div style={{
-            "overflow": "hidden",
-            "marginBottom": 90
-        }}>
-            <motion.div
-                initial={{
-                    "y": "100%"
-                }}
-                animate={{
-                    "y": 0,
-                    "transition": {
-                        "ease": "easeInOut",
-                        "duration": 0.7,
-                        "delay": 2.4
+        <div>
+            {
+                (() => {
+                    if (theme.windowInnerWidth < breakpointValues.sm) {
+                        return <>
+                            <Logo className={classes.mobileLogo} logoUrl={logoSvg} width={70} />
+                            <Text className={classes.subtitleMobile} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
+                        </>
                     }
-                }}
-            >
-                <Text className={classes.title} typo="heading1">{t("pageTitle")}</Text>
-            </motion.div>
-        </div>
-        <div className={classes.subtitleAndParagraph}>
+                })()
+            }
             <div style={{
                 "overflow": "hidden",
-                "top": "0.5rem",
-                "position": "relative"
+                "marginBottom": 90
             }}>
                 <motion.div
                     initial={{
@@ -73,53 +52,76 @@ export const Hero = memo(() => {
                         "transition": {
                             "ease": "easeInOut",
                             "duration": 0.7,
-                            "delay": 2.7
+                            "delay": 2.4
                         }
                     }}
                 >
-                    <Text className={classes.subtitle} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
+                    <Text className={classes.title} typo="heading1">{t("pageTitle")}</Text>
                 </motion.div>
             </div>
-            <div style={{
-                "overflow": "hidden"
-            }}>
+            <div className={classes.subtitleAndParagraph}>
+                <div style={{
+                    "overflow": "hidden",
+                    "top": "0.5rem",
+                    "position": "relative"
+                }}>
+                    <motion.div
+                        initial={{
+                            "y": "100%"
+                        }}
+                        animate={{
+                            "y": 0,
+                            "transition": {
+                                "ease": "easeInOut",
+                                "duration": 0.7,
+                                "delay": 2.7
+                            }
+                        }}
+                    >
+                        <Text className={classes.subtitle} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
+                    </motion.div>
+                </div>
+                <div style={{
+                    "overflow": "hidden"
+                }}>
+                    <motion.div
+                        initial={{
+                            "opacity": 0
+                        }}
+                        animate={{
+                            "opacity": 1,
+                            "transition": {
+                                "ease": "easeInOut",
+                                "duration": 0.7,
+                                "delay": 3
+                            }
+                        }}
+                    >
+                        <Text className={classes.paragraph} typo="paragraph">{t("introParagraph")}</Text>
+                    </motion.div>
+                </div>
                 <motion.div
+                    className={classes.socialMedia}
                     initial={{
-                        "opacity": 0
+                        "opacity": 0,
+                        "x": 40
                     }}
                     animate={{
                         "opacity": 1,
+                        "x": 0,
                         "transition": {
                             "ease": "easeInOut",
                             "duration": 0.7,
-                            "delay": 3
+                            "delay": 3.3
                         }
                     }}
                 >
-                    <Text className={classes.paragraph} typo="paragraph">{t("introParagraph")}</Text>
+                    {
+                        socialMediaLinks.map(({ href, logo }, index) => <a className={classes.link} href={href} key={index}><Logo logoUrl={logo} width={60} /></a>)
+                    }
+
                 </motion.div>
             </div>
-            <motion.div 
-                className={classes.socialMedia}
-                initial={{
-                    "opacity": 0,
-                    "x": 40
-                }}
-                animate={{
-                    "opacity": 1,
-                    "x": 0,
-                    "transition": {
-                        "ease": "easeInOut",
-                        "duration": 0.7,
-                        "delay": 3.3
-                    }
-                }}
-            >
-                {
-                    socialMediaLinks.map(({ href, logo }, index) => <a className={classes.link} href={href} key={index}><Logo logoUrl={logo} width={60} /></a>)
-                }
-
-            </motion.div>
         </div>
     </section>
 })
@@ -145,11 +147,17 @@ const useStyles = tss.create(({ theme }) => {
                 }
                 return {
                     "marginBottom": 200,
-                    "paddingLeft": 425,
                     "paddingTop": 290,
 
                 }
-            })()
+            })(),
+            ...(theme.windowInnerWidth > 2000 ? {
+                "display": "flex",
+                "justifyContent": "center"
+            } : {
+                "paddingLeft": 425,
+
+            })
         },
         "link": {
             "transition": "transform 600ms",

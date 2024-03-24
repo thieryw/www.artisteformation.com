@@ -343,8 +343,15 @@ const useStyles = tss
         "sliderSection": {
             "paddingBottom": 300,
             "paddingTop": 315,
-            "paddingLeft": 185,
-            "position": "relative"
+            "position": "relative",
+            ...(theme.windowInnerWidth > 2000 ? {
+                "display": "flex",
+                "justifyContent": "center"
+            } : {
+                "paddingLeft": 185,
+
+            })
+            
         },
     }))
 

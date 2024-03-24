@@ -197,9 +197,14 @@ const useStyles = tss.create(({theme}) => {
                     "marginTop": 80,
                     "position": "relative",
                     "top": 100,
-
                 }
-            })()
+            })(),
+            ...(theme.windowInnerWidth > 2000 ? {
+                "display": "flex",
+                "justifyContent": "center"
+            } : {})
+
+
         },
         "slider": {
             "position": "relative",
