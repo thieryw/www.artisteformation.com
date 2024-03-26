@@ -78,7 +78,7 @@ export const Article = memo((props: ArticleProps) => {
         animationDelay = 0
     } = props;
     const controls = useAnimation();
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.3 })
 
     useEffect(() => {
         if (inView) {

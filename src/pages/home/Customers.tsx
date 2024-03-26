@@ -33,7 +33,7 @@ const titleVariants: Record<string, Variant> = {
 export const Customers = memo(() => {
     const { classes, cx, theme } = useStyles();
     const { t } = useTranslation("Home");
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.3 })
     const controls = useAnimation();
     useEffect(() => {
         if (inView) {

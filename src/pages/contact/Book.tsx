@@ -33,7 +33,7 @@ export const Book = memo(() => {
     const { t } = useTranslation("Contact")
     const { classes, theme } = useStyles();
     const controls = useAnimation();
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.3 })
 
     useEffect(() => {
         if (inView) {

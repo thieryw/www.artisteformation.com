@@ -181,7 +181,7 @@ export function App() {
         ]}
         buttonLink={{
           "label": t("appointmentLink"),
-          ...routes.contact().link
+          "href": "https://outlook.office365.com/book/cesarreservation@artisteformation.com/"
         }}
 
       />

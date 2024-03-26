@@ -48,7 +48,7 @@ export function Home() {
 
     const { classes, theme } = useStyles()
 
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.3 })
     const controls = useAnimation();
     useEffect(() => {
         if (inView) {

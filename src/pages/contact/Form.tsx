@@ -34,7 +34,7 @@ export const Form = memo(() => {
 
 
     const controls = useAnimation();
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.7 })
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.3 })
 
     useEffect(() => {
         if (inView) {

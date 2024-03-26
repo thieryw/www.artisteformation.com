@@ -460,6 +460,7 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                     "position": "absolute",
                     "top": 55,
                     "right": 324,
+                    "zIndex": 4001
                 }
             })()
 

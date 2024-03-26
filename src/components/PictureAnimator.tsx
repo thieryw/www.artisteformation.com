@@ -15,7 +15,7 @@ export type PictureAnimatorProps = {
 
 export const PictureAnimator = memo((props: PictureAnimatorProps) => {
     const { className, src, sources, alt, animationDelay = 0 } = props;
-    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.8 })
+    const [ref, inView] = useInView({ "triggerOnce": true, "threshold": 0.4 })
     const { ref: imageRef, domRect: { width: imageWidth, height: imageHeight } } = useDomRect();
     const [isImageVisible, setIsImageVisible] = useState(inView);
 
