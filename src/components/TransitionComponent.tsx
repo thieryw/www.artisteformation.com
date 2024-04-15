@@ -100,9 +100,11 @@ export const TransitionComponent = memo((props: TransitionComponentProps) => {
         <div className={classes.titleWrapper}>
           {
             splashScreenTitle.split(" ").map((title, index) =>
-              <div style={{ "overflow": "hidden" }}>
+              <div 
+                key={index}
+                style={{ "overflow": "hidden" }}
+              >
                 <motion.div
-                  key={index}
                   variants={titleVariants}
                   initial="hidden"
                   animate={controls}
@@ -166,29 +168,28 @@ const useStyles = tss.withParams<
       "backgroundBlendMode": "soft-light",
       "backgroundSize": "cover",
       "position": "fixed",
-      "transition": "top 800ms",
+      "transition": "height 800ms",
       ...(() => {
         if (theme.windowInnerWidth < breakpointValues.sm) {
           return {
-            "top": isActive ? 0 : -theme.windowInnerHeight,
-            "height": "100dvh",
-
+            "height": !isActive ? 0 : theme.windowInnerHeight,
           }
         }
         return {
-          "top": isActive ? 0 : "-100%",
-          "height": "100%"
+          "height": !isActive ? 0 : "100%",
 
         }
       })(),
 
 
+      "top": "0",
       "left": 0,
       "zIndex": 4500,
       "display": "flex",
       "alignItems": "center",
       "justifyContent": "center",
-      "backgroundPosition": "center"
+      "backgroundPosition": "center",
+      "overflow": "hidden"
 
 
     },

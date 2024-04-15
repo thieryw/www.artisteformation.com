@@ -32,16 +32,16 @@ export const Hero = memo(() => {
             {
                 (() => {
                     if (theme.windowInnerWidth < breakpointValues.sm) {
-                        return <>
-                            <Logo className={classes.mobileLogo} logoUrl={logoSvg} width={70} />
+                        return <div className={classes.mobileLogoWrapper}>
+                            <Logo className={classes.mobileLogo} logoUrl={logoSvg} width={95} />
                             <Text className={classes.subtitleMobile} typo="sectionPageOrButton">{t("pageSubtitle")}</Text>
-                        </>
+                        </div>
                     }
                 })()
             }
             <div style={{
                 "overflow": "hidden",
-                "marginBottom": 90
+                "marginBottom": theme.windowInnerWidth >= breakpointValues.sm ? 90 : undefined
             }}>
                 <motion.div
                     initial={{
@@ -148,6 +148,7 @@ const useStyles = tss.create(({ theme }) => {
                 return {
                     "marginBottom": 200,
                     "paddingTop": 290,
+                    "paddingLeft": 425
 
                 }
             })(),
@@ -155,9 +156,14 @@ const useStyles = tss.create(({ theme }) => {
                 "display": "flex",
                 "justifyContent": "center"
             } : {
-                "paddingLeft": 425,
 
             })
+        },
+        "mobileLogoWrapper": {
+            "display": "flex",
+            "flexDirection": "column",
+            "alignItems": "center"
+
         },
         "link": {
             "transition": "transform 600ms",

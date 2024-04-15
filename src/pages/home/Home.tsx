@@ -303,6 +303,7 @@ const useStyles = tss
         "visionTitleMobile": {
             "color": theme.colors.white,
             "position": "relative",
+            "fontSize": 40,
             "top": -150,
             ...(() => {
                 const value = 40;

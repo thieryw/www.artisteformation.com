@@ -7,7 +7,9 @@ import { Logo } from "./Logo";
 import type { Link } from "../tools/link";
 import { LinkButton } from "./LinkButton";
 import type { Variants } from "framer-motion";
-import {motion, useAnimation} from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { getScrollableParent } from "powerhooks/getScrollableParent";
+
 
 const linksVariants: Variants = {
     "hidden": {
@@ -94,8 +96,8 @@ export function Header(props: HeaderProps) {
     const [isOpen, setIsOpen] = useState(false);
     const controls = useAnimation();
 
-    useEffect(()=>{
-        if(isOpen){
+    useEffect(() => {
+        if (isOpen) {
             controls.start("visible");
             return;
         };
@@ -124,37 +126,37 @@ export function Header(props: HeaderProps) {
                 className={classes.toggleMenuButton}
             />
             <div className={classes.menu} role="menu">
-                    {
-                        (() => {
-                            if (theme.windowInnerWidth < breakpointValues.sm) {
-                                return undefined
-                            }
-                            return <>
-                                {
-                                    buttonLink !== undefined &&
-                                    <motion.div
-                                        initial="hidden"
-                                        variants={buttonVariants}
-                                        animate={controls}
-                                        transition={{
-                                            "ease": "easeInOut",
-                                            "duration": 0.9,
-                                            "delay": 1.4
-                                        }}
-                                    >
-                                        <LinkButton
+                {
+                    (() => {
+                        if (theme.windowInnerWidth < breakpointValues.sm) {
+                            return undefined
+                        }
+                        return <>
+                            {
+                                buttonLink !== undefined &&
+                                <motion.div
+                                    initial="hidden"
+                                    variants={buttonVariants}
+                                    animate={controls}
+                                    transition={{
+                                        "ease": "easeInOut",
+                                        "duration": 0.9,
+                                        "delay": 1.4
+                                    }}
+                                >
+                                    <LinkButton
                                         className={classes.linkButton}
-                                            {
-                                            ...buttonLink
-                                            }
-                                        />
-                                    </motion.div>
+                                        {
+                                        ...buttonLink
+                                        }
+                                    />
+                                </motion.div>
 
-                                }
-                            </>
-                        })()
+                            }
+                        </>
+                    })()
 
-                    }
+                }
 
                 <div className={classes.menuInner}>
 
@@ -187,7 +189,7 @@ export function Header(props: HeaderProps) {
                                 {
 
                                     contact !== undefined &&
-                                    <motion.div 
+                                    <motion.div
                                         className={classes.contact}
                                         initial="hidden"
                                         variants={buttonVariants}
@@ -207,7 +209,7 @@ export function Header(props: HeaderProps) {
 
                                 {
                                     logoLinks !== undefined &&
-                                    <motion.div 
+                                    <motion.div
                                         className={classes.logoLinks}
                                         initial="hidden"
                                         animate={controls}
@@ -216,6 +218,7 @@ export function Header(props: HeaderProps) {
                                         {
                                             logoLinks.map(({ logo, label, ...rest }, index) => <div
                                                 className={classes.logoLink}
+                                                key={label}
                                                 style={{
                                                     "overflow": "hidden",
                                                     "marginRight": index === logoLinks.length - 1 ? undefined : theme.spacing.iconSpacing,
@@ -229,7 +232,6 @@ export function Header(props: HeaderProps) {
                                                     }}
                                                 >
                                                     <a
-                                                        key={label}
                                                         {...rest}
                                                         aria-label={label}
                                                     >{typeof logo === "string" ?
@@ -420,7 +422,10 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                         "display": "flex",
                         "flexDirection": "column",
                         "alignItems": "flex-start",
-                        "paddingLeft": 25
+                        "paddingLeft": 25,
+                        "position": "absolute",
+                        "top": 0,
+                        "left": 0
 
                     }
                 }
@@ -473,13 +478,14 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
         },
         "mobileLogoWrapper": {
             "marginTop": 20,
-            "marginBottom": 60
+            "marginBottom": 60,
 
         },
         "menuInner": {
 
             "display": "flex",
             "position": "relative",
+            "border": "solid red 2px",
             "height": "100%",
             ...(() => {
                 if (theme.windowInnerHeight < 850 && theme.windowInnerWidth >= breakpointValues.sm) {
@@ -495,24 +501,25 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
         "menu": {
             "position": "fixed",
             "zIndex": 4001,
-            "transition": `top ${transitionTime}ms`,
+            "top": 0,
+            "left": 0,
+            "transition": `height ${transitionTime}ms`,
             "width": "100%",
             "backgroundColor": theme.colors.lighterGray,
             ...(() => {
+
                 if (theme.windowInnerWidth < breakpointValues.sm) {
                     return {
-                        "top": isOpen ? 0 : -theme.windowInnerHeight,
-                        "height": "100dvh",
+                        "height": isOpen ? theme.windowInnerHeight : 0,
                         "overflow": "auto"
                     }
                 }
                 return {
-                    "top": isOpen ? 0 : "-100%",
-                    "height": "100%",
+                    "height": isOpen ? "100%" : 0,
                     "overflow": theme.windowInnerHeight < 850 ? "auto" : "hidden",
                 }
+
             })(),
-            "pointerEvents": !isOpen ? "none" : undefined,
             ...(theme.windowInnerWidth > 2000 ? {
                 "display": "flex",
                 "justifyContent": "center"
@@ -561,9 +568,37 @@ const { ToggleMenuButton } = (() => {
             onClick();
         })
         const { classes, cx } = useStyles({ isActive })
+        const ref = useRef<HTMLButtonElement>(null);
+
+            useEffect(() => {
+                if(ref.current === null){
+                    return;
+                }
+                const scrollableParent = getScrollableParent({
+                    "doReturnElementIfScrollable": true,
+                    "element": ref.current
+                })
+                function preventScroll() {
+                    scrollableParent.scrollTo({
+                        "top": 0,
+                        "behavior": "instant"
+                    })
+                }
+                (() => {
+                    if (!isActive) {
+                        return;
+                    }
+                    scrollableParent.addEventListener("scroll", preventScroll);
+                })()
+
+                return () => scrollableParent.removeEventListener("scroll", preventScroll);
+
+
+            }, [ref.current, isActive])
 
         return <button
             aria-haspopup="true"
+            ref={ref}
             aria-expanded={isActive}
             aria-label="drop down menu button"
             onClick={handleClick}

@@ -128,7 +128,7 @@ export const Hero = memo(() => {
                 animate={{"opacity": 1}}
                 transition={{
                     "ease": "easeOut",
-                    "delay": 3.4,
+                    "delay": theme.windowInnerWidth < breakpointValues.sm ? 2.6 : 3.4,
                     "duration": 1
                 }}
             >
@@ -137,9 +137,9 @@ export const Hero = memo(() => {
             {
                 theme.windowInnerWidth < breakpointValues.sm &&
                 <picture>
-                    <source srcSet={webpFresque3} type="image/webp" />
-                    <source srcSet={jpgFresque3} type="image/jpeg" />
-                    <img className={classes.image} src={webpFresque3} alt="fresque de la banniere" />
+                    <source srcSet={webpFresque2} type="image/webp" />
+                    <source srcSet={jpgFresque2} type="image/jpeg" />
+                    <img className={classes.image} src={webpFresque2} alt="fresque de la banniere" />
                 </picture>
             }
             {

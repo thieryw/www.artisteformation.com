@@ -43,23 +43,26 @@ export const Book = memo(() => {
     }, [controls, inView])
 
     return <section ref={ref} className={classes.root}>
-        <div style={{"overflow": "hidden", "marginBottom": 110}}>
-            <motion.div
-                initial="hidden"
-                animate={controls}
-                variants={titleVariants}
-                transition={{
-                    "ease": "easeInOut",
-                    "duration": 0.7
-                }}
-            >
+        {
+            theme.windowInnerWidth >= breakpointValues.sm &&
+            <div style={{ "overflow": "hidden", "marginBottom": 110 }}>
+                <motion.div
+                    initial="hidden"
+                    animate={controls}
+                    variants={titleVariants}
+                    transition={{
+                        "ease": "easeInOut",
+                        "duration": 0.7
+                    }}
+                >
 
-                <Text style={{
-                    "color": theme.colors.darkGray3
-                }} typo="sectionPageOrButton">{t("or")}</Text>
-            </motion.div>
+                    <Text style={{
+                        "color": theme.colors.darkGray3
+                    }} typo="sectionPageOrButton">{t("or")}</Text>
+                </motion.div>
 
-        </div>
+            </div>
+        }
 
         {
             (() => {

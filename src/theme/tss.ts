@@ -114,7 +114,7 @@ function getTypography(windowInnerWidth: number): Record<Typography, CSSObject>{
                     return 40;
                 }*/
                 if(windowInnerWidth < 600){
-                    return 40;
+                    return 52;
                 }
                 return 64;
             })() / baseFontSizePx}rem`,
