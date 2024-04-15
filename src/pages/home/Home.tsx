@@ -296,7 +296,6 @@ const useStyles = tss
             "marginBottom": 10
         },
         "sliderTitleWrapper": {
-            "border": "solid red 2px",
             "width": 700
 
         },
