@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { declareComponentKeys } from "@/i18n";
 import { Hero } from "./Hero";
-import { Form } from "./Form";
+import { Form } from "./Form2";
 import { Book } from "./Book";
 
 
