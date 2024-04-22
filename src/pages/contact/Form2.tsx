@@ -86,7 +86,7 @@ export const Form = memo(() => {
                         </motion.div>
 
                     </div>
-                    <form action="https://formsubmit.co/bonjour@artisteformation.com" method="POST" className={classes.form}>
+                    <form action="https://formsubmit.co/3a3b787c981baed8d5cbb373b83811eb" method="POST" className={classes.form}>
                         <input
                             placeholder={t("formNamePlaceholder")}
                             type="text"
