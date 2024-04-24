@@ -256,6 +256,7 @@ export function Header(props: HeaderProps) {
                                             "duration": 0.9,
                                             "delay": 0.8
                                         }}
+                                        onClick={handleMenuItemClick}
                                     >
                                         {smallPrint}
                                     </motion.div>
@@ -371,7 +372,7 @@ export function Header(props: HeaderProps) {
                                 if (smallPrint === undefined || theme.windowInnerWidth >= breakpointValues.sm) {
                                     return undefined;
                                 }
-                                return <div>
+                                return <div onClick={handleMenuItemClick}>
                                     {smallPrint}
                                 </div>
                             })()
