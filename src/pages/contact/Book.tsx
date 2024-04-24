@@ -106,6 +106,7 @@ export const Book = memo(() => {
                 variant="outlined"
                 href="https://outlook.office365.com/book/cesarreservation@artisteformation.com/"
                 label={t("bookingButtonLabel")}
+                openInNewTab={true}
             />
 
         </motion.div>

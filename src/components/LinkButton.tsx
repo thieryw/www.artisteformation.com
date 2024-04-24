@@ -6,8 +6,9 @@ import { useDomRect } from "powerhooks/useDomRect";
 
 export type LinkButtonProps = Link & {
     className?: string;
-    classes?: Partial<ReturnType<typeof useStyles>["classes"]>
-    variant?: "filled" | "outlined"
+    classes?: Partial<ReturnType<typeof useStyles>["classes"]>;
+    variant?: "filled" | "outlined";
+    openInNewTab?: boolean;
 }
 
 
@@ -15,14 +16,14 @@ export type LinkButtonProps = Link & {
 
 
 export const LinkButton = memo((props: LinkButtonProps) => {
-    const { href, label, onClick, className, variant } = props;
+    const { href, label, onClick, className, variant, openInNewTab = false } = props;
     const { ref, domRect: { height } } = useDomRect();
     const { classes, cx } = useStyles({
         "variant": variant ?? "outlined",
         "textHeight": height,
         "classesOverrides": props.classes
     });
-    return <a className={cx(classes.root, className)} onClick={onClick} href={href}>
+    return <a className={cx(classes.root, className)} onClick={onClick} href={href} {...openInNewTab ? {"target": "_blank"}: {}}>
         <div className={classes.inner}>
 
             <div className={classes.textWrapper}>

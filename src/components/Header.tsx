@@ -9,6 +9,7 @@ import { LinkButton } from "./LinkButton";
 import type { Variants } from "framer-motion";
 import { motion, useAnimation } from "framer-motion";
 import { getScrollableParent } from "powerhooks/getScrollableParent";
+import type { LinkButtonProps } from "@/components/LinkButton";
 
 
 const linksVariants: Variants = {
@@ -83,7 +84,7 @@ export type HeaderProps = {
     logo?: ReactNode;
     contact?: ReactNode;
     smallPrint?: ReactNode;
-    buttonLink?: Link;
+    buttonLink?: LinkButtonProps;
     logoLinks?: ({
         logo: ReactNode;
     } & Link)[],
@@ -569,31 +570,31 @@ const { ToggleMenuButton } = (() => {
         const { classes, cx } = useStyles({ isActive })
         const ref = useRef<HTMLButtonElement>(null);
 
-            useEffect(() => {
-                if(ref.current === null){
+        useEffect(() => {
+            if (ref.current === null) {
+                return;
+            }
+            const scrollableParent = getScrollableParent({
+                "doReturnElementIfScrollable": true,
+                "element": ref.current
+            })
+            function preventScroll() {
+                scrollableParent.scrollTo({
+                    "top": 0,
+                    "behavior": "instant"
+                })
+            }
+            (() => {
+                if (!isActive) {
                     return;
                 }
-                const scrollableParent = getScrollableParent({
-                    "doReturnElementIfScrollable": true,
-                    "element": ref.current
-                })
-                function preventScroll() {
-                    scrollableParent.scrollTo({
-                        "top": 0,
-                        "behavior": "instant"
-                    })
-                }
-                (() => {
-                    if (!isActive) {
-                        return;
-                    }
-                    scrollableParent.addEventListener("scroll", preventScroll);
-                })()
+                scrollableParent.addEventListener("scroll", preventScroll);
+            })()
 
-                return () => scrollableParent.removeEventListener("scroll", preventScroll);
+            return () => scrollableParent.removeEventListener("scroll", preventScroll);
 
 
-            }, [ref.current, isActive])
+        }, [ref.current, isActive])
 
         return <button
             aria-haspopup="true"

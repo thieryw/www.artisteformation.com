@@ -3,6 +3,7 @@ import { tss, Text, breakpointValues } from "@/theme";
 import { useTranslation } from "@/i18n";
 import badge from "@/assets/svg/home/badge-qualiopi.svg";
 import card from "@/assets/jpg/home/backgroundCert.png";
+import certificate from "@/assets/pdf/certificat-Qualiopi-Artiste-Formation.pdf"
 
 
 
@@ -16,7 +17,7 @@ export const Certification = memo(() => {
                 <img className={classes.svg} src={badge} alt="badge qualiopi certification" />
             </div>
             <div className={classes.textWrapper}>
-                <Text className={classes.paragraph} typo="paragraph">{t("certificationParagraph")}</Text>
+                <Text className={classes.paragraph} typo="paragraph">{t("certificationParagraph1")} <a className={classes.certificateLink} href={certificate} download="certificat-Qualiopi-Artiste-Formation.pdf">{t("certificationParagraphLink")}</a>  {t("certificationParagraph2")}</Text>
                 <Text className={classes.title} typo="carouselItem">{t("certificationTitle")}</Text>
             </div>
         </div>
@@ -39,6 +40,10 @@ const useStyles = tss.create(({ theme }) => {
 
                 }
             })()
+        },
+        "certificateLink": {
+            "color": theme.colors.white
+
         },
         "inner": {
             "display": "flex",

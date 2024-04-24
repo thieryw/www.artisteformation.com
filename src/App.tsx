@@ -21,6 +21,8 @@ import { TransitionComponent } from "@/components/TransitionComponent";
 import pattern from "@/assets/svg/pattern.svg";
 import { enableScreenScaler } from "screen-scaler/react";
 import { getScrollableParent } from "powerhooks/getScrollableParent";
+import { NotFound } from "@/pages/four-oh-four";
+import {Legal} from "@/pages/Legal";
 
 enableScreenScaler({
   targetWindowInnerWidth: ({ zoomFactor, actualWindowInnerWidth }) => {
@@ -68,8 +70,8 @@ export function App() {
   const { classes, theme } = useStyles();
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(()=>{
-    if(ref.current === null){
+  useEffect(() => {
+    if (ref.current === null) {
       return;
     };
     const scrollableParent = getScrollableParent({
@@ -180,6 +182,7 @@ export function App() {
           }
         ]}
         buttonLink={{
+          "openInNewTab": true,
           "label": t("appointmentLink"),
           "href": "https://outlook.office365.com/book/cesarreservation@artisteformation.com/"
         }}
@@ -193,32 +196,42 @@ export function App() {
 
     <TransitionComponent
       isActive={isTransitioning}
-      backgroundColor={(() => {
-        switch (route.name) {
-          case "how": return theme.colors.bloodOrange;
-          case "teachers": return theme.colors.linden;
-          case "about": return theme.colors.darkYellow;
-          case "contact": return theme.colors.indigo;
-          default: return theme.colors.backgroundTertiary;
-        }
-      })()}
       logoUrl={route.name === "home" ? siteLogo : undefined}
       splashScreenTitle={route.name === "home" ? t("siteTitle") : undefined}
       backgroundImage={route.name !== "home" && route.name !== "legal" ? pattern : undefined}
-      transitionText={(() => {
+      {
+      ...(() => {
         switch (route.name) {
-          case "how": return t("howLink");
-          case "about": return t("aboutLink");
-          case "contact": return t("contactLink");
-          case "teachers": return t("teachersLink");
-          default: return undefined;
+          case "how": return {
+            "transitionText": t("howLink"),
+            "backgroundColor": theme.colors.bloodOrange
+          };
+          case "about": return {
+            "transitionText": t("aboutLink"),
+            "backgroundColor": theme.colors.linden
+          };
+          case "contact": return {
+            "transitionText": t("contactLink"),
+            "backgroundColor": theme.colors.darkYellow
+          };
+          case "teachers": return {
+            "transitionText": t("teachersLink"),
+            "backgroundColor": theme.colors.indigo
+          };
+          case "home": return {
+            "backgroundColor": theme.colors.backgroundTertiary
+          }
+          default: return {
+            "isActive": false
+          };
         }
 
-      })()}
+      })()
+      }
     />
 
     <div style={{
-      "opacity": isTransitioning ? 0 : 1
+      "opacity": isTransitioning && route.name ? 0 : 1
     }} className={classes.bodyWrapper}>
       <div className={classes.body}>
         {route.name === "home" && <Home />}
@@ -226,6 +239,9 @@ export function App() {
         {route.name === "teachers" && <Teachers />}
         {route.name === "about" && <About />}
         {route.name === "contact" && <Contact />}
+        {route.name === "legal" && <Legal />}
+        {!route.name && <NotFound />}
+
 
 
       </div>
@@ -236,6 +252,7 @@ export function App() {
         siteLogo={siteLogo}
         contactTitle={t("footerContactTitle")}
         smallPrint={<div className={classes.smallPrint}>
+          <Text typo="quote">{t("photographerCredits")}</Text>
           <Text typo="quote">{t("copyRight")}</Text>
           <ReactMarkdown className={classes.designerCredits}>{t("designerCredits")}</ReactMarkdown>
         </div>}
@@ -377,6 +394,7 @@ export const { i18n } = declareComponentKeys<
   "number" |
   "legalLink" |
   "copyRight" |
+  "photographerCredits" |
   "designerCredits" |
   "appointmentLink" |
   "siteTitle" |

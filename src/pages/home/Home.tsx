@@ -385,7 +385,9 @@ export const { i18n } = declareComponentKeys<
     "sliderResponseParagraph2" |
     "sliderButtonLabel" |
     "sliderMiniTitle" |
-    "certificationParagraph" |
+    "certificationParagraph1" |
+    "certificationParagraph2" |
+    "certificationParagraphLink" |
     "certificationTitle" |
     "customerSmallTitle" |
     "customerTitle" |
