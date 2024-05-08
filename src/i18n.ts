@@ -69,7 +69,7 @@ export const {
     			"sliderEngagementParagraph1": "Chaque artiste est unique et demande une attention particulière, c’est la raison pour laquelle nous offrons un suivi entièrement sur mesure, sans la moindre automatisation. Chaque étape est soigneusement conçue et adaptée à vos besoins spécifiques.",
     			"sliderEngagementParagraph2": "Nous croyons en votre talent et sommes déterminés à vous aider à le développer au maximum. Artiste Formation n’est pas qu’un centre de formation, c’est votre partenaire de confiance dans votre voyage artistique.",
     			"sliderFinancingName": "02. / FINANCEMENT",
-    			"sliderFinancingTitle": "Pise en charge financière et administrative",
+    			"sliderFinancingTitle": "Prise en charge financière et administrative",
     			"sliderFinancingParagraph1": "Ayant une connaissance approfondie de tous les droits de formation dans le monde artistique, nous mobilisons notre expertise afin d’obtenir une prise en charge financière partielle ou totale de votre parcours d'évolution professionnelle.",
     			"sliderFinancingParagraph2": "Vos droits permettant de vous former régulièrement dans nos métiers artistiques, nous vous proposerons le parcours le plus adapté et vous délesterons de toute la partie administrative.",
     			"sliderResponseName": "03. / ANALYSE & RÉPONSE",

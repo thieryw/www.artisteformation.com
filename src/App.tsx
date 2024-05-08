@@ -155,7 +155,6 @@ export function App() {
         contact={<div>
           <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
           <a className={classes.email} href="https://outlook.office365.com/book/cesarreservation@artisteformation.com/"><Text className={classes.contactText} typo="paragraph">{t("email")}</Text></a>
-          <Text className={classes.contactText} typo="paragraph">{t("number")}</Text>
         </div>}
         smallPrint={
           <div>
