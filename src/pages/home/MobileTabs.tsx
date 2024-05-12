@@ -3,6 +3,7 @@ import { memo } from "react"
 import { Article } from "@/components/Article";
 import { useTranslation } from "@/i18n"
 import { Text, tss } from "@/theme";
+import { routes } from "@/router";
 
 
 export const MobileTabs = memo(() => {
@@ -15,11 +16,11 @@ export const MobileTabs = memo(() => {
             className={classes.tab}
             tabName={t("sliderEngagementName")}
             tabContent={<Article
-                title={<Text typo="heading3">{t("sliderEngagementTitle")}</Text>}
+                title={<Text typo="heading3">{t("sliderEngagementTitle")}<br />{t("sliderEngagementTitle2")}</Text>}
                 paragraph={t("sliderEngagementParagraph1")}
                 secondParagraph={t("sliderEngagementParagraph2")}
                 button={{
-                    "href": "",
+                    ...routes.how().link,
                     "label": t("sliderButtonLabel")
                 }}
             />}
@@ -33,7 +34,7 @@ export const MobileTabs = memo(() => {
                 paragraph={t("sliderFinancingParagraph1")}
                 secondParagraph={t("sliderFinancingParagraph2")}
                 button={{
-                    "href": "",
+                    ...routes.how().link,
                     "label": t("sliderButtonLabel")
                 }}
             />}
@@ -46,7 +47,7 @@ export const MobileTabs = memo(() => {
                 paragraph={t("sliderResponseParagraph2")}
                 secondParagraph={t("sliderResponseParagraph2")}
                 button={{
-                    "href": "",
+                    ...routes.how().link,
                     "label": t("sliderButtonLabel")
                 }}
             />}
