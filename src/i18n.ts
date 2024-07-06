@@ -31,6 +31,7 @@ export const {
 				"homeLink": "Accueil",
 				"howLink": "Comment ?",
 				"teachersLink": "Formateurs",
+				"teachingsLink": "Formations",
 				"aboutLink": "À propos",
 				"contactLink": "Contact",
 				"contactTitle": "Nous joindre",

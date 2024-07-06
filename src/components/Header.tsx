@@ -488,6 +488,7 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
             "display": "flex",
             "position": "relative",
             "height": "100%",
+            "minHeight": 800,
             ...(() => {
                 if (theme.windowInnerHeight < 850 && theme.windowInnerWidth >= breakpointValues.sm) {
                     return {

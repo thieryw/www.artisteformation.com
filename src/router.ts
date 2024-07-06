@@ -13,6 +13,7 @@ export const routeDefs = {
 	"home": defineRoute(publicUrl),
 	"how": defineRoute(publicUrl + "comment"),
 	"teachers": defineRoute(publicUrl + "formateurs"),
+	"teachings": defineRoute(publicUrl + "formations"),
 	"about": defineRoute(publicUrl + "a-propos"),
 	"contact": defineRoute(publicUrl + "contact"),
 	"legal": defineRoute(publicUrl + "legal")

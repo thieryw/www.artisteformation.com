@@ -23,6 +23,7 @@ import { enableScreenScaler } from "screen-scaler/react";
 import { getScrollableParent } from "powerhooks/getScrollableParent";
 import { NotFound } from "@/pages/four-oh-four";
 import {Legal} from "@/pages/Legal";
+import { Teachings } from "./pages/Teachings";
 
 enableScreenScaler({
   targetWindowInnerWidth: ({ zoomFactor, actualWindowInnerWidth }) => {
@@ -52,6 +53,12 @@ export function App() {
       ...routes.teachers().link,
       "label": t("teachersLink"),
       "routeName": "teachers"
+
+    },
+    {
+      ...routes.teachings().link,
+      "label": t("teachingsLink"),
+      "routeName": "teachings"
 
     },
     {
@@ -85,6 +92,10 @@ export function App() {
   }, [route.name, ref.current])
 
   useEffect(() => {
+    if(route.name === "legal" || route.name === "teachings"){
+      setIsTransitioning(false);
+      return;
+    }
 
     const startTransition = () => {
       setIsTransitioning(true);
@@ -197,7 +208,7 @@ export function App() {
       isActive={isTransitioning}
       logoUrl={route.name === "home" ? siteLogo : undefined}
       splashScreenTitle={route.name === "home" ? t("siteTitle") : undefined}
-      backgroundImage={route.name !== "home" && route.name !== "legal" ? pattern : undefined}
+      backgroundImage={route.name !== "home" ? pattern : undefined}
       {
       ...(() => {
         switch (route.name) {
@@ -239,6 +250,7 @@ export function App() {
         {route.name === "about" && <About />}
         {route.name === "contact" && <Contact />}
         {route.name === "legal" && <Legal />}
+        {route.name === "teachings" && <Teachings />}
         {!route.name && <NotFound />}
 
 
@@ -386,6 +398,7 @@ export const { i18n } = declareComponentKeys<
   "homeLink" |
   "howLink" |
   "teachersLink" |
+  "teachingsLink" |
   "aboutLink" |
   "contactLink" |
   "contactTitle" |
