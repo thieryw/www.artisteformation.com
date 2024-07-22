@@ -8,7 +8,7 @@ such as a translation engine, powerhooks, type-route etc...
 - Uses i18nifty setup
 - Has powerhooks installed
 - Uses type-route
-- Uses tss-react for styling the components
+- Uses tss-react for styling the components!
 
 ## Tech Stack
 
