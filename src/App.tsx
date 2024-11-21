@@ -24,6 +24,7 @@ import { getScrollableParent } from "powerhooks/getScrollableParent";
 import { NotFound } from "@/pages/four-oh-four";
 import {Legal} from "@/pages/Legal";
 import { Teachings } from "./pages/Teachings";
+import { Opasso } from "./pages/Opasso";
 
 enableScreenScaler({
   targetWindowInnerWidth: ({ zoomFactor, actualWindowInnerWidth }) => {
@@ -267,6 +268,7 @@ export function App() {
         {route.name === "contact" && <Contact />}
         {route.name === "legal" && <Legal />}
         {route.name === "optimiser" && <Teachings />}
+        {route.name === "opasso" && <Opasso />}
         {!route.name && <NotFound />}
 
 

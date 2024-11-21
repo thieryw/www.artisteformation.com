@@ -244,7 +244,7 @@ export const {
 				"sent": "Message envoyé !"
 			},
 			"Opasso": {
-				"heroSurtitle": "formations",
+				"heroSurtitle": "FORMATIONS",
 				"heroTitle": "Formation “O Passo”",
 				"heroParagraph": "L'objectif est d'offrir, à ceux qui veulent commencer à utiliser la méthode O Passo® ou aux enseignants qui connaissent déjà et utilisent O Passo®, l'opportunité de s'immerger dans la méthode et d'échanger avec les musiciens/professeurs de l'Instituto d'O Passo.",
 				"sessionsTitle": "Sessions",
