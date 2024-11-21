@@ -137,7 +137,7 @@ export const {
 				"introSecondParagraph": "Intermittent du spectacle, demandeur d'emploi, travailleur indépendant ou salarié, nous avons les clés pour vous aider à obtenir du soutien.",
 				"sliderIntermittentName": "01. / INTERMITTENT",
 				"sliderIntermittentTitle": "Intermittent du spectacle",
-				"sliderIntermittentParagraph": "Vous travaillez dans le domaine artistique ? Nous travaillons en étroite collaboration avec les Opérateurs de Compétences qui gèrent vos droits à la formation.",
+				"sliderIntermittentParagraph": "Vous travaillez dans le domaine artistique ? Nous travaillons en étroite collaboration avec les Opérateurs de Compétences qui gèrent vos droits à la formation. Nous vous orientons dans les démarches pour accéder à une prise en charge de vos formations.",
 				"sliderTenantName": "02. / SALARIÉ",
 				"sliderTenantTitle": "Salarié",
 				"sliderTenantParagraph": "Si vous êtes en poste, notre équipe vous assiste pour naviguer à travers les méandres du plan de développement des compétences, du CPF, et du CPF de transition professionnelle. Nous vous accompagnons pour maximiser vos chances de financement.",
