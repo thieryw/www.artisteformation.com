@@ -13,10 +13,11 @@ export const routeDefs = {
 	"home": defineRoute(publicUrl),
 	"how": defineRoute(publicUrl + "comment"),
 	"teachers": defineRoute(publicUrl + "formateurs"),
-	"teachings": defineRoute(publicUrl + "formations"),
 	"about": defineRoute(publicUrl + "a-propos"),
 	"contact": defineRoute(publicUrl + "contact"),
-	"legal": defineRoute(publicUrl + "legal")
+	"legal": defineRoute(publicUrl + "legal"),
+	"opasso": defineRoute(publicUrl + "Opasso"),
+	"optimiser": defineRoute(publicUrl + "optimiser-performance")
 };
 
 

@@ -56,10 +56,21 @@ export function App() {
 
     },
     {
-      ...routes.teachings().link,
+      ...routes.optimiser().link,
       "label": t("teachingsLink"),
-      "routeName": "teachings"
+      "routeName": "optimiser",
+      "ishoverable": true,
+      "sublinks": [
+        {
+          ...routes.optimiser().link,
+          "label": t("optimizeLink")
 
+        },
+        {
+          ...routes.opasso().link,
+          "label": t("opassoLink")
+        }
+      ]
     },
     {
       ...routes.about().link,
@@ -92,7 +103,7 @@ export function App() {
   }, [route.name, ref.current])
 
   useEffect(() => {
-    if(route.name === "legal" || route.name === "teachings"){
+    if(route.name === "legal" || route.name === "optimiser" || route.name === "opasso"){
       setIsTransitioning(false);
       return;
     }
@@ -161,7 +172,12 @@ export function App() {
       }
       <Header
         links={links}
-        currentLinkLabel={links.find(({ routeName }) => routeName === route.name)?.label}
+        currentLinkLabel={(() => {
+          if(route.name === "opasso" || route.name === "optimiser"){
+            return t("teachingsLink")
+          }
+          return links.find(({routeName}) => routeName === route.name )?.label
+        })()}
         logo={siteLogo}
         contact={<div>
           <Text className={classes.contactTitle} typo="heading4">{t("contactTitle")}</Text>
@@ -250,7 +266,7 @@ export function App() {
         {route.name === "about" && <About />}
         {route.name === "contact" && <Contact />}
         {route.name === "legal" && <Legal />}
-        {route.name === "teachings" && <Teachings />}
+        {route.name === "optimiser" && <Teachings />}
         {!route.name && <NotFound />}
 
 
@@ -402,6 +418,8 @@ export const { i18n } = declareComponentKeys<
   "aboutLink" |
   "contactLink" |
   "contactTitle" |
+  "opassoLink" |
+  "optimizeLink" |
   "email" |
   "number" |
   "legalLink" |
