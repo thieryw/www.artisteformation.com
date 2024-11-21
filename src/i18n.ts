@@ -22,7 +22,8 @@ export const {
 	typeof import ("pages/how/How").i18n |
 	typeof import ("pages/teachers/Teachers").i18n |
 	typeof import ("pages/about/About").i18n |
-	typeof import ("pages/contact/Contact").i18n 
+	typeof import ("pages/contact/Contact").i18n |
+	typeof import ("pages/Opasso").i18n
 >()(
 	{ languages, fallbackLanguage },
 	{
@@ -35,6 +36,8 @@ export const {
 				"aboutLink": "À propos",
 				"contactLink": "Contact",
 				"contactTitle": "Nous joindre",
+				"opassoLink": "Formation “O Passo”",
+				"optimizeLink": "“Optimiser la performance physique et mentale de l’artiste”",
 				"email": "bonjour@artisteformation.com",
 				"number": "(+33) 199 999 990",
 				"photographerCredits": "Clichés de C. Guigue / Dayphotographies ©",
@@ -239,7 +242,24 @@ export const {
 				"formMessageNonValid": "Veuillez formuler votre message",
 				"sending": "En cour d'envoi...",
 				"sent": "Message envoyé !"
+			},
+			"Opasso": {
+				"heroSurtitle": "FORMATIONS",
+				"heroTitle": "Formation “O Passo”",
+				"heroParagraph": "L'objectif est d'offrir, à ceux qui veulent commencer à utiliser la méthode O Passo® ou aux enseignants qui connaissent déjà et utilisent O Passo®, l'opportunité de s'immerger dans la méthode et d'échanger avec les musiciens/professeurs de l'Instituto d'O Passo.",
+				"sessionsTitle": "Sessions",
+				"session1": "24 au 28 février 2025",
+				"session2": "7 au 11 jullet 2025",
+				"session3": "27 au 31 octobre 2025",
+				"priceTitle": "Tarifs HT",
+				"price": "2,400€",
+				"priceInfo": "PAR SESSION",
+				"methodTitle": "Une méthode d'éducation musicale",
+				"methodParagraph": "Créée par Lucas Ciavatta en 1996, cette méthode a comme principes l’inclusion et l’autonomie. O Passo comprend la pratique musicale comme un phénomène indissociable du corps, de l’imagination, du groupe et de la culture. O Passo apparaît en réponse aux modèles hautement sélectifs d’accès à la pratique musicale et trouve dans la richesse des pratiques musicales brésiliennes ses grandes sources. L’approche de la méthode valorise le projet musical de chaque musicien, enseignant, école et groupe, et contribue à sa réalisation, facilitant également l’utilisation d’autres méthodes. Depuis sa création, O Passo a été expérimenté et adopté par des écoles, universités et projets au Brésil et dans le monde, rendant la pratique musicale accessible à des milliers de personnes de tous âges par des cours, ateliers, conférences et autres activités. Aujourd’hui, l’Institut d’O Passo réunit les enseignants qui font avancer et qui recréent O Passo en leurs nouveaux espaces et chemins.",
+				"methodButton1": "EN SAVOIR PLUS",
+				"methodButton2": "PROGRAMME.PDF",
 			}
+
 
 		},
 	}

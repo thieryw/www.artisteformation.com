@@ -79,7 +79,7 @@ const socialLinkVariants: Variants = {
 
 
 export type HeaderProps = {
-    links: Link[];
+    links: (Link & {ishoverable?: boolean; sublinks?: Link[]})[];
     currentLinkLabel?: string;
     logo?: ReactNode;
     contact?: ReactNode;
@@ -292,8 +292,7 @@ export function Header(props: HeaderProps) {
                             className={classes.linksWrapper}
                         >
                             {
-                                links.map(({ href, label, onClick }, index) => <div
-                                    onClick={handleMenuItemClick}
+                                links.map(({ href, label, onClick, ishoverable, sublinks }, index) => <div
                                     key={label}
                                     style={{
                                         "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap,
@@ -308,12 +307,16 @@ export function Header(props: HeaderProps) {
                                         }}
 
                                     >
+
                                         <Link
                                             key={label}
                                             href={href}
                                             onClick={onClick}
                                             label={label}
                                             isActive={label === currentLinkLabel}
+                                            ishoverable={ishoverable}
+                                            sublinks={sublinks}
+                                            handleMenuItemClick={handleMenuItemClick}
                                         />
 
                                     </motion.div>
@@ -660,14 +663,16 @@ const { Link } = (() => {
             underline?: string;
         };
         isActive: boolean;
+        handleMenuItemClick: () => void;
     };
 
 
 
     const Link = memo((props: LinkProps) => {
-        const { href, label, onClick, className, classes: classesProp, isActive } = props;
-        const { classes, cx } = useStyles({ isActive })
+        const { href, label, onClick, className, classes: classesProp, isActive, ishoverable = false, sublinks, handleMenuItemClick } = props;
+        const { classes, cx, theme } = useStyles({ isActive })
         const ref = useRef<HTMLDivElement>(null);
+        const [isMouseIn, setIsMouseIn] = useState(false)
 
 
 
@@ -676,20 +681,72 @@ const { Link } = (() => {
             ref={ref}
             role="menuitem"
         >
-            <a
-                href={href}
-                onClick={onClick}
-                className={classes.link}
-            >
-                <div className={cx(classes.underline, classesProp?.underline)}></div>
-                <Text
-                    typo="menuItem"
-                    className={cx(classes.text, classesProp?.link)}
-                >
-                    {label}
-                </Text>
+            {
+                (() => {
+                    if (!ishoverable) {
+                        return <div onClick={handleMenuItemClick}><a
+                            href={href}
+                            onClick={onClick}
+                            className={classes.link}
+                        >
+                            <div className={cx(classes.underline, classesProp?.underline)}></div>
+                            <Text
+                                typo="menuItem"
+                                className={cx(classes.text, classesProp?.link)}
+                            >
+                                {label}
+                            </Text>
 
-            </a>
+                        </a></div>
+                    }
+                    return <div
+                        onMouseEnter={() => { setIsMouseIn(true) }}
+                        onMouseLeave={() => { setIsMouseIn(false) }}
+                        className={classes.linkWrapper}
+                    >
+                        <div
+                            className={classes.link}
+                        >
+                            <div className={cx(classes.underline, classesProp?.underline)}></div>
+                            <Text
+                                typo="menuItem"
+                                className={cx(classes.text, classesProp?.link)}
+                            >
+                                {label}
+                            </Text>
+
+                        </div>
+                        <div style={{
+                            "width": "100%",
+                            "height": isMouseIn ? 200 : 0,
+                            "transition": "height 500ms",
+                            "maxWidth": 700,
+                            "paddingLeft": theme.windowInnerWidth < breakpointValues.sm ? 0 : 40
+                        }}>
+                            <ul>
+                                {
+                                    sublinks !== undefined &&
+                                    sublinks.map(({href, label, onClick}, index) => <li
+                                        style={{
+                                            "marginBottom": index === sublinks.length - 1 ? undefined : 30
+                                        }}
+                                        key={label}
+                                        onClick={handleMenuItemClick}
+                                    >
+                                        <a style={{
+                                            "textDecoration": "none"
+                                        }} href={href} onClick={onClick}>
+                                            <Text className={classes.sublinkText} typo="heading4">{label}</Text>
+                                        </a>
+                                    </li>)
+                                }
+
+                            </ul>
+
+                        </div>
+                    </div>
+                })()
+            }
         </div>
 
     })
@@ -707,12 +764,30 @@ const { Link } = (() => {
                 "textDecoration": "none",
                 "display": "flex",
                 "alignItems": "center",
+                "cursor": "pointer",
                 [`&:hover .${classes.underline}`]: {
                     "width": theme.spacing.buttonGap,
                     "backgroundColor": theme.colors.bloodOrange
                 },
                 [`&:hover .${classes.text}`]: {
                     "color": theme.colors.bloodOrange
+                }
+
+            },
+            "linkWrapper": {
+                [`&:hover .${classes.underline}`]: {
+                    "width": theme.spacing.buttonGap,
+                    "backgroundColor": theme.colors.bloodOrange
+                },
+                [`&:hover .${classes.text}`]: {
+                    "color": theme.colors.bloodOrange
+                }
+
+            },
+            "sublinkText": {
+                ":hover": {
+                    "color": theme.colors.bloodOrange,
+                    "transition": "color 500ms"
                 }
 
             },
