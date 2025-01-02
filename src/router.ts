@@ -17,7 +17,7 @@ export const routeDefs = {
 	"contact": defineRoute(publicUrl + "contact"),
 	"legal": defineRoute(publicUrl + "legal"),
 	"opasso": defineRoute(publicUrl + "Opasso"),
-	"optimiser": defineRoute(publicUrl + "optimiser-performance")
+	"optimiser": defineRoute(publicUrl + "formation-formateur-optimiser-performance")
 };
 
 
