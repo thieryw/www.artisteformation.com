@@ -25,6 +25,7 @@ import { NotFound } from "@/pages/four-oh-four";
 import {Legal} from "@/pages/Legal";
 import { Teachings } from "./pages/Teachings";
 import { Opasso } from "./pages/Opasso";
+import { MentalCoaching } from "./pages/MentalCoaching";
 
 enableScreenScaler({
   targetWindowInnerWidth: ({ zoomFactor, actualWindowInnerWidth }) => {
@@ -70,6 +71,10 @@ export function App() {
         {
           ...routes.opasso().link,
           "label": t("opassoLink")
+        },
+        {
+          ...routes.prepMental().link,
+          "label": t("mentalLink")
         }
       ]
     },
@@ -104,7 +109,7 @@ export function App() {
   }, [route.name, ref.current])
 
   useEffect(() => {
-    if(route.name === "legal" || route.name === "optimiser" || route.name === "opasso"){
+    if (route.name === "legal" || route.name === "optimiser" || route.name === "opasso") {
       setIsTransitioning(false);
       return;
     }
@@ -174,10 +179,10 @@ export function App() {
       <Header
         links={links}
         currentLinkLabel={(() => {
-          if(route.name === "opasso" || route.name === "optimiser"){
+          if (route.name === "opasso" || route.name === "optimiser") {
             return t("teachingsLink")
           }
-          return links.find(({routeName}) => routeName === route.name )?.label
+          return links.find(({ routeName }) => routeName === route.name)?.label
         })()}
         logo={siteLogo}
         contact={<div>
@@ -269,6 +274,7 @@ export function App() {
         {route.name === "legal" && <Legal />}
         {route.name === "optimiser" && <Teachings />}
         {route.name === "opasso" && <Opasso />}
+        {route.name === "prepMental" && <MentalCoaching />}
         {!route.name && <NotFound />}
 
 
@@ -422,6 +428,7 @@ export const { i18n } = declareComponentKeys<
   "contactTitle" |
   "opassoLink" |
   "optimizeLink" |
+  "mentalLink" |
   "email" |
   "number" |
   "legalLink" |

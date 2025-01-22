@@ -10,6 +10,7 @@ import type { Variants } from "framer-motion";
 import { motion, useAnimation } from "framer-motion";
 import { getScrollableParent } from "powerhooks/getScrollableParent";
 import type { LinkButtonProps } from "@/components/LinkButton";
+import { useDomRect } from 'powerhooks';
 
 
 const linksVariants: Variants = {
@@ -79,7 +80,7 @@ const socialLinkVariants: Variants = {
 
 
 export type HeaderProps = {
-    links: (Link & {ishoverable?: boolean; sublinks?: Link[]})[];
+    links: (Link & { ishoverable?: boolean; sublinks?: Link[] })[];
     currentLinkLabel?: string;
     logo?: ReactNode;
     contact?: ReactNode;
@@ -296,7 +297,7 @@ export function Header(props: HeaderProps) {
                                     key={label}
                                     style={{
                                         "marginBottom": index === links.length - 1 ? undefined : theme.spacing.listElementGap,
-                                        "overflow": "hidden"
+                                        "overflow": "hidden",
                                     }}
                                 >
                                     <motion.div
@@ -435,6 +436,9 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                     }
                 }
                 return {
+                    "alignSelf": "center",
+                    "paddingTop": 150,
+                    "paddingBottom": 100
 
                 }
             })()
@@ -501,7 +505,11 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 return {
                     "alignItems": "center",
                 }
-            })()
+            })(),
+            ...(theme.windowInnerWidth > 2000 ? {
+                "justifyContent": "center"
+
+            } : {})
         },
         "menu": {
             "position": "fixed",
@@ -521,14 +529,10 @@ const useStyles = tss.withParams<{ isOpen: boolean }>().create(({ isOpen, theme 
                 }
                 return {
                     "height": isOpen ? "100%" : 0,
-                    "overflow": theme.windowInnerHeight < 850 ? "auto" : "hidden",
+                    "overflow": "auto"
                 }
 
             })(),
-            ...(theme.windowInnerWidth > 2000 ? {
-                "display": "flex",
-                "justifyContent": "center"
-            } : {})
         },
         "contactWrapper": {
             "marginRight": 320,
@@ -671,14 +675,13 @@ const { Link } = (() => {
     const Link = memo((props: LinkProps) => {
         const { href, label, onClick, className, classes: classesProp, isActive, ishoverable = false, sublinks, handleMenuItemClick } = props;
         const { classes, cx, theme } = useStyles({ isActive })
-        const ref = useRef<HTMLDivElement>(null);
         const [isMouseIn, setIsMouseIn] = useState(false)
+        const { ref, domRect: { height } } = useDomRect();
 
 
 
         return <div
             className={cx(classes.root, className)}
-            ref={ref}
             role="menuitem"
         >
             {
@@ -718,7 +721,7 @@ const { Link } = (() => {
                         </div>
                         <div style={{
                             "width": "100%",
-                            "height": isMouseIn ? 200 : 0,
+                            "height": isMouseIn ? (height * (sublinks === undefined ? 0 : sublinks.length)) - 50 : 0,
                             "transition": "height 500ms",
                             "maxWidth": 700,
                             "paddingLeft": theme.windowInnerWidth < breakpointValues.sm ? 0 : 40
@@ -726,12 +729,13 @@ const { Link } = (() => {
                             <ul>
                                 {
                                     sublinks !== undefined &&
-                                    sublinks.map(({href, label, onClick}, index) => <li
+                                    sublinks.map(({ href, label, onClick }, index) => <li
                                         style={{
                                             "marginBottom": index === sublinks.length - 1 ? undefined : 30
                                         }}
                                         key={label}
                                         onClick={handleMenuItemClick}
+                                        ref={ref}
                                     >
                                         <a style={{
                                             "textDecoration": "none"

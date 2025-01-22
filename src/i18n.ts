@@ -38,6 +38,7 @@ export const {
 				"contactTitle": "Nous joindre",
 				"opassoLink": "Formation “O Passo”",
 				"optimizeLink": "“Optimiser la performance physique et mentale de l’artiste”",
+				"mentalLink": "Concevoir et animer une formation à la préparation physique et mentale des artistes",
 				"email": "bonjour@artisteformation.com",
 				"number": "(+33) 199 999 990",
 				"photographerCredits": "Clichés de C. Guigue / Dayphotographies ©",
