@@ -109,7 +109,7 @@ export function App() {
   }, [route.name, ref.current])
 
   useEffect(() => {
-    if (route.name === "legal" || route.name === "optimiser" || route.name === "opasso") {
+    if (route.name === "legal" || route.name === "optimiser" || route.name === "opasso" || route.name === "prepMental") {
       setIsTransitioning(false);
       return;
     }
