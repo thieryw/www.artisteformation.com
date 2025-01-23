@@ -719,14 +719,17 @@ const { Link } = (() => {
                             </Text>
 
                         </div>
-                        <div style={{
-                            "width": "100%",
-                            "height": isMouseIn ? (height * (sublinks === undefined ? 0 : sublinks.length)) - 50 : 0,
-                            "transition": "height 500ms",
-                            "maxWidth": 700,
-                            "paddingLeft": theme.windowInnerWidth < breakpointValues.sm ? 0 : 40
-                        }}>
-                            <ul>
+                        <div
+
+                            style={{
+                                "width": "100%",
+                                "height": isMouseIn ? height : 0,
+                                "transition": "height 500ms",
+                                "maxWidth": 700,
+                                "paddingLeft": theme.windowInnerWidth < breakpointValues.sm ? 0 : 40
+                            }}
+                        >
+                            <ul ref={ref}>
                                 {
                                     sublinks !== undefined &&
                                     sublinks.map(({ href, label, onClick }, index) => <li
@@ -735,7 +738,6 @@ const { Link } = (() => {
                                         }}
                                         key={label}
                                         onClick={handleMenuItemClick}
-                                        ref={ref}
                                     >
                                         <a style={{
                                             "textDecoration": "none"
